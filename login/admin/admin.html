@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Makiiverse - Panel de Administración</title>
+    <style>
+        body {
+            background-color: #f4f1eb;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+        .admin-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #ffffff;
+            border: 1px solid #cccccc;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+        h2 { color: #333; text-align: center; }
+        .solicitud-card {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px;
+            border-bottom: 1px dashed #ddd;
+            gap: 15px;
+        }
+        .solicitud-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .solicitud-info img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 1px solid #ccc;
+        }
+        .acciones {
+            display: flex;
+            gap: 8px;
+        }
+        button {
+            padding: 6px 12px;
+            font-size: 13px;
+            font-weight: bold;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .btn-aprobar { background-color: #3fb927; color: white; }
+        .btn-rechazar { background-color: #e60012; color: white; }
+        .vacio { text-align: center; color: #777; padding: 20px; }
+    </style>
+</head>
+<body>
+
+    <div class="admin-container">
+        <h2>Solicitudes de Registro Pendientes</h2>
+        <div id="listaSolicitudes">
+            <p class="vacio">Cargando solicitudes...</p>
+        </div>
+    </div>
+
+    <script>
+        window.addEventListener('DOMContentLoaded', () => {
+            cargarSolicitudes();
+        });
+
+        function cargarSolicitudes() {
+            const contenedor = document.getElementById('listaSolicitudes');
+            // Obtenemos los pendientes del localStorage
+            const pendientes = JSON.parse(localStorage.getItem('makiiverse_pendientes') || "{}");
+            const keys = Object.keys(pendientes);
+
+            if (keys.length === 0) {
+                contenedor.innerHTML = '<p class="vacio">No hay solicitudes pendientes en este momento.</p>';
+                return;
+            }
+
+            contenedor.innerHTML = '';
+
+            keys.forEach(pnid => {
+                const card = document.createElement('div');
+                card.className = 'solicitud-card';
+
+                const infoDiv = document.createElement('div');
+                infoDiv.className = 'solicitud-info';
+
+                // Renderizar el Mii del solicitante usando la API
+                const img = document.createElement('img');
+                img.src = `https://mii-unsecure.ariankordi.net/miis/image.png?nnid=${encodeURIComponent(pnid)}&type=face&width=270&api_id=1`;
+                
+                const texto = document.createElement('span');
+                texto.style.fontWeight = 'bold';
+                texto.textContent = pnid;
+
+                infoDiv.appendChild(img);
+                infoDiv.appendChild(texto);
+
+                // Botones de acción
+                const accionesDiv = document.createElement('div');
+                accionesDiv.className = 'acciones';
+
+                const btnAprobar = document.createElement('button');
+                btnAprobar.className = 'btn-aprobar';
+                btnAprobar.textContent = 'Aprobar';
+                btnAprobar.onclick = function() { aprobarUsuario(pnid); };
+
+                const btnRechazar = document.createElement('button');
+                btnRechazar.className = 'btn-rechazar';
+                btnRechazar.textContent = 'Banear / Rechazar';
+                btnRechazar.onclick = function() { rechazarUsuario(pnid); };
+
+                accionesDiv.appendChild(btnAprobar);
+                accionesDiv.appendChild(btnRechazar);
+
+                card.appendChild(infoDiv);
+                card.appendChild(accionesDiv);
+                contenedor.appendChild(card);
+            });
+        }
+
+        function aprobarUsuario(pnid) {
+            let pendientes = JSON.parse(localStorage.getItem('makiiverse_pendientes') || "{}");
+            let autorizados = JSON.parse(localStorage.getItem('makiiverse_users') || "{}");
+
+            // Mover de pendientes a autorizados
+            if (pendientes[pnid]) {
+                autorizados[pnid] = pendientes[pnid]; // Guarda su contraseña local de la web
+                delete pendientes[pnid];
+
+                localStorage.setItem('makiiverse_users', JSON.stringify(autorizados));
+                localStorage.setItem('makiiverse_pendientes', JSON.stringify(pendientes));
+
+                alert(`¡Usuario ${pnid} aprobado con éxito!`);
+                cargarSolicitudes();
+            }
+        }
+
+        function rechazarUsuario(pnid) {
+            let pendientes = JSON.parse(localStorage.getItem('makiiverse_pendientes') || "{}");
+
+            if (pendientes[pnid]) {
+                delete pendientes[pnid];
+                localStorage.setItem('makiiverse_pendientes', JSON.stringify(pendientes));
+
+                alert(`Solicitud de ${pnid} rechazada.`);
+                cargarSolicitudes();
+            }
+        }
+    </script>
+</body>
+</html>
