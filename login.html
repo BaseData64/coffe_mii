@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar sesión - Miiverse</title>
+    <script type="module" src="login/basedata.js"></script>
+    <style>
+        :root {
+            --miiverse-green: #3fb927;
+            --miiverse-green-hover: #32991e;
+            --bg-gray: #f0f0f0;
+            --text-dark: #333333;
+            --text-light: #777777;
+            --border-color: #cccccc;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-gray);
+            color: var(--text-dark);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .header {
+            width: 100%;
+            background-color: #ffffff;
+            border-bottom: 4px solid var(--miiverse-green);
+            padding: 15px 20px;
+            display: flex;
+            justify-content: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .header h1 {
+            color: var(--miiverse-green);
+            font-size: 24px;
+            font-weight: bold;
+            letter-spacing: -0.5px;
+        }
+
+        .login-container {
+            background-color: #ffffff;
+            width: 100%;
+            max-width: 450px;
+            margin-top: 50px;
+            border-radius: 12px;
+            padding: 40px 30px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .login-container h2 {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: var(--text-dark);
+        }
+
+        .login-container p {
+            font-size: 14px;
+            color: var(--text-light);
+            margin-bottom: 20px;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .input-group label {
+            display: block;
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: var(--text-dark);
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 12px 15px;
+            font-size: 16px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            outline: none;
+            transition: border-color 0.2s ease;
+        }
+
+        .input-group input:focus {
+            border-color: var(--miiverse-green);
+            box-shadow: 0 0 0 2px rgba(63, 185, 39, 0.2);
+        }
+
+        .btn-submit {
+            background-color: var(--miiverse-green);
+            color: #ffffff;
+            border: none;
+            width: 100%;
+            padding: 14px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+            margin-top: 10px;
+        }
+
+        .btn-submit:hover {
+            background-color: var(--miiverse-green-hover);
+        }
+
+        #mensaje-error {
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            display: none;
+            text-align: left;
+            padding: 10px;
+            border-radius: 6px;
+            background: #faf8f5;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>Miiverse</h1>
+    </div>
+
+    <div class="login-container">
+        <h2>Vincular un PNID</h2>
+        <p>Introduce tu Pretendo Network ID y contraseña para acceder a la comunidad.</p>
+
+        <div id="mensaje-error"></div>
+
+        <form id="miiverseLoginForm">
+            <div class="input-group">
+                <label for="pnid">Pretendo Network ID</label>
+                <input type="text" id="pnid" name="pnid" placeholder="Ingresa tu PNID" required autocomplete="username">
+            </div>
+
+            <div class="input-group">
+                <label for="password">Contraseña</label>
+                <input type="password" id="password" name="password" placeholder="Ingresa tu contraseña" required autocomplete="current-password">
+            </div>
+
+            <button type="submit" class="btn-submit">Iniciar sesión</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('miiverseLoginForm').addEventListener('submit', async function(e) {
+            e.preventDefault(); 
+
+            const pnid = document.getElementById('pnid').value.trim();
+            const password = document.getElementById('password').value; 
+            const errorDiv = document.getElementById('mensaje-error');
+            const btnSubmit = document.querySelector('.btn-submit');
+
+            errorDiv.style.display = 'none';
+
+            if (!pnid || !password) {
+                mostrarError("Por favor, completa todos los campos.");
+                return;
+            }
+
+            btnSubmit.textContent = "Verificando...";
+            btnSubmit.disabled = true;
+
+            // Verificación mediante la API de avatares para comprobar existencia del Mii
+            const validadorMii = new Image();
+            
+            validadorMii.onload = async function() {
+                // Si el Mii existe en Pretendo, procedemos a autenticar con Firebase Real
+                if (typeof window.iniciarSesionFirebase === 'function') {
+                    const resultado = await window.iniciarSesionFirebase(pnid, password);
+
+                    if (resultado.exito) {
+                        localStorage.setItem('makiiverse_pnid', pnid);
+                        window.location.href = 'index.html';
+                    } else {
+                        // Manejo de errores detallados de Firebase
+                        switch (resultado.codigo) {
+                            case 'auth/invalid-credential':
+                            case 'auth/user-not-found':
+                            case 'auth/wrong-password':
+                                mostrarError("Error 102-2128: PNID o contraseña incorrectos.");
+                                break;
+                            case 'auth/too-many-requests':
+                                mostrarError("Demasiados intentos fallidos. Inténtalo más tarde.");
+                                break;
+                            default:
+                                mostrarError("Error de autenticación: " + resultado.codigo);
+                                break;
+                        }
+                        reiniciarBoton();
+                    }
+                } else {
+                    mostrarError("Error crítico: El módulo de base de datos no se ha cargado correctamente.");
+                    reiniciarBoton();
+                }
+            };
+
+            validadorMii.onerror = function() {
+                mostrarError("Error 102-2128: El Pretendo Network ID ingresado no existe o no es válido.");
+                reiniciarBoton();
+            };
+
+            validadorMii.src = `https://mii-unsecure.ariankordi.net/miis/image.png?nnid=${encodeURIComponent(pnid)}&type=face&width=270&api_id=1`;
+
+            function mostrarError(mensaje) {
+                errorDiv.style.color = "#e60012";
+                errorDiv.style.border = "1px solid #ffcccc";
+                errorDiv.textContent = mensaje;
+                errorDiv.style.display = 'block';
+            }
+
+            function reiniciarBoton() {
+                btnSubmit.textContent = "Iniciar sesión";
+                btnSubmit.disabled = false;
+            }
+        });
+
+        // 1. Detectamos el autor del post de forma segura (cambia 'msg.autor' si tu variable se llama diferente, ej: post.autor)
+        const autorPost = (msg.autor || "").trim();
+        const esMiCuentaExacta = (autorPost === "YosMakii99_PN");
+
+        // 2. Generamos el HTML del badge solo si coincide con tu cuenta exacta
+        const insigniaHTML = esMiCuentaExacta ? `
+            <img src="img/identified-user-mark.png" style="position: absolute; top: -8px; left: -8px; width: 30px; height: 30px; pointer-events: none; z-index: 9999; display: block;" alt="Verified">
+        ` : '';
+
+        // 3. Contenedor del Mii con overflow visible para que el badge flote libremente
+        const avatarConInsigniaHTML = `
+            <div style="position: relative; width: 72px; height: 72px; min-width: 72px; min-height: 72px; margin-top: 14px; flex-shrink: 0; overflow: visible;">
+                <div style="width: 100%; height: 100%; border-radius: 12px; border: 1px solid #b8b8b8; background: #fff; overflow: hidden; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                    <img src="${urlMiiPost}" style="width: 100%; height: 100%; object-fit: cover; display: block;" crossorigin="anonymous">
+                </div>
+                ${insigniaHTML}
+            </div>
+        `;
+
+        console.log("Autor leído:", JSON.stringify(msg.autor), "Coincide con YosMakii99_PN:", msg.autor === "YosMakii99_PN");
+    </script>
+</body>
+</html>

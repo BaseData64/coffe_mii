@@ -1,0 +1,1742 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="module" src="login/basedata.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <head>
+        <head>
+    <head>
+    <!-- 1. Primero cargamos el gestor -->
+    <script src="mii/MiiLog.js"></script> 
+    <script src="sessionManager.js"></script>
+    <script src="portal/post/accounts.js"></script>
+<script src="NetworkManager.js"></script>
+
+<script>
+fetch('Specialuser.php')
+    .then(response => response.json())
+    .then(data => {
+        if (data.esDuenio) {
+            window.addEventListener('DOMContentLoaded', () => {
+                // Selecciona la clase o contenedor donde está tu Mii en tu HTML
+                const miContenedor = document.querySelector('.icon-container, .tu-clase-de-avatar'); 
+                
+                if (miContenedor && !miContenedor.querySelector('.user-verified-mark')) {
+                    miContenedor.style.position = 'relative';
+                    miContenedor.style.overflow = 'visible';
+                    
+                    const badge = document.createElement('img');
+                    badge.src = 'img/identified-user-mark.png';
+                    badge.className = 'user-verified-mark';
+                    badge.style.cssText = 'position: absolute; top: -8px; left: -8px; width: 30px; height: 30px; pointer-events: none; z-index: 9999; display: block;';
+                    
+                    miContenedor.appendChild(badge);
+                }
+            });
+        }
+    })
+    .catch(err => console.log('Error al verificar sesión:', err));
+</script>
+
+<script>
+    
+    document.addEventListener('DOMContentLoaded', () => {
+        initPortal();
+    });
+</script>
+    <!-- 2. Después cargamos el manager que depende del primero -->
+    <script src="mii/baseDataMii/sessionManager.js"></script>
+</head>
+</head>
+</head>
+    <style>
+body {
+            margin: 0;
+            padding: 50px;
+            min-height: 100vh;
+            font-family: 'MiiverseFont', sans-serif;
+            position: relative;
+            /* Eliminamos el background de aquí para pasarlo al fondo fijo */
+        }
+
+        /* Capa de fondo fija independiente para móviles y PC */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-image: url('background.png');
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover; /* Cambiado a cover para que cubra toda la pantalla por completo */
+            z-index: -10; /* Lo envía al fondo detrás de todos los elementos */
+            pointer-events: none; /* Evita que interfiera con los clics o toques */
+        }
+
+        @media (max-width: 768px) {
+            body {
+                background-size: auto 110%;
+            }
+        }
+
+        .card, .card-standard, .card-user {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 170px;   
+            height: 150px;   
+            background-color: #ffffff;
+            border-radius: 0;
+            cursor: pointer;
+            margin-bottom: 0;
+            box-shadow: 0 10px 20px rgb(201, 201, 201);
+        }
+
+        .card-title-user {
+            font-size: 20px;
+            font-weight: 600;
+            margin-top: 85px;
+            color: #555555; 
+            text-align: center;
+            transition: color 0.2s ease;
+            font-family: 'MiiverseFont', sans-serif;
+        }
+
+        .card-title {
+            font-size: 20px;
+            font-family: "MiiverseFont", sans-serif;
+        }
+
+        .card.selected,
+        .card.selected .card-title,
+        .selected .card-title-user {
+            color:#00e1ff;
+        }
+
+        @font-face {
+            font-family: "MiiverseIcons"; 
+            src: url("font/MiiverseSymbols-Regular.ttf") format("truetype");
+            font-weight: normal;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: "MiiverseFont"; 
+            src: url("font/nintendoNTLG-DB001.ttf") format("truetype");
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        .favorite-button {
+            position: absolute;
+            top: 140px;      
+            right: 40px;   
+            width: 420px;
+            height: 100px;
+            background-color: #ffffff;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            padding-left: 20px;
+            box-shadow: 0 8px 18px rgba(0,0,0,0.25);
+            cursor: pointer;
+        }
+
+        .card-icons {
+            font-family: "MiiverseIcons";
+            font-size: 65px; 
+            color: #c4c2c2ff;
+            margin-left: 10px;
+            transition: color 0.2s ease;
+            margin-top: 10px;
+        }
+
+        .linea-degradada h1 {
+            color: white;
+            margin: 0;
+            font-size: 24px;    
+            text-transform: uppercase; 
+        }
+
+        .contenedor-seccion-roja {
+            background-color: #ffffff;
+            border: 1px solid #dcdcdc;
+            border-radius: 12px;
+            padding: 0 !important;   
+            overflow: hidden;        
+            margin-top: 25px;
+            width: 100%;
+            box-sizing: border-box;
+            box-shadow: 0 10px 20px rgb(201, 201, 201);
+        }
+
+        .barra-roja-interna {
+            width: 100%;
+            height: 62px;
+            background: linear-gradient(to right, #ff4d4d, #990000);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .barra-roja-interna h1 {
+            color: white !important;
+            margin: 0 !important;
+            font-size: 24px;
+            text-transform: uppercase;
+            font-family: "MiiverseFont", sans-serif;
+            font-weight: bold;
+        }
+
+        .lista-comunidades-pura {
+            display: flex;
+            flex-direction: column;
+            width: 90%;                                     
+            margin-left: 155px;              
+            margin-top: 35px;
+            font-family: "MiiverseFont", sans-serif;
+        }
+
+        /* --- CSS BLINDADO --- */
+        #global-menu .card .symbol, 
+        #global-menu .card .label, 
+        #global-menu .card .icons, 
+        #global-menu .card .name {
+            color: #c4c2c2 !important;
+        }
+
+        #global-menu .card.selected .symbol, 
+        #global-menu .card.selected .label, 
+        #global-menu .card.selected .icons, 
+        #global-menu .card.selected .name {
+            color: #17e404 !important;
+        }
+
+        #global-menu a { 
+            text-decoration: none !important; 
+            color: inherit !important; 
+        }
+        /* -------------------- */
+    </style>
+</head>
+<body style="background-image: url(background.png);">
+
+<!-- SIDEBAR MENU GLOBAL -->
+<menu id="global-menu" style="position: fixed; z-index: 10; padding: 0; margin: 0; list-style: none;">
+    <li id="global-menu-mymenu" class="card card-standard" style="position: fixed; border-top-right-radius: 80px; top: -30px; left: 2px; width: 165px; height: 170px; margin: 0;">
+        <a href="javascript:void(0);" onclick="conmutarPortal(5, 'global-menu-mymenu')" style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; text-decoration: none; padding: 0;">
+            <div class="mii-icon" style="width: 64px; height: 64px; background-color: #e1e1e1; border-radius: 12px; border: 1px solid #cbd5e1; box-shadow: inset 0 2px 4px rgba(0,0,0,0.05); overflow: hidden; display: flex; align-items: center; justify-content: center; margin-top: 20px;">
+                <img id="user-sidebar-avatar" src="img/games/Dummy_mii_user.png" style="width: 110%; height: 110%; object-fit: cover;" onerror="this.src='img/games/Dummy_mii_user.png';">
+            </div>
+            <span id="user-sidebar-name" class="label" style="font-family: 'MiiverseFont', sans-serif !important; font-size: 20px !important; font-weight: 600 !important;  !important; text-align: center; margin-top: 8px !important; display: block;">user page</span>
+        </a>
+    </li>
+
+    <li id="global-menu-feed" class="card card-standard" style="position: fixed; top: 120px; left: 2px; width: 165px; height: 130px; margin: 0;">
+        <!-- Botón de Networks pasa el 4 y su propio ID -->
+        <a href="javascript:void(0);" onclick="conmutarPortal(4, 'global-menu-feed')" style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; text-decoration: none; padding: 0;">
+            <span class="icons" style="font-family: 'MiiverseIcons' !important; font-size: 65px !important; line-height: 1; display: block; margin-top: -15px;">1</span>
+            <span class="name" style="font-family: 'MiiverseFont', sans-serif !important; font-size: 20px !important; font-weight: 600 !important; text-align: center; margin-top: 5px; display: block;">Networks</span>
+        </a>
+    </li>
+
+    <li id="global-menu-community" class="card card-standard selected" style="position: fixed; top: 240px; left: -12px; width: 179px; height: 140px; margin: 0;">
+        <!-- Botón About Me pasa el 0 y su propio ID -->
+        <a href="javascript:void(0);" onclick="conmutarPortal(0, 'global-menu-community')" style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; text-decoration: none; padding: 0;">
+            <span class="symbol" style="font-family: 'MiiverseIcons' !important; font-size: 65px !important; line-height: 1; display: block; margin-top: -20px; margin-left: 20px;">a</span>
+            <span class="label" style="font-family: 'MiiverseFont', sans-serif !important; font-size: 20px !important; font-weight: 600 !important; text-align: center; margin-top: 5px; display: block;">about me</span>
+        </a>
+    </li>
+
+    <li id="global-menu-message" class="card card-standard" style="position: fixed; top: 380px; left: -12px; width: 179px; height: 139px; margin: 0;" onclick="conmutarPortal(6, 'global-menu-message')">
+    <a href="#" style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; text-decoration: none; padding: 0;">
+        <span class="symbol" style="font-family: 'MiiverseIcons' !important; font-size: 65px !important; line-height: 1; display: block; margin-top: -15px;">m</span>
+        <span class="label" style="font-family: 'MiiverseFont', sans-serif !important; font-size: 20px !important; font-weight: 600 !important; text-align: center; margin-top: 5px; display: block;">messages</span>
+    </a>
+</li>
+
+    <li id="boton-navegacion-miiverse" class="card card-exit" style="position: fixed; top: 521px; left: -5px; width: 174px; height: 150px; border-bottom-right-radius: 105px; margin: 0; background: #3d3d3d !important; box-shadow: 0 12px 25px rgba(163, 161, 161, 0.5) !important; border: none !important;" onclick="manejadorNavegacionFija();">
+        <a href="#" role="button" style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; text-decoration: none; padding: 0;">
+            <span id="nav-icono-wiiu" class="" img src="img/closeX.png" style="color: #777; margin-top: 0px; font-size: 24px; font-weight: bold; display: block;"></span>
+            <span id="nav-texto-wiiu" class="" style="font-family: 'MiiverseFont', sans-serif !important; font-size: 20px !important; font-weight: 600 !important; color: #ccc !important; text-align: center; margin-top: -20px !important; display: block;">Close</span>
+        </a>
+    </li>
+</menu>
+
+
+<!-- ================= VISTA DE INICIO: PERFIL PRINCIPAL ================= -->
+<div id="vista-perfil" style="display: block;">
+    
+    <div class="linea-degradada">
+        <h1>about me</h1>
+    </div>
+
+    <div style="margin-left: 170px;">
+        <div class="miiverse-post" style="margin-top: 25px;">
+            <div class="post-header">
+                <div class="mii-avatar"></div> 
+                <div class="user-info">
+                    <span class="user-name">Makii</span>
+                    <span class="post-tag"></span>
+                </div>
+            </div>
+            <div class="post-body">
+                This is my website about myself... here you can see everything about me, my hobbies, my favorite games, and more.
+            </div>
+        </div>
+
+        <div class="contenedor-seccion-roja">
+            <div class="barra-roja-interna">
+                <h1>games and hobbies and more</h1>
+            </div>
+        </div>
+    </div> 
+
+    <!-- MENÚ PORTAL: LISTA DE COMUNIDADES -->
+    <div class="lista-comunidades-pura">
+        <!-- Botón Juegos (Envía 1 y pasa id global-menu-community) -->
+        <div class="comunidad-item-puro" onclick="conmutarPortal(1, 'global-menu-community')">
+            <div class="comunidad-icono-puro" style="background-image: url('img/games/mk8.png');"></div>
+            <span class="comunidad-titulo-puro">My Favorite Games</span>
+        </div>
+
+        <!-- Botón Proyectos (Envía 2 y pasa id global-menu-community) -->
+        <div class="comunidad-item-puro" onclick="conmutarPortal(2, 'global-menu-community')">
+            <div class="comunidad-icono-puro" style="background-image: url('img/games/174095.png');"></div>
+            <span class="comunidad-titulo-puro">About my projects</span>
+        </div>
+    </div>
+
+    <!-- Línea divisora -->
+    <div style="border-top: 3px dashed #cccccc; width: 90%; margin: 5px 0 5px 160px;"></div>
+
+    <!-- Botón About Me (Envía 3 y pasa id global-menu-community) -->
+    <div class="comunidad-item-puro" onclick="conmutarPortal(3, 'global-menu-community')" style="padding-left: 165px;">
+        <div class="comunidad-icono-puro" style="background-image: url('img/games/wii-u-logo-png_seeklogo-312570.png');"></div>
+        <span class="comunidad-titulo-puro">about me</span>
+    </div>
+    
+    
+   <div class="comunidad-item-puro boton-derecha" onclick="conmutarPortal(7, 'global-menu-community')">
+    <div class="comunidad-item-puro" 
+     onclick="conmutarPortal(7, 'global-menu-community')" 
+     style="margin-left: 40px;">
+    <div class="comunidad-icono-puro" style="background-image: url('img/games/wii-u-logo-png_seeklogo-312570.png');"></div>
+    <span class="comunidad-titulo-puro">General</span>
+
+
+
+</div>
+
+
+
+</div>
+     
+</div>
+
+</div>
+    
+      
+</div>
+
+
+
+<!-- ================= SECCIÓN 1: VISTA JUEGOS FAVORITOS ================= -->
+<div id="vista-juegos" style="display: none;">
+    <div class="linea-degradada" style="margin-top: -50px; background: linear-gradient(to right, #00bfff, #005580);">
+        <h1>My Favorite Games</h1>
+    </div>
+    <div style="position: relative; width: 95.90%; margin-left: 105px; margin-top: 0px;">
+        <img src="img/games/zlCfzR3i9aY3AJxL6J.png" style="width: 100%; height: 200px; object-fit: cover; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); display: block;">
+        <div style="position: absolute; bottom: -30px; right: 0%; width: 100%; height: 90px; background-color: rgb(255, 255, 255); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); border-radius: 14px; border: 1px solid rgba(0, 0, 0, 0.12); box-shadow: 0 6px 16px rgba(0,0,0,0.12); display: flex; align-items: center; padding: 0 20px; box-sizing: border-box; font-family: 'MiiverseFont', sans-serif; z-index: 5;">
+            <div style="width: 72px; height: 72px; background-image: url('img/games/mk8.png'); background-size: cover; background-position: center; border-radius: 14px; border: 2px solid #ffffff; flex-shrink: 0; box-shadow: 0 4px 8px rgba(0,0,0,0.15); margin-top: -35px; z-index: 6;"></div>
+            <div style="margin-left: 18px; display: flex; flex-direction: column; gap: 1px; flex-grow: 1;">
+                <span style="font-size: 21px; font-weight: bold; color: #1f2937;">My Favorite Games</span>
+                <span style="font-size: 13px; color: #555555; line-height: 1.3; max-width: 80%;">Welcome to my favorite games section!</span>
+            </div>
+        </div>
+    </div>
+
+    <div style="height: 60px;"></div>
+
+    <!-- POST MARIO KART 8 -->
+    <div style="display: flex; align-items: flex-start; width: 90.90%; margin-left: 125px; margin-top: 20px; font-family: 'MiiverseFont', sans-serif;">
+        <div style="width: 72px; height: 72px; background-image: url('mii/miiOwner.png'); background-size: cover; background-position: center; background-color: #ffffff; border-radius: 14px; border: 1px solid #cbd5e1; box-shadow: 0 4px 10px rgba(0,0,0,0.06); flex-shrink: 0; position: relative;"></div>
+        <div style="width: 0; height: 0; border-top: 10px solid transparent; border-bottom: 10px solid transparent; border-right: 12px solid #ffffff; margin-top: 26px; margin-left: 8px; filter: drop-shadow(-1px 2px 1px rgba(0,0,0,0.04)); z-index: 2;"></div>
+        <div style="flex-grow: 1; background-color: #ffffff; border: 1px solid #dcdcdc; border-radius: 16px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); display: flex; flex-direction: column; overflow: hidden; margin-left: -1px;">
+            <div style="background-color: #f7f9fa; padding: 8px 16px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #edf2f7;">
+                <span style="font-weight: bold; color: #4a5568; font-size: 14px;">Mario Kart 8</span>
+                <span style="color: #a0aec0; font-size: 12px;">23/06/2026</span>
+            </div>
+            <div style="padding: 18px 20px; min-height: 80px;">
+                <img src="img/games/mk8.png" style="width: 36px; height: 36px; float: left; margin-right: 12px; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <p style="margin: 0; color: #2d3748; font-size: 15px; line-height: 1.5; font-family: 'MiiverseFont', sans-serif;">
+                   My Favorite Game Even its Mario Kart 8 since I was a kid I loved this game and I still love it, I have played it for many years and I will continue to play it for many more years... maybe can play Mario Kart World in the future.. since 2015 i had the opportunity to play this game (kiosk version) then i was able to play in 2016.. i think... this game was part of my life and... with this game i was able to get new friends.. I had moments that were very happy.. moments where I got frustrated because someone beat me... but overall (for me) this mostly gives me the idea that this game will continue being a game that marked a lot of my childhood... I met a lot of people with whom I managed to make a lot of connections.. around 2018-2019...
+                </p>
+            </div>
+            <div style="background-color: #f7f9fa; padding: 8px 16px; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #edf2f7;">
+                <button style="background: linear-gradient(to bottom, #f1f1f1, #f1f3f5); border: 1px solid #cbd5e1; border-radius: 20px; padding: 6px 16px; font-size: 14px; color: #4a5568; cursor: pointer; font-weight: bold; display: flex; align-items: center; gap: 6px; font-family: 'MiiverseFont', sans-serif;">
+                    <span style="font-family: 'MiiverseIcons'; font-size: 20px; color: #7e7e7e; font-weight: normal; line-height: 1;">E</span> Yeah!
+                </button>
+                <div style="display: flex; gap: 14px; color: #718096; font-size: 13px;"><span> 0</span></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- POST FORTNITE -->
+    <div style="display: flex; align-items: flex-start; width: 90.90%; margin-left: 125px; font-family: 'MiiverseFont', sans-serif; margin-top: 30px;">
+        <div style="width: 72px; height: 72px; background-image: url('mii/miiOwner.png'); background-size: cover; background-position: center; background-color: #ffffff; border-radius: 14px; border: 1px solid #cbd5e1; box-shadow: 0 4px 10px rgba(0,0,0,0.06); flex-shrink: 0; position: relative;"></div>
+        <div style="width: 0; height: 0; border-top: 10px solid transparent; border-bottom: 10px solid transparent; border-right: 12px solid #ffffff; margin-top: 26px; margin-left: 8px; filter: drop-shadow(-1px 2px 1px rgba(0,0,0,0.04)); z-index: 2;"></div>
+        <div style="flex-grow: 1; background-color: #ffffff; border: 1px solid #dcdcdc; border-radius: 16px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); display: flex; flex-direction: column; overflow: hidden; margin-left: -1px;">
+            <div style="background-color: #f7f9fa; padding: 8px 16px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #edf2f7;">
+                <span style="font-weight: bold; color: #4a5568; font-size: 14px;">Fortnite</span>
+                <span style="color: #a0aec0; font-size: 12px;">23/06/2026</span>
+            </div>
+            <div style="padding: 18px 20px; min-height: 80px;">
+                <img src="img/games/FortniteLogo.png" style="width: 36px; height: 36px; float: left; margin-right: 12px; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <p style="margin: 0; color: #2d3748; font-size: 15px; line-height: 1.5; font-family: 'MiiverseFont', sans-serif;">
+                    Fortnite is a game that i play almost everytime and im very active in this game.. if you want to play with me... You can see me My Epic Games ID in "Networks" feel free to add me and we can play together.
+                </p>
+            </div>
+            <div style="background-color: #f7f9fa; padding: 8px 16px; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #edf2f7;">
+                <button style="background: linear-gradient(to bottom, #f1f1f1, #f1f3f5); border: 1px solid #cbd5e1; border-radius: 20px; padding: 6px 16px; font-size: 14px; color: #4a5568; cursor: pointer; font-weight: bold; display: flex; align-items: center; gap: 6px; font-family: 'MiiverseFont', sans-serif;">
+                    <span style="font-family: 'MiiverseIcons'; font-size: 20px; color: #7e7e7e; font-weight: normal; line-height: 1;">E</span> Yeah!
+                </button>
+                <div style="display: flex; gap: 14px; color: #718096; font-size: 13px;"><span> 0</span></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- POST ROBLOX -->
+    <div style="display: flex; align-items: flex-start; width: 90.90%; margin-left: 125px; font-family: 'MiiverseFont', sans-serif; margin-top: 30px;">
+        <div style="width: 72px; height: 72px; background-image: url('mii/miiOwner.png'); background-size: cover; background-position: center; background-color: #ffffff; border-radius: 14px; border: 1px solid #cbd5e1; box-shadow: 0 4px 10px rgba(0,0,0,0.06); flex-shrink: 0; position: relative;"></div>
+        <div style="width: 0; height: 0; border-top: 10px solid transparent; border-bottom: 10px solid transparent; border-right: 12px solid #ffffff; margin-top: 26px; margin-left: 8px; filter: drop-shadow(-1px 2px 1px rgba(0,0,0,0.04)); z-index: 2;"></div>
+        <div style="flex-grow: 1; background-color: #ffffff; border: 1px solid #dcdcdc; border-radius: 16px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); display: flex; flex-direction: column; overflow: hidden; margin-left: -1px;">
+            <div style="background-color: #f7f9fa; padding: 8px 16px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #edf2f7;">
+                <span style="font-weight: bold; color: #4a5568; font-size: 14px;">Roblox</span>
+                <span style="color: #a0aec0; font-size: 12px;">23/06/2026</span>
+            </div>
+            <div style="padding: 18px 20px; min-height: 80px;">
+                <img src="img/games/RobloxGame.png" style="width: 36px; height: 36px; float: left; margin-right: 12px; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <p style="margin: 0; color: #2d3748; font-size: 15px; line-height: 1.5; font-family: 'MiiverseFont', sans-serif;">
+                    dragon ball rage (ROBLOX) is a fight game RPG with dragon ball z theme but im so obsesioned with it, i play this game almost everytime and im very active in this game.. im zenkai50 and i like wait for PvP..  if you want to play with me... You can see me My Roblox ID in "Networks" feel free to add me and we can play together!... even also play prision life.
+                </p>
+            </div>
+            <div style="background-color: #f7f9fa; padding: 8px 16px; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #edf2f7;">
+                <button style="background: linear-gradient(to bottom, #f1f1f1, #f1f3f5); border: 1px solid #cbd5e1; border-radius: 20px; padding: 6px 16px; font-size: 14px; color: #4a5568; cursor: pointer; font-weight: bold; display: flex; align-items: center; gap: 6px; font-family: 'MiiverseFont', sans-serif;">
+                    <span style="font-family: 'MiiverseIcons'; font-size: 20px; color: #7e7e7e; font-weight: normal; line-height: 1;">E</span> Yeah!
+                </button>
+                <div style="display: flex; gap: 14px; color: #718096; font-size: 13px;"><span> 0</span></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- EXTRA IMG POST -->
+    <div style="display: flex; align-items: flex-start; width: 50.90%; margin-left: 125px; margin-top: 20px; font-family: 'MiiverseFont', sans-serif;">
+        <div style="width: 72px; height: 72px; background-image: url('mii/miiOwner.png'); background-size: cover; border-radius: 14px; border: 1px solid #cbd5e1; flex-shrink: 0;"></div>
+        <div style="width: 0; height: 0; border-top: 10px solid transparent; border-bottom: 10px solid transparent; border-right: 12px solid #ffffff; margin-top: 26px; margin-left: 8px; z-index: 2;"></div>
+        <div style="flex-grow: 1; background-color: #ffffff; border: 1px solid #dcdcdc; border-radius: 16px; padding: 16px; margin-left: -1px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                <span style="font-weight: bold; color: #4a5568;">Makii</span>
+                <span style="color: #a0aec0; font-size: 13px;">1/1/1969</span>
+            </div>
+            <p style="margin: 0 0 12px 0; color: #2d3748;">¡why...!</p>
+            <img src="portal/post/miiversePost.png" style="width: 80%; border-radius: 8px; border: 1px solid #e2e8f0; display: block; margin-bottom: 12px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #edf2f7; padding-top: 8px;">
+                <button style="background: #f1f1f1; border: 1px solid #ccc; border-radius: 20px; padding: 4px 12px; cursor: pointer;">
+                    <span style="font-family: 'MiiverseIcons';">E</span> Yeah!
+                </button>
+                <span style="color: #a0aec0; font-size: 13px;"></span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="vista-messages" style="display: none; position: relative; z-index: 1;">
+    
+    <!-- Barra superior verde Miiverse -->
+    <div class="linea-degradada" style="margin-top: -50px; background: linear-gradient(to right, #da03da, #ff00d4); padding: 15px;">
+        <h1 style="color: white; margin: 0; font-size: 24px; font-family: 'MiiverseFont', sans-serif;">Messages</h1>
+    </div>
+
+    <!-- Contenedor principal -->
+    <div style="width: 78%; margin-left: 170px; margin-top: 50px; font-family: 'MiiverseFont', sans-serif;">
+        
+        <!-- Tarjeta estilo Error 500 -->
+        <div style="background: #ffffff; border-radius: 12px; border: 1px solid #dcdcdc; box-shadow: 0 4px 12px rgba(0,0,0,0.1); padding: 30px;">
+            
+            <!-- Encabezado Gris -->
+            <div style="background: #8e8e8e; color: white; padding: 15px 20px; border-radius: 8px; font-size: 24px; font-weight: bold; margin-bottom: 25px;">
+                Messages
+            </div>
+
+            <!-- Contenido con imagen a la derecha -->
+            <div style="display: flex; align-items: flex-start; justify-content: space-between;">
+                
+                <!-- Texto alineado a la izquierda -->
+                <div style="flex: 1; color: #333; font-size: 18px; line-height: 1.5;">
+                    <p style="margin-bottom: 15px;">No messages to display.</p>
+                    <p style="margin-bottom: 25px;">Your inbox is currently empty.</p>
+                    
+                    <button onclick="conmutarPortal(0, 'global-menu-community')" 
+                            style="padding: 10px 25px; border-radius: 5px; border: none; background: #8e8e8e; color: white; font-family: 'MiiverseFont', sans-serif; font-size: 16px; cursor: pointer;">
+                        Back
+                    </button>
+                </div>
+
+                <!-- Imagen a la derecha -->
+                <div style="margin-left: 40px;">
+                    <img src="img/games/Dummy_mii_user.png" style="width: 150px; height: 150px; border-radius: 10px; opacity: 0.8;">
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+<!-- ================= SECCIÓN 2: VISTA PROYECTOS ================= -->
+<div id="vista-proyectos" style="display: none;">
+    <div class="linea-degradada" style="margin-top: -50px; background: linear-gradient(to right, #ffb84d, #d68910);">
+        <h1>About my projects</h1>
+    </div>
+
+    <!-- POST PROYECTO 1 -->
+    <div style="display: flex; align-items: flex-start; width: 78%; margin-left: 170px; margin-top: 25px; font-family: 'MiiverseFont', sans-serif;">
+        <div style="width: 55px; height: 55px; background-image: url('mii/miiOwner.png'); background-size: cover; border-radius: 8px; border: 1px solid #cbd5e1; flex-shrink: 0;"></div>
+        <div style="width: 0; height: 0; border-top: 9px solid transparent; border-bottom: 9px solid transparent; border-right: 12px solid #ffffff; margin-top: 20px; margin-left: 6px; z-index: 2;"></div>
+        <div style="flex-grow: 1; background-color: #ffffff; border: 1px solid #dcdcdc; border-radius: 12px; padding: 15px; margin-left: -1px; box-shadow: 0 3px 8px rgba(0,0,0,0.08);">
+            <p style="margin: 0; color: #2d3748; font-size: 15px; line-height: 1.5;">
+                "Back in 2024, I set out on what was perhaps my most ambitious technical project: attempting to recreate the Miiverse prototype originally presented by Satoru Iwata at E3. This was an immense challenge, as I had to hunt down rare, obscure materials across the internet. I spent weeks analyzing old screenshots, using logic and deduction to try and reverse-engineer features that were never officially released and whose functionality remained a mystery.
+                <br><br>
+                I was dedicated to this for two months, working tirelessly to build a functional 'WUBH' environment that would allow others to experience this lost vision. I was only about a month and a half away from releasing the first public prototype. Unfortunately, disaster struck when my PC suffered a fatal system crash—the dreaded blue screen of death. I was forced to format my drive, losing not only the code but all the rare photographs and research materials I had gathered. The sheer exhaustion and frustration of losing two months of intense work without a proper backup was devastating. I ultimately decided to abandon the project, but the experience gave me a deep, unparalleled look into the Miiverse architecture that I'll never forget."
+            </p>
+        </div>
+    </div>
+
+    <!-- POST PROYECTO 2 -->
+    <div style="display: flex; align-items: flex-start; width: 78%; margin-left: 170px; margin-top: 25px; font-family: 'MiiverseFont', sans-serif;">
+        <div style="width: 55px; height: 55px; background-image: url('mii/miiOwner.png'); background-size: cover; border-radius: 8px; border: 1px solid #cbd5e1; flex-shrink: 0;"></div>
+        <div style="width: 0; height: 0; border-top: 9px solid transparent; border-bottom: 9px solid transparent; border-right: 12px solid #ffffff; margin-top: 20px; margin-left: 6px; z-index: 2;"></div>
+        <div style="flex-grow: 1; background-color: #ffffff; border: 1px solid #dcdcdc; border-radius: 12px; padding: 15px; margin-left: -1px; box-shadow: 0 3px 8px rgba(0,0,0,0.08);">
+            <p style="margin: 0; color: #2d3748; font-size: 15px; line-height: 1.5;">
+                My journey into modding began in 2023, and it has been a steady progression of learning and experimentation. What started as simple modifications quickly evolved into more complex and fun cosmetic projects. Over time, I managed to dominate the internal file logic of Wii U games, which allowed me to start creating much more advanced and professional-grade mods.
+                <br><br>
+                The process of understanding how these games handle assets, textures, and logic has been incredibly rewarding. Currently, I am working on a custom, comprehensive pack for Mario Kart 8 Deluxe. This project is a collection of my favorite personal mods—things that are tailored specifically to my taste and playstyle. It’s a great feeling to take a game I love and completely customize it to be 'mine.' I’m really enjoying this creative freedom, and I look forward to continuing to push what is possible within the game's engine.
+            </p>
+        </div>
+    </div>
+</div>
+
+
+<!-- ================= SECCIÓN 3: VISTA COSAS SOBRE MÍ ================= -->
+<div id="vista-sobremi" style="display: none;">
+    <div class="linea-degradada" style="margin-top: -50px; background: linear-gradient(to right, #4aeb4f, #1aa622);">
+        <h1>About Me</h1>
+    </div>
+    
+    <div style="position: relative; width: 95.90%; margin-left: 105px; margin-top: 0px;">
+        <img src="img/games/ownerBanner.png" style="width: 100%; height: 300px; object-fit: cover; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); display: block;">
+
+        <div style="position: absolute; bottom: -30px; right: 0%; width: 100%; height: 90px; background-color: rgb(255, 255, 255); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); border-radius: 14px; border: 1px solid rgba(0, 0, 0, 0.12); box-shadow: 0 6px 16px rgba(0,0,0,0.12); display: flex; align-items: center; padding: 0 20px; box-sizing: border-box; font-family: 'MiiverseFont', sans-serif; z-index: 5;">
+            <div style="width: 72px; height: 72px; background-image: url('img/games/wii-u-logo-png_seeklogo-312570.png'); background-size: cover; background-position: center; border-radius: 14px; border: 2px solid #ffffff; flex-shrink: 0; box-shadow: 0 4px 8px rgba(0,0,0,0.15); margin-top: -35px; z-index: 6;"></div>
+            <div style="margin-left: 18px; display: flex; flex-direction: column; gap: 1px; flex-grow: 1;">
+                <span style="font-size: 21px; font-weight: bold; color: #1f2937;">About Me</span>
+                <span style="font-size: 13px; color: #555555; line-height: 1.3; max-width: 80%;">Welcome to my personal section!</span>
+            </div>
+        </div>
+    </div>
+
+    <div style="height: 60px;"></div>
+
+    <div style="display: flex; align-items: flex-start; width: 90.90%; margin-left: 125px; margin-top: 20px; font-family: 'MiiverseFont', sans-serif;">
+        <div style="width: 72px; height: 72px; background-image: url('mii/miiOwner.png'); background-size: cover; background-position: center; background-color: #ffffff; border-radius: 14px; border: 1px solid #cbd5e1; box-shadow: 0 4px 10px rgba(0,0,0,0.06); flex-shrink: 0; position: relative;"></div>
+        <div style="width: 0; height: 0; border-top: 10px solid transparent; border-bottom: 10px solid transparent; border-right: 12px solid #ffffff; margin-top: 26px; margin-left: 8px; filter: drop-shadow(-1px 2px 1px rgba(0,0,0,0.04)); z-index: 2;"></div>
+        <div style="flex-grow: 1; background-color: #ffffff; border: 1px solid #dcdcdc; border-radius: 16px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); display: flex; flex-direction: column; overflow: hidden; margin-left: -1px;">
+            <div style="background-color: #f7f9fa; padding: 8px 16px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #edf2f7;">
+                <span style="font-weight: bold; color: #4a5568; font-size: 14px;">Makii</span>
+                <span style="color: #a0aec0; font-size: 12px;">27/06/2026</span>
+            </div>
+            <div style="padding: 18px 20px; min-height: 80px;">
+                <img src="img/games/wii-u-logo-png_seeklogo-312570.png" style="width: 36px; height: 36px; float: left; margin-right: 12px; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <p style="margin: 0; color: #2d3748; font-size: 15px; line-height: 1.5; font-family: 'MiiverseFont', sans-serif;">
+                    <strong>Wii U Experence</strong> It all started back in 2015 playing a kiosk version of Mario Kart 8.. Soon after, in 2016, I would get the Wii U for the first time or well.. in December 2015.. up until now, 2026.. I would have a total of 11 years of playing with the Wii U.. I started as a player.. then I became a cheater.. then I became a modder who MAYBE could have a lot of experience with the WII U to what I am now...
+                </p>
+                
+                <p style="margin: 14px 0 4px 0; font-weight: bold; color: #333;">experiences:</p>
+                <ul class="nintendo-list" style="color: #444; font-size: 14px; padding-left: 20px;">
+                    <li><strong>Mod Designer:</strong> modifying system or Wii U game files.. with a lot of experience basically I'm a modder</li>
+                    <li><strong>Wii U system recovery:</strong> I can fix a lot of brick problems, both hardware and software... that is, I can also work on technical NAND recovery and bring a Wii U back to life</li>
+                    <li><strong>Desarrollo Web:</strong> I am a web developer and I have experience with both old and modern WebKit... my biggest achievement was actually this lost prototype</li>
+                </ul>
+
+                <p style="margin: 14px 0 4px 0; font-weight: bold; color: #333;">Favorite Characters:</p>
+                <p style="margin: 0; color: #2d3748; font-size: 15px;">Meggy from smg4</p>
+                <p style="margin: 0; color: #2d3748; font-size: 15px;">Yoshi</p>
+                <p style="margin: 0; color: #2d3748; font-size: 15px;">Shantae</p>
+                <p style="margin: 0; color: #2d3748; font-size: 15px;">Marine (from Splatoon 2)</p>
+                <p style="margin: 0; color: #2d3748; font-size: 15px;">Pomni from Glitch</p>
+                <p style="margin: 0; color: #2d3748; font-size: 15px;">Rosalina and Luma</p>
+
+                <p style="margin: 14px 0 4px 0; font-weight: bold; color: #333;">interests:</p>
+                <p style="margin: 0; color: #2d3748; font-size: 15px;">Mario Kart 8, WII U, nintendo switch, kny hinokami chronicles 2 </p>
+                <p style="margin: 0; color: #2d3748; font-size: 15px;">Minecraft, Roblox, Splatoon 2, shanate, Fortnite, Dragon ball rage </p>
+                <p style="margin: 0; color: #2d3748; font-size: 15px;">super smash bros, splatoon, WiiU modding, GD Miiverse, WII U LOST MEDIA </p>
+            </div>
+            
+            <div style="background-color: #f7f9fa; padding: 8px 16px; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #edf2f7;">
+                <button style="background: linear-gradient(to bottom, #f1f1f1, #f1f3f5); border: 1px solid #cbd5e1; border-radius: 20px; padding: 6px 16px; font-size: 14px; color: #4a5568; cursor: pointer; font-weight: bold; display: flex; align-items: center; gap: 6px; font-family: 'MiiverseFont', sans-serif;">
+                    <span style="font-family: 'MiiverseIcons'; font-size: 20px; color: #7e7e7e; line-height: 1;">E</span> Yeah!
+                </button>
+                <div style="display: flex; gap: 14px; color: #718096; font-size: 13px;">
+                    <span>0</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+        <div style="display: flex; align-items: flex-start; width: 78%; margin-left: 170px; margin-top: 25px; font-family: 'MiiverseFont', sans-serif;">
+        <div style="width: 55px; height: 55px; background-image: url('mii/miiOwner.png'); background-size: cover; border-radius: 8px; border: 1px solid #cbd5e1; flex-shrink: 0;"></div>
+        <div style="width: 0; height: 0; border-top: 9px solid transparent; border-bottom: 9px solid transparent; border-right: 12px solid #ffffff; margin-top: 20px; margin-left: 6px; z-index: 2;"></div>
+        <div style="flex-grow: 1; background-color: #ffffff; border: 1px solid #dcdcdc; border-radius: 12px; padding: 15px; margin-left: -1px; box-shadow: 0 3px 8px rgba(0,0,0,0.08);">
+            <p style="margin: 0; color: #2d3748; font-size: 15px; line-height: 1.5;">
+                "Back in 2024, I set out on what was perhaps my most ambitious technical project: attempting to recreate the Miiverse prototype originally presented by Satoru Iwata at E3. This was an immense challenge, as I had to hunt down rare, obscure materials across the internet. I spent weeks analyzing old screenshots, using logic and deduction to try and reverse-engineer features that were never officially released and whose functionality remained a mystery.
+                <br><br>
+                I was dedicated to this for two months, working tirelessly to build a functional 'WUBH' environment that would allow others to experience this lost vision. I was only about a month and a half away from releasing the first public prototype. Unfortunately, disaster struck when my PC suffered a fatal system crash—the dreaded blue screen of death. I was forced to format my drive, losing not only the code but all the rare photographs and research materials I had gathered. The sheer exhaustion and frustration of losing two months of intense work without a proper backup was devastating. I ultimately decided to abandon the project, but the experience gave me a deep, unparalleled look into the Miiverse architecture that I'll never forget."
+            </p>
+        </div>
+    </div>
+
+</div>
+<div id="vista-quepasara" class="vista-contenido" style="display: none; position: relative; min-height: 100vh; padding-bottom: 120px;">
+    
+    <div class="linea-degradada" style="margin-top: -50px; background: linear-gradient(to right, #4aeb4f, #1aa622);">
+        <h1>General Chat</h1>
+    </div>
+    
+    <div style="position: relative; width: 95.90%; margin-left: 108px; margin-top: 0px;">
+        <img src="img/DummyLaunchBG.png" style="width: 101%; height: 230px; object-fit: cover; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); display: block;">
+
+        <div style="position: absolute; bottom: -30px; right: 0%; width: 100%; height: 90px; background-color: rgb(255, 255, 255); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); border-radius: 14px; border: 1px solid rgba(0, 0, 0, 0.12); box-shadow: 0 6px 16px rgba(0,0,0,0.12); display: flex; align-items: center; padding: 0 20px; box-sizing: border-box; font-family: 'MiiverseFont', sans-serif; z-index: 5;">
+            <div style="width: 72px; height: 72px; background-image: url('img/games/wii-u-logo-png_seeklogo-312570.png'); background-size: cover; background-position: center; border-radius: 14px; border: 2px solid #ffffff; flex-shrink: 0; box-shadow: 0 4px 8px rgba(0,0,0,0.15); margin-top: -35px; z-index: 6;"></div>
+            <div style="margin-left: 18px; display: flex; flex-direction: column; gap: 1px; flex-grow: 1;">
+                <span style="font-size: 21px; font-weight: bold; color: #1f2937;">General Chat</span>
+                <span style="font-size: 13px; color: #555555; line-height: 1.3; max-width: 80%;">Welcome to my personal section!</span>
+            </div>
+        </div>
+    </div>
+    
+    <div style="height: 60px;"></div>
+
+    <!-- Contenedor donde se cargarán los mensajes del chat -->
+    <div style="width: 95.90%; margin-left: 108px;" id="contenedor-mensajes-chat">
+        <!-- Aquí se pintarán dinámicamente los posts estilo Miiverse -->
+    </div>
+
+    <!-- Botón "Post" anclado a la esquina inferior derecha idéntico a Miiverse (Tamaño Agrandado) -->
+    <div onclick="abrirModalPostGeneral()" style="position: fixed; bottom: 0; right: 0; width: 240px; height: 90px; background: linear-gradient(to bottom, #ffffff, #e6e6e6); border-top-left-radius: 80px; border-top: 2px solid #cccccc; border-left: 2px solid #cccccc; box-shadow: -6px -6px 15px rgba(0,0,0,0.08); display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 999; transition: background 0.1s;">
+        <!-- Ícono de globo verde exacto más grande -->
+        <svg width="42" height="42" viewBox="0 0 24 24" fill="#69c200" xmlns="http://www.w3.org/2000/svg" style="margin-right: 12px;">
+            <path d="M3 4C3 2.89543 3.89543 2 5 2H19C20.1046 2 21 2.89543 21 4V15C21 16.1046 20.1046 17 19 17H7.5L3.5 21V17C3.1 16.7 3 16.4 3 16V4Z"/>
+        </svg>
+        <!-- Texto "Post" más grande -->
+        <span style="font-family: 'MiiverseFont', sans-serif; font-size: 32px; color: #444444; font-weight: normal; margin-top: 4px;">Post</span>
+    </div>
+
+<!-- ================= 1. PANTALLA COMPLETA ESTILO GAMEPAD (OCULTA) ================= -->
+<div id="modal-crear-post" style="display: none; flex-direction: column; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background-color: #eaeaea; z-index: 9999; font-family: 'MiiverseFont', 'FOT-Rodin', sans-serif; box-sizing: border-box; overflow: hidden;">
+    
+    <!-- BARRA SUPERIOR VERDE -->
+    <div style="background: linear-gradient(to bottom, #74d221 0%, #5cb814 100%); width: 100%; height: 60px; display: flex; align-items: center; justify-content: center; color: white; font-size: 24px; font-weight: bold; border-bottom: 2px solid #4a960f; text-shadow: 0px 1px 2px rgba(0,0,0,0.3); box-shadow: inset 0 1px 0 rgba(255,255,255,0.4); flex-shrink: 0;">
+        Send Message
+    </div>
+
+    <!-- CONTENEDOR CENTRAL EXACTO AL GAMEPAD -->
+    <div style="position: relative; width: 100%; max-width: 1060px; height: calc(100vh - 60px); margin: 0 auto; display: flex; flex-direction: column; padding: 30px 35px 95px 35px; box-sizing: border-box;">
+        
+        <!-- Fila 1: Mii y Burbuja de Expresiones -->
+        <div style="display: flex; align-items: center; gap: 18px; margin-bottom: 18px; flex-shrink: 0;">
+            
+            <!-- Avatar Mii -->
+            <div id="avatar-mii-post" style="width: 90px; height: 90px; background-color: #fff; border-radius: 8px; border: 1px solid #a0a0a0; box-shadow: 0 2px 4px rgba(0,0,0,0.1); background-size: cover; background-position: center; flex-shrink: 0;"></div>
+            
+            <!-- Burbuja de Emociones Estilo Wii U -->
+            <div style="background: #a8a8a8; border: 1px solid #8e8e8e; border-radius: 45px; padding: 6px 12px; display: flex; gap: 8px; position: relative; box-shadow: inset 0 2px 4px rgba(0,0,0,0.15), 0 2px 3px rgba(0,0,0,0.05); align-items: center;">
+                <!-- Puntero de la burbuja -->
+                <div style="position: absolute; left: -10px; top: 30px; width: 0; height: 0; border-top: 8px solid transparent; border-bottom: 8px solid transparent; border-right: 10px solid #8e8e8e;"></div>
+                <div style="position: absolute; left: -8px; top: 30px; width: 0; height: 0; border-top: 8px solid transparent; border-bottom: 8px solid transparent; border-right: 10px solid #a8a8a8; z-index: 1;"></div>
+                
+                <!-- Botones de Expresiones -->
+                <div class="emocion-btn activo" data-exp="normal" onclick="seleccionarEmocion(this)" style="width: 50px; height: 50px; border-radius: 25px; display: flex; justify-content: center; align-items: center; cursor: pointer; position: relative; z-index: 2; background: transparent;">
+                    <img src="img/feeling-normal-selected.png" class="icono-exp" style="width: 36px; height: 36px; object-fit: contain; filter: drop-shadow(0 0 4px #74d221) drop-shadow(0 0 8px #74d221);">
+                </div>
+                <div class="emocion-btn" data-exp="smile" onclick="seleccionarEmocion(this)" style="width: 50px; height: 50px; border-radius: 25px; display: flex; justify-content: center; align-items: center; cursor: pointer; position: relative; z-index: 2; background: transparent;">
+                    <img src="img/happy.png" class="icono-exp" style="width: 36px; height: 36px; object-fit: contain;">
+                </div>
+                <div class="emocion-btn" data-exp="like" onclick="seleccionarEmocion(this)" style="width: 50px; height: 50px; border-radius: 25px; display: flex; justify-content: center; align-items: center; cursor: pointer; position: relative; z-index: 2; background: transparent;">
+                    <img src="img/smile.png" class="icono-exp" style="width: 36px; height: 36px; object-fit: contain;">
+                </div>
+                <div class="emocion-btn" data-exp="surprised" onclick="seleccionarEmocion(this)" style="width: 50px; height: 50px; border-radius: 25px; display: flex; justify-content: center; align-items: center; cursor: pointer; position: relative; z-index: 2; background: transparent;">
+                    <img src="img/surpriced.png" class="icono-exp" style="width: 36px; height: 36px; object-fit: contain;">
+                </div>
+                <div class="emocion-btn" data-exp="frustrated" onclick="seleccionarEmocion(this)" style="width: 50px; height: 50px; border-radius: 25px; display: flex; justify-content: center; align-items: center; cursor: pointer; position: relative; z-index: 2; background: transparent;">
+                    <img src="img/frustrate.png" class="icono-exp" style="width: 36px; height: 36px; object-fit: contain;">
+                </div>
+                <div class="emocion-btn" data-exp="sorrow" onclick="seleccionarEmocion(this)" style="width: 50px; height: 50px; border-radius: 25px; display: flex; justify-content: center; align-items: center; cursor: pointer; position: relative; z-index: 2; background: transparent;">
+                    <img src="img/sad.png" class="icono-exp" style="width: 36px; height: 36px; object-fit: contain;">
+                </div>
+            </div>
+        </div>
+
+        <!-- Fila 2: Selector T/Dibujo + Área de Entrada -->
+        <div style="display: flex; height: 350px; margin-bottom: 18px; flex-shrink: 0; position: relative;">
+            <div style="width: 65px; display: flex; flex-direction: column;">
+                <div id="btn-modo-texto" onclick="cambiarModoEntrada('texto')" class="toggle-input-btn activo" style="height: 50%; background: linear-gradient(to bottom, #74d221 0%, #5cb814 100%); border: 1px solid #4a960f; border-right: none; border-radius: 8px 0 0 0; display: flex; justify-content: center; align-items: center; color: white; font-family: serif; font-size: 36px; box-shadow: inset 0 1px 0 rgba(255,255,255,0.4); cursor: pointer;">T</div>
+                <div id="btn-modo-dibujo" onclick="cambiarModoEntrada('dibujo')" class="toggle-input-btn" style="height: 50%; background: linear-gradient(to bottom, #fdfdfd 0%, #e0e0e0 100%); border: 1px solid #b0b0b0; border-top: none; border-right: none; border-radius: 0 0 0 8px; display: flex; justify-content: center; align-items: center; color: #777; font-size: 28px; box-shadow: inset 0 1px 0 rgba(255,255,255,0.8); cursor: pointer;">✎</div>
+            </div>
+            
+            <!-- Contenedor dinámico (Texto o Dibujo) -->
+            <div style="flex-grow: 1; position: relative; height: 100%;">
+                <textarea id="texto-nuevo-post" placeholder="Write a message." style="width: 100%; height: 100%; border: 1px solid #999; border-radius: 0 8px 8px 0; padding: 20px; font-size: 20px; font-family: inherit; resize: none; outline: none; background-color: #ffffff; box-shadow: inset 0 3px 6px rgba(0,0,0,0.12); color: #333; box-sizing: border-box; display: block;"></textarea>
+                
+                <canvas id="canvas-post" style="width: 100%; height: 100%; border: 1px solid #999; border-radius: 0 8px 8px 0; background-color: #ffffff; box-shadow: inset 0 3px 6px rgba(0,0,0,0.12); box-sizing: border-box; display: none; cursor: crosshair; touch-action: none;"></canvas>
+            </div>
+        </div>
+
+        <!-- BOTÓN CANCEL EN LA ESQUINA INFERIOR IZQUIERDA -->
+        <div onclick="cerrarModalPostGeneral()" style="position: absolute; bottom: 0; left: 0; width: 250px; height: 64px; background: linear-gradient(to bottom, #fdfdfd 0%, #dedede 100%); border-top: 2px solid #b0b0b0; border-right: 2px solid #b0b0b0; border-top-right-radius: 45px; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: inset 1px 1px 0px rgba(255,255,255,0.9);">
+            <span style="font-size: 22px; color: #666; font-weight: bold; margin-right: 20px; text-shadow: 0 1px 0 #fff;">Cancel</span>
+        </div>
+
+        <!-- ÚNICO BOTÓN SEND EN LA ESQUINA INFERIOR DERECHA -->
+        <div onclick="publicarPostGeneral()" style="position: absolute; bottom: 0; right: 0; width: 250px; height: 64px; background: linear-gradient(to bottom, #fdfdfd 0%, #dedede 100%); border-top: 2px solid #b0b0b0; border-left: 2px solid #b0b0b0; border-top-left-radius: 45px; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: inset -1px 1px 0px rgba(255,255,255,0.9);">
+            <span style="font-size: 22px; color: #1c75bc; font-weight: bold; margin-left: 20px; text-shadow: 0 1px 0 #fff;">Send</span>
+        </div>
+
+    </div>
+</div>
+
+<script>
+function seleccionarEmocion(elemento) {
+    // 1. Resetea todos los botones: fondo transparente y limpia los filtros/iconos a su estado gris normal
+    document.querySelectorAll('.emocion-btn').forEach(btn => {
+        btn.classList.remove('activo');
+        btn.style.background = 'transparent';
+        
+        const img = btn.querySelector('.icono-exp');
+        img.style.filter = 'none';
+        
+        const exp = btn.getAttribute('data-exp');
+        if (exp === 'normal') img.src = 'img/normal.png';
+        if (exp === 'smile') img.src = 'img/happy.png';
+        if (exp === 'like') img.src = 'img/smile.png';
+        if (exp === 'surprised') img.src = 'img/surpriced.png';
+        if (exp === 'frustrated') img.src = 'img/frustrate.png';
+        if (exp === 'sorrow') img.src = 'img/sad.png';
+    });
+
+    // 2. Activa el seleccionado: asigna su respectivo PNG iluminado y le aplica el efecto de brillo verde
+    elemento.classList.add('activo');
+    elemento.style.background = 'transparent';
+    
+    const imgActiva = elemento.querySelector('.icono-exp');
+    const expActiva = elemento.getAttribute('data-exp');
+    
+    if (expActiva === 'normal') {
+        imgActiva.src = 'img/feeling-normal-selected.png';
+    } else if (expActiva === 'smile') {
+        imgActiva.src = 'img/feeling-happy-selected.png';
+    } else if (expActiva === 'like') {
+        imgActiva.src = 'img/feeling-like-selected.png';
+    } else if (expActiva === 'surprised') {
+        imgActiva.src = 'img/feeling-surprised-selected.png';
+    } else if (expActiva === 'frustrated') {
+        imgActiva.src = 'img/feeling-frustrated-selected.png';
+    } else if (expActiva === 'sorrow') {
+        imgActiva.src = 'img/feeling-puzzled-selected.png';
+    }
+    
+    imgActiva.style.filter = 'drop-shadow(0 0 4px #74d221) drop-shadow(0 0 8px #74d221)';
+}
+</script>
+
+
+
+<!-- ================= 2. MURO ESTILO MIIVERSE ================= -->
+<div id="muro-mensajes" style="max-width: 1060px; margin: 40px auto; display: flex; flex-direction: column; gap: 32px; padding: 0 15px; box-sizing: border-box;"></div>
+
+<style>
+#modal-crear-post {
+    animation: fadeInModal 0.2s ease-in-out;
+}
+@keyframes fadeInModal {
+    from { opacity: 0; transform: scale(0.98); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+.icono-exp {
+    pointer-events: none;
+    opacity: 0.85;
+    transition: opacity 0.15s;
+}
+
+.emocion-btn:hover .icono-exp {
+    opacity: 1;
+}
+
+.emocion-btn.activo {
+    background: linear-gradient(to bottom, #74d221 0%, #5cb814 100%) !important;
+    border-radius: 25px;
+    box-shadow: inset 0 2px 3px rgba(0,0,0,0.2), 0 1px 2px rgba(255,255,255,0.6);
+    border: 1px solid #4a960f;
+}
+
+.emocion-btn.activo .icono-exp {
+    filter: brightness(0) invert(1);
+    opacity: 1;
+}
+
+.miiverse-card:hover .btn-eliminar-miiverse {
+    opacity: 1;
+}
+</style>
+
+<script type="module">
+    import * as MiiJS from 'https://cdn.jsdelivr.net/npm/miijs@latest/dist/miijs.browser.esm.js';
+    window.MiiJS = MiiJS;
+</script>
+
+<script>
+let expresionActual = 'normal';
+let modoActual = 'texto'; 
+let canvas, ctx;
+let dibujando = false;
+
+document.addEventListener('DOMContentLoaded', () => {
+    const botonesEmocion = document.querySelectorAll('#modal-crear-post .emocion-btn');
+    botonesEmocion.forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            botonesEmocion.forEach(b => b.classList.remove('activo'));
+            const botonReal = e.target.closest('.emocion-btn');
+            if (!botonReal) return;
+
+            botonReal.classList.add('activo');
+            expresionActual = botonReal.getAttribute('data-exp');
+            
+            const pnid = localStorage.getItem('makiiverse_pnid') || 'Makii';
+            actualizarAvatarModal(pnid, expresionActual);
+        });
+    });
+
+    canvas = document.getElementById('canvas-post');
+    ctx = canvas.getContext('2d');
+
+    const rect = canvas.getBoundingClientRect();
+    canvas.width = rect.width;
+    canvas.height = rect.height;
+
+    ctx.strokeStyle = '#000000';
+    ctx.lineWidth = 2;
+    ctx.lineCap = 'round';
+    ctx.lineJoin = 'round';
+
+    canvas.addEventListener('mousedown', empezarTrazo);
+    canvas.addEventListener('mousemove', dibujar);
+    canvas.addEventListener('mouseup', detenerTrazo);
+    canvas.addEventListener('mouseleave', detenerTrazo);
+
+    canvas.addEventListener('touchstart', (e) => { e.preventDefault(); empezarTrazo(e.touches[0]); });
+    canvas.addEventListener('touchmove', (e) => { e.preventDefault(); dibujar(e.touches[0]); });
+    canvas.addEventListener('touchend', detenerTrazo);
+
+    renderizarMensajes();
+});
+
+// Función para abrir el modal desde cualquier lugar externo que lo requiera
+function abrirModalPostGeneral() {
+    document.getElementById('modal-crear-post').style.display = 'flex';
+    document.body.style.overflow = 'hidden'; 
+    
+    const pnid = localStorage.getItem('makiiverse_pnid') || 'Makii';
+    actualizarAvatarModal(pnid, expresionActual);
+    
+    if (modoActual === 'texto') {
+        document.getElementById('texto-nuevo-post').focus();
+    } else {
+        const rect = canvas.getBoundingClientRect();
+        if(canvas.width !== rect.width || canvas.height !== rect.height) {
+            canvas.width = rect.width;
+            canvas.height = rect.height;
+        }
+    }
+}
+
+function cerrarModalPostGeneral() {
+    document.getElementById('modal-crear-post').style.display = 'none';
+    document.getElementById('texto-nuevo-post').value = ''; 
+    if(ctx) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+    }
+    document.body.style.overflow = 'auto'; 
+}
+
+function actualizarAvatarModal(pnid, expresion) {
+    const avatarDiv = document.getElementById('avatar-mii-post');
+    const urlMii = `https://mii-unsecure.ariankordi.net/miis/image.png?nnid=${encodeURIComponent(pnid)}&type=face&width=270&expression=${encodeURIComponent(expresion)}&api_id=1`;
+    avatarDiv.style.backgroundImage = `url('${urlMii}')`;
+}
+
+function cambiarModoEntrada(modo) {
+    modoActual = modo;
+    const textarea = document.getElementById('texto-nuevo-post');
+    const canvasElem = document.getElementById('canvas-post');
+    const btnTexto = document.getElementById('btn-modo-texto');
+    const btnDibujo = document.getElementById('btn-modo-dibujo');
+
+    if (modo === 'texto') {
+        textarea.style.display = 'block';
+        canvasElem.style.display = 'none';
+        
+        btnTexto.classList.add('activo');
+        btnTexto.style.background = 'linear-gradient(to bottom, #74d221 0%, #5cb814 100%)';
+        btnTexto.style.color = 'white';
+        
+        btnDibujo.classList.remove('activo');
+        btnDibujo.style.background = 'linear-gradient(to bottom, #fdfdfd 0%, #e0e0e0 100%)';
+        btnDibujo.style.color = '#777';
+
+        textarea.focus();
+    } else {
+        textarea.style.display = 'none';
+        canvasElem.style.display = 'block';
+        
+        btnDibujo.classList.add('activo');
+        btnDibujo.style.background = 'linear-gradient(to bottom, #74d221 0%, #5cb814 100%)';
+        btnDibujo.style.color = 'white';
+        
+        btnTexto.classList.remove('activo');
+        btnTexto.style.background = 'linear-gradient(to bottom, #fdfdfd 0%, #e0e0e0 100%)';
+        btnTexto.style.color = '#777';
+
+        const rect = canvasElem.getBoundingClientRect();
+        if(canvas.width !== rect.width || canvas.height !== rect.height) {
+            canvas.width = rect.width;
+            canvas.height = rect.height;
+        }
+    }
+}
+
+function obtenerPosicionCanvas(e) {
+    const rect = canvas.getBoundingClientRect();
+    return {
+        x: e.clientX - rect.left,
+        y: e.clientY - rect.top
+    };
+}
+
+function empezarTrazo(e) {
+    dibujando = true;
+    const pos = obtenerPosicionCanvas(e);
+    ctx.beginPath();
+    ctx.moveTo(pos.x, pos.y);
+}
+
+function dibujar(e) {
+    if (!dibujando) return;
+    const pos = obtenerPosicionCanvas(e);
+    ctx.lineTo(pos.x, pos.y);
+    ctx.stroke();
+}
+
+function detenerTrazo() {
+    if (!dibujando) return;
+    dibujando = false;
+    ctx.closePath();
+}
+
+function publicarPostGeneral() {
+    let contenidoPost = {};
+
+    if (modoActual === 'texto') {
+        const texto = document.getElementById('texto-nuevo-post').value;
+        if(texto.trim() === '') {
+            alert("¡No puedes enviar un mensaje vacío!");
+            return;
+        }
+        contenidoPost = { tipo: 'texto', valor: texto };
+    } else {
+        const imagenDataUrl = canvas.toDataURL('image/png');
+        contenidoPost = { tipo: 'dibujo', valor: imagenDataUrl };
+    }
+
+    const pnid = localStorage.getItem('makiiverse_pnid') || 'Makii';
+    
+    const nuevoMensaje = {
+        id: Date.now(),
+        autor: pnid,
+        tipo: contenidoPost.tipo,
+        contenido: contenidoPost.valor,
+        expresion: expresionActual,
+        fecha: new Date().toLocaleTimeString()
+    };
+
+    let mensajesGuardados = JSON.parse(localStorage.getItem('makiiverse_mensajes') || '[]');
+    mensajesGuardados.unshift(nuevoMensaje);
+    localStorage.setItem('makiiverse_mensajes', JSON.stringify(mensajesGuardados));
+
+    cerrarModalPostGeneral();
+    renderizarMensajes();
+}
+
+function renderizarMensajes() {
+    const muro = document.getElementById('muro-mensajes');
+    if (!muro) return;
+
+    let mensajesGuardados = JSON.parse(localStorage.getItem('makiiverse_mensajes') || '[]');
+    muro.innerHTML = '';
+
+    if (mensajesGuardados.length === 0) {
+        muro.innerHTML = '<p style="text-align: center; color: #777; font-family: sans-serif; font-size: 16px;">Aún no hay publicaciones en este muro.</p>';
+        return;
+    }
+
+    const usuarioActual = localStorage.getItem('makiiverse_pnid') || 'Makii';
+
+    mensajesGuardados.forEach(msg => {
+        const urlMii = `https://mii-unsecure.ariankordi.net/miis/image.png?nnid=${encodeURIComponent(msg.autor)}&type=face&width=270&expression=${encodeURIComponent(msg.expresion)}&api_id=1`;
+        
+        const contenedorPost = document.createElement('div');
+        contenedorPost.className = 'miiverse-card';
+        contenedorPost.style.cssText = "display: flex; align-items: flex-start; position: relative; margin-bottom: 20px;";
+
+        let botonEliminarHTML = '';
+        if (msg.autor === usuarioActual) {
+            botonEliminarHTML = `<button onclick="eliminarMensaje(${msg.id})" class="btn-eliminar-miiverse" style="position: absolute; top: 12px; right: 16px; background: #fff; border: 1px solid #ccc; border-radius: 4px; padding: 6px 14px; font-size: 14px; color: #666; cursor: pointer; opacity: 0; transition: opacity 0.15s; z-index: 10;">Delete</button>`;
+        }
+
+        let contenidoHTML = '';
+        if (msg.tipo === 'texto') {
+            contenidoHTML = `<p style="margin: 0; font-size: 21px; color: #333; word-break: break-word; font-family: sans-serif; line-height: 1.7;">${escapeHTML(msg.contenido)}</p>`;
+        } else {
+            contenidoHTML = `<img src="${msg.contenido}" style="max-width: 100%; border-radius: 6px; background: #fff; display: block;">`;
+        }
+
+        contenedorPost.innerHTML = `
+            <!-- Avatar Mii flotante a la izquierda -->
+            <div style="width: 96px; height: 96px; background-image: url('${urlMii}'); background-size: cover; background-position: center; background-color: #fff; border-radius: 8px; border: 1px solid #b8b8b8; box-shadow: 0 2px 4px rgba(0,0,0,0.1); margin-right: 20px; flex-shrink: 0; margin-top: 4px;"></div>
+            
+            <!-- Tarjeta de contenido -->
+            <div style="flex-grow: 1; background: #ffffff; border: 1px solid #c8c8c8; border-radius: 8px; box-shadow: 0 3px 6px rgba(0,0,0,0.06); overflow: hidden; position: relative;">
+                ${botonEliminarHTML}
+                
+                <!-- Encabezado de la tarjeta -->
+                <div style="background: linear-gradient(to bottom, #f2f2f2 0%, #e4e4e4 100%); border-bottom: 1px solid #d0d0d0; padding: 14px 20px; display: flex; justify-content: space-between; align-items: center;">
+                    <span style="font-weight: bold; font-size: 18px; color: #444; font-family: sans-serif;">${escapeHTML(msg.autor)}</span>
+                    <span style="font-size: 14px; color: #888; font-family: sans-serif;">${msg.fecha}</span>
+                </div>
+
+                <!-- Cuerpo del mensaje -->
+                <div style="padding: 34px 26px; background: #ffffff; min-height: 120px; box-sizing: border-box;">
+                    <div style="display: flex; gap: 20px; align-items: flex-start;">
+                        <!-- Icono de Comunidad -->
+                        <div style="width: 66px; height: 66px; background: linear-gradient(to bottom, #505050 0%, #303030 100%); border-radius: 8px; border: 1px solid #222; overflow: hidden; display: flex; justify-content: center; align-items: center; flex-shrink: 0; box-shadow: inset 0 1px 2px rgba(255,255,255,0.2);">
+                            <img src="img/games/wii-u-logo-png_seeklogo-312570.png" style="width: 100%; height: 100%; object-fit: cover;">
+                        </div>
+                        <div style="flex-grow: 1;">${contenidoHTML}</div>
+                    </div>
+                </div>
+
+                <!-- Pie de tarjeta -->
+                <div style="background: #fafafa; border-top: 1px solid #eaeaea; padding: 12px 20px; display: flex; gap: 28px; font-size: 15px; color: #666;">
+                    <span>👍 Yeah! (0)</span>
+                    <span>💬 0</span>
+                </div>
+            </div>
+        `;
+
+        muro.appendChild(contenedorPost);
+    });
+}
+
+function eliminarMensaje(id) {
+    if (!confirm("¿Deseas eliminar este mensaje?")) return;
+
+    let mensajesGuardados = JSON.parse(localStorage.getItem('makiiverse_mensajes') || '[]');
+    mensajesGuardados = mensajesGuardados.filter(msg => msg.id !== id);
+    
+    localStorage.setItem('makiiverse_mensajes', JSON.stringify(mensajesGuardados));
+    renderizarMensajes();
+}
+
+function escapeHTML(str) {
+    return str.replace(/[&<>'"]/g, 
+        tag => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[tag] || tag)
+    );
+}
+</script>
+
+<!-- Agrega esta etiqueta en el <head> de tu documento para cargar la fuente de símbolos de Miiverse -->
+<style>
+@font-face {
+    font-family: 'MiiverseSymbols';
+    src: url('MiiverseSymbols-Regular.ttf') format('truetype');
+}
+</style>
+
+<!-- Reemplaza el bloque de la tarjeta de mensaje en renderizarMensajes() con el siguiente código integrado: -->
+<script>
+function renderizarMensajes() {
+    const muro = document.getElementById('muro-mensajes');
+    if (!muro) return;
+
+    let mensajesGuardados = JSON.parse(localStorage.getItem('makiiverse_mensajes') || '[]');
+    muro.innerHTML = '';
+
+    if (mensajesGuardados.length === 0) {
+        muro.innerHTML = '<p style="text-align: center; color: #777; font-family: sans-serif; font-size: 16px;">Aún no hay publicaciones en este muro.</p>';
+        return;
+    }
+
+    const usuarioActual = localStorage.getItem('makiiverse_pnid') || 'Makii';
+
+    mensajesGuardados.forEach(msg => {
+        const urlMii = `https://mii-unsecure.ariankordi.net/miis/image.png?nnid=${encodeURIComponent(msg.autor)}&type=face&width=270&expression=${encodeURIComponent(msg.expresion)}&api_id=1`;
+        
+        // Manejo de Yeahs guardados en localStorage por mensaje
+        const yeahsData = JSON.parse(localStorage.getItem(`makiiverse_yeahs_${msg.id}`) || '{"count": 0, "dado": false}');
+        
+        const contenedorPost = document.createElement('div');
+        contenedorPost.className = 'miiverse-card';
+        contenedorPost.style.cssText = "display: flex; align-items: flex-start; position: relative; margin-bottom: 20px;";
+
+        let botonEliminarHTML = '';
+        if (msg.autor === usuarioActual) {
+            botonEliminarHTML = `<button onclick="eliminarMensaje(${msg.id})" class="btn-eliminar-miiverse" style="position: absolute; top: 12px; right: 16px; background: #fff; border: 1px solid #ccc; border-radius: 4px; padding: 6px 14px; font-size: 14px; color: #666; cursor: pointer; opacity: 0; transition: opacity 0.15s; z-index: 10;">Delete</button>`;
+        }
+
+        let contenidoHTML = '';
+        if (msg.tipo === 'texto') {
+            contenidoHTML = `<p style="margin: 0; font-size: 21px; color: #333; word-break: break-word; font-family: sans-serif; line-height: 1.7;">${escapeHTML(msg.contenido)}</p>`;
+        } else {
+            contenidoHTML = `<img src="${msg.contenido}" style="max-width: 100%; border-radius: 6px; background: #fff; display: block;">`;
+        }
+
+        contenedorPost.innerHTML = `
+            <!-- Avatar Mii flotante a la izquierda -->
+            <div style="width: 96px; height: 96px; background-image: url('${urlMii}'); background-size: cover; background-position: center; background-color: #fff; border-radius: 8px; border: 1px solid #b8b8b8; box-shadow: 0 2px 4px rgba(0,0,0,0.1); margin-right: 20px; flex-shrink: 0; margin-top: 4px;"></div>
+            
+            <!-- Tarjeta de contenido -->
+            <div style="flex-grow: 1; background: #ffffff; border: 1px solid #c8c8c8; border-radius: 8px; box-shadow: 0 3px 6px rgba(0,0,0,0.06); overflow: hidden; position: relative;">
+                ${botonEliminarHTML}
+                
+                <!-- Encabezado de la tarjeta -->
+                <div style="background: linear-gradient(to bottom, #f2f2f2 0%, #e4e4e4 100%); border-bottom: 1px solid #d0d0d0; padding: 14px 20px; display: flex; justify-content: space-between; align-items: center;">
+                    <span style="font-weight: bold; font-size: 18px; color: #444; font-family: sans-serif;">${escapeHTML(msg.autor)}</span>
+                    <span style="font-size: 14px; color: #888; font-family: sans-serif;">${msg.fecha}</span>
+                </div>
+
+                <!-- Cuerpo del mensaje -->
+                <div style="padding: 34px 26px; background: #ffffff; min-height: 120px; box-sizing: border-box;">
+                    <div style="display: flex; gap: 20px; align-items: flex-start;">
+                        <!-- Icono de Comunidad -->
+                        <div style="width: 66px; height: 66px; background: linear-gradient(to bottom, #505050 0%, #303030 100%); border-radius: 8px; border: 1px solid #222; overflow: hidden; display: flex; justify-content: center; align-items: center; flex-shrink: 0; box-shadow: inset 0 1px 2px rgba(255,255,255,0.2);">
+                            <img src="img/games/wii-u-logo-png_seeklogo-312570.png" style="width: 100%; height: 100%; object-fit: cover;">
+                        </div>
+                        <div style="flex-grow: 1;">${contenidoHTML}</div>
+                    </div>
+                </div>
+
+               
+        `;
+
+        muro.appendChild(contenedorPost);
+    });
+}
+
+// Función global para manejar los Yeahs interactivos en cada post
+function toggleYeah(idMensaje) {
+    let yeahsData = JSON.parse(localStorage.getItem(`makiiverse_yeahs_${idMensaje}`) || '{"count": 0, "dado": false}');
+    
+    if (yeahsData.dado) {
+        yeahsData.dado = false;
+        yeahsData.count = Math.max(0, yeahsData.count - 1);
+    } else {
+        yeahsData.dado = true;
+        yeahsData.count += 1;
+    }
+    
+    localStorage.setItem(`makiiverse_yeahs_${idMensaje}`, JSON.stringify(yeahsData));
+    renderizarMensajes();
+}
+</script>
+</div>
+
+<style>
+@font-face {
+    font-family: 'MiiverseSymbols';
+    src: url('MiiverseSymbols-Regular.ttf') format('truetype');
+}
+</style>
+
+</div>
+
+
+ <!-- ================= SECCIÓN 5: VISTA USER PAGE ================= -->
+<div id="vista-userpage" style="display: none; position: relative; z-index: 1;  min-height: 100vh; padding-bottom: 40px;">
+    
+    <!-- Barra superior verde Miiverse -->
+    <div style="background: linear-gradient(to bottom, #8ee331, #63b90b); width: 1400px; margin-left: 100px; margin-top: -50px; padding: 12px 20px; border-bottom: 2px solid #529c09; box-shadow: inset 0 1px 0 rgba(255,255,255,0.4);">
+        <h1 style="color: white; margin: 0; font-size: 20px; font-weight: bold; font-family: 'MiiverseFont', sans-serif; text-shadow: 0 1px 2px rgba(0,0,0,0.2);">Your Profile</h1>
+    </div>
+
+    <!-- Contenedor principal de la interfaz -->
+    <div style="width: 82%; margin-left: 140px; margin-top: 25px; font-family: 'MiiverseFont', sans-serif;">
+        
+        <!-- Tarjeta de perfil superior -->
+        <div style="background: #ffffff; border: 1px solid #d0cce1; border-radius: 8px; padding: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); position: relative;">
+            
+            <!-- Encabezado con Mii, Nombre y Botón de Ajustes -->
+            <div style="display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 15px;">
+                <div style="display: flex; align-items: center; gap: 15px;">
+                    <!-- Avatar Mii dinámico -->
+                    <div style="width: 70px; height: 70px; background: #e1e1e1; border-radius: 10px; border: 1px solid #ccc; overflow: hidden; display: flex; align-items: center; justify-content: center;">
+                        <img id="profile-mii-img" src="img/games/Dummy_mii_user.png" style="width: 110%; height: 110%; object-fit: cover;">
+                    </div>
+                    <div>
+                        <h2 id="profile-username" style="font-size: 20px; color: #333; margin: 0 0 4px 0; font-weight: bold;">Usuario</h2>
+                        <span id="profile-pnid-sub" style="font-size: 13px; color: #777;">PNID</span>
+                    </div>
+                </div>
+
+                
+
+                <!-- Botón Profile Settings estilo Wii U -->
+                <button onclick="alert('Configuraciones de perfil')" style="background: #eef2f5; border: 1px solid #ccd1d9; color: #444; padding: 8px 15px; border-radius: 6px; font-size: 13px; font-weight: bold; cursor: pointer; display: flex; align-items: center; gap: 6px;">
+                    <span style="color: #6ea100; font-size: 15px;">✎</span> Profile Settings
+                </button>
+            </div>
+
+            <!-- Descripción / Estado del usuario -->
+            <div id="profile-bio" style="font-size: 14px; color: #444; line-height: 1.4; margin-bottom: 20px; min-height: 20px;">
+            </div>
+
+            <!-- Detalles de usuario (Solo Yeahs) -->
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; max-width: 600px;">
+                <div style="background: #f0ecfa; border-radius: 20px; padding: 6px 15px; display: flex; justify-content: space-between; align-items: center; font-size: 13px;">
+                    <span style="color: #7b7393; font-weight: bold;">Yeahs</span>
+                    <span style="color: #333;" id="info-yeahs">0</span>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Pestañas de Navegación (Solo Posts) -->
+        <div style="display: grid; grid-template-columns: 1fr; background: #e0dceb; border: 1px solid #d0cce1; border-top: none; border-radius: 0 0 8px 8px; overflow: hidden; text-align: center; margin-bottom: 20px;">
+            
+            <div style="background: #73e600; color: white; padding: 12px 0; cursor: pointer;">
+                <div style="font-size: 14px; font-weight: bold; margin-bottom: 4px;">Posts</div>
+                <div id="contador-posts-usuario" style="background: #52a600; width: 60px; margin: 0 auto; border-radius: 10px; font-size: 12px; padding: 2px 0; font-weight: bold;">0</div>
+            </div>
+
+        </div>
+
+        <!-- Botón de Cerrar Sesión inferior para control del usuario -->
+        <div style="margin-top: 20px; text-align: right;">
+            <button onclick="cerrarSesion()" style="background: #e60012; border: none; color: white; padding: 10px 20px; border-radius: 6px; font-weight: bold; cursor: pointer; font-size: 14px;">
+                Cerrar sesión
+            </button>
+        </div>
+
+        <!-- Contenedor donde se cargarán los posts del usuario en su perfil -->
+        <div style="margin-top: 30px;">
+            <h3 style="font-size: 18px; color: #444; margin-bottom: 15px; border-bottom: 2px solid #d0cce1; padding-bottom: 8px;">My Posts History</h3>
+            <div id="muro-posts-usuario" style="display: flex; flex-direction: column; gap: 20px;">
+                <!-- Aquí se inyectarán dinámicamente las tarjetas de los posts del usuario -->
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<!-- ================= SECCIÓN 4: VISTA NETWORKS ================= -->
+<div id="vista-networks" style="display: none;">
+    <div class="linea-degradada" style="margin-top: -50px; background: linear-gradient(to right, #fbff02, #ffae00);">
+        <h1>Networks</h1>
+    </div>
+    
+    <div style="width: 78%; margin-left: 170px; margin-top: 25px;">
+        <h2 style="font-family: 'MiiverseFont', sans-serif; color: #555; margin-bottom: 20px;">Mis Redes Conectadas</h2>
+<!-- Pretendo Network -->
+<div class="card card-standard" style="display: flex; flex-direction: row; align-items: center; justify-content: flex-start; padding: 15px; margin-bottom: 15px; margin-left: 170px; background: #fff; border-radius: 6px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); width: calc(100% - 190px); height: auto; cursor: default;">
+    <img src="img/icon_pretendo.png" style="width: 50px; height: 50px; border-radius: 5px; margin-right: 15px; flex-shrink: 0; object-fit: cover;">
+    <div style="text-align: left;">
+        <span style="font-family: 'MiiverseFont', sans-serif; color: #999; font-size: 14px;">Pretendo Network (PNID)</span>
+        <p style="font-family: 'MiiverseFont', sans-serif; font-weight: 600; font-size: 18px; color: #555; margin: 5px 0 0 0;">YosMakii99_PN</p>
+    </div>
+</div>
+
+<!-- Roblox Manual: Enlace SOLO en la tarjeta -->
+<div class="card card-standard" style="display: flex; flex-direction: row; align-items: center; justify-content: flex-start; padding: 15px; margin-bottom: 15px; margin-left: 170px; background: #fff; border-radius: 6px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); width: calc(100% - 190px); height: auto; cursor: default;">
+    
+    <a href="https://www.roblox.com/es/users/10030521486/profile" target="_blank" style="display: flex; flex-direction: row; align-items: center; text-decoration: none; color: inherit; width: 100%;">
+        <img src="img/pfp/RobloxUser.png" 
+             style="width: 50px; height: 50px; border-radius: 5px; margin-right: 15px; flex-shrink: 0; object-fit: cover;" 
+             alt="Roblox Avatar">
+        <div style="text-align: left;">
+            <span style="font-family: 'MiiverseFont', sans-serif; color: #999; font-size: 14px;">Roblox</span>
+            <p style="font-family: 'MiiverseFont', sans-serif; font-weight: 600; font-size: 18px; color: #555; margin: 5px 0 0 0;">amke01_WiiU</p>
+        </div>
+    </a>
+</div>
+
+<!-- Discord -->
+<div class="card card-standard" style="display: flex; flex-direction: row; align-items: center; justify-content: flex-start; padding: 15px; margin-bottom: 15px; margin-left: 170px; background: #fff; border-radius: 6px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); width: calc(100% - 190px); height: auto; cursor: default;">
+    <img src="img/pfp/Discord.jpg" style="width: 50px; height: 50px; border-radius: 5px; margin-right: 15px; flex-shrink: 0; object-fit: cover;">
+    <div style="text-align: left;">
+        <span style="font-family: 'MiiverseFont', sans-serif; color: #999; font-size: 14px;">Discord </span>
+        <p style="font-family: 'MiiverseFont', sans-serif; font-weight: 600; font-size: 18px; color: #555; margin: 5px 0 0 0;">amke01</p>
+    </div>
+</div>
+
+ <!-- Tarjeta de YouTube alineada a la derecha -->
+<div class="card card-standard" style="display: flex; flex-direction: row; align-items: center; justify-content: flex-start; padding: 15px; margin-bottom: 15px; margin-left: 170px; background: #fff; border-radius: 6px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); width: calc(100% - 190px); height: auto;">
+    
+    <a href="https://www.youtube.com/@cafe_laila" target="_blank" style="display: flex; align-items: center; text-decoration: none; color: inherit;">
+        
+        <!-- Esta URL usa tu ID para obtener siempre tu foto actual -->
+        <img src="https://unavatar.io/youtube/@cafe_laila" 
+     style="width: 50px; height: 50px; border-radius: 5px; margin-right: 15px; flex-shrink: 0;" 
+     alt="Mi Canal">
+        
+        <div style="text-align: left;">
+            <span style="font-family: 'MiiverseFont', sans-serif; color: #999; font-size: 14px;">YouTube</span>
+            <p style="font-family: 'MiiverseFont', sans-serif; font-weight: 600; font-size: 18px; color: #555; margin: 5px 0 0 0;">@cafe_laila</p>
+        </div>
+    </a>
+
+</div>
+
+<!-- Discord -->
+ <div class="card card-standard" style="display: flex; flex-direction: row; align-items: center; justify-content: flex-start; padding: 15px; margin-bottom: 15px; margin-left: 170px; background: #fff; border-radius: 6px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); width: calc(100% - 190px); height: auto; cursor: default;">
+    <img src="img/pfp/Nintendo_Switch-Logo.wine.png" style="width: 50px; height: 50px; border-radius: 5px; margin-right: 15px; flex-shrink: 0; object-fit: cover;">
+    <div style="text-align: left;">
+        <span style="font-family: 'MiiverseFont', sans-serif; color: #999; font-size: 14px;">Nintendo Switch </span>
+        <p style="font-family: 'MiiverseFont', sans-serif; font-weight: 600; font-size: 18px; color: #555; margin: 5px 0 0 0;">SW-7284-9105-6325</p>
+    </div>
+</div>
+
+<!-- Facebook automático -->
+<!-- Facebook Manual (Carga al 100% y sin errores) -->
+<div class="card card-standard" style="display: flex; flex-direction: row; align-items: center; justify-content: flex-start; padding: 15px; margin-bottom: 15px; margin-left: 170px; background: #fff; border-radius: 6px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); width: calc(100% - 190px); height: auto; cursor: default;">
+    
+    <a href="https://www.facebook.com/amkr01/" target="_blank" style="display: flex; flex-direction: row; align-items: center; text-decoration: none; color: inherit; width: 100%;">
+        <img src="img/pfp/facebook.jpg" 
+             style="width: 50px; height: 50px; border-radius: 5px; margin-right: 15px; flex-shrink: 0; object-fit: cover;" 
+             alt="Facebook Avatar">
+        <div style="text-align: left;">
+            <span style="font-family: 'MiiverseFont', sans-serif; color: #999; font-size: 14px;">Facebook</span>
+            <p style="font-family: 'MiiverseFont', sans-serif; font-weight: 600; font-size: 18px; color: #555; margin: 5px 0 0 0;">amkr01</p>
+        </div>
+    </a>
+</div>
+
+ <div class="card card-standard" style="display: flex; flex-direction: row; align-items: center; justify-content: flex-start; padding: 15px; margin-bottom: 15px; margin-left: 170px; background: #fff; border-radius: 6px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); width: calc(100% - 190px); height: auto; cursor: default;">
+    <img src="img/pfp/mkwii.png" style="width: 50px; height: 50px; border-radius: 5px; margin-right: 15px; flex-shrink: 0; object-fit: cover;">
+    <div style="text-align: left;">
+        <span style="font-family: 'MiiverseFont', sans-serif; color: #999; font-size: 14px;">Mario Kart Wii (Wiimmfi) </span>
+        <p style="font-family: 'MiiverseFont', sans-serif; font-weight: 600; font-size: 18px; color: #555; margin: 5px 0 0 0;">FC-4429-8513-7239</p>
+    </div>
+</div>
+
+ <div class="card card-standard" style="display: flex; flex-direction: row; align-items: center; justify-content: flex-start; padding: 15px; margin-bottom: 15px; margin-left: 170px; background: #fff; border-radius: 6px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); width: calc(100% - 190px); height: auto; cursor: default;">
+    <img src="img/pfp/Wii-Logo-PNG-Cutout.png" style="width: 50px; height: 50px; border-radius: 5px; margin-right: 15px; flex-shrink: 0; object-fit: cover;">
+    <div style="text-align: left;">
+        <span style="font-family: 'MiiverseFont', sans-serif; color: #999; font-size: 14px;">Wii (friendCode) </span>
+        <p style="font-family: 'MiiverseFont', sans-serif; font-weight: 600; font-size: 18px; color: #555; margin: 5px 0 0 0;">FC-7536-1862-9058-8245</p>
+    </div>
+</div>
+
+ <div class="card card-standard" style="display: flex; flex-direction: row; align-items: center; justify-content: flex-start; padding: 15px; margin-bottom: 15px; margin-left: 170px; background: #fff; border-radius: 6px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); width: calc(100% - 190px); height: auto; cursor: default;">
+    <img src="img/pfp/Epic-Games-Symbol.png" style="width: 50px; height: 50px; border-radius: 5px; margin-right: 15px; flex-shrink: 0; object-fit: cover;">
+    <div style="text-align: left;">
+        <span style="font-family: 'MiiverseFont', sans-serif; color: #999; font-size: 14px;">Epic Games </span>
+        <p style="font-family: 'MiiverseFont', sans-serif; font-weight: 600; font-size: 18px; color: #555; margin: 5px 0 0 0;">YosMaki999</p>
+    </div>
+</div>
+
+
+</div>
+
+
+
+<!-- ================= SCRIPT ÚNICO DE CONTROL DE NAVEGACIÓN ================= -->
+<script>
+    // Creamos una "memoria" que guarde por dónde ha navegado el usuario.
+    // Asumimos que siempre empezamos en el perfil (0)
+    var historialNavegacion = [{ irA: 0, idBoton: 'global-menu-community' }];
+    var enSubportal = false;
+
+    // Agregamos un tercer parámetro opcional "esRetroceso"
+    function conmutarPortal(irA, idBoton, esRetroceso = false) {
+        
+        // Si el usuario está navegando normal (no está usando el botón Back), guardamos el paso
+        if (!esRetroceso) {
+            var actual = historialNavegacion[historialNavegacion.length - 1];
+            // Evitamos guardar duplicados si el usuario le da doble clic al mismo botón
+            if (!actual || actual.irA !== irA) {
+                historialNavegacion.push({ irA: irA, idBoton: idBoton });
+            }
+        }
+
+        // 1. Limpiamos la clase 'selected' de todos los botones primero
+        document.querySelectorAll('.card').forEach(function(b) {
+            b.classList.remove('selected');
+        });
+
+        // 2. Si venimos de un clic, marcamos el botón recibido
+        if (idBoton) {
+            var boton = document.getElementById(idBoton);
+            if (boton) boton.classList.add('selected');
+        }
+
+        // 3. Ocultar todas las vistas (Se incluye 'vista-quepasara')
+        var vistas = [
+            'vista-perfil', 
+            'vista-juegos', 
+            'vista-proyectos', 
+            'vista-sobremi', 
+            'vista-networks', 
+            'vista-userpage', 
+            'vista-messages', 
+            'vista-quepasara'
+        ];
+        
+        vistas.forEach(function(id) {
+            var v = document.getElementById(id);
+            if (v) v.style.display = 'none';
+        });
+
+        // 4. Mostrar la vista solicitada (Se agrega el índice 7)
+        var mapaVistas = { 
+            0: 'vista-perfil', 
+            1: 'vista-juegos', 
+            2: 'vista-proyectos', 
+            3: 'vista-sobremi', 
+            4: 'vista-networks', 
+            5: 'vista-userpage', 
+            6: 'vista-messages', 
+            7: 'vista-quepasara' 
+        };
+        
+        var destino = document.getElementById(mapaVistas[irA] || 'vista-perfil');
+        if (destino) destino.style.display = 'block';
+
+        // 5. Lógica del botón Back/Close
+        // Ahora el modo subportal depende de si hay más de 1 página en el historial
+        enSubportal = (historialNavegacion.length > 1);
+        
+        var btnNav = document.getElementById('boton-navegacion-miiverse');
+        var navIcono = document.getElementById('nav-icono-wiiu');
+        var navTexto = document.getElementById('nav-texto-wiiu');
+
+        if (enSubportal) {
+            // Diseño MODO SUBPORTAL (Back)
+            if(btnNav) {
+                btnNav.style.setProperty('background-color', '#ffffff', 'important');
+                btnNav.style.setProperty('box-shadow', '0 10px 20px rgb(201, 201, 201)', 'important');
+            }
+            if(navIcono) {
+                navIcono.style.fontFamily = "'MiiverseIcons'";
+                navIcono.style.fontSize = "68px"; 
+                navIcono.style.color = "#999999"; 
+                navIcono.style.marginTop = "-20px";
+                navIcono.style.marginLeft = "-2px";
+                navIcono.innerText = "b"; 
+            }
+            if(navTexto) {
+                navTexto.style.color = "#6b6969";
+                navTexto.style.marginTop = "10px";
+                navTexto.innerText = "Back";
+            }
+        } else {
+            // Diseño MODO PERFIL (Close)
+            if(btnNav) {
+                btnNav.style.setProperty('background-color', '#3d3d3d', 'important');
+                btnNav.style.setProperty('box-shadow', '0 12px 25px rgba(163, 161, 161, 0.5)', 'important');
+            }
+            if(navIcono) {
+                navIcono.style.fontFamily = "inherit";
+                navIcono.style.fontSize = "24px";
+                navIcono.style.color = "#777777";
+                navIcono.style.marginTop = "0px";
+                navIcono.style.marginLeft = "0px";
+                navIcono.img = "img/closeX.png"; // Mantengo tu lógica original aquí
+                navIcono.innerText = "";
+            }
+            if(navTexto) {
+                navTexto.style.color = "#cccccc";
+                navTexto.style.marginTop = "-20px";
+                navTexto.innerText = "Close";
+            }
+        }
+    }
+
+    function manejadorNavegacionFija() {
+        if (historialNavegacion.length > 1) {
+            // 1. Borramos la vista en la que estamos parados actualmente
+            historialNavegacion.pop();
+            
+            // 2. Nos asomamos a ver cuál era la vista anterior en la memoria
+            var vistaAnterior = historialNavegacion[historialNavegacion.length - 1];
+            
+            // 3. Viajamos a esa vista. Le pasamos "true" al final para avisarle a la función que esto es un retroceso
+            conmutarPortal(vistaAnterior.irA, vistaAnterior.idBoton, true);
+        } else {
+            // Si ya no hay historial (estamos en la página 1), cierra la ventana
+            window.close();
+        }
+    }
+</script>
+<script>
+ window.addEventListener('DOMContentLoaded', () => {
+    const pnidGuardado = localStorage.getItem('makiiverse_pnid');
+
+    if (pnidGuardado) {
+        // Solo buscamos y reemplazamos la imagen del Mii
+        const avatarSidebar = document.getElementById('user-sidebar-avatar');
+        
+        if (avatarSidebar) {
+            avatarSidebar.src = `https://mii-unsecure.ariankordi.net/miis/image.png?nnid=${encodeURIComponent(pnidGuardado)}&type=face&width=270&api_id=1`;
+            
+            // Si por alguna razón la API falla, regresamos a la silueta
+            avatarSidebar.onerror = function() {
+                this.src = 'img/games/Dummy_mii_user.png';
+            };
+        }
+    }
+});
+</script>
+
+<script>
+ async function cargarEstadisticasUsuario(pnid) {
+    try {
+        // 1. Referencia a tu base de datos (asegúrate de tener firebase inicializado)
+        const db = firebase.firestore();
+
+        // 2. Contar los Posts del usuario
+        const postsRef = db.collection('posts');
+        const postsSnapshot = await postsRef.where('autor', '==', pnid).get();
+        const totalPosts = postsSnapshot.size;
+
+        // Actualizar el DOM con el número real de posts
+        document.getElementById('info-yeahs').textContent = totalPosts; // (O el elemento de posts que tengas)
+        
+        // Si tienes un elemento específico para el contador de la pestaña de posts:
+        const contadorPostsTab = document.querySelector('#vista-userpage div[style*="background: #52a600"]');
+        if (contadorPostsTab) {
+            contadorPostsTab.textContent = totalPosts;
+        }
+
+        // 3. Contar los Yeahs (puedes sumar un campo 'yeahsCount' de sus posts o contar documentos en otra colección)
+        let totalYeahs = 0;
+        postsSnapshot.forEach(doc => {
+            const data = doc.data();
+            if (data.yeahs) {
+                totalYeahs += data.yeahs.length; // O el número directo si guardas un contador
+            }
+        });
+
+        // Actualizar elemento de Yeahs si creas uno específico para los likes recibidos
+        // document.getElementById('info-yeahs-recibidos').textContent = totalYeahs;
+
+    } catch (error) {
+        console.error("Error al cargar las estadísticas del usuario:", error);
+    }
+}
+
+
+</script>
+
+<script>
+
+ let expresionActual = 'normal';
+
+function abrirModalPostGeneral() {
+    document.getElementById('modal-crear-post').style.display = 'block';
+    
+    // Cargar la imagen del Mii con la expresión actual basada en el PNID guardado
+    const pnid = localStorage.getItem('makiiverse_pnid') || 'Makii';
+    actualizarAvatarModal(pnid, expresionActual);
+}
+
+function cerrarModalPostGeneral() {
+    document.getElementById('modal-crear-post').style.display = 'none';
+}
+
+function actualizarAvatarModal(pnid, expresion) {
+    const avatarDiv = document.getElementById('avatar-mii-post');
+    // Usamos el renderizador oficial con el parámetro de expresión que seleccionó el usuario
+    const urlMii = `https://mii-unsecure.ariankordi.net/miis/image.png?nnid=${encodeURIComponent(pnid)}&type=face&width=270&expression=${expresion}&api_id=1`;
+    avatarDiv.style.backgroundImage = `url('${urlMii}')`;
+}
+
+// Configurar clics en los botones de emociones de feeling-icons.png
+document.addEventListener('DOMContentLoaded', () => {
+    const botones = document.querySelectorAll('.emocion-btn');
+    botones.forEach(btn => {
+        btn.addEventListener('click', function() {
+            botones.forEach(b => b.style.backgroundColor = 'transparent');
+            this.style.backgroundColor = '#79c100';
+            
+            expresionActual = this.getAttribute('data-exp');
+            const pnid = localStorage.getItem('makiiverse_pnid') || 'Makii';
+            actualizarAvatarModal(pnid, expresionActual);
+        });
+    });
+});
+
+function actualizarVistaUserPage() {
+        const pnidGuardado = localStorage.getItem('makiiverse_pnid');
+
+        if (!pnidGuardado) {
+            window.location.href = 'login.html';
+            return;
+        }
+
+        const miiUrl = `https://mii-unsecure.ariankordi.net/miis/image.png?nnid=${encodeURIComponent(pnidGuardado)}&type=face&width=270&api_id=1`;
+
+        const usernameEl = document.getElementById('profile-username');
+        const subPnidEl = document.getElementById('profile-pnid-sub');
+        
+        if (usernameEl) usernameEl.textContent = pnidGuardado;
+        if (subPnidEl) subPnidEl.textContent = pnidGuardado;
+
+        const miiImgProfile = document.getElementById('profile-mii-img');
+
+        if (miiImgProfile) {
+            miiImgProfile.src = miiUrl;
+            miiImgProfile.onerror = function() {
+                this.src = 'img/games/Dummy_mii_user.png';
+            };
+        }
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+        actualizarVistaUserPage();
+    });
+
+    function cerrarSesion() {
+        localStorage.removeItem('makiiverse_pnid');
+        window.location.href = 'login.html';
+    }
+
+ 
+
+</script>
+
+<script>
+(function() {
+    const observer = new MutationObserver(() => {
+        // Buscamos cualquier elemento cuyo texto o contenido sea exactamente tu usuario
+        const elementos = document.querySelectorAll('span, p, a, div, b, strong');
+        
+        elementos.forEach(el => {
+            const texto = el.textContent ? el.textContent.trim() : '';
+            
+            // Verificamos si este elemento contiene tu PNID exacto
+            if (texto === "YosMakii99_PN" && !el.dataset.insigniaPuesta) {
+                console.log("¡Usuario encontrado en el DOM!", el);
+                
+                // Buscamos el contenedor de la tarjeta o post más cercano
+                let contenedorPadre = el.closest('.post, .comment, article, .item, .box, div') || el.parentElement;
+                if (!contenedorPadre) return;
+                
+                // Buscamos la imagen del Mii dentro de ese bloque
+                let avatarImg = contenedorPadre.querySelector('img');
+                
+                if (avatarImg && avatarImg.parentNode) {
+                    let wrapper = avatarImg.parentNode;
+                    
+                    wrapper.style.position = 'relative';
+                    wrapper.style.overflow = 'visible';
+                    
+                    if (!wrapper.querySelector('.user-verified-mark')) {
+                        const badge = document.createElement('img');
+                        badge.src = 'img/identified-user-mark.png';
+                        badge.className = 'user-verified-mark';
+                        badge.style.cssText = 'position: absolute; top: -8px; left: -8px; width: 30px; height: 30px; pointer-events: none; z-index: 99999; display: block;';
+                        wrapper.appendChild(badge);
+                        
+                        el.dataset.insigniaPuesta = "true";
+                        console.log("¡Insignia inyectada con éxito!");
+                    }
+                }
+            }
+        });
+    });
+
+    observer.observe(document.body, { childList: true, subtree: true });
+})();
+
+// FUNCIÓN ÚNICA Y UNIFICADA PARA PUBLICAR POSTS (Con validación de usuario activa)
+export async function registrarNuevoPost(textoPost, expresionActual) {
+    let user = auth.currentUser;
+
+    // Si Firebase aún no carga el usuario en memoria, intentamos asegurarlo o esperamos un momento
+    if (!user) {
+        console.warn("Esperando sesión de Firebase Auth...");
+        await new Promise((resolve) => {
+            const unsubscribe = auth.onAuthStateChanged((u) => {
+                unsubscribe();
+                user = u;
+                resolve();
+            });
+        });
+    }
+
+    if (user) {
+        try {
+            const postsRef = ref(db, 'posts'); 
+            const nuevoPostRef = push(postsRef); 
+            
+            // Forzamos tu usuario si coincide con tu sesión o el localStorage
+            const autorActual = localStorage.getItem('makiiverse_pnid') || 'YosMakii99_PN';
+
+            await set(nuevoPostRef, {
+                uid: user.uid,
+                autor: autorActual,
+                contenido: textoPost,
+                expresion: expresionActual || 'normal',
+                fecha: new Date().toLocaleTimeString()
+            });
+
+            const userRef = ref(db, 'users/' + user.uid);
+            await update(userRef, {
+                postCount: increment(1)
+            });
+            
+            console.log("Post enviado y contador de cuenta incrementado.");
+            return true;
+        } catch (error) {
+            console.error("Error al actualizar el post y contador:", error);
+            return false;
+        }
+    } else {
+        console.error("No hay ningún usuario autenticado en Firebase Auth.");
+        alert("Debes iniciar sesión para poder publicar.");
+        return false;
+    }
+}
+
+
+</script>
+</div>
+
+
+
+</body>
+</html>
