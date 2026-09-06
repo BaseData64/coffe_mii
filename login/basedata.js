@@ -1,66 +1,121 @@
-// FUNCIÓN ÚNICA Y UNIFICADA PARA PUBLICAR POSTS (Con validación de usuario activa)
-export async function registrarNuevoPost(textoPost, expresionActual) {
-    let user = auth.currentUser;
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js"; 
 
-    // Si Firebase aún no carga el usuario en memoria, intentamos asegurarlo o esperamos un momento
-    if (!user) {
-        console.warn("Esperando sesión de Firebase Auth...");
-        await new Promise((resolve) => {
-            const unsubscribe = auth.onAuthStateChanged((u) => {
-                unsubscribe();
-                user = u;
-                resolve();
-            });
-        });
+const firebaseConfig = {
+    apiKey: "AIzaSyBC1CU5NvbyYvgb6W2nbxAWXtdPV63qhnA",
+    authDomain: "maki-s-bio.firebaseapp.com",
+    databaseURL: "https://maki-s-bio-default-rtdb.firebaseio.com",
+    projectId: "maki-s-bio",
+    storageBucket: "maki-s-bio.firebasestorage.app",
+    messagingSenderId: "267692056127",
+    appId: "1:267692056127:web:472b5f1ca8c82db4a3228a",
+    measurementId: "G-VQNKS44LPK"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+
+// 1. FUNCIÓN DE INICIO DE SESIÓN
+window.iniciarSesionFirebase = async function(pnid, password) {
+    try {
+        const pnidClean = pnid.trim().toLowerCase();
+        const emailFicticio = `${pnidClean}@makiiverse.com`;
+        
+        const userCredential = await signInWithEmailAndPassword(auth, emailFicticio, password);
+        
+        return {
+            exito: true,
+            user: userCredential.user
+        };
+    } catch (error) {
+        console.error("Error de Firebase:", error.code);
+        return {
+            exito: false,
+            codigo: error.code
+        };
     }
+};
 
-    if (user) {
-        try {
-            const postsRef = ref(db, 'posts'); 
-            const nuevoPostRef = push(postsRef); 
-            
-            // Forzamos tu usuario si coincide con tu sesión o el localStorage
-            const autorActual = localStorage.getItem('makiiverse_pnid') || 'YosMakii99_PN';
+// 2. OBTENER EL NOMBRE REAL DEL MII DESDE LA API DE ARIANKORDI
+window.cargarNombreRealMii = async function(pnidUsuario) {
+    let nombreMostrable = pnidUsuario; // Respaldo inicial
 
-            await set(nuevoPostRef, {
-                uid: user.uid,
-                autor: autorActual,
-                contenido: textoPost,
-                expresion: expresionActual || 'normal',
-                fecha: new Date().toLocaleTimeString()
-            });
-
-            const userRef = ref(db, 'users/' + user.uid);
-            await update(userRef, {
-                postCount: increment(1)
-            });
-            
-            console.log("Post enviado y contador de cuenta incrementado.");
-            return true;
-        } catch (error) {
-            console.error("Error al actualizar el post y contador:", error);
-            return false;
+    try {
+        const response = await fetch(`https://mii-unsecure.ariankordi.net/mii_data/${encodeURIComponent(pnidUsuario)}?api_id=1`);
+        
+        if (response.ok) {
+            const data = await response.json(); // Lectura correcta del JSON
+            if (data) {
+                if (data.name) {
+                    nombreMostrable = data.name;
+                } else if (data.miiName) {
+                    nombreMostrable = data.miiName;
+                } else if (data.mii && data.mii.name) {
+                    nombreMostrable = data.mii.name;
+                }
+            }
         }
-    } else {
-        console.error("No hay ningún usuario autenticado en Firebase Auth.");
-        alert("Debes iniciar sesión para poder publicar.");
-        return false;
+        
+        // Si la API no dio nombre, consultamos Firestore
+        if (nombreMostrable === pnidUsuario) {
+            const docRef = doc(db, "usuarios", pnidUsuario);
+            const docSnap = await getDoc(docRef);
+
+            if (docSnap.exists()) {
+                const userData = docSnap.data();
+                nombreMostrable = userData.miiName || userData.name || pnidUsuario;
+            }
+        }
+    } catch (error) {
+        console.error("Error al consultar la API del Mii:", error);
     }
+
+    // Asignación individual para evitar duplicados visuales raros
+    const elNombreReal = document.getElementById('nombre-real-mii');
+    if (elNombreReal) elNombreReal.innerText = nombreMostrable;
+
+    const elNombrePost = document.getElementById('nombre-mii-post');
+    if (elNombrePost) elNombrePost.innerText = nombreMostrable;
+
+    const elProfileUser = document.getElementById('profile-username');
+    if (elProfileUser) elProfileUser.innerText = nombreMostrable;
+};
+
+// 3. ACTUALIZAR VISTA DE PERFIL Y SESIÓN
+function actualizarVistaUserPage() {
+    const pnidGuardado = localStorage.getItem('makiiverse_pnid');
+
+    if (!pnidGuardado) {
+        if (!window.location.pathname.includes('login.html')) {
+            window.location.href = 'login.html';
+        }
+        return;
+    }
+
+    const miiUrl = `https://mii-unsecure.ariankordi.net/miis/image.png?nnid=${encodeURIComponent(pnidGuardado)}&type=face&width=270&api_id=1`;
+
+    const subPnidEl = document.getElementById('profile-pnid-sub');
+    if (subPnidEl) subPnidEl.textContent = pnidGuardado;
+
+    const miiImgProfile = document.getElementById('profile-mii-img');
+    if (miiImgProfile) {
+        miiImgProfile.src = miiUrl;
+        miiImgProfile.onerror = function() {
+            this.src = 'img/games/Dummy_mii_user.png';
+        };
+    }
+
+    // Carga el nombre real del Mii
+    window.cargarNombreRealMii(pnidGuardado);
 }
 
-// Suponiendo que obtienes los datos de tu usuario de Firebase:
-if (userData.official_user === true || userData.official_user === 1) {
-    const profileHeader = document.getElementById("user-profile-name"); // El contenedor donde está tu nombre de usuario
-    
-    if (profileHeader) {
-        // Creamos la insignia y la organización de golpe al lado de tu nombre
-        const badgeHTML = `
-            <span class="official-badge-container" style="display: inline-flex; align-items: center; margin-left: 6px;">
-                <img src="img/identified-user-mark.png" alt="Official" style="width: 16px; height: 16px; vertical-align: middle;">
-                ${userData.organization ? `<span style="font-size: 0.85em; margin-left: 4px; opacity: 0.8;">${userData.organization}</span>` : ''}
-            </span>
-        `;
-        profileHeader.insertAdjacentHTML('beforeend', badgeHTML);
-    }
-}
+window.addEventListener('DOMContentLoaded', () => {
+    actualizarVistaUserPage();
 });
+
+window.cerrarSesion = function() {
+    localStorage.removeItem('makiiverse_pnid');
+    window.location.href = 'login.html';
+};
