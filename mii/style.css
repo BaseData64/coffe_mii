@@ -1,0 +1,520 @@
+/* Contenedor principal que se adapta al espacio en blanco */
+.main-content {
+    margin-left: 140px; /* Evita que el menú lateral tape el contenido (ajusta este número si es necesario) */
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* El contenedor tipo tablero/collage de Miiverse */
+.miiverse-collage {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Tarjeta que imita un post de Miiverse */
+.miiverse-post {
+    background: #ffffff;
+    border: 1px solid #dcdcdc;
+    border-radius: 10px;
+    padding: 15px;
+    font-family: sans-serif;
+    position: relative;
+    box-shadow: 1px 1px 4px rgba(0,0,0,0.05);
+}
+
+/* Cabecera del Post (Estilo Usuario) */
+.post-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+    border-bottom: 1px solid #f0f0f0;
+    padding-bottom: 8px;
+}
+
+.mii-avatar {
+  /* TAMAÑO: Modifica estos valores si quieres que se vea más grande o pequeño */
+    width: 50px;
+    height: 50px;
+    
+    /* IMAGEN: Aquí pones la ruta de la foto de tu Mii */
+    background-image: url('mii/miiOwner.png'); 
+    background-size: cover;        /* Hace que la foto llene todo el cuadro sin deformarse */
+    background-position: center;   /* Centra la cara del Mii en el cuadro */
+    
+    /* DISEÑO ESTILO NINTENDO: Fondo gris suave y bordes un poco redondos */
+    background-color: #e0e0e0;     /* Se verá esto si la imagen no carga */
+    border-radius: 8px;            /* Curvatura de las esquinas */
+    border: 1px solid #ccc;        /* Un pequeño borde gris */
+    
+    /* DIRECCIÓN / ALINEACIÓN */
+    flex-shrink: 0;                /* Evita que el cuadro se aplaste en pantallas chicas */
+}
+
+.user-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.user-name {
+    font-weight: bold;
+    color: #333;
+    font-size: 14px;
+}
+
+.post-tag {
+    font-size: 11px;
+    color: #00d2ff; /* Color de tu menú */
+    font-weight: bold;
+}
+
+/* Contenido del post */
+.post-body {
+    color: #444;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+/* Lista de intereses dentro de un post */
+.nintendo-list {
+    margin: 8px 0 0 0;
+    padding-left: 20px;
+}
+
+.nintendo-list li {
+    margin-bottom: 5px;
+}
+
+/* Ajuste para pantallas móviles (Android/iOS) */
+@media (max-width: 768px) {
+    .main-content {
+        margin-left: 0; /* En móviles el menú suele ir arriba o colapsado, así el contenido usa toda la pantalla */
+        padding: 15px;
+    }
+}
+
+.General {
+    width: 150px;
+    margin-left: -270px;
+    border-radius: 25px;
+    margin-top: 170px;
+    box-shadow: 0px 12px 16px rgba(0,0,0,0.30);
+}
+
+.lista-comunidades-pura {
+    display: flex;
+    flex-direction: column;
+    width: 90%;                  /* Le regresamos buen ancho para que luzca el espacio */
+    margin-left: 155px;           /* Ajustado al ras (antes 210px) */
+    margin-top: 35px;
+    font-family: "MiiverseFont", sans-serif;
+}
+
+/* Cada fila con un espacio enorme y acolchado */
+.comunidad-item-puro {
+    display: flex;
+    align-items: center;
+    gap: 35px;                   /* Mucho más espacio de separación con el texto */
+    padding: 28px 10px;          /* Filas mucho más altas y robustas */
+    cursor: pointer;
+    transition: transform 0.1s ease, opacity 0.15s ease;
+}
+
+/* Efecto sutil de presión al pasar el mouse (Estilo canal de Wii U) */
+.comunidad-item-puro:hover {
+    opacity: 0.9;
+    transform: translateX(4px); /* Se mueve tantito a la derecha al pasar el cursor */
+}
+
+/* Línea discontinua/punteada entre elementos */
+.comunidad-item-puro:not(:last-child) {
+    border-bottom: 2px dashed #b5b5b5; /* Línea un poquito más marcada para aguantar el tamaño */
+}
+
+/* Icono en formato MASIVO (128px de puro Miiverse) */
+.comunidad-icono-puro {
+    width: 128px;                /* Subió a 128px */
+    height: 128px;               /* Subió a 128px */
+    border-radius: 22px;         /* Curvatura más pronunciada proporcional al tamaño */
+    background-color: #e2e8f0;
+    border: 2px solid #cbd5e1;   /* Borde un poco más grueso */
+    background-size: cover;
+    background-position: center;
+    flex-shrink: 0;
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08); /* Sombra más envolvente */
+}
+
+/* Título de la comunidad Gigante */
+.comunidad-titulo-puro {
+    font-size: 26px;             /* Letra grande, clara y destacable */
+    font-weight: bold;
+    color: #333333;
+    letter-spacing: 0.5px;
+}
+
+/* Contenedor en cuadrícula (Grid) para las portadas de los juegos */
+.cuadricula-juegos {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 25px;
+    margin-top: 30px;
+    padding: 10px;
+}
+
+/* Tarjeta individual de cada juego */
+.juego-card {
+    background: #ffffff;
+    border: 1px solid #dcdcdc;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.05);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+}
+
+.juego-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Contenedor de la imagen del juego */
+.juego-portada {
+    width: 100%;
+    height: 140px;
+    background-size: cover;
+    background-position: center;
+    background-color: #e2e8f0;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+/* Información del juego (Título y subtexto estilo Wii U) */
+.juego-info {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.juego-titulo {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333333;
+    font-family: "MiiverseFont", sans-serif;
+}
+
+.juego-detalles {
+    font-size: 12px;
+    color: #888888;
+    display: flex;
+    justify-content: space-between;
+    font-family: "MiiverseFont", sans-serif;
+}
+
+/* Botón flotante para regresar al perfil principal */
+.btn-volver-miiverse {
+    background: linear-gradient(to bottom, #ffffff, #f2f2f2);
+    border: 1px solid #cccccc;
+    border-radius: 25px;
+    color: #444444;
+    padding: 10px 24px;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 25px;
+    transition: background 0.1s;
+    font-family: "MiiverseFont", sans-serif;
+}
+
+.btn-volver-miiverse:hover {
+    background: #ebebeb;
+}
+
+
+
+        @media (max-width: 768px) {
+            body {
+                background-size: auto 110%;
+            }
+        }
+
+        .card, .card-standard, .card-user {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 170px;   
+            height: 150px;   
+            background-color: #ffffff;
+            border-radius: 0;
+            cursor: pointer;
+            margin-bottom: 0;
+            box-shadow: 0 10px 20px rgb(201, 201, 201);
+        }
+
+        .card-title-user {
+            font-size: 20px;
+            font-weight: 600;
+            margin-top: 85px;
+            color: #555555; 
+            text-align: center;
+            transition: color 0.2s ease;
+            font-family: 'MiiverseFont', sans-serif;
+        }
+
+        .card-title {
+            font-size: 20px;
+            color:#55;
+            font-family: "MiiverseFont", sans-serif;
+        }
+
+        .card.selected,
+        .card.selected .card-title,
+        .selected .card-title-user {
+            color:#4aeb4f;
+        }
+
+        @font-face {
+            font-family: "MiiverseIcons"; 
+            src: url("font/MiiverseSymbols-Regular.ttf") format("truetype");
+            font-weight: normal;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: "MiiverseFont"; 
+            src: url("font/nintendoNTLG-DB001.ttf") format("truetype");
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        .favorite-button {
+            position: absolute;
+            top: 140px;      
+            right: 40px;   
+            width: 420px;
+            height: 100px;
+            background-color: #ffffff;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            padding-left: 20px;
+            box-shadow: 0 8px 18px rgba(0,0,0,0.25);
+            cursor: pointer;
+        }
+
+
+        .card-icons {
+            font-family: "MiiverseIcons";
+            font-size: 65px; 
+            color: #c4c2c2ff;
+            margin-left: 10px;
+            transition: color 0.2s ease;
+            margin-top: 10px;
+        }
+
+        .linea-degradada {
+            width: 103.78%;          
+            height: 62px;         
+            border-radius: 6px;   
+            margin-top: -50px;
+            background: linear-gradient(to right, #00d2ff, #004e92);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+       
+        .linea-degradada h1 {
+            color: white;
+            margin: 0;
+            font-size: 24px;    
+            text-transform: uppercase; 
+        }
+
+        .contenedor-seccion-roja {
+            background-color: #ffffff;
+            border: 1px solid #dcdcdc;
+            border-radius: 12px;
+            padding: 0 !important;   
+            overflow: hidden;        
+            margin-top: 25px;
+            width: 100%;
+            box-sizing: border-box;
+            box-shadow: 0 10px 20px rgb(201, 201, 201);
+        }
+
+
+
+        .barra-roja-interna h1 {
+            color: white !important;
+            margin: 0 !important;
+            font-size: 24px;
+            text-transform: uppercase;
+            font-family: "MiiverseFont", sans-serif;
+            font-weight: bold;
+        }
+
+        .lista-comunidades-pura {
+            display: flex;
+            flex-direction: column;
+            width: 90%;                                     
+            margin-left: 155px;              
+            margin-top: 35px;
+            font-family: "MiiverseFont", sans-serif;
+        }
+
+        .comunidad-item-puro {
+            display: flex;
+            align-items: center;
+            gap: 35px;                                     
+            padding: 28px 10px;          
+            cursor: pointer;
+            transition: transform 0.1s ease, opacity 0.15s ease;
+        }
+
+        .comunidad-item-puro:hover {
+            opacity: 0.9;
+            transform: translateX(4px);
+        }
+
+        .comunidad-item-puro:not(:last-child) {
+            border-bottom: 2px dashed #b5b5b5; 
+        }
+
+        .comunidad-icono-puro {
+            width: 128px;                                            
+            height: 128px;                                           
+            border-radius: 22px;         
+            background-color: #e2e8f0;
+            border: 2px solid #cbd5e1;   
+            background-size: cover;
+            background-position: center;
+            flex-shrink: 0;
+            box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08); 
+        }
+
+        .comunidad-titulo-puro {
+            font-size: 26px;            
+            font-weight: bold;
+            color: #333333;
+            letter-spacing: 0.5px;
+        }
+
+
+        /* El contenedor que agrupa todas las redes */
+.networks-portal {
+  display: flex;
+  flex-direction: column; /* Una debajo de la otra */
+  gap: 15px; /* Espacio entre cada tarjeta */
+  padding: 20px;
+}
+
+/* La tarjeta individual de cada red */
+.network-card {
+  display: flex;
+  align-items: center;
+  background-color: #ffffff; /* Fondo blanco limpio */
+  border: 2px solid #e6e6e6; /* Borde sutil estilo Wii U */
+  border-radius: 8px; /* Esquinas ligeramente redondeadas */
+  padding: 15px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05); /* Sombrita ligera */
+  transition: transform 0.2s; /* Para que haga algo al pasar el mouse */
+}
+
+/* Efecto al pasar el mouse (para PC) */
+
+/* La zona del icono */
+.net-icon {
+  width: 50px;
+  height: 50px;
+  margin-right: 20px;
+  background-color: #f0f0f0;
+  border-radius: 5px; /* Para que el logo tenga un fondo si es transparente */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.net-icon img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+/* Los textos adentro de la tarjeta */
+.net-info h4 {
+  margin: 0;
+  color: #999999; /* Gris sutil para el título de la plataforma */
+  font-size: 14px;
+  font-weight: normal;
+}
+
+.net-info p {
+  margin: 0;
+  color: #333333;
+  font-size: 18px;
+  font-weight: bold; /* Que resalte tu ID */
+}
+
+@media (max-width: 768px) {
+    /* Ajustamos el margen de las secciones para que no se corten */
+    div[style*="margin-left: 170px"] {
+        margin-left: 10px !important;
+        width: 95% !important;
+    }
+
+    /* Ocultamos o ajustamos botones fijos si estorban */
+    #boton-navegacion-miiverse {
+        top: auto !important;
+        bottom: 10px !important;
+        left: 10px !important;
+        width: 120px !important;
+        height: 100px !important;
+    }
+
+    /* Centramos mejor el contenido del cartel de error en móvil */
+    .contenedor-cartel {
+        flex-direction: column !important;
+        text-align: center !important;
+    }
+}
+
+.boton-derecha {
+    margin-left: 100px;
+}
+
+/* Contenedor principal del avatar para posicionar la esquina */
+.avatar-container {
+    position: relative;
+    display: inline-block;
+    width: 50px;  /* Ajusta al tamaño de tu Mii */
+    height: 50px;
+}
+
+.avatar-container img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%; /* O border-radius cuadrado si prefieres el estilo original */
+    display: block;
+}
+
+/* La insignia verde en la esquina superior izquierda */
+.verified-badge {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 20px;
+    height: 20px;
+    background-image: url('/img/identified-user-mark.png'); /* O puedes dibujarlo con un pseudo-elemento / SVG */
+    background-size: contain;
+    background-repeat: no-repeat;
+    pointer-events: none;
+}
