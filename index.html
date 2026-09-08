@@ -10,36 +10,11 @@
     <head>
     <!-- 1. Primero cargamos el gestor -->
     <script src="mii/MiiLog.js"></script> 
+    <script src="mii/Specialuser.js"></script> 
     <script type="module" src="login/basedata.js"></script>
     <script src="mii/Userdata.js"></script>
     <script src="portal/post/accounts.js"></script>
-    
 
-<script>
-fetch('Specialuser.php')
-    .then(response => response.json())
-    .then(data => {
-        if (data.esDuenio) {
-            window.addEventListener('DOMContentLoaded', () => {
-                // Selecciona la clase o contenedor donde está tu Mii en tu HTML
-                const miContenedor = document.querySelector('.icon-container, .tu-clase-de-avatar'); 
-                
-                if (miContenedor && !miContenedor.querySelector('.user-verified-mark')) {
-                    miContenedor.style.position = 'relative';
-                    miContenedor.style.overflow = 'visible';
-                    
-                    const badge = document.createElement('img');
-                    badge.src = 'img/identified-user-mark.png';
-                    badge.className = 'user-verified-mark';
-                    badge.style.cssText = 'position: absolute; top: -8px; left: -8px; width: 30px; height: 30px; pointer-events: none; z-index: 9999; display: block;';
-                    
-                    miContenedor.appendChild(badge);
-                }
-            });
-        }
-    })
-    .catch(err => console.log('Error al verificar sesión:', err));
-</script>
 
 <script>
     
@@ -214,7 +189,7 @@ body {
         #global-menu .card.selected .label, 
         #global-menu .card.selected .icons, 
         #global-menu .card.selected .name {
-            color: #17e404 !important;
+            color: #04afff !important;
         }
 
         #global-menu a { 
@@ -255,7 +230,7 @@ body {
 
     <li id="global-menu-message" class="card card-standard" style="position: fixed; top: 380px; left: -12px; width: 179px; height: 139px; margin: 0;" onclick="conmutarPortal(6, 'global-menu-message')">
     <a href="#" style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; text-decoration: none; padding: 0;">
-        <span class="symbol" style="font-family: 'MiiverseIcons' !important; font-size: 65px !important; line-height: 1; display: block; margin-top: -15px;">m</span>
+        <span class="symbol" style="font-family: 'MiiverseIcons' !important; font-size: 65px !important; line-height: 1; display: block; margin-top: -15px;">o</span>
         <span class="label" style="font-family: 'MiiverseFont', sans-serif !important; font-size: 20px !important; font-weight: 600 !important; text-align: center; margin-top: 5px; display: block;">messages</span>
     </a>
 </li>
@@ -269,87 +244,1749 @@ body {
 </menu>
 
 
-<!-- ================= VISTA DE INICIO: PERFIL PRINCIPAL ================= -->
-<div id="vista-perfil" style="display: block;">
-    
-    <div class="linea-degradada">
-        <h1>about me</h1>
+<!-- ============================================================
+     ============================================================
+                    MAKI'S BIO — HOME PORTAL
+                  MIIVERSE / WII U REMASTER
+                       SINGLE LIST UI
+     ============================================================
+     ============================================================
+
+     NAVEGACIÓN:
+
+     1 = My Favorite Games
+     2 = About my projects
+     4 = Networks
+     6 = Mii Clicker
+     7 = General Chat
+
+     ============================================================ -->
+
+
+<style>
+
+/* ============================================================
+   ============================================================
+                           HOME
+   ============================================================
+   ============================================================ */
+
+#vista-perfil {
+    position: relative;
+    z-index: 1;
+
+    min-height: 1000px;
+
+    font-family:
+        'MiiverseFont',
+        sans-serif;
+}
+
+
+/* ============================================================
+   ============================================================
+                      TOPBAR PRINCIPAL
+   ============================================================
+   ============================================================ */
+
+#vista-perfil .home-topbar {
+    margin-top: -50px;
+    margin-left: 100px;
+    width: 1385px;
+
+    padding:
+        15px 22px;
+
+    background:
+        linear-gradient(
+            to bottom,
+            #77e5ff 0%,
+            #48d2f5 24%,
+            #25bde6 50%,
+            #119dca 74%,
+            #0786b3 100%
+        );
+
+    border-bottom:
+        2px solid #0879a1;
+
+    box-shadow:
+        inset 0 2px 0 rgba(255,255,255,.52),
+        inset 0 -2px 0 rgba(0,75,115,.17),
+        0 3px 6px rgba(0,0,0,.10);
+}
+
+
+/* ============================================================
+   TOPBAR INNER
+   ============================================================ */
+
+#vista-perfil .home-topbar-inner {
+    display: flex;
+
+    align-items: center;
+
+    justify-content:
+        space-between;
+}
+
+
+/* ============================================================
+   TÍTULO
+   ============================================================ */
+
+#vista-perfil .home-topbar h1 {
+    margin: 0;
+
+    color:
+        #ffffff;
+
+    font-size:
+        25px;
+
+    font-weight:
+        bold;
+
+    line-height:
+        1;
+
+    text-shadow:
+        0 1px 2px rgba(0,70,110,.30);
+}
+
+
+/* ============================================================
+   BADGE HOME
+   ============================================================ */
+
+#vista-perfil .home-topbar-badge {
+    padding:
+        5px 13px;
+
+    color:
+        #ffffff;
+
+    font-size:
+        11px;
+
+    font-weight:
+        bold;
+
+    border:
+        1px solid rgba(255,255,255,.58);
+
+    border-radius:
+        20px;
+
+    background:
+        rgba(0,100,150,.17);
+
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.22);
+
+    text-shadow:
+        0 1px 1px rgba(0,0,0,.13);
+}
+
+
+/* ============================================================
+   ============================================================
+                        PAGE PRINCIPAL
+   ============================================================
+   ============================================================ */
+
+#vista-perfil .home-page {
+    width:
+        78%;
+
+    max-width:
+        1080px;
+
+    margin-left:
+        170px;
+
+    margin-top:
+        33px;
+
+    padding-bottom:
+        90px;
+
+    box-sizing:
+        border-box;
+}
+
+
+/* ============================================================
+   ============================================================
+                  TARJETA DE BIENVENIDA
+   ============================================================
+   ============================================================ */
+
+#vista-perfil .home-profile-card {
+    position:
+        relative;
+
+    overflow:
+        hidden;
+
+    min-height:
+        155px;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    padding:
+        23px 28px;
+
+    box-sizing:
+        border-box;
+
+    background:
+        linear-gradient(
+            to bottom,
+            #ffffff 0%,
+            #ffffff 69%,
+            #f3fbfe 100%
+        );
+
+    border:
+        1px solid #bcd5df;
+
+    border-radius:
+        14px;
+
+    box-shadow:
+        0 4px 13px rgba(0,90,130,.10),
+        inset 0 1px 0 #ffffff;
+}
+
+
+/* ============================================================
+   FRANJA AZUL SUPERIOR
+   ============================================================ */
+
+#vista-perfil .home-profile-card::before {
+    content:
+        "";
+
+    position:
+        absolute;
+
+    top:
+        0;
+
+    left:
+        0;
+
+    right:
+        0;
+
+    height:
+        6px;
+
+    background:
+        linear-gradient(
+            to right,
+            #73e4ff,
+            #28bfe9,
+            #0789b8
+        );
+}
+
+
+/* ============================================================
+   MII FRAME
+   ============================================================ */
+
+#vista-perfil .home-profile-mii-frame {
+    position:
+        relative;
+
+    width:
+        105px;
+
+    height:
+        105px;
+
+    flex-shrink:
+        0;
+
+    overflow:
+        hidden;
+
+    background:
+        radial-gradient(
+            circle at center,
+            #ffffff,
+            #eaf7fb
+        );
+
+    border:
+        1px solid #9fcbd9;
+
+    border-radius:
+        14px;
+
+    box-shadow:
+        0 3px 8px rgba(0,80,120,.12),
+        inset 0 1px 0 #ffffff;
+}
+
+
+/* ============================================================
+   MII
+   ============================================================ */
+
+#vista-perfil .home-profile-mii {
+    display:
+        block;
+
+    width:
+        100%;
+
+    height:
+        100%;
+
+    object-fit:
+        cover;
+
+    object-position:
+        center;
+}
+
+
+/* ============================================================
+   PROFILE INFO
+   ============================================================ */
+
+#vista-perfil .home-profile-info {
+    flex:
+        1;
+
+    min-width:
+        0;
+
+    margin-left:
+        23px;
+}
+
+
+/* ============================================================
+   NOMBRE
+   ============================================================ */
+
+#vista-perfil .home-profile-name {
+    display:
+        block;
+
+    color:
+        #34464e;
+
+    font-size:
+        24px;
+
+    font-weight:
+        bold;
+
+    line-height:
+        1.15;
+}
+
+
+/* ============================================================
+   PNID
+   ============================================================ */
+
+#vista-perfil .home-profile-pnid {
+    display:
+        block;
+
+    margin-top:
+        3px;
+
+    color:
+        #169ac8;
+
+    font-size:
+        13px;
+
+    font-weight:
+        bold;
+}
+
+
+/* ============================================================
+   DESCRIPCIÓN
+   ============================================================ */
+
+#vista-perfil .home-profile-description {
+    max-width:
+        720px;
+
+    margin:
+        12px 0 0 0;
+
+    color:
+        #66747b;
+
+    font-size:
+        14px;
+
+    line-height:
+        1.55;
+}
+
+
+/* ============================================================
+   STATUS
+   ============================================================ */
+
+#vista-perfil .home-profile-status {
+    margin-left:
+        25px;
+
+    padding:
+        7px 14px;
+
+    flex-shrink:
+        0;
+
+    color:
+        #138db8;
+
+    font-size:
+        11px;
+
+    font-weight:
+        bold;
+
+    background:
+        linear-gradient(
+            to bottom,
+            #ffffff,
+            #edf9fd
+        );
+
+    border:
+        1px solid #acd5e4;
+
+    border-radius:
+        16px;
+
+    box-shadow:
+        inset 0 1px 0 #ffffff;
+}
+
+
+/* ============================================================
+   ============================================================
+                    COMMUNITY HEADER
+   ============================================================
+   ============================================================ */
+
+#vista-perfil .home-section-header {
+    margin-top:
+        31px;
+
+    margin-bottom:
+        14px;
+
+    padding:
+        12px 18px;
+
+    color:
+        #ffffff;
+
+    font-size:
+        19px;
+
+    font-weight:
+        bold;
+
+    background:
+        linear-gradient(
+            to bottom,
+            #979797,
+            #858585
+        );
+
+    border:
+        1px solid #767676;
+
+    border-radius:
+        9px 9px 4px 4px;
+
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.22);
+
+    text-shadow:
+        0 1px 1px rgba(0,0,0,.20);
+}
+
+
+/* ============================================================
+   ============================================================
+                  LISTA DE UNA SOLA COLUMNA
+   ============================================================
+   ============================================================ */
+
+#vista-perfil .home-community-list {
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    width:
+        100%;
+
+    gap:
+        12px;
+}
+
+
+/* ============================================================
+   ============================================================
+                    COMMUNITY BUTTON
+   ============================================================
+   ============================================================ */
+
+#vista-perfil .home-community {
+    position:
+        relative;
+
+    width:
+        100%;
+
+    min-height:
+        96px;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    padding:
+        12px 58px 12px 14px;
+
+    box-sizing:
+        border-box;
+
+    overflow:
+        hidden;
+
+    cursor:
+        pointer;
+
+    text-align:
+        left;
+
+    font-family:
+        'MiiverseFont',
+        sans-serif;
+
+    background:
+        linear-gradient(
+            to bottom,
+            #ffffff 0%,
+            #ffffff 67%,
+            #f6f6f6 100%
+        );
+
+    border:
+        1px solid #cccccc;
+
+    border-radius:
+        11px;
+
+    box-shadow:
+        0 3px 8px rgba(0,0,0,.07),
+        inset 0 1px 0 #ffffff;
+
+    outline:
+        none;
+
+    transition:
+        transform .09s ease,
+        border-color .09s ease,
+        box-shadow .09s ease,
+        background .09s ease;
+}
+
+
+/* ============================================================
+   HOVER
+   ============================================================ */
+
+#vista-perfil .home-community:hover {
+    transform:
+        translateY(-2px);
+
+    border-color:
+        #9ccfdf;
+
+    background:
+        linear-gradient(
+            to bottom,
+            #ffffff,
+            #f7fcfe
+        );
+
+    box-shadow:
+        0 6px 12px rgba(0,110,160,.12),
+        inset 0 1px 0 #ffffff;
+}
+
+
+/* ============================================================
+   CLICK
+   ============================================================ */
+
+#vista-perfil .home-community:active {
+    transform:
+        translateY(1px);
+}
+
+
+/* ============================================================
+   COLOR STRIP IZQUIERDO
+   ============================================================ */
+
+#vista-perfil .home-community::before {
+    content:
+        "";
+
+    position:
+        absolute;
+
+    top:
+        0;
+
+    left:
+        0;
+
+    bottom:
+        0;
+
+    width:
+        5px;
+
+    background:
+        var(--community-color);
+
+    box-shadow:
+        1px 0 4px rgba(0,0,0,.06);
+}
+
+
+/* ============================================================
+   ============================================================
+                    ICONO DE COMUNIDAD
+   ============================================================
+   ============================================================ */
+
+#vista-perfil .home-community-icon {
+    position:
+        relative;
+
+    width:
+        72px;
+
+    height:
+        72px;
+
+    flex-shrink:
+        0;
+
+    overflow:
+        hidden;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    margin-left:
+        4px;
+
+    margin-right:
+        17px;
+
+    background:
+        linear-gradient(
+            to bottom,
+            #ffffff,
+            #f5f5f5
+        );
+
+    border:
+        1px solid #c3c3c3;
+
+    border-radius:
+        11px;
+
+    box-shadow:
+        0 2px 5px rgba(0,0,0,.09),
+        inset 0 1px 0 rgba(255,255,255,.85);
+}
+
+
+/* ============================================================
+   BRILLO EN ICONO
+   ============================================================ */
+
+#vista-perfil .home-community-icon::after {
+    content:
+        "";
+
+    position:
+        absolute;
+
+    left:
+        4px;
+
+    right:
+        4px;
+
+    top:
+        3px;
+
+    height:
+        18px;
+
+    pointer-events:
+        none;
+
+    border-radius:
+        8px 8px 50% 50%;
+
+    background:
+        linear-gradient(
+            to bottom,
+            rgba(255,255,255,.35),
+            rgba(255,255,255,0)
+        );
+}
+
+
+/* ============================================================
+   IMAGEN ICONO
+   ============================================================ */
+
+#vista-perfil .home-community-icon img {
+    display:
+        block;
+
+    width:
+        100%;
+
+    height:
+        100%;
+
+    object-fit:
+        cover;
+}
+
+
+/* ============================================================
+   CONTAIN
+   ============================================================ */
+
+#vista-perfil .home-community-icon img.contain {
+    width:
+        87%;
+
+    height:
+        87%;
+
+    object-fit:
+        contain;
+}
+
+
+/* ============================================================
+   ============================================================
+                        TEXTOS
+   ============================================================
+   ============================================================ */
+
+#vista-perfil .home-community-info {
+    flex:
+        1;
+
+    min-width:
+        0;
+}
+
+
+/* ============================================================
+   TÍTULO
+   ============================================================ */
+
+#vista-perfil .home-community-title {
+    display:
+        block;
+
+    color:
+        #414141;
+
+    font-size:
+        18px;
+
+    font-weight:
+        bold;
+
+    line-height:
+        1.2;
+}
+
+
+/* ============================================================
+   DESCRIPCIÓN
+   ============================================================ */
+
+#vista-perfil .home-community-description {
+    display:
+        block;
+
+    margin-top:
+        5px;
+
+    color:
+        #929292;
+
+    font-size:
+        12px;
+
+    line-height:
+        1.35;
+}
+
+
+/* ============================================================
+   ============================================================
+                         FLECHA
+   ============================================================
+   ============================================================ */
+
+#vista-perfil .home-community-arrow {
+    position:
+        absolute;
+
+    top:
+        50%;
+
+    right:
+        22px;
+
+    transform:
+        translateY(-50%);
+
+    color:
+        #aaaaaa;
+
+    font-family:
+        Arial,
+        sans-serif;
+
+    font-size:
+        31px;
+
+    font-weight:
+        normal;
+
+    transition:
+        color .09s ease,
+        right .09s ease;
+}
+
+
+/* ============================================================
+   FLECHA HOVER
+   ============================================================ */
+
+#vista-perfil
+.home-community:hover
+.home-community-arrow {
+
+    color:
+        var(--community-color);
+
+    right:
+        18px;
+}
+
+
+/* ============================================================
+   ============================================================
+                     COLORES COMUNIDADES
+   ============================================================
+   ============================================================ */
+
+
+/* FAVORITE GAMES */
+
+#vista-perfil .community-games {
+    --community-color:
+        #23b9e5;
+}
+
+
+/* PROJECTS */
+
+#vista-perfil .community-projects {
+    --community-color:
+        #eea421;
+}
+
+
+/* GENERAL CHAT */
+
+#vista-perfil .community-general {
+    --community-color:
+        #63ca37;
+}
+
+
+/* NETWORKS */
+
+#vista-perfil .community-networks {
+    --community-color:
+        #28bfe9;
+}
+
+
+/* MII CLICKER */
+
+#vista-perfil .community-clicker {
+    --community-color:
+        #72ce1f;
+}
+
+
+/* ============================================================
+   ============================================================
+                         MORE
+   ============================================================
+   ============================================================ */
+
+#vista-perfil .home-more-separator {
+    position:
+        relative;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    gap:
+        14px;
+
+    margin:
+        27px 0 16px 0;
+}
+
+
+/* ============================================================
+   LÍNEAS
+   ============================================================ */
+
+#vista-perfil .home-more-separator::before,
+#vista-perfil .home-more-separator::after {
+    content:
+        "";
+
+    flex:
+        1;
+
+    height:
+        1px;
+}
+
+
+#vista-perfil .home-more-separator::before {
+    background:
+        linear-gradient(
+            to right,
+            transparent,
+            #cacaca
+        );
+}
+
+
+#vista-perfil .home-more-separator::after {
+    background:
+        linear-gradient(
+            to left,
+            transparent,
+            #cacaca
+        );
+}
+
+
+/* ============================================================
+   PASTILLA MORE
+   ============================================================ */
+
+#vista-perfil .home-more-separator span {
+    min-width:
+        70px;
+
+    padding:
+        6px 17px;
+
+    box-sizing:
+        border-box;
+
+    text-align:
+        center;
+
+    color:
+        #777777;
+
+    font-size:
+        12px;
+
+    font-weight:
+        bold;
+
+    text-transform:
+        uppercase;
+
+    background:
+        linear-gradient(
+            to bottom,
+            #ffffff,
+            #eeeeee
+        );
+
+    border:
+        1px solid #c9c9c9;
+
+    border-radius:
+        18px;
+
+    box-shadow:
+        inset 0 1px 0 #ffffff,
+        0 2px 3px rgba(0,0,0,.05);
+}
+
+
+/* ============================================================
+   ============================================================
+                          FOOTER
+   ============================================================
+   ============================================================ */
+
+#vista-perfil .home-footer-info {
+    padding:
+        13px 18px;
+
+    margin-top:
+        24px;
+
+    text-align:
+        center;
+
+    color:
+        #8c9aa0;
+
+    font-size:
+        12px;
+
+    background:
+        linear-gradient(
+            to bottom,
+            #ffffff,
+            #f2fafc
+        );
+
+    border:
+        1px solid #c5dce4;
+
+    border-radius:
+        9px;
+
+    box-shadow:
+        inset 0 1px 0 #ffffff;
+}
+
+
+/* ============================================================
+   ============================================================
+                         RESPONSIVE
+   ============================================================
+   ============================================================ */
+
+@media screen and (max-width:1000px) {
+
+    #vista-perfil .home-page {
+        width:
+            auto;
+
+        margin-left:
+            185px;
+
+        margin-right:
+            20px;
+    }
+
+}
+
+
+@media screen and (max-width:760px) {
+
+    #vista-perfil .home-profile-status {
+        display:
+            none;
+    }
+
+
+    #vista-perfil .home-profile-mii-frame {
+        width:
+            85px;
+
+        height:
+            85px;
+    }
+
+
+    #vista-perfil .home-community-icon {
+        width:
+            62px;
+
+        height:
+            62px;
+    }
+
+
+    #vista-perfil .home-community {
+        min-height:
+            84px;
+    }
+
+}
+
+</style>
+
+
+
+<!-- ============================================================
+     ============================================================
+                         HOME VIEW
+     ============================================================
+     ============================================================ -->
+
+<div
+    id="vista-perfil"
+
+    style="
+        display:block;
+        position:relative;
+        z-index:1;
+    "
+>
+
+
+    <!-- ========================================================
+         ========================================================
+                            TOPBAR
+         ========================================================
+         ======================================================== -->
+
+    <div class="home-topbar">
+
+
+        <div class="home-topbar-inner">
+
+
+            <h1>
+                Maki's Bio
+            </h1>
+
+
+            <div class="home-topbar-badge">
+                HOME
+            </div>
+
+
+        </div>
+
+
     </div>
 
-    <div style="margin-left: 170px;">
-        <div class="miiverse-post" style="margin-top: 25px;">
-            <div class="post-header">
-                <div class="mii-avatar"></div> 
-                <div class="user-info">
-                    <span class="user-name">Makii</span>
-                    <span class="post-tag"></span>
+
+
+    <!-- ========================================================
+         ========================================================
+                          PAGE
+         ========================================================
+         ======================================================== -->
+
+    <div class="home-page">
+
+
+
+        <!-- ====================================================
+             ====================================================
+                       PROFILE / WELCOME
+             ====================================================
+             ==================================================== -->
+
+        <section class="home-profile-card">
+
+
+
+            <!-- =================================================
+                 MII
+                 ================================================= -->
+
+            <div class="home-profile-mii-frame">
+
+
+                <img
+                    class="home-profile-mii"
+
+                    src="mii/miiOwner.png"
+
+                    alt="Makii"
+                >
+
+
+            </div>
+
+
+
+            <!-- =================================================
+                 INFO
+                 ================================================= -->
+
+            <div class="home-profile-info">
+
+
+                <span class="home-profile-name">
+                    Makii
+                </span>
+
+
+                <span class="home-profile-pnid">
+                    YosMakii99_PN
+                </span>
+
+
+                <p class="home-profile-description">
+                    This is my website about myself... here you can
+                    see everything about me, my hobbies, my favorite
+                    games, my projects and more.
+                </p>
+
+
+            </div>
+
+
+
+            <!-- =================================================
+                 WELCOME
+                 ================================================= -->
+
+            <div class="home-profile-status">
+                WELCOME!
+            </div>
+
+
+        </section>
+
+
+
+        <!-- ====================================================
+             ====================================================
+                         COMMUNITIES
+             ====================================================
+             ==================================================== -->
+
+        <div class="home-section-header">
+            Communities
+        </div>
+
+
+
+        <!-- ====================================================
+             LISTA PRINCIPAL
+             ==================================================== -->
+
+        <div class="home-community-list">
+
+
+
+            <!-- =================================================
+                 MY FAVORITE GAMES
+                 ================================================= -->
+
+            <button
+                type="button"
+
+                class="
+                    home-community
+                    community-games
+                "
+
+                onclick="
+                    conmutarPortal(
+                        1,
+                        'global-menu-community'
+                    )
+                "
+            >
+
+
+                <div class="home-community-icon">
+
+
+                    <img
+                        src="img/games/mk8.png"
+
+                        alt="My Favorite Games"
+                    >
+
+
                 </div>
-            </div>
-            <div class="post-body">
-                This is my website about myself... here you can see everything about me, my hobbies, my favorite games, and more.
-            </div>
+
+
+
+                <div class="home-community-info">
+
+
+                    <span class="home-community-title">
+                        My Favorite Games
+                    </span>
+
+
+                    <span class="home-community-description">
+                        Games that marked my childhood and games
+                        that I still play today.
+                    </span>
+
+
+                </div>
+
+
+
+                <span class="home-community-arrow">
+                    ›
+                </span>
+
+
+            </button>
+
+
+
+            <!-- =================================================
+                 ABOUT MY PROJECTS
+                 ================================================= -->
+
+            <button
+                type="button"
+
+                class="
+                    home-community
+                    community-projects
+                "
+
+                onclick="
+                    conmutarPortal(
+                        2,
+                        'global-menu-community'
+                    )
+                "
+            >
+
+
+                <div class="home-community-icon">
+
+
+                    <img
+                        src="img/games/174095.png"
+
+                        alt="About my projects"
+                    >
+
+
+                </div>
+
+
+
+                <div class="home-community-info">
+
+
+                    <span class="home-community-title">
+                        About my projects
+                    </span>
+
+
+                    <span class="home-community-description">
+                        Experiments, websites and things
+                        I've been building.
+                    </span>
+
+
+                </div>
+
+
+
+                <span class="home-community-arrow">
+                    ›
+                </span>
+
+
+            </button>
+
+
+
+            <!-- =================================================
+                 GENERAL CHAT
+                 ================================================= -->
+
+            <button
+                type="button"
+
+                class="
+                    home-community
+                    community-general
+                "
+
+                onclick="
+                    conmutarPortal(
+                        7,
+                        'global-menu-community'
+                    )
+                "
+            >
+
+
+                <div class="home-community-icon">
+
+
+                    <img
+                        class="contain"
+
+                        src="img/games/wii-u-logo-png_seeklogo-312570.png"
+
+                        alt="General Chat"
+                    >
+
+
+                </div>
+
+
+
+                <div class="home-community-info">
+
+
+                    <span class="home-community-title">
+                        General Chat
+                    </span>
+
+
+                    <span class="home-community-description">
+                        Posts, conversations and general stuff.
+                    </span>
+
+
+                </div>
+
+
+
+                <span class="home-community-arrow">
+                    ›
+                </span>
+
+
+            </button>
+
+
+
         </div>
 
-        <div class="contenedor-seccion-roja">
-            <div class="barra-roja-interna">
-                <h1>games and hobbies and more</h1>
-            </div>
-        </div>
-    </div> 
 
-    <!-- MENÚ PORTAL: LISTA DE COMUNIDADES -->
-    <div class="lista-comunidades-pura">
-        <!-- Botón Juegos (Envía 1 y pasa id global-menu-community) -->
-        <div class="comunidad-item-puro" onclick="conmutarPortal(1, 'global-menu-community')">
-            <div class="comunidad-icono-puro" style="background-image: url('img/games/mk8.png');"></div>
-            <span class="comunidad-titulo-puro">My Favorite Games</span>
+
+        <!-- ====================================================
+             ====================================================
+                           MORE
+             ====================================================
+             ==================================================== -->
+
+        <div class="home-more-separator">
+
+            <span>
+                More
+            </span>
+
         </div>
 
-        <!-- Botón Proyectos (Envía 2 y pasa id global-menu-community) -->
-        <div class="comunidad-item-puro" onclick="conmutarPortal(2, 'global-menu-community')">
-            <div class="comunidad-icono-puro" style="background-image: url('img/games/174095.png');"></div>
-            <span class="comunidad-titulo-puro">About my projects</span>
+
+
+        <!-- ====================================================
+             MORE LIST
+             ==================================================== -->
+
+        <div class="home-community-list">
+
+
+
+            <!-- =================================================
+                 NETWORKS
+                 ================================================= -->
+
+            <button
+                type="button"
+
+                class="
+                    home-community
+                    community-networks
+                "
+
+                onclick="
+                    conmutarPortal(
+                        4,
+                        'global-menu-community'
+                    )
+                "
+            >
+
+
+                <div class="home-community-icon">
+
+
+                    <img
+                        src="mii/miiOwner.png"
+
+                        alt="Networks"
+                    >
+
+
+                </div>
+
+
+
+                <div class="home-community-info">
+
+
+                    <span class="home-community-title">
+                        Networks
+                    </span>
+
+
+                    <span class="home-community-description">
+                        My gaming IDs, profiles and friend codes.
+                    </span>
+
+
+                </div>
+
+
+
+                <span class="home-community-arrow">
+                    ›
+                </span>
+
+
+            </button>
+
+
+
+            <!-- =================================================
+                 MII CLICKER
+                 ================================================= -->
+
+            <button
+                type="button"
+
+                class="
+                    home-community
+                    community-clicker
+                "
+
+                onclick="
+                    conmutarPortal(
+                        6,
+                        'global-menu-message'
+                    )
+                "
+            >
+
+
+                <div class="home-community-icon">
+
+
+                    <img
+                        src="mii/miiOwner.png"
+
+                        alt="Mii Clicker"
+                    >
+
+
+                </div>
+
+
+
+                <div class="home-community-info">
+
+
+                    <span class="home-community-title">
+                        Mii Clicker
+                    </span>
+
+
+                    <span class="home-community-description">
+                        Click your Mii and compete in the
+                        global online ranking.
+                    </span>
+
+
+                </div>
+
+
+
+                <span class="home-community-arrow">
+                    ›
+                </span>
+
+
+            </button>
+
+
+
         </div>
+
+
+
+        <!-- ====================================================
+             ====================================================
+                           FOOTER
+             ====================================================
+             ==================================================== -->
+
+        <div class="home-footer-info">
+            Welcome to my personal Wii U / Miiverse-inspired portal.
+        </div>
+
+
+
     </div>
 
-    <!-- Línea divisora -->
-    <div style="border-top: 3px dashed #cccccc; width: 90%; margin: 5px 0 5px 160px;"></div>
-
-    <!-- Botón About Me (Envía 3 y pasa id global-menu-community) -->
-    <div class="comunidad-item-puro" onclick="conmutarPortal(3, 'global-menu-community')" style="padding-left: 165px;">
-        <div class="comunidad-icono-puro" style="background-image: url('img/games/wii-u-logo-png_seeklogo-312570.png');"></div>
-        <span class="comunidad-titulo-puro">about me</span>
-    </div>
-    
-    
-   <div class="comunidad-item-puro boton-derecha" onclick="conmutarPortal(7, 'global-menu-community')">
-    <div class="comunidad-item-puro" 
-     onclick="conmutarPortal(7, 'global-menu-community')" 
-     style="margin-left: 40px;">
-    <div class="comunidad-icono-puro" style="background-image: url('img/games/wii-u-logo-png_seeklogo-312570.png');"></div>
-    <span class="comunidad-titulo-puro">General</span>
-
-
 
 </div>
+<style>
 
+#vista-juegos .games-clicker-style-topbar {
+    margin-top: -50px;
 
+    padding:
+        15px 22px;
+        margin-left: 100px;
+        width: 1385px;
 
-</div>
-     
-</div>
+    background:
+        linear-gradient(
+            to bottom,
+            #48d4ff 0%,
+            #23bce9 42%,
+            #119ed1 56%,
+            #0784b6 100%
+        );
 
-</div>
-    
-      
-</div>
+    border-bottom:
+        2px solid #08759f;
 
+    box-shadow:
+        inset 0 2px 0 rgba(255,255,255,.45),
+        inset 0 -2px 0 rgba(0,70,110,.16),
+        0 3px 6px rgba(0,0,0,.10);
+}
 
+#vista-juegos .games-clicker-style-topbar-inner {
+    display: flex;
 
-<!-- ================= SECCIÓN 1: VISTA JUEGOS FAVORITOS ================= -->
-<div id="vista-juegos" style="display: none;">
-    <div class="linea-degradada" style="margin-top: -50px; background: linear-gradient(to right, #00bfff, #005580);">
-        <h1>My Favorite Games</h1>
+    align-items: center;
+
+    justify-content: space-between;
+}
+
+#vista-juegos .games-clicker-style-topbar h1 {
+    margin: 0;
+
+    color: #ffffff;
+
+    font-family:
+        'MiiverseFont',
+        sans-serif;
+
+    font-size: 25px;
+
+    font-weight: bold;
+
+    line-height: 1;
+
+    text-shadow:
+        0 1px 2px rgba(0,0,0,.22);
+}
+#vista-juegos .games-clicker-style-badge {
+    padding:
+        5px 13px;
+
+    color: #ffffff;
+
+    font-family:
+        'MiiverseFont',
+        sans-serif;
+
+    font-size: 11px;
+
+    font-weight: bold;
+
+    border:
+        1px solid rgba(255,255,255,.48);
+
+    border-radius:
+        20px;
+
+    background:
+        rgba(0,0,0,.13);
+
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.18);
+
+    text-shadow:
+        0 1px 1px rgba(0,0,0,.15);
+}
+</style>
+<div
+    id="vista-juegos"
+
+    style="
+        display:none;
+        position:relative;
+        z-index:1;
+    "
+>
+    <div class="games-clicker-style-topbar">
+        <div class="games-clicker-style-topbar-inner">
+            <h1>
+                My Favorite Games
+            </h1>
+            <div class="games-clicker-style-badge">
+                FAVORITE GAMES
+            </div>
+        </div>
     </div>
     <div style="position: relative; width: 95.90%; margin-left: 105px; margin-top: 0px;">
         <img src="img/games/zlCfzR3i9aY3AJxL6J.png" style="width: 100%; height: 200px; object-fit: cover; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); display: block;">
@@ -457,53 +2094,3340 @@ body {
     </div>
 </div>
 
-<div id="vista-messages" style="display: none; position: relative; z-index: 1;">
-    
-    <!-- Barra superior verde Miiverse -->
-    <div class="linea-degradada" style="margin-top: -50px; background: linear-gradient(to right, #da03da, #ff00d4); padding: 15px;">
-        <h1 style="color: white; margin: 0; font-size: 24px; font-family: 'MiiverseFont', sans-serif;">Messages</h1>
-    </div>
+<style>
 
-    <!-- Contenedor principal -->
-    <div style="width: 78%; margin-left: 170px; margin-top: 50px; font-family: 'MiiverseFont', sans-serif;">
-        
-        <!-- Tarjeta estilo Error 500 -->
-        <div style="background: #ffffff; border-radius: 12px; border: 1px solid #dcdcdc; box-shadow: 0 4px 12px rgba(0,0,0,0.1); padding: 30px;">
-            
-            <!-- Encabezado Gris -->
-            <div style="background: #8e8e8e; color: white; padding: 15px 20px; border-radius: 8px; font-size: 24px; font-weight: bold; margin-bottom: 25px;">
-                Messages
+/* ============================================================
+   VISTA GENERAL
+   ============================================================ */
+
+#vista-messages {
+    position: relative;
+    z-index: 1;
+    min-height: 700px;
+
+    font-family:
+        'MiiverseFont',
+        sans-serif;
+}
+
+
+/* ============================================================
+   BARRA SUPERIOR VERDE
+   ============================================================ */
+
+#vista-messages .mii-clicker-topbar {
+    margin-top: -50px;
+
+    padding:
+        15px
+        22px;
+        width: 1385px;
+        margin-left: 100px;
+
+    background:
+        linear-gradient(
+            to bottom,
+            #86df29 0%,
+            #6ec817 48%,
+            #5bb50d 100%
+        );
+
+    border-bottom:
+        2px solid #4d9b09;
+
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.42),
+        inset 0 -1px 0 rgba(0,0,0,.08);
+}
+
+
+#vista-messages .mii-clicker-topbar-content {
+    display: flex;
+
+    align-items: center;
+
+    justify-content:
+        space-between;
+}
+
+
+#vista-messages .mii-clicker-topbar h1 {
+    margin: 0;
+
+    color:
+        #ffffff;
+
+    font-size:
+        25px;
+
+    font-weight:
+        bold;
+
+    text-shadow:
+        0 1px 2px
+        rgba(0,0,0,.20);
+}
+
+
+/* ============================================================
+   CONTENEDOR PRINCIPAL
+   ============================================================ */
+
+#vista-messages .mii-clicker-page {
+    width:
+        78%;
+
+    max-width:
+        1050px;
+
+    margin-left:
+        170px;
+
+    margin-top:
+        35px;
+
+    padding-bottom:
+        60px;
+
+    box-sizing:
+        border-box;
+}
+
+
+/* ============================================================
+   PANEL GENERAL
+   ============================================================ */
+
+#vista-messages .mii-clicker-panel {
+    background:
+        #ffffff;
+
+    border:
+        1px solid #d1d1d1;
+
+    border-radius:
+        12px;
+
+    overflow:
+        hidden;
+
+    box-shadow:
+        0 4px 12px
+        rgba(0,0,0,.09);
+
+    margin-bottom:
+        26px;
+}
+
+
+/* ============================================================
+   CABECERA GRIS
+   ============================================================ */
+
+#vista-messages .mii-clicker-panel-title {
+    padding:
+        14px
+        20px;
+
+    background:
+        linear-gradient(
+            to bottom,
+            #979797 0%,
+            #888888 48%,
+            #797979 100%
+        );
+
+    border-bottom:
+        1px solid #707070;
+
+    color:
+        #ffffff;
+
+    font-size:
+        23px;
+
+    font-weight:
+        bold;
+
+    text-shadow:
+        0 1px 1px
+        rgba(0,0,0,.22);
+}
+
+
+/* ============================================================
+   DESCRIPCIÓN
+   ============================================================ */
+
+#vista-messages .mii-clicker-description {
+    padding:
+        13px
+        20px;
+
+    color:
+        #777777;
+
+    font-size:
+        15px;
+
+    text-align:
+        center;
+
+    background:
+        #fafafa;
+
+    border-bottom:
+        1px solid #e2e2e2;
+}
+
+
+/* ============================================================
+   ============================================================
+                         PODIO
+   ============================================================
+   ============================================================ */
+
+#vista-messages .mii-clicker-podium {
+    min-height:
+        250px;
+
+    display:
+        flex;
+
+    align-items:
+        flex-end;
+
+    justify-content:
+        center;
+
+    gap:
+        22px;
+
+    padding:
+        28px
+        24px
+        30px
+        24px;
+
+    box-sizing:
+        border-box;
+}
+
+
+/* ============================================================
+   TARJETAS DEL PODIO
+   ============================================================ */
+
+#vista-messages .mii-clicker-place {
+    position:
+        relative;
+
+    width:
+        185px;
+
+    box-sizing:
+        border-box;
+
+    text-align:
+        center;
+
+    background:
+        linear-gradient(
+            to bottom,
+            #ffffff,
+            #eeeeee
+        );
+
+    border:
+        1px solid #c7c7c7;
+
+    border-radius:
+        10px;
+
+    padding:
+        12px
+        10px
+        15px
+        10px;
+
+    box-shadow:
+        0 3px 6px rgba(0,0,0,.10),
+        inset 0 1px 0 #ffffff;
+}
+
+
+/* ============================================================
+   1ST
+   ============================================================ */
+
+#vista-messages .mii-clicker-place.first {
+    min-height:
+        210px;
+
+    border-top:
+        5px solid #f0c822;
+}
+
+
+/* ============================================================
+   2ND
+   ============================================================ */
+
+#vista-messages .mii-clicker-place.second {
+    min-height:
+        185px;
+
+    border-top:
+        5px solid #a9afb4;
+}
+
+
+/* ============================================================
+   3RD
+   ============================================================ */
+
+#vista-messages .mii-clicker-place.third {
+    min-height:
+        165px;
+
+    border-top:
+        5px solid #b77a47;
+}
+
+
+/* ============================================================
+   TEXTO DE POSICIÓN
+   ============================================================ */
+
+#vista-messages .mii-clicker-place-number {
+    font-size:
+        28px;
+
+    font-weight:
+        bold;
+
+    line-height:
+        32px;
+
+    margin-bottom:
+        7px;
+}
+
+
+#vista-messages .first .mii-clicker-place-number {
+    color:
+        #d0a900;
+}
+
+
+#vista-messages .second .mii-clicker-place-number {
+    color:
+        #858b91;
+}
+
+
+#vista-messages .third .mii-clicker-place-number {
+    color:
+        #9f6737;
+}
+
+
+/* ============================================================
+   MII DEL TOP 3
+
+   NINGÚN BADGE.
+   NINGUNA INSIGNIA.
+   ============================================================ */
+
+#vista-messages .mii-clicker-place-avatar {
+    width:
+        78px;
+
+    height:
+        78px;
+
+    margin:
+        0 auto
+        8px auto;
+
+    overflow:
+        hidden;
+
+    background-color:
+        #ececec;
+
+    background-image:
+        url('img/games/Dummy_mii_user.png');
+
+    background-size:
+        cover;
+
+    background-position:
+        center;
+
+    background-repeat:
+        no-repeat;
+
+    border:
+        1px solid #bbbbbb;
+
+    border-radius:
+        10px;
+
+    box-shadow:
+        inset 0 1px 2px
+        rgba(0,0,0,.07);
+}
+
+
+/* ============================================================
+   PNID DEL RANKING
+   ============================================================ */
+
+#vista-messages .mii-clicker-place-pnid {
+    display:
+        block;
+
+    width:
+        100%;
+
+    overflow:
+        hidden;
+
+    white-space:
+        nowrap;
+
+    text-overflow:
+        ellipsis;
+
+    color:
+        #484848;
+
+    font-size:
+        15px;
+
+    font-weight:
+        bold;
+}
+
+
+/* ============================================================
+   SCORE DEL RANKING
+   ============================================================ */
+
+#vista-messages .mii-clicker-place-score {
+    display:
+        block;
+
+    margin-top:
+        5px;
+
+    color:
+        #777777;
+
+    font-size:
+        13px;
+}
+
+
+/* ============================================================
+   ============================================================
+                       ZONA DEL JUEGO
+   ============================================================
+   ============================================================ */
+
+#vista-messages .mii-clicker-game {
+    position:
+        relative;
+
+    padding:
+        27px
+        25px
+        36px
+        25px;
+
+    text-align:
+        center;
+}
+
+
+/* ============================================================
+   PNID ACTUAL
+   ============================================================ */
+
+#vista-messages #mii-clicker-pnid {
+    color:
+        #555555;
+
+    font-size:
+        20px;
+
+    font-weight:
+        bold;
+
+    margin-bottom:
+        5px;
+}
+
+
+/* ============================================================
+   INSTRUCCIÓN
+   ============================================================ */
+
+#vista-messages .mii-clicker-instruction {
+    color:
+        #888888;
+
+    font-size:
+        14px;
+
+    margin-bottom:
+        18px;
+}
+
+
+/* ============================================================
+   SCORE PRINCIPAL
+   ============================================================ */
+
+#vista-messages #mii-clicker-score {
+    color:
+        #65bf0b;
+
+    font-size:
+        52px;
+
+    line-height:
+        55px;
+
+    font-weight:
+        bold;
+
+    margin-bottom:
+        0;
+
+    text-shadow:
+        0 1px 0
+        #ffffff;
+}
+
+
+#vista-messages .mii-clicker-score-label {
+    color:
+        #999999;
+
+    font-size:
+        14px;
+
+    margin-bottom:
+        22px;
+}
+
+#vista-messages .mii-clicker-mii-stage {
+    position:
+        relative;
+
+    width:
+        300px;
+
+    height:
+        360px;
+
+    margin:
+        0 auto
+        22px auto;
+
+    overflow:
+        hidden;
+
+    background:
+        radial-gradient(
+            ellipse at center bottom,
+            #ffffff 0%,
+            #f6f6f6 55%,
+            #e9e9e9 100%
+        );
+
+    border:
+        2px solid #c3c3c3;
+
+    border-radius:
+        18px;
+
+    box-shadow:
+        inset 0 2px 5px rgba(0,0,0,.07),
+        0 3px 6px rgba(0,0,0,.08);
+}
+
+
+/* ============================================================
+   SOMBRA DEL MII
+   ============================================================ */
+
+#vista-messages .mii-clicker-floor {
+    position:
+        absolute;
+
+    left:
+        50%;
+
+    bottom:
+        25px;
+
+    width:
+        190px;
+
+    height:
+        20px;
+
+    margin-left:
+        -95px;
+
+    border-radius:
+        50%;
+
+    background:
+        radial-gradient(
+            ellipse at center,
+            rgba(0,0,0,.16) 0%,
+            rgba(0,0,0,.06) 45%,
+            rgba(0,0,0,0) 72%
+        );
+
+    pointer-events:
+        none;
+}
+
+
+/* ============================================================
+   MII DE CUERPO COMPLETO
+   ============================================================ */
+
+#vista-messages #mii-clicker-mii {
+    position:
+        relative;
+
+    z-index:
+        2;
+
+    display:
+        block;
+
+    width:
+        100%;
+
+    height:
+        100%;
+
+    object-fit:
+        contain;
+
+    object-position:
+        center center;
+
+    pointer-events:
+        none;
+
+    -webkit-user-select:
+        none;
+
+    user-select:
+        none;
+}
+
+
+/* ============================================================
+   ============================================================
+                   BOTÓN WII U / MIIVERSE
+   ============================================================
+   ============================================================ */
+
+#vista-messages #mii-clicker-click-button {
+    position:
+        relative;
+
+    display:
+        block;
+
+    width:
+        300px;
+
+    height:
+        66px;
+
+    margin:
+        0 auto;
+
+    box-sizing:
+        border-box;
+
+    cursor:
+        pointer;
+
+    outline:
+        none;
+
+    color:
+        #ffffff;
+
+    font-family:
+        'MiiverseFont',
+        sans-serif;
+
+    font-size:
+        24px;
+
+    font-weight:
+        bold;
+
+    text-align:
+        center;
+
+    text-shadow:
+        0 1px 1px
+        rgba(0,0,0,.20);
+
+    background:
+        linear-gradient(
+            to bottom,
+            #92e93c 0%,
+            #78d51f 42%,
+            #64be12 55%,
+            #55aa09 100%
+        );
+
+    border:
+        2px solid #519f0b;
+
+    border-radius:
+        12px;
+
+    box-shadow:
+        inset 0 2px 0 rgba(255,255,255,.48),
+        inset 0 -3px 0 rgba(50,110,0,.22),
+        0 5px 0 #438b08,
+        0 7px 8px rgba(0,0,0,.18);
+
+    -webkit-tap-highlight-color:
+        transparent;
+
+    -webkit-user-select:
+        none;
+
+    user-select:
+        none;
+
+    transition:
+        transform .055s,
+        box-shadow .055s,
+        background .055s;
+}
+
+
+/* ============================================================
+   BRILLO DEL BOTÓN
+   ============================================================ */
+
+#vista-messages #mii-clicker-click-button::before {
+    content:
+        "";
+
+    position:
+        absolute;
+
+    top:
+        4px;
+
+    left:
+        10px;
+
+    right:
+        10px;
+
+    height:
+        17px;
+
+    border-radius:
+        8px 8px 50% 50%;
+
+    background:
+        linear-gradient(
+            to bottom,
+            rgba(255,255,255,.35),
+            rgba(255,255,255,0)
+        );
+
+    pointer-events:
+        none;
+}
+
+
+/* ============================================================
+   BOTÓN PRESIONADO
+   ============================================================ */
+
+#vista-messages
+#mii-clicker-click-button.mii-clicker-pressed {
+    transform:
+        translateY(4px);
+
+    background:
+        linear-gradient(
+            to bottom,
+            #80da2d,
+            #5eb811
+        );
+
+    box-shadow:
+        inset 0 2px 4px rgba(0,0,0,.12),
+        0 1px 0 #438b08,
+        0 3px 4px rgba(0,0,0,.14);
+}
+
+
+/* ============================================================
+   BOTÓN DESACTIVADO
+   ============================================================ */
+
+#vista-messages
+#mii-clicker-click-button:disabled {
+    opacity:
+        .45;
+
+    cursor:
+        default;
+}
+
+
+/* ============================================================
+   +1
+   ============================================================ */
+
+#vista-messages #mii-clicker-plus-one {
+    height:
+        38px;
+
+    margin-top:
+        18px;
+
+    color:
+        #68c212;
+
+    font-size:
+        28px;
+
+    font-weight:
+        bold;
+
+    opacity:
+        0;
+
+    transform:
+        translateY(0);
+
+    pointer-events:
+        none;
+}
+
+
+#vista-messages
+#mii-clicker-plus-one.show {
+    opacity:
+        1;
+
+    transform:
+        translateY(-7px);
+
+    transition:
+        opacity .12s,
+        transform .12s;
+}
+
+
+/* ============================================================
+   TU POSICIÓN
+   ============================================================ */
+
+#vista-messages .mii-clicker-personal-rank {
+    margin-top:
+        3px;
+
+    color:
+        #777777;
+
+    font-size:
+        15px;
+}
+
+
+/* ============================================================
+   TEXTO DE SYNC
+   ============================================================ */
+
+#vista-messages #mii-clicker-sync-text {
+    height:
+        18px;
+
+    margin-top:
+        8px;
+
+    color:
+        #999999;
+
+    font-size:
+        12px;
+}
+
+
+/* ============================================================
+   REGLAS VISUALES
+   ============================================================ */
+
+#vista-messages .mii-clicker-rules {
+    display:
+        flex;
+
+    justify-content:
+        center;
+
+    gap:
+        35px;
+
+    padding:
+        17px
+        20px;
+
+    background:
+        #f7f7f7;
+
+    border-top:
+        1px solid #dedede;
+
+    color:
+        #777777;
+
+    font-size:
+        13px;
+}
+
+
+#vista-messages .mii-clicker-rule {
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    gap:
+        7px;
+}
+
+
+#vista-messages .mii-clicker-rule-dot {
+    width:
+        9px;
+
+    height:
+        9px;
+
+    border-radius:
+        50%;
+
+    background:
+        #72cc1d;
+}
+
+
+/* ============================================================
+   BACK
+   ============================================================ */
+
+#vista-messages .mii-clicker-back {
+    display:
+        block;
+
+    width:
+        170px;
+
+    height:
+        43px;
+
+    margin:
+        22px auto 0 auto;
+
+    cursor:
+        pointer;
+
+    color:
+        #555555;
+
+    font-family:
+        'MiiverseFont',
+        sans-serif;
+
+    font-size:
+        16px;
+
+    font-weight:
+        bold;
+
+    background:
+        linear-gradient(
+            to bottom,
+            #ffffff,
+            #e4e4e4
+        );
+
+    border:
+        1px solid #aaaaaa;
+
+    border-radius:
+        7px;
+
+    box-shadow:
+        0 2px 4px rgba(0,0,0,.12),
+        inset 0 1px 0 #ffffff;
+}
+
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+@media screen and (max-width:950px) {
+
+    #vista-messages .mii-clicker-page {
+        width:
+            auto;
+
+        margin-left:
+            175px;
+
+        margin-right:
+            20px;
+    }
+
+
+    #vista-messages .mii-clicker-podium {
+        gap:
+            8px;
+    }
+
+
+    #vista-messages .mii-clicker-place {
+        width:
+            31%;
+    }
+
+}
+
+</style>
+
+
+
+<!-- ============================================================
+     ============================================================
+                       VISTA MII CLICKER
+     ============================================================
+     ============================================================ -->
+
+<div
+    id="vista-messages"
+
+    style="
+        display:none;
+        position:relative;
+        z-index:1;
+    "
+>
+
+
+    <!-- ========================================================
+         HEADER
+         ======================================================== -->
+
+    <div class="mii-clicker-topbar">
+
+
+        <div class="mii-clicker-topbar-content">
+
+
+            <h1>
+                Mii Clicker
+            </h1>
+
+
+            <div id="mii-clicker-status">
+                CONNECTING...
             </div>
 
-            <!-- Contenido con imagen a la derecha -->
-            <div style="display: flex; align-items: flex-start; justify-content: space-between;">
-                
-                <!-- Texto alineado a la izquierda -->
-                <div style="flex: 1; color: #333; font-size: 18px; line-height: 1.5;">
-                    <p style="margin-bottom: 15px;">No messages to display.</p>
-                    <p style="margin-bottom: 25px;">Your inbox is currently empty.</p>
-                    
-                    <button onclick="conmutarPortal(0, 'global-menu-community')" 
-                            style="padding: 10px 25px; border-radius: 5px; border: none; background: #8e8e8e; color: white; font-family: 'MiiverseFont', sans-serif; font-size: 16px; cursor: pointer;">
-                        Back
-                    </button>
-                </div>
 
-                <!-- Imagen a la derecha -->
-                <div style="margin-left: 40px;">
-                    <img src="img/games/Dummy_mii_user.png" style="width: 150px; height: 150px; border-radius: 10px; opacity: 0.8;">
-                </div>
-            </div>
-            
         </div>
+
+
     </div>
+
+
+
+    <!-- ========================================================
+         CONTENIDO
+         ======================================================== -->
+
+    <div class="mii-clicker-page">
+
+
+
+        <!-- ====================================================
+             RANKING ONLINE
+             ==================================================== -->
+
+        <div class="mii-clicker-panel">
+
+
+            <div class="mii-clicker-panel-title">
+                Top Mii Clickers
+            </div>
+
+
+            <div class="mii-clicker-description">
+                Global ranking — updates live when players click.
+            </div>
+
+
+
+            <div class="mii-clicker-podium">
+
+
+
+                <!-- =============================================
+                     2ND
+                     ============================================= -->
+
+                <div
+                    id="mii-clicker-place-2"
+                    class="mii-clicker-place second"
+                >
+
+
+                    <div class="mii-clicker-place-number">
+                        2nd
+                    </div>
+
+
+                    <div class="mii-clicker-place-avatar">
+                    </div>
+
+
+                    <span class="mii-clicker-place-pnid">
+                        ---
+                    </span>
+
+
+                    <span class="mii-clicker-place-score">
+                        0 clicks
+                    </span>
+
+
+                </div>
+
+
+
+                <!-- =============================================
+                     1ST
+                     ============================================= -->
+
+                <div
+                    id="mii-clicker-place-1"
+                    class="mii-clicker-place first"
+                >
+
+
+                    <div class="mii-clicker-place-number">
+                        1st
+                    </div>
+
+
+                    <div class="mii-clicker-place-avatar">
+                    </div>
+
+
+                    <span class="mii-clicker-place-pnid">
+                        ---
+                    </span>
+
+
+                    <span class="mii-clicker-place-score">
+                        0 clicks
+                    </span>
+
+
+                </div>
+
+
+
+                <!-- =============================================
+                     3RD
+                     ============================================= -->
+
+                <div
+                    id="mii-clicker-place-3"
+                    class="mii-clicker-place third"
+                >
+
+
+                    <div class="mii-clicker-place-number">
+                        3rd
+                    </div>
+
+
+                    <div class="mii-clicker-place-avatar">
+                    </div>
+
+
+                    <span class="mii-clicker-place-pnid">
+                        ---
+                    </span>
+
+
+                    <span class="mii-clicker-place-score">
+                        0 clicks
+                    </span>
+
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- ====================================================
+             JUEGO
+             ==================================================== -->
+
+        <div class="mii-clicker-panel">
+
+
+            <div class="mii-clicker-panel-title">
+                Click your Mii!
+            </div>
+
+
+
+            <div class="mii-clicker-game">
+
+
+
+                <!-- =============================================
+                     PNID
+                     ============================================= -->
+
+                <div id="mii-clicker-pnid">
+                    Loading account...
+                </div>
+
+
+
+                <div class="mii-clicker-instruction">
+                    Every press adds one point to your online score.
+                </div>
+
+
+
+                <!-- =============================================
+                     SCORE
+                     ============================================= -->
+
+                <div id="mii-clicker-score">
+                    0
+                </div>
+
+
+                <div class="mii-clicker-score-label">
+                    clicks
+                </div>
+
+
+
+                <!-- =============================================
+                     MII COMPLETO
+
+                     SIN BADGE.
+                     SIN OFFICIAL USER.
+                     ============================================= -->
+
+                <div class="mii-clicker-mii-stage">
+
+
+                    <div class="mii-clicker-floor">
+                    </div>
+
+
+                    <img
+                        id="mii-clicker-mii"
+
+                        src="img/games/Dummy_mii_user.png"
+
+                        alt="Your Mii"
+
+                        draggable="false"
+                    >
+
+
+                </div>
+
+
+
+                <!-- =============================================
+                     BOTÓN WII U
+                     ============================================= -->
+
+                <button
+                    type="button"
+
+                    id="mii-clicker-click-button"
+
+                    disabled
+                >
+                    Click!
+                </button>
+
+
+
+                <!-- =============================================
+                     +1
+                     ============================================= -->
+
+                <div id="mii-clicker-plus-one">
+                    +1
+                </div>
+
+
+
+                <!-- =============================================
+                     TU RANK
+                     ============================================= -->
+
+                <div class="mii-clicker-personal-rank">
+
+                    Your rank:
+
+                    <strong id="mii-clicker-rank-text">
+                        Loading...
+                    </strong>
+
+                </div>
+
+
+
+                <!-- =============================================
+                     SYNC
+                     ============================================= -->
+
+                <div id="mii-clicker-sync-text">
+                    Connecting to online ranking...
+                </div>
+
+
+            </div>
+
+
+
+            <!-- =================================================
+                 INFO
+                 ================================================= -->
+
+            <div class="mii-clicker-rules">
+
+
+                <div class="mii-clicker-rule">
+
+                    <span class="mii-clicker-rule-dot">
+                    </span>
+
+                    1 click = 1 point
+
+                </div>
+
+
+                <div class="mii-clicker-rule">
+
+                    <span class="mii-clicker-rule-dot">
+                    </span>
+
+                    Scores are online
+
+                </div>
+
+
+                <div class="mii-clicker-rule">
+
+                    <span class="mii-clicker-rule-dot">
+                    </span>
+
+                    Top 3 update live
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- ====================================================
+             BACK
+             ==================================================== -->
+
+        <button
+            class="mii-clicker-back"
+
+            onclick="
+                conmutarPortal(
+                    0,
+                    'global-menu-community'
+                )
+            "
+        >
+            Back
+        </button>
+
+
+    </div>
+
+
 </div>
 
+<script type="module">
+
+import {
+    initializeApp,
+    getApp,
+    getApps
+}
+from
+"https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+
+
+import {
+    getAuth,
+    onAuthStateChanged
+}
+from
+"https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+
+import {
+    getDatabase,
+    ref,
+    get,
+    set,
+    update,
+    onValue,
+    query,
+    orderByChild,
+    limitToLast,
+    runTransaction,
+    serverTimestamp
+}
+from
+"https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+
+
+
+const firebaseConfigMiiClicker = {
+
+    apiKey:
+        "AIzaSyBC1CU5NvbyYvgb6W2nbxAWXtdPV63qhnA",
+
+    authDomain:
+        "maki-s-bio.firebaseapp.com",
+
+    databaseURL:
+        "https://maki-s-bio-default-rtdb.firebaseio.com",
+
+    projectId:
+        "maki-s-bio",
+
+    storageBucket:
+        "maki-s-bio.firebasestorage.app",
+
+    messagingSenderId:
+        "267692056127",
+
+    appId:
+        "1:267692056127:web:472b5f1ca8c82db4a3228a"
+
+};
+
+
+const miiClickerApp =
+
+    getApps().length > 0
+
+        ?
+
+        getApp()
+
+        :
+
+        initializeApp(
+            firebaseConfigMiiClicker
+        );
+
+
+
+const miiClickerAuth =
+    getAuth(
+        miiClickerApp
+    );
+
+
+const miiClickerDB =
+    getDatabase(
+        miiClickerApp
+    );
+
+const clickButton =
+    document.getElementById(
+        "mii-clicker-click-button"
+    );
+
+
+const miiImage =
+    document.getElementById(
+        "mii-clicker-mii"
+    );
+
+
+const scoreElement =
+    document.getElementById(
+        "mii-clicker-score"
+    );
+
+
+const pnidElement =
+    document.getElementById(
+        "mii-clicker-pnid"
+    );
+
+
+const plusOne =
+    document.getElementById(
+        "mii-clicker-plus-one"
+    );
+
+
+const rankElement =
+    document.getElementById(
+        "mii-clicker-rank-text"
+    );
+
+
+const syncElement =
+    document.getElementById(
+        "mii-clicker-sync-text"
+    );
+
+
+const statusElement =
+    document.getElementById(
+        "mii-clicker-status"
+    );
+
+
+
+/* ============================================================
+   ESTADO
+   ============================================================ */
+
+let firebaseUser =
+    null;
+
+
+let playerPNID =
+    "";
+
+
+let playerReference =
+    null;
+
+
+let localScore =
+    0;
+
+
+let pendingClicks =
+    0;
+
+
+let saving =
+    false;
+
+
+let saveTimer =
+    null;
+
+
+let pressTimer =
+    null;
+
+
+let plusTimer =
+    null;
+
+
+let rankingUnsubscribe =
+    null;
+
+
+let playerUnsubscribe =
+    null;
+
+
+
+/* ============================================================
+   CONFIGURACIÓN DEL CLICKER
+   ============================================================ */
+
+const CLICK_BATCH =
+    10;
+
+
+const SAVE_DELAY =
+    650;
+
+
+
+/* ============================================================
+   NORMALIZAR PNID
+   ============================================================ */
+
+function normalizePNID(
+    value
+) {
+
+    return String(
+        value || ""
+    )
+
+    .replace(
+        /^\s+|\s+$/g,
+        ""
+    )
+
+    .toLowerCase();
+
+}
+
+
+
+/* ============================================================
+   FORMATO DE NÚMEROS
+   ============================================================ */
+
+function formatNumber(
+    value
+) {
+
+    var number =
+        Number(
+            value || 0
+        );
+
+
+    try {
+
+        return number.toLocaleString();
+
+    }
+
+    catch (error) {
+
+        return String(
+            number
+        );
+
+    }
+
+}
+
+
+onValue(
+
+    ref(
+        miiClickerDB,
+        ".info/connected"
+    ),
+
+    function (
+        snapshot
+    ) {
+
+
+        if (
+            snapshot.val() === true
+        ) {
+
+
+            statusElement.textContent =
+                "ONLINE";
+
+        }
+
+
+        else {
+
+
+            statusElement.textContent =
+                "OFFLINE";
+
+        }
+
+    }
+
+);
+
+
+
+/* ============================================================
+   OBTENER PNID DE LA SESIÓN
+   ============================================================ */
+
+function getSessionPNID(
+    user
+) {
+
+
+    var storedPNID =
+        localStorage.getItem(
+            "makiiverse_pnid"
+        );
+
+
+    var email =
+        user && user.email
+            ?
+            String(
+                user.email
+            )
+            :
+            "";
+
+
+    var firebasePNID =
+        "";
+
+
+    var atPosition =
+        email.indexOf("@");
+
+
+
+    if (
+        atPosition !== -1
+    ) {
+
+
+        firebasePNID =
+            email.substring(
+                0,
+                atPosition
+            );
+
+    }
+
+
+
+    /*
+       Si localStorage coincide con Firebase,
+       conservamos la capitalización original.
+
+       Ejemplo:
+           Firebase:
+               yosmakii99_pn
+
+           Vista:
+               YosMakii99_PN
+    */
+
+    if (
+        storedPNID
+        &&
+        normalizePNID(
+            storedPNID
+        )
+        ===
+        normalizePNID(
+            firebasePNID
+        )
+    ) {
+
+
+        return storedPNID;
+
+    }
+
+
+
+    return firebasePNID
+        ||
+        storedPNID
+        ||
+        "";
+
+}
+
+
+
+/* ============================================================
+   CARGAR MII PRINCIPAL
+
+   CUERPO COMPLETO.
+   SIN INSIGNIAS.
+   ============================================================ */
+
+function loadPlayerMii() {
+
+
+    var miiURL =
+
+        "https://mii-unsecure.ariankordi.net/miis/image.png"
+
+        +
+
+        "?nnid="
+
+        +
+
+        encodeURIComponent(
+            playerPNID
+        )
+
+        +
+
+        "&type=all_body"
+
+        +
+
+        "&width=270"
+
+        +
+
+        "&api_id=1";
+
+
+
+    miiImage.src =
+        miiURL;
+
+
+
+    miiImage.onerror =
+        function () {
+
+
+            miiImage.onerror =
+                null;
+
+
+            miiImage.src =
+                "img/games/Dummy_mii_user.png";
+
+        };
+
+}
+
+
+
+/* ============================================================
+   CREAR / CARGAR JUGADOR ONLINE
+   ============================================================ */
+
+async function loadOnlinePlayer() {
+
+
+    playerReference =
+        ref(
+
+            miiClickerDB,
+
+            "mii_clicker/"
+            +
+            firebaseUser.uid
+
+        );
+
+
+
+    var snapshot =
+        await get(
+            playerReference
+        );
+
+
+
+    /* ========================================================
+       NUEVO JUGADOR
+       ======================================================== */
+
+    if (
+        !snapshot.exists()
+    ) {
+
+
+        localScore =
+            0;
+
+
+
+        await set(
+
+            playerReference,
+
+            {
+
+                uid:
+                    firebaseUser.uid,
+
+                pnid:
+                    playerPNID,
+
+                clicks:
+                    0,
+
+                updatedAt:
+                    serverTimestamp()
+
+            }
+
+        );
+
+    }
+
+
+
+    /* ========================================================
+       JUGADOR EXISTENTE
+       ======================================================== */
+
+    else {
+
+
+        var data =
+            snapshot.val()
+            ||
+            {};
+
+
+        localScore =
+            Number(
+                data.clicks || 0
+            );
+
+
+
+        /*
+           Sin tocar los clicks,
+           actualizamos solamente datos de cuenta.
+        */
+
+        await update(
+
+            playerReference,
+
+            {
+
+                uid:
+                    firebaseUser.uid,
+
+                pnid:
+                    playerPNID,
+
+                updatedAt:
+                    serverTimestamp()
+
+            }
+
+        );
+
+    }
+
+
+
+    updateScoreUI();
+
+
+
+    clickButton.disabled =
+        false;
+
+
+
+    syncElement.textContent =
+        "Score synced.";
+
+
+
+    listenPlayerScore();
+
+}
+
+
+
+/* ============================================================
+   ESCUCHAR SCORE PROPIO
+   ============================================================ */
+
+function listenPlayerScore() {
+
+
+    if (
+        playerUnsubscribe
+    ) {
+
+
+        playerUnsubscribe();
+
+    }
+
+
+
+    playerUnsubscribe =
+        onValue(
+
+            playerReference,
+
+            function (
+                snapshot
+            ) {
+
+
+                if (
+                    !snapshot.exists()
+                ) {
+
+
+                    return;
+
+                }
+
+
+
+                var data =
+                    snapshot.val()
+                    ||
+                    {};
+
+
+                var remoteScore =
+                    Number(
+                        data.clicks || 0
+                    );
+
+
+
+                /*
+                   Si no tenemos clicks esperando
+                   sincronización, usamos el valor
+                   exacto del servidor.
+                */
+
+                if (
+                    pendingClicks === 0
+                    &&
+                    saving === false
+                ) {
+
+
+                    localScore =
+                        remoteScore;
+
+
+                    updateScoreUI();
+
+                }
+
+            },
+
+            function (
+                error
+            ) {
+
+
+                console.error(
+                    "[Mii Clicker] Error leyendo score:",
+                    error
+                );
+
+            }
+
+        );
+
+}
+
+
+
+/* ============================================================
+   ACTUALIZAR SCORE VISUAL
+   ============================================================ */
+
+function updateScoreUI() {
+
+
+    scoreElement.textContent =
+        formatNumber(
+            localScore
+        );
+
+}
+
+
+
+/* ============================================================
+   CLICK
+   ============================================================ */
+
+function registerClick() {
+
+
+    if (
+        !firebaseUser
+        ||
+        !playerReference
+        ||
+        clickButton.disabled
+    ) {
+
+
+        return;
+
+    }
+
+
+
+    localScore =
+        localScore + 1;
+
+
+    pendingClicks =
+        pendingClicks + 1;
+
+
+
+    updateScoreUI();
+
+
+    animateButton();
+
+
+    animatePlusOne();
+
+
+    scheduleSave();
+
+}
+
+
+
+/* ============================================================
+   ANIMAR BOTÓN
+   ============================================================ */
+
+function animateButton() {
+
+
+    clickButton.classList.add(
+        "mii-clicker-pressed"
+    );
+
+
+
+    if (
+        pressTimer
+    ) {
+
+
+        clearTimeout(
+            pressTimer
+        );
+
+    }
+
+
+
+    pressTimer =
+        setTimeout(
+
+            function () {
+
+
+                clickButton.classList.remove(
+                    "mii-clicker-pressed"
+                );
+
+            },
+
+            80
+
+        );
+
+}
+
+
+
+/* ============================================================
+   ANIMAR +1
+   ============================================================ */
+
+function animatePlusOne() {
+
+
+    plusOne.classList.remove(
+        "show"
+    );
+
+
+    /*
+       Forzar repaint.
+    */
+
+    void plusOne.offsetWidth;
+
+
+    plusOne.classList.add(
+        "show"
+    );
+
+
+
+    if (
+        plusTimer
+    ) {
+
+
+        clearTimeout(
+            plusTimer
+        );
+
+    }
+
+
+
+    plusTimer =
+        setTimeout(
+
+            function () {
+
+
+                plusOne.classList.remove(
+                    "show"
+                );
+
+            },
+
+            150
+
+        );
+
+}
+
+
+
+/* ============================================================
+   PROGRAMAR GUARDADO ONLINE
+   ============================================================ */
+
+function scheduleSave() {
+
+
+    syncElement.textContent =
+        "Saving online...";
+
+
+
+    /*
+       Si llegamos a 10 clicks pendientes,
+       sincronizamos inmediatamente.
+    */
+
+    if (
+        pendingClicks >=
+        CLICK_BATCH
+    ) {
+
+
+        savePendingClicks();
+
+
+        return;
+
+    }
+
+
+
+    /*
+       Si ya existe un timer,
+       esperamos ese.
+    */
+
+    if (
+        saveTimer
+    ) {
+
+
+        return;
+
+    }
+
+
+
+    saveTimer =
+        setTimeout(
+
+            function () {
+
+
+                saveTimer =
+                    null;
+
+
+                savePendingClicks();
+
+            },
+
+            SAVE_DELAY
+
+        );
+
+}
+
+
+
+/* ============================================================
+   GUARDAR CLICKS ONLINE
+
+   runTransaction evita sobrescribir scores.
+   ============================================================ */
+
+async function savePendingClicks() {
+
+
+    if (
+        saving
+        ||
+        pendingClicks <= 0
+        ||
+        !firebaseUser
+        ||
+        !playerReference
+    ) {
+
+
+        return;
+
+    }
+
+
+
+    saving =
+        true;
+
+
+
+    var amount =
+        Math.min(
+            pendingClicks,
+            CLICK_BATCH
+        );
+
+
+
+    pendingClicks -=
+        amount;
+
+
+
+    var clicksReference =
+        ref(
+
+            miiClickerDB,
+
+            "mii_clicker/"
+            +
+            firebaseUser.uid
+            +
+            "/clicks"
+
+        );
+
+
+
+    try {
+
+
+        await runTransaction(
+
+            clicksReference,
+
+            function (
+                currentValue
+            ) {
+
+
+                var current =
+                    Number(
+                        currentValue || 0
+                    );
+
+
+                return current
+                    +
+                    amount;
+
+            }
+
+        );
+
+
+
+        await update(
+
+            playerReference,
+
+            {
+
+                uid:
+                    firebaseUser.uid,
+
+                pnid:
+                    playerPNID,
+
+                updatedAt:
+                    serverTimestamp()
+
+            }
+
+        );
+
+
+
+        syncElement.textContent =
+            "Score synced.";
+
+    }
+
+
+
+    catch (
+        error
+    ) {
+
+
+        console.error(
+            "[Mii Clicker] Error guardando score:",
+            error
+        );
+
+
+
+        /*
+           Devolvemos los clicks al buffer
+           si hubo error.
+        */
+
+        pendingClicks +=
+            amount;
+
+
+
+        syncElement.textContent =
+            "Sync error — retrying...";
+
+
+
+        setTimeout(
+
+            function () {
+
+
+                scheduleSave();
+
+            },
+
+            1500
+
+        );
+
+    }
+
+
+
+    finally {
+
+
+        saving =
+            false;
+
+
+
+        /*
+           Si hizo más clicks durante el guardado,
+           mandamos el siguiente grupo.
+        */
+
+        if (
+            pendingClicks > 0
+        ) {
+
+
+            setTimeout(
+
+                function () {
+
+
+                    savePendingClicks();
+
+                },
+
+                80
+
+            );
+
+        }
+
+    }
+
+}
+
+
+
+/* ============================================================
+   ============================================================
+                     RANKING GLOBAL ONLINE
+   ============================================================
+   ============================================================ */
+
+function startOnlineRanking() {
+
+
+    if (
+        rankingUnsubscribe
+    ) {
+
+
+        rankingUnsubscribe();
+
+    }
+
+
+
+    /*
+       Realtime Database ordena ascendente.
+
+       limitToLast(3)
+       obtiene los 3 valores de clicks más altos.
+    */
+
+    var leaderboardQuery =
+        query(
+
+            ref(
+                miiClickerDB,
+                "mii_clicker"
+            ),
+
+            orderByChild(
+                "clicks"
+            ),
+
+            limitToLast(
+                3
+            )
+
+        );
+
+
+
+    rankingUnsubscribe =
+        onValue(
+
+            leaderboardQuery,
+
+            function (
+                snapshot
+            ) {
+
+
+                var players =
+                    [];
+
+
+
+                snapshot.forEach(
+
+                    function (
+                        childSnapshot
+                    ) {
+
+
+                        var data =
+                            childSnapshot.val()
+                            ||
+                            {};
+
+
+                        players.push({
+
+                            uid:
+                                childSnapshot.key,
+
+                            pnid:
+                                data.pnid
+                                ||
+                                "Unknown",
+
+                            clicks:
+                                Number(
+                                    data.clicks || 0
+                                )
+
+                        });
+
+                    }
+
+                );
+
+
+
+                /*
+                   Ordenamos:
+                   mayor score primero.
+                */
+
+                players.sort(
+
+                    function (
+                        a,
+                        b
+                    ) {
+
+
+                        if (
+                            b.clicks !==
+                            a.clicks
+                        ) {
+
+
+                            return b.clicks
+                                -
+                                a.clicks;
+
+                        }
+
+
+
+                        /*
+                           Desempate por PNID.
+                        */
+
+                        return String(
+                            a.pnid
+                        ).localeCompare(
+                            String(
+                                b.pnid
+                            )
+                        );
+
+                    }
+
+                );
+
+
+
+                renderLeaderboard(
+                    players
+                );
+
+
+                updatePlayerRank(
+                    players
+                );
+
+            },
+
+
+
+            function (
+                error
+            ) {
+
+
+                console.error(
+                    "[Mii Clicker] Error del ranking:",
+                    error
+                );
+
+
+                rankElement.textContent =
+                    "Unavailable";
+
+            }
+
+        );
+
+}
+
+
+
+/* ============================================================
+   RENDER DEL TOP 3
+   ============================================================ */
+
+function renderLeaderboard(
+    players
+) {
+
+
+    renderRank(
+        1,
+        players[0]
+    );
+
+
+    renderRank(
+        2,
+        players[1]
+    );
+
+
+    renderRank(
+        3,
+        players[2]
+    );
+
+}
+
+
+
+/* ============================================================
+   RENDER DE UNA POSICIÓN
+   ============================================================ */
+
+function renderRank(
+    position,
+    player
+) {
+
+
+    var card =
+        document.getElementById(
+
+            "mii-clicker-place-"
+            +
+            position
+
+        );
+
+
+    if (
+        !card
+    ) {
+
+
+        return;
+
+    }
+
+
+
+    var avatarElement =
+        card.querySelector(
+            ".mii-clicker-place-avatar"
+        );
+
+
+    var rankPNID =
+        card.querySelector(
+            ".mii-clicker-place-pnid"
+        );
+
+
+    var rankScore =
+        card.querySelector(
+            ".mii-clicker-place-score"
+        );
+
+
+
+    /* ========================================================
+       POSICIÓN VACÍA
+       ======================================================== */
+
+    if (
+        !player
+    ) {
+
+
+        avatarElement.style.backgroundImage =
+            "url('img/games/Dummy_mii_user.png')";
+
+
+        rankPNID.textContent =
+            "---";
+
+
+        rankScore.textContent =
+            "0 clicks";
+
+
+        return;
+
+    }
+
+
+
+    /* ========================================================
+       MII DEL TOP
+
+       FACE porque el espacio es pequeño.
+
+       NO SE GENERA NINGUNA INSIGNIA.
+       ======================================================== */
+
+    var miiURL =
+
+        "https://mii-unsecure.ariankordi.net/miis/image.png"
+
+        +
+
+        "?nnid="
+
+        +
+
+        encodeURIComponent(
+            player.pnid
+        )
+
+        +
+
+        "&type=face"
+
+        +
+
+        "&width=270"
+
+        +
+
+        "&api_id=1";
+
+
+
+    avatarElement.innerHTML =
+        "";
+
+
+    avatarElement.style.backgroundImage =
+        "url('" + miiURL + "')";
+
+
+
+    rankPNID.textContent =
+        player.pnid;
+
+
+
+    rankScore.textContent =
+
+        formatNumber(
+            player.clicks
+        )
+
+        +
+
+        " clicks";
+
+}
+
+
+
+/* ============================================================
+   TU POSICIÓN
+   ============================================================ */
+
+function updatePlayerRank(
+    top3
+) {
+
+
+    if (
+        !firebaseUser
+    ) {
+
+
+        return;
+
+    }
+
+
+
+    var position =
+        -1;
+
+
+
+    for (
+        var i = 0;
+        i < top3.length;
+        i++
+    ) {
+
+
+        if (
+            top3[i].uid ===
+            firebaseUser.uid
+        ) {
+
+
+            position =
+                i + 1;
+
+
+            break;
+
+        }
+
+    }
+
+
+
+    if (
+        position === 1
+    ) {
+
+
+        rankElement.textContent =
+            "1st";
+
+    }
+
+
+    else if (
+        position === 2
+    ) {
+
+
+        rankElement.textContent =
+            "2nd";
+
+    }
+
+
+    else if (
+        position === 3
+    ) {
+
+
+        rankElement.textContent =
+            "3rd";
+
+    }
+
+
+    else {
+
+
+        rankElement.textContent =
+            "Not in Top 3";
+
+    }
+
+}
+
+
+
+/* ============================================================
+   EVENTO DEL BOTÓN
+   ============================================================ */
+
+clickButton.addEventListener(
+
+    "click",
+
+    registerClick
+
+);
+
+
+
+/* ============================================================
+   FIREBASE AUTH
+   ============================================================ */
+
+onAuthStateChanged(
+
+    miiClickerAuth,
+
+    async function (
+        user
+    ) {
+
+
+        /* ====================================================
+           NO HAY SESIÓN
+           ==================================================== */
+
+        if (
+            !user
+        ) {
+
+
+            firebaseUser =
+                null;
+
+
+            clickButton.disabled =
+                true;
+
+
+            pnidElement.textContent =
+                "No authenticated user";
+
+
+            rankElement.textContent =
+                "Sign in first";
+
+
+            syncElement.textContent =
+                "Firebase login required.";
+
+
+            return;
+
+        }
+
+
+
+        /* ====================================================
+           USUARIO AUTENTICADO
+           ==================================================== */
+
+        firebaseUser =
+            user;
+
+
+
+        playerPNID =
+            getSessionPNID(
+                user
+            );
+
+
+
+        if (
+            !playerPNID
+        ) {
+
+
+            clickButton.disabled =
+                true;
+
+
+            pnidElement.textContent =
+                "PNID unavailable";
+
+
+            return;
+
+        }
+
+
+
+        /* ====================================================
+           MOSTRAR PNID
+           ==================================================== */
+
+        pnidElement.textContent =
+            playerPNID;
+
+
+
+        /* ====================================================
+           RENDER MII
+           ==================================================== */
+
+        loadPlayerMii();
+
+
+
+        /* ====================================================
+           CONEXIÓN ONLINE
+           ==================================================== */
+
+        try {
+
+
+            syncElement.textContent =
+                "Loading online score...";
+
+
+
+            await loadOnlinePlayer();
+
+
+
+            startOnlineRanking();
+
+
+
+            console.log(
+                "[Mii Clicker] ONLINE - Realtime Database connected."
+            );
+
+        }
+
+
+
+        catch (
+            error
+        ) {
+
+
+            console.error(
+                "[Mii Clicker] Connection error:",
+                error
+            );
+
+
+
+            clickButton.disabled =
+                true;
+
+
+            rankElement.textContent =
+                "Unavailable";
+
+
+            syncElement.textContent =
+                "Could not connect to Realtime Database.";
+
+        }
+
+    }
+
+);
+
+
+
+/* ============================================================
+   INTENTAR GUARDAR SI SE OCULTA LA PÁGINA
+   ============================================================ */
+
+document.addEventListener(
+
+    "visibilitychange",
+
+    function () {
+
+
+        if (
+            document.hidden
+            &&
+            pendingClicks > 0
+        ) {
+
+
+            savePendingClicks();
+
+        }
+
+    }
+
+);
+
+
+
+/* ============================================================
+   CAMBIAR MENÚ:
+
+       messages
+          ↓
+       Mii Clicker
+
+   conmutarPortal(6, ...)
+   SIGUE IGUAL.
+   ============================================================ */
+
+var sidebarLabel =
+    document.querySelector(
+        "#global-menu-message .label"
+    );
+
+
+if (
+    sidebarLabel
+) {
+
+
+    sidebarLabel.textContent =
+        "Mii Clicker";
+
+}
+
+</script>
+
 <!-- ================= SECCIÓN 2: VISTA PROYECTOS ================= -->
-<div id="vista-proyectos" style="display: none;">
-    <div class="linea-degradada" style="margin-top: -50px; background: linear-gradient(to right, #ffb84d, #d68910);">
-        <h1>About my projects</h1>
+<style>
+
+/* ============================================================
+   ABOUT MY PROJECTS — HEADER ESTILO MII CLICKER
+   ============================================================ */
+
+#vista-proyectos .projects-clicker-style-topbar {
+    margin-top: -50px;
+    margin-left: 100px;
+    width: 1385px;
+
+    padding:
+        15px 22px;
+
+    background:
+        linear-gradient(
+            to bottom,
+            #ffd27a 0%,
+            #ffb84d 42%,
+            #ee9d28 56%,
+            #d68910 100%
+        );
+
+    border-bottom:
+        2px solid #b8730d;
+
+    box-shadow:
+        inset 0 2px 0 rgba(255,255,255,.45),
+        inset 0 -2px 0 rgba(120,70,0,.16),
+        0 3px 6px rgba(0,0,0,.10);
+}
+
+
+/* ============================================================
+   CONTENIDO INTERNO
+   ============================================================ */
+
+#vista-proyectos .projects-clicker-style-topbar-inner {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+}
+
+
+/* ============================================================
+   TÍTULO
+   ============================================================ */
+
+#vista-proyectos .projects-clicker-style-topbar h1 {
+    margin: 0;
+
+    color: #ffffff;
+
+    font-family:
+        'MiiverseFont',
+        sans-serif;
+
+    font-size: 25px;
+
+    font-weight: bold;
+
+    line-height: 1;
+
+    text-shadow:
+        0 1px 2px rgba(0,0,0,.22);
+}
+
+
+/* ============================================================
+   BADGE DERECHO
+   ============================================================ */
+
+#vista-proyectos .projects-clicker-style-badge {
+    padding:
+        5px 13px;
+
+    color: #ffffff;
+
+    font-family:
+        'MiiverseFont',
+        sans-serif;
+
+    font-size: 11px;
+
+    font-weight: bold;
+
+    border:
+        1px solid rgba(255,255,255,.48);
+
+    border-radius:
+        20px;
+
+    background:
+        rgba(0,0,0,.13);
+
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.18);
+
+    text-shadow:
+        0 1px 1px rgba(0,0,0,.15);
+}
+
+</style>
+
+
+<div
+    id="vista-proyectos"
+
+    style="
+        display:none;
+        position:relative;
+        z-index:1;
+    "
+>
+
+
+    <!-- ========================================================
+         HEADER ESTILO MII CLICKER
+         ======================================================== -->
+
+    <div class="projects-clicker-style-topbar">
+
+
+        <div class="projects-clicker-style-topbar-inner">
+
+
+            <h1>
+                About my projects
+            </h1>
+
+
+            <div class="projects-clicker-style-badge">
+                PROJECTS
+            </div>
+
+
+        </div>
+
+
     </div>
+
+
+    <!-- ========================================================
+         AQUÍ SIGUE TODO TU CONTENIDO ORIGINAL DE PROYECTOS
+         ======================================================== -->
 
     <!-- POST PROYECTO 1 -->
     <div style="display: flex; align-items: flex-start; width: 78%; margin-left: 170px; margin-top: 25px; font-family: 'MiiverseFont', sans-serif;">
@@ -534,10 +5458,153 @@ body {
 
 
 <!-- ================= SECCIÓN 3: VISTA COSAS SOBRE MÍ ================= -->
-<div id="vista-sobremi" style="display: none;">
-    <div class="linea-degradada" style="margin-top: -50px; background: linear-gradient(to right, #4aeb4f, #1aa622);">
-        <h1>About Me</h1>
+<style>
+
+/* ============================================================
+   ABOUT ME — HEADER ESTILO MII CLICKER
+   ============================================================ */
+
+#vista-sobremi .about-clicker-style-topbar {
+    margin-top: -50px;
+    margin-left: 100px;
+    width: 1385px;
+
+    padding:
+        15px 22px;
+
+    background:
+        linear-gradient(
+            to bottom,
+            #79ee7c 0%,
+            #4fd655 42%,
+            #2ebd37 56%,
+            #1aa622 100%
+        );
+
+    border-bottom:
+        2px solid #168f1d;
+
+    box-shadow:
+        inset 0 2px 0 rgba(255,255,255,.45),
+        inset 0 -2px 0 rgba(0,90,20,.16),
+        0 3px 6px rgba(0,0,0,.10);
+}
+
+
+/* ============================================================
+   CONTENIDO INTERNO
+   ============================================================ */
+
+#vista-sobremi .about-clicker-style-topbar-inner {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+}
+
+
+/* ============================================================
+   TÍTULO
+   ============================================================ */
+
+#vista-sobremi .about-clicker-style-topbar h1 {
+    margin: 0;
+
+    color: #ffffff;
+
+    font-family:
+        'MiiverseFont',
+        sans-serif;
+
+    font-size: 25px;
+
+    font-weight: bold;
+
+    line-height: 1;
+
+    text-shadow:
+        0 1px 2px rgba(0,0,0,.22);
+}
+
+
+/* ============================================================
+   BADGE DERECHO
+   ============================================================ */
+
+#vista-sobremi .about-clicker-style-badge {
+    padding:
+        5px 13px;
+
+    color: #ffffff;
+
+    font-family:
+        'MiiverseFont',
+        sans-serif;
+
+    font-size: 11px;
+
+    font-weight: bold;
+
+    border:
+        1px solid rgba(255,255,255,.48);
+
+    border-radius:
+        20px;
+
+    background:
+        rgba(0,0,0,.13);
+
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.18);
+
+    text-shadow:
+        0 1px 1px rgba(0,0,0,.15);
+}
+
+</style>
+
+
+<div
+    id="vista-sobremi"
+
+    style="
+        display:none;
+        position:relative;
+        z-index:1;
+    "
+>
+
+
+    <!-- ========================================================
+         HEADER ESTILO MII CLICKER
+         ======================================================== -->
+
+    <div class="about-clicker-style-topbar">
+
+
+        <div class="about-clicker-style-topbar-inner">
+
+
+            <h1>
+                About Me
+            </h1>
+
+
+            <div class="about-clicker-style-badge">
+                ABOUT ME
+            </div>
+
+
+        </div>
+
+
     </div>
+
+
+    <!-- ========================================================
+         AQUÍ SIGUE TODO TU CONTENIDO ORIGINAL DE ABOUT ME
+         ======================================================== -->
     
     <div style="position: relative; width: 95.90%; margin-left: 105px; margin-top: 0px;">
         <img src="img/games/ownerBanner.png" style="width: 100%; height: 300px; object-fit: cover; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); display: block;">
@@ -599,24 +5666,156 @@ body {
         </div>
     </div>
 
-        <div style="display: flex; align-items: flex-start; width: 78%; margin-left: 170px; margin-top: 25px; font-family: 'MiiverseFont', sans-serif;">
-        <div style="width: 55px; height: 55px; background-image: url('mii/miiOwner.png'); background-size: cover; border-radius: 8px; border: 1px solid #cbd5e1; flex-shrink: 0;"></div>
-        <div style="width: 0; height: 0; border-top: 9px solid transparent; border-bottom: 9px solid transparent; border-right: 12px solid #ffffff; margin-top: 20px; margin-left: 6px; z-index: 2;"></div>
-        <div style="flex-grow: 1; background-color: #ffffff; border: 1px solid #dcdcdc; border-radius: 12px; padding: 15px; margin-left: -1px; box-shadow: 0 3px 8px rgba(0,0,0,0.08);">
-            <p style="margin: 0; color: #2d3748; font-size: 15px; line-height: 1.5;">
-                "Back in 2024, I set out on what was perhaps my most ambitious technical project: attempting to recreate the Miiverse prototype originally presented by Satoru Iwata at E3. This was an immense challenge, as I had to hunt down rare, obscure materials across the internet. I spent weeks analyzing old screenshots, using logic and deduction to try and reverse-engineer features that were never officially released and whose functionality remained a mystery.
-                <br><br>
-                I was dedicated to this for two months, working tirelessly to build a functional 'WUBH' environment that would allow others to experience this lost vision. I was only about a month and a half away from releasing the first public prototype. Unfortunately, disaster struck when my PC suffered a fatal system crash—the dreaded blue screen of death. I was forced to format my drive, losing not only the code but all the rare photographs and research materials I had gathered. The sheer exhaustion and frustration of losing two months of intense work without a proper backup was devastating. I ultimately decided to abandon the project, but the experience gave me a deep, unparalleled look into the Miiverse architecture that I'll never forget."
-            </p>
+</div>
+<style>
+
+/* ============================================================
+   GENERAL CHAT — HEADER ESTILO MII CLICKER
+   ============================================================ */
+
+#vista-quepasara .chat-clicker-style-topbar {
+    margin-top: -50px;
+    margin-left: 100px;
+    width: 1385px;
+
+    padding:
+        15px 22px;
+
+    background:
+        linear-gradient(
+            to bottom,
+            #79ee7c 0%,
+            #4fd655 42%,
+            #2ebd37 56%,
+            #1aa622 100%
+        );
+
+    border-bottom:
+        2px solid #168f1d;
+
+    box-shadow:
+        inset 0 2px 0 rgba(255,255,255,.45),
+        inset 0 -2px 0 rgba(0,90,20,.16),
+        0 3px 6px rgba(0,0,0,.10);
+}
+
+
+/* ============================================================
+   CONTENIDO INTERNO
+   ============================================================ */
+
+#vista-quepasara .chat-clicker-style-topbar-inner {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+}
+
+
+/* ============================================================
+   TÍTULO
+   ============================================================ */
+
+#vista-quepasara .chat-clicker-style-topbar h1 {
+    margin: 0;
+
+    color: #ffffff;
+
+    font-family:
+        'MiiverseFont',
+        sans-serif;
+
+    font-size: 25px;
+
+    font-weight: bold;
+
+    line-height: 1;
+
+    text-shadow:
+        0 1px 2px rgba(0,0,0,.22);
+}
+
+
+/* ============================================================
+   BADGE DERECHO
+   ============================================================ */
+
+#vista-quepasara .chat-clicker-style-badge {
+    padding:
+        5px 13px;
+
+    color: #ffffff;
+
+    font-family:
+        'MiiverseFont',
+        sans-serif;
+
+    font-size: 11px;
+
+    font-weight: bold;
+
+    border:
+        1px solid rgba(255,255,255,.48);
+
+    border-radius:
+        20px;
+
+    background:
+        rgba(0,0,0,.13);
+
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.18);
+
+    text-shadow:
+        0 1px 1px rgba(0,0,0,.15);
+}
+
+</style>
+
+
+<div
+    id="vista-quepasara"
+    class="vista-contenido"
+
+    style="
+        display:none;
+        position:relative;
+        min-height:100vh;
+        padding-bottom:120px;
+    "
+>
+
+
+    <!-- ========================================================
+         HEADER ESTILO MII CLICKER
+         ======================================================== -->
+
+    <div class="chat-clicker-style-topbar">
+
+
+        <div class="chat-clicker-style-topbar-inner">
+
+
+            <h1>
+                General Chat
+            </h1>
+
+
+            <div class="chat-clicker-style-badge">
+                GENERAL CHAT
+            </div>
+
+
         </div>
+
+
     </div>
 
-</div>
-<div id="vista-quepasara" class="vista-contenido" style="display: none; position: relative; min-height: 100vh; padding-bottom: 120px;">
-    
-    <div class="linea-degradada" style="margin-top: -50px; background: linear-gradient(to right, #4aeb4f, #1aa622);">
-        <h1>General Chat</h1>
-    </div>
+
+    <!-- ========================================================
+         AQUÍ SIGUE TODO TU CONTENIDO ORIGINAL
+         ======================================================== -->
     
     <div style="position: relative; width: 95.90%; margin-left: 108px; margin-top: 0px;">
         <img src="img/DummyLaunchBG.png" style="width: 101%; height: 230px; object-fit: cover; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); display: block;">
@@ -646,31 +5845,6 @@ body {
         <!-- Texto "Post" más grande -->
         <span style="font-family: 'MiiverseFont', sans-serif; font-size: 32px; color: #444444; font-weight: normal; margin-top: 4px;">Post</span>
     </div>
-
-
-<!-- ================= 1. PANTALLA COMPLETA ESTILO GAMEPAD (AMPLIADA) ================= -->
-<!-- ============================================================
-     MAKIIVERSE
-     MIIVERSE E3 2012 POST COMPOSER
-
-     REACCIONES = MiiverseSymbols-Regular
-     NO PNG DE REACCIONES
-
-     GLYPHS:
-       normal       e
-       smile        L
-       like         H
-       surprised    O
-       frustrated   G
-       sorrow       U
-
-     NO REDEFINE:
-       publicarPostGeneral()
-       cerrarModalPostGeneral()
-       cambiarModoEntrada()
-       actualizarAvatarModal()
-     ============================================================ -->
-
 
 <style>
 @font-face {
@@ -3258,114 +8432,1783 @@ function toggleYeah(idMensaje) {
 
 </div>
 
-<!-- ================= SECCIÓN 4: VISTA NETWORKS ================= -->
-<div id="vista-networks" style="display: none;">
-    <div class="linea-degradada" style="margin-top: -50px; background: linear-gradient(to right, #fbff02, #ffae00);">
-        <h1>Networks</h1>
-    </div>
-    
-    <div style="width: 78%; margin-left: 170px; margin-top: 25px;">
-        <h2 style="font-family: 'MiiverseFont', sans-serif; color: #555; margin-bottom: 20px;">Mis Redes Conectadas</h2>
-<!-- Pretendo Network -->
-<div class="card card-standard" style="display: flex; flex-direction: row; align-items: center; justify-content: flex-start; padding: 15px; margin-bottom: 15px; margin-left: 170px; background: #fff; border-radius: 6px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); width: calc(100% - 190px); height: auto; cursor: default;">
-    <img src="img/icon_pretendo.png" style="width: 50px; height: 50px; border-radius: 5px; margin-right: 15px; flex-shrink: 0; object-fit: cover;">
-    <div style="text-align: left;">
-        <span style="font-family: 'MiiverseFont', sans-serif; color: #999; font-size: 14px;">Pretendo Network (PNID)</span>
-        <p style="font-family: 'MiiverseFont', sans-serif; font-weight: 600; font-size: 18px; color: #555; margin: 5px 0 0 0;">YosMakii99_PN</p>
-    </div>
-</div>
+<!-- ============================================================
+     ============================================================
+                       NETWORKS REMAKE
+                 LIGHT BLUE / WII U STYLE
+     ============================================================
+     ============================================================ -->
 
-<!-- Roblox Manual: Enlace SOLO en la tarjeta -->
-<div class="card card-standard" style="display: flex; flex-direction: row; align-items: center; justify-content: flex-start; padding: 15px; margin-bottom: 15px; margin-left: 170px; background: #fff; border-radius: 6px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); width: calc(100% - 190px); height: auto; cursor: default;">
-    
-    <a href="https://www.roblox.com/es/users/10030521486/profile" target="_blank" style="display: flex; flex-direction: row; align-items: center; text-decoration: none; color: inherit; width: 100%;">
-        <img src="img/pfp/RobloxUser.png" 
-             style="width: 50px; height: 50px; border-radius: 5px; margin-right: 15px; flex-shrink: 0; object-fit: cover;" 
-             alt="Roblox Avatar">
-        <div style="text-align: left;">
-            <span style="font-family: 'MiiverseFont', sans-serif; color: #999; font-size: 14px;">Roblox</span>
-            <p style="font-family: 'MiiverseFont', sans-serif; font-weight: 600; font-size: 18px; color: #555; margin: 5px 0 0 0;">amke01_WiiU</p>
+<style>
+
+/* ============================================================
+   VISTA
+   ============================================================ */
+
+#vista-networks {
+    display: none;
+    position: relative;
+    z-index: 1;
+
+    min-height: 900px;
+
+    font-family:
+        'MiiverseFont',
+        sans-serif;
+}
+
+
+/* ============================================================
+   HEADER — AZUL CLARO REFORZADO
+   ============================================================ */
+
+#vista-networks .networks-topbar {
+    margin-left: 100px;
+    width: 1385px;
+    margin-top: -50px;
+
+    padding:
+        15px 22px;
+
+    background:
+        linear-gradient(
+            to bottom,
+            #78e6ff 0%,
+            #48d4f7 25%,
+            #25bfe9 52%,
+            #109fce 74%,
+            #0789b8 100%
+        );
+
+    border-bottom:
+        2px solid #087da8;
+
+    box-shadow:
+        inset 0 2px 0 rgba(255,255,255,.58),
+        inset 0 -2px 0 rgba(0,80,120,.18),
+        0 3px 6px rgba(0,0,0,.10);
+}
+
+
+/* ============================================================
+   HEADER INNER
+   ============================================================ */
+
+#vista-networks .networks-topbar-inner {
+    display: flex;
+
+    align-items: center;
+
+    justify-content:
+        space-between;
+}
+
+
+/* ============================================================
+   TÍTULO
+   ============================================================ */
+
+#vista-networks .networks-topbar h1 {
+    margin: 0;
+
+    color:
+        #ffffff;
+
+    font-size:
+        25px;
+
+    font-weight:
+        bold;
+
+    line-height:
+        1;
+
+    text-shadow:
+        0 1px 2px rgba(0,80,120,.32);
+}
+
+
+/* ============================================================
+   BADGE DERECHO
+   ============================================================ */
+
+#vista-networks .networks-topbar-badge {
+    padding:
+        5px 13px;
+
+    color:
+        #ffffff;
+
+    font-size:
+        11px;
+
+    font-weight:
+        bold;
+
+    border:
+        1px solid rgba(255,255,255,.60);
+
+    border-radius:
+        20px;
+
+    background:
+        rgba(0,115,165,.19);
+
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.24);
+
+    text-shadow:
+        0 1px 1px rgba(0,0,0,.15);
+}
+
+
+/* ============================================================
+   PAGE
+   ============================================================ */
+
+#vista-networks .networks-page {
+    width:
+        78%;
+
+    max-width:
+        1050px;
+
+    margin-left:
+        170px;
+
+    margin-top:
+        34px;
+
+    padding-bottom:
+        80px;
+
+    box-sizing:
+        border-box;
+}
+
+
+/* ============================================================
+   INTRO
+   ============================================================ */
+
+#vista-networks .networks-intro {
+    overflow:
+        hidden;
+
+    margin-bottom:
+        25px;
+
+    background:
+        #ffffff;
+
+    border:
+        1px solid #bcd8e3;
+
+    border-radius:
+        12px;
+
+    box-shadow:
+        0 4px 12px rgba(0,110,160,.09);
+}
+
+
+/* ============================================================
+   INTRO TITLE — AHORA AZUL
+   ============================================================ */
+
+#vista-networks .networks-intro-title {
+    padding:
+        14px 19px;
+
+    color:
+        #ffffff;
+
+    font-size:
+        22px;
+
+    font-weight:
+        bold;
+
+    background:
+        linear-gradient(
+            to bottom,
+            #69ddfa 0%,
+            #38c5ec 48%,
+            #159fcf 100%
+        );
+
+    border-bottom:
+        1px solid #0b8dbd;
+
+    text-shadow:
+        0 1px 1px rgba(0,70,110,.25);
+}
+
+
+/* ============================================================
+   INTRO DESCRIPTION
+   ============================================================ */
+
+#vista-networks .networks-intro-description {
+    padding:
+        15px 20px;
+
+    color:
+        #66747b;
+
+    font-size:
+        14px;
+
+    line-height:
+        1.5;
+
+    background:
+        linear-gradient(
+            to bottom,
+            #ffffff,
+            #f4fbfe
+        );
+}
+
+
+/* ============================================================
+   LISTA
+   ============================================================ */
+
+#vista-networks .networks-list {
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    gap:
+        13px;
+}
+
+
+/* ============================================================
+   TARJETAS
+   ============================================================ */
+
+#vista-networks .network-card {
+    position:
+        relative;
+
+    min-height:
+        88px;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    padding:
+        12px 15px;
+
+    box-sizing:
+        border-box;
+
+    overflow:
+        hidden;
+
+    background:
+        linear-gradient(
+            to bottom,
+            #ffffff 0%,
+            #ffffff 66%,
+            #f5fbfd 100%
+        );
+
+    border:
+        1px solid #c4d7df;
+
+    border-radius:
+        10px;
+
+    box-shadow:
+        0 3px 8px rgba(0,80,120,.07),
+        inset 0 1px 0 #ffffff;
+
+    transition:
+        transform .10s ease,
+        box-shadow .10s ease,
+        border-color .10s ease;
+}
+
+
+/* ============================================================
+   HOVER
+   ============================================================ */
+
+#vista-networks .network-card:hover {
+    transform:
+        translateY(-1px);
+
+    border-color:
+        #8acfe5;
+
+    box-shadow:
+        0 5px 12px rgba(0,130,180,.13),
+        inset 0 1px 0 #ffffff;
+}
+
+
+/* ============================================================
+   FRANJA AZUL
+   ============================================================ */
+
+#vista-networks .network-card::before {
+    content:
+        "";
+
+    position:
+        absolute;
+
+    top:
+        0;
+
+    left:
+        0;
+
+    bottom:
+        0;
+
+    width:
+        5px;
+
+    background:
+        linear-gradient(
+            to bottom,
+            #72e5ff 0%,
+            #30c7ed 45%,
+            #0c9aca 100%
+        );
+
+    box-shadow:
+        1px 0 4px rgba(0,170,220,.18);
+}
+
+
+/* ============================================================
+   ICON FRAME
+   ============================================================ */
+
+#vista-networks .network-icon-box {
+    position:
+        relative;
+
+    width:
+        64px;
+
+    height:
+        64px;
+
+    flex-shrink:
+        0;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    overflow:
+        hidden;
+
+    margin-left:
+        6px;
+
+    margin-right:
+        17px;
+
+    background:
+        linear-gradient(
+            to bottom,
+            #ffffff,
+            #f2fbfe
+        );
+
+    border:
+        1px solid #a8cfdd;
+
+    border-radius:
+        11px;
+
+    box-shadow:
+        inset 0 1px 2px rgba(0,0,0,.04),
+        0 2px 5px rgba(0,105,150,.10);
+}
+
+
+/* ============================================================
+   BRILLO ICONO
+   ============================================================ */
+
+#vista-networks .network-icon-box::after {
+    content:
+        "";
+
+    position:
+        absolute;
+
+    left:
+        4px;
+
+    right:
+        4px;
+
+    top:
+        3px;
+
+    height:
+        18px;
+
+    border-radius:
+        8px 8px 50% 50%;
+
+    background:
+        linear-gradient(
+            to bottom,
+            rgba(255,255,255,.40),
+            rgba(255,255,255,0)
+        );
+
+    pointer-events:
+        none;
+}
+
+
+/* ============================================================
+   ICONO
+   ============================================================ */
+
+#vista-networks .network-icon {
+    display:
+        block;
+
+    width:
+        100%;
+
+    height:
+        100%;
+
+    object-fit:
+        cover;
+}
+
+
+/* ============================================================
+   LOGOS CONTAIN
+   ============================================================ */
+
+#vista-networks .network-icon.contain {
+    width:
+        86%;
+
+    height:
+        86%;
+
+    object-fit:
+        contain;
+}
+
+
+/* ============================================================
+   MII PNID
+
+   El renderer devuelve la cara de YosMakii99_PN.
+   ============================================================ */
+
+#vista-networks .network-icon.pnid-mii {
+    width:
+        100%;
+
+    height:
+        100%;
+
+    object-fit:
+        cover;
+
+    object-position:
+        center;
+}
+
+
+/* ============================================================
+   PUNTO PNID ONLINE
+   ============================================================ */
+
+#vista-networks .pnid-status-dot {
+    position:
+        absolute;
+
+    z-index:
+        5;
+
+    right:
+        3px;
+
+    bottom:
+        3px;
+
+    width:
+        12px;
+
+    height:
+        12px;
+
+    box-sizing:
+        border-box;
+
+    background:
+        #59d719;
+
+    border:
+        2px solid #ffffff;
+
+    border-radius:
+        50%;
+
+    box-shadow:
+        0 1px 3px rgba(0,0,0,.25);
+}
+
+
+/* ============================================================
+   INFO
+   ============================================================ */
+
+#vista-networks .network-info {
+    flex:
+        1;
+
+    min-width:
+        0;
+}
+
+
+/* ============================================================
+   SERVICIO
+   ============================================================ */
+
+#vista-networks .network-service {
+    display:
+        block;
+
+    color:
+        #7a9aa7;
+
+    font-size:
+        13px;
+
+    margin-bottom:
+        4px;
+}
+
+
+/* ============================================================
+   USER
+   ============================================================ */
+
+#vista-networks .network-user {
+    display:
+        block;
+
+    overflow:
+        hidden;
+
+    white-space:
+        nowrap;
+
+    text-overflow:
+        ellipsis;
+
+    color:
+        #3d5159;
+
+    font-size:
+        18px;
+
+    font-weight:
+        bold;
+
+    line-height:
+        1.25;
+}
+
+
+/* ============================================================
+   SMALL
+   ============================================================ */
+
+#vista-networks .network-small-text {
+    display:
+        block;
+
+    margin-top:
+        3px;
+
+    color:
+        #9aafb7;
+
+    font-size:
+        11px;
+}
+
+
+/* ============================================================
+   ACCIONES
+   ============================================================ */
+
+#vista-networks .network-actions {
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    gap:
+        8px;
+
+    margin-left:
+        15px;
+}
+
+
+/* ============================================================
+   BOTÓN
+   ============================================================ */
+
+#vista-networks .network-button {
+    min-width:
+        83px;
+
+    height:
+        34px;
+
+    padding:
+        0 13px;
+
+    box-sizing:
+        border-box;
+
+    cursor:
+        pointer;
+
+    display:
+        inline-flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    text-decoration:
+        none;
+
+    color:
+        #5b7380;
+
+    font-family:
+        'MiiverseFont',
+        sans-serif;
+
+    font-size:
+        12px;
+
+    font-weight:
+        bold;
+
+    background:
+        linear-gradient(
+            to bottom,
+            #ffffff,
+            #edf7fa
+        );
+
+    border:
+        1px solid #a9cbd7;
+
+    border-radius:
+        17px;
+
+    box-shadow:
+        inset 0 1px 0 #ffffff,
+        0 2px 2px rgba(0,80,120,.07);
+
+    outline:
+        none;
+}
+
+
+/* ============================================================
+   OPEN AZUL CLARO
+   ============================================================ */
+
+#vista-networks .network-button.open {
+    color:
+        #ffffff;
+
+    background:
+        linear-gradient(
+            to bottom,
+            #71dcfa 0%,
+            #38c3eb 45%,
+            #159fce 100%
+        );
+
+    border-color:
+        #0b8dbb;
+
+    text-shadow:
+        0 1px 1px rgba(0,70,110,.22);
+
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.50),
+        0 2px 3px rgba(0,125,170,.15);
+}
+
+
+/* ============================================================
+   ACTIVE
+   ============================================================ */
+
+#vista-networks .network-button:active {
+    transform:
+        translateY(2px);
+}
+
+
+/* ============================================================
+   COPIED
+   ============================================================ */
+
+#vista-networks .network-button.copied {
+    color:
+        #ffffff;
+
+    background:
+        linear-gradient(
+            to bottom,
+            #65d7f5,
+            #159fce
+        );
+
+    border-color:
+        #0b8dbb;
+
+    box-shadow:
+        0 0 7px rgba(0,180,235,.40);
+}
+
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+
+#vista-networks .networks-footer-note {
+    margin-top:
+        24px;
+
+    padding:
+        13px 18px;
+
+    color:
+        #79919b;
+
+    font-size:
+        12px;
+
+    text-align:
+        center;
+
+    background:
+        linear-gradient(
+            to bottom,
+            #ffffff,
+            #eefafd
+        );
+
+    border:
+        1px solid #bdd7e1;
+
+    border-radius:
+        9px;
+}
+
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+@media screen and (max-width:950px) {
+
+    #vista-networks .networks-page {
+        width:
+            auto;
+
+        margin-left:
+            185px;
+
+        margin-right:
+            20px;
+    }
+
+
+    #vista-networks .network-actions {
+        margin-left:
+            8px;
+    }
+
+
+    #vista-networks .network-button {
+        min-width:
+            70px;
+
+        padding:
+            0 10px;
+    }
+
+}
+
+</style>
+
+
+
+<!-- ============================================================
+     ============================================================
+                        NETWORKS VIEW
+     ============================================================
+     ============================================================ -->
+
+<div
+    id="vista-networks"
+
+    style="
+        display:none;
+        position:relative;
+        z-index:1;
+    "
+>
+
+
+    <!-- ========================================================
+         HEADER
+         ======================================================== -->
+
+    <div class="networks-topbar">
+
+
+        <div class="networks-topbar-inner">
+
+
+            <h1>
+                Networks
+            </h1>
+
+
+            <div class="networks-topbar-badge">
+                CONNECTED ACCOUNTS
+            </div>
+
+
         </div>
-    </a>
-</div>
 
-<!-- Discord -->
-<div class="card card-standard" style="display: flex; flex-direction: row; align-items: center; justify-content: flex-start; padding: 15px; margin-bottom: 15px; margin-left: 170px; background: #fff; border-radius: 6px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); width: calc(100% - 190px); height: auto; cursor: default;">
-    <img src="img/pfp/Discord.jpg" style="width: 50px; height: 50px; border-radius: 5px; margin-right: 15px; flex-shrink: 0; object-fit: cover;">
-    <div style="text-align: left;">
-        <span style="font-family: 'MiiverseFont', sans-serif; color: #999; font-size: 14px;">Discord </span>
-        <p style="font-family: 'MiiverseFont', sans-serif; font-weight: 600; font-size: 18px; color: #555; margin: 5px 0 0 0;">amke01</p>
+
     </div>
-</div>
 
- <!-- Tarjeta de YouTube alineada a la derecha -->
-<div class="card card-standard" style="display: flex; flex-direction: row; align-items: center; justify-content: flex-start; padding: 15px; margin-bottom: 15px; margin-left: 170px; background: #fff; border-radius: 6px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); width: calc(100% - 190px); height: auto;">
-    
-    <a href="https://www.youtube.com/@cafe_laila" target="_blank" style="display: flex; align-items: center; text-decoration: none; color: inherit;">
-        
-        <!-- Esta URL usa tu ID para obtener siempre tu foto actual -->
-        <img src="https://unavatar.io/youtube/@cafe_laila" 
-     style="width: 50px; height: 50px; border-radius: 5px; margin-right: 15px; flex-shrink: 0;" 
-     alt="Mi Canal">
-        
-        <div style="text-align: left;">
-            <span style="font-family: 'MiiverseFont', sans-serif; color: #999; font-size: 14px;">YouTube</span>
-            <p style="font-family: 'MiiverseFont', sans-serif; font-weight: 600; font-size: 18px; color: #555; margin: 5px 0 0 0;">@cafe_laila</p>
+
+
+    <!-- ========================================================
+         PAGE
+         ======================================================== -->
+
+    <div class="networks-page">
+
+
+
+        <!-- ====================================================
+             INTRO
+             ==================================================== -->
+
+        <div class="networks-intro">
+
+
+            <div class="networks-intro-title">
+                My Networks
+            </div>
+
+
+            <div class="networks-intro-description">
+                Here you can find my gaming accounts, social networks
+                and friend codes. Feel free to add me!
+            </div>
+
+
         </div>
-    </a>
 
-</div>
 
-<!-- Discord -->
- <div class="card card-standard" style="display: flex; flex-direction: row; align-items: center; justify-content: flex-start; padding: 15px; margin-bottom: 15px; margin-left: 170px; background: #fff; border-radius: 6px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); width: calc(100% - 190px); height: auto; cursor: default;">
-    <img src="img/pfp/Nintendo_Switch-Logo.wine.png" style="width: 50px; height: 50px; border-radius: 5px; margin-right: 15px; flex-shrink: 0; object-fit: cover;">
-    <div style="text-align: left;">
-        <span style="font-family: 'MiiverseFont', sans-serif; color: #999; font-size: 14px;">Nintendo Switch </span>
-        <p style="font-family: 'MiiverseFont', sans-serif; font-weight: 600; font-size: 18px; color: #555; margin: 5px 0 0 0;">SW-7284-9105-6325</p>
-    </div>
-</div>
 
-<!-- Facebook automático -->
-<!-- Facebook Manual (Carga al 100% y sin errores) -->
-<div class="card card-standard" style="display: flex; flex-direction: row; align-items: center; justify-content: flex-start; padding: 15px; margin-bottom: 15px; margin-left: 170px; background: #fff; border-radius: 6px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); width: calc(100% - 190px); height: auto; cursor: default;">
-    
-    <a href="https://www.facebook.com/amkr01/" target="_blank" style="display: flex; flex-direction: row; align-items: center; text-decoration: none; color: inherit; width: 100%;">
-        <img src="img/pfp/facebook.jpg" 
-             style="width: 50px; height: 50px; border-radius: 5px; margin-right: 15px; flex-shrink: 0; object-fit: cover;" 
-             alt="Facebook Avatar">
-        <div style="text-align: left;">
-            <span style="font-family: 'MiiverseFont', sans-serif; color: #999; font-size: 14px;">Facebook</span>
-            <p style="font-family: 'MiiverseFont', sans-serif; font-weight: 600; font-size: 18px; color: #555; margin: 5px 0 0 0;">amkr01</p>
+        <!-- ====================================================
+             LIST
+             ==================================================== -->
+
+        <div class="networks-list">
+
+
+
+            <!-- =================================================
+                 PRETENDO / PNID
+
+                 AQUÍ USAMOS TU MII REAL.
+                 ================================================= -->
+
+            <div class="network-card">
+
+
+                <div class="network-icon-box">
+
+
+                    <img
+                        class="network-icon pnid-mii"
+
+                        src="https://mii-unsecure.ariankordi.net/miis/image.png?nnid=YosMakii99_PN&type=face&width=270&api_id=1"
+
+                        alt="YosMakii99_PN Mii"
+
+                        onerror="
+                            this.onerror = null;
+                            this.src = 'mii/miiOwner.png';
+                        "
+                    >
+
+
+                    <span class="pnid-status-dot">
+                    </span>
+
+
+                </div>
+
+
+
+                <div class="network-info">
+
+
+                    <span class="network-service">
+                        Pretendo Network (PNID)
+                    </span>
+
+
+                    <span class="network-user">
+                        YosMakii99_PN
+                    </span>
+
+
+                    <span class="network-small-text">
+                        My Wii U / Pretendo profile
+                    </span>
+
+
+                </div>
+
+
+
+                <div class="network-actions">
+
+
+                    <button
+                        type="button"
+
+                        class="network-button"
+
+                        data-copy-network="YosMakii99_PN"
+                    >
+                        COPY
+                    </button>
+
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- =================================================
+                 ROBLOX
+                 ================================================= -->
+
+            <div class="network-card">
+
+
+                <div class="network-icon-box">
+
+
+                    <img
+                        class="network-icon"
+
+                        src="img/pfp/RobloxUser.png"
+
+                        alt="Roblox"
+                    >
+
+
+                </div>
+
+
+
+                <div class="network-info">
+
+
+                    <span class="network-service">
+                        Roblox
+                    </span>
+
+
+                    <span class="network-user">
+                        amke01_WiiU
+                    </span>
+
+
+                    <span class="network-small-text">
+                        Roblox profile
+                    </span>
+
+
+                </div>
+
+
+
+                <div class="network-actions">
+
+
+                    <button
+                        type="button"
+
+                        class="network-button"
+
+                        data-copy-network="amke01_WiiU"
+                    >
+                        COPY
+                    </button>
+
+
+                    <a
+                        class="network-button open"
+
+                        href="https://www.roblox.com/es/users/10030521486/profile"
+
+                        target="_blank"
+
+                        rel="noopener noreferrer"
+                    >
+                        OPEN
+                    </a>
+
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- =================================================
+                 DISCORD
+                 ================================================= -->
+
+            <div class="network-card">
+
+
+                <div class="network-icon-box">
+
+
+                    <img
+                        class="network-icon"
+
+                        src="img/pfp/Discord.jpg"
+
+                        alt="Discord"
+                    >
+
+
+                </div>
+
+
+
+                <div class="network-info">
+
+
+                    <span class="network-service">
+                        Discord
+                    </span>
+
+
+                    <span class="network-user">
+                        amke01
+                    </span>
+
+
+                    <span class="network-small-text">
+                        Discord username
+                    </span>
+
+
+                </div>
+
+
+
+                <div class="network-actions">
+
+
+                    <button
+                        type="button"
+
+                        class="network-button"
+
+                        data-copy-network="amke01"
+                    >
+                        COPY
+                    </button>
+
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- =================================================
+                 YOUTUBE
+                 ================================================= -->
+
+            <div class="network-card">
+
+
+                <div class="network-icon-box">
+
+
+                    <img
+                        class="network-icon"
+
+                        src="https://unavatar.io/youtube/@cafe_laila"
+
+                        alt="YouTube"
+                    >
+
+
+                </div>
+
+
+
+                <div class="network-info">
+
+
+                    <span class="network-service">
+                        YouTube
+                    </span>
+
+
+                    <span class="network-user">
+                        @cafe_laila
+                    </span>
+
+
+                    <span class="network-small-text">
+                        YouTube channel
+                    </span>
+
+
+                </div>
+
+
+
+                <div class="network-actions">
+
+
+                    <button
+                        type="button"
+
+                        class="network-button"
+
+                        data-copy-network="@cafe_laila"
+                    >
+                        COPY
+                    </button>
+
+
+                    <a
+                        class="network-button open"
+
+                        href="https://www.youtube.com/@cafe_laila"
+
+                        target="_blank"
+
+                        rel="noopener noreferrer"
+                    >
+                        OPEN
+                    </a>
+
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- =================================================
+                 NINTENDO SWITCH
+                 ================================================= -->
+
+            <div class="network-card">
+
+
+                <div class="network-icon-box">
+
+
+                    <img
+                        class="network-icon contain"
+
+                        src="img/pfp/Nintendo_Switch-Logo.wine.png"
+
+                        alt="Nintendo Switch"
+                    >
+
+
+                </div>
+
+
+
+                <div class="network-info">
+
+
+                    <span class="network-service">
+                        Nintendo Switch
+                    </span>
+
+
+                    <span class="network-user">
+                        SW-7284-9105-6325
+                    </span>
+
+
+                    <span class="network-small-text">
+                        Friend Code
+                    </span>
+
+
+                </div>
+
+
+
+                <div class="network-actions">
+
+
+                    <button
+                        type="button"
+
+                        class="network-button"
+
+                        data-copy-network="SW-7284-9105-6325"
+                    >
+                        COPY
+                    </button>
+
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- =================================================
+                 FACEBOOK
+                 ================================================= -->
+
+            <div class="network-card">
+
+
+                <div class="network-icon-box">
+
+
+                    <img
+                        class="network-icon"
+
+                        src="img/pfp/facebook.jpg"
+
+                        alt="Facebook"
+                    >
+
+
+                </div>
+
+
+
+                <div class="network-info">
+
+
+                    <span class="network-service">
+                        Facebook
+                    </span>
+
+
+                    <span class="network-user">
+                        amkr01
+                    </span>
+
+
+                    <span class="network-small-text">
+                        Facebook profile
+                    </span>
+
+
+                </div>
+
+
+
+                <div class="network-actions">
+
+
+                    <a
+                        class="network-button open"
+
+                        href="https://www.facebook.com/amkr01/"
+
+                        target="_blank"
+
+                        rel="noopener noreferrer"
+                    >
+                        OPEN
+                    </a>
+
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- =================================================
+                 MARIO KART WII
+                 ================================================= -->
+
+            <div class="network-card">
+
+
+                <div class="network-icon-box">
+
+
+                    <img
+                        class="network-icon"
+
+                        src="img/pfp/mkwii.png"
+
+                        alt="Mario Kart Wii"
+                    >
+
+
+                </div>
+
+
+
+                <div class="network-info">
+
+
+                    <span class="network-service">
+                        Mario Kart Wii (Wiimmfi)
+                    </span>
+
+
+                    <span class="network-user">
+                        FC-4429-8513-7239
+                    </span>
+
+
+                    <span class="network-small-text">
+                        Wiimmfi Friend Code
+                    </span>
+
+
+                </div>
+
+
+
+                <div class="network-actions">
+
+
+                    <button
+                        type="button"
+
+                        class="network-button"
+
+                        data-copy-network="4429-8513-7239"
+                    >
+                        COPY
+                    </button>
+
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- =================================================
+                 WII
+                 ================================================= -->
+
+            <div class="network-card">
+
+
+                <div class="network-icon-box">
+
+
+                    <img
+                        class="network-icon contain"
+
+                        src="img/pfp/Wii-Logo-PNG-Cutout.png"
+
+                        alt="Wii"
+                    >
+
+
+                </div>
+
+
+
+                <div class="network-info">
+
+
+                    <span class="network-service">
+                        Wii (Friend Code)
+                    </span>
+
+
+                    <span class="network-user">
+                        FC-7536-1862-9058-8245
+                    </span>
+
+
+                    <span class="network-small-text">
+                        Wii Friend Code
+                    </span>
+
+
+                </div>
+
+
+
+                <div class="network-actions">
+
+
+                    <button
+                        type="button"
+
+                        class="network-button"
+
+                        data-copy-network="7536-1862-9058-8245"
+                    >
+                        COPY
+                    </button>
+
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- =================================================
+                 EPIC GAMES
+                 ================================================= -->
+
+            <div class="network-card">
+
+
+                <div class="network-icon-box">
+
+
+                    <img
+                        class="network-icon contain"
+
+                        src="img/pfp/Epic-Games-Symbol.png"
+
+                        alt="Epic Games"
+                    >
+
+
+                </div>
+
+
+
+                <div class="network-info">
+
+
+                    <span class="network-service">
+                        Epic Games
+                    </span>
+
+
+                    <span class="network-user">
+                        YosMaki999
+                    </span>
+
+
+                    <span class="network-small-text">
+                        Epic Games ID
+                    </span>
+
+
+                </div>
+
+
+
+                <div class="network-actions">
+
+
+                    <button
+                        type="button"
+
+                        class="network-button"
+
+                        data-copy-network="YosMaki999"
+                    >
+                        COPY
+                    </button>
+
+
+                </div>
+
+
+            </div>
+
+
         </div>
-    </a>
-</div>
 
- <div class="card card-standard" style="display: flex; flex-direction: row; align-items: center; justify-content: flex-start; padding: 15px; margin-bottom: 15px; margin-left: 170px; background: #fff; border-radius: 6px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); width: calc(100% - 190px); height: auto; cursor: default;">
-    <img src="img/pfp/mkwii.png" style="width: 50px; height: 50px; border-radius: 5px; margin-right: 15px; flex-shrink: 0; object-fit: cover;">
-    <div style="text-align: left;">
-        <span style="font-family: 'MiiverseFont', sans-serif; color: #999; font-size: 14px;">Mario Kart Wii (Wiimmfi) </span>
-        <p style="font-family: 'MiiverseFont', sans-serif; font-weight: 600; font-size: 18px; color: #555; margin: 5px 0 0 0;">FC-4429-8513-7239</p>
+
+
+        <div class="networks-footer-note">
+            Gaming IDs and social profiles connected to my profile.
+        </div>
+
+
     </div>
-</div>
-
- <div class="card card-standard" style="display: flex; flex-direction: row; align-items: center; justify-content: flex-start; padding: 15px; margin-bottom: 15px; margin-left: 170px; background: #fff; border-radius: 6px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); width: calc(100% - 190px); height: auto; cursor: default;">
-    <img src="img/pfp/Wii-Logo-PNG-Cutout.png" style="width: 50px; height: 50px; border-radius: 5px; margin-right: 15px; flex-shrink: 0; object-fit: cover;">
-    <div style="text-align: left;">
-        <span style="font-family: 'MiiverseFont', sans-serif; color: #999; font-size: 14px;">Wii (friendCode) </span>
-        <p style="font-family: 'MiiverseFont', sans-serif; font-weight: 600; font-size: 18px; color: #555; margin: 5px 0 0 0;">FC-7536-1862-9058-8245</p>
-    </div>
-</div>
-
- <div class="card card-standard" style="display: flex; flex-direction: row; align-items: center; justify-content: flex-start; padding: 15px; margin-bottom: 15px; margin-left: 170px; background: #fff; border-radius: 6px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); width: calc(100% - 190px); height: auto; cursor: default;">
-    <img src="img/pfp/Epic-Games-Symbol.png" style="width: 50px; height: 50px; border-radius: 5px; margin-right: 15px; flex-shrink: 0; object-fit: cover;">
-    <div style="text-align: left;">
-        <span style="font-family: 'MiiverseFont', sans-serif; color: #999; font-size: 14px;">Epic Games </span>
-        <p style="font-family: 'MiiverseFont', sans-serif; font-weight: 600; font-size: 18px; color: #555; margin: 5px 0 0 0;">YosMaki999</p>
-    </div>
-</div>
 
 
 </div>
+
+
+
+<!-- ============================================================
+     COPY SYSTEM
+     ============================================================ -->
+
+<script>
+
+(function () {
+
+
+    var buttons =
+        document.querySelectorAll(
+            "#vista-networks [data-copy-network]"
+        );
+
+
+    function fallbackCopy(text) {
+
+
+        var textarea =
+            document.createElement(
+                "textarea"
+            );
+
+
+        textarea.value =
+            text;
+
+
+        textarea.style.position =
+            "fixed";
+
+
+        textarea.style.left =
+            "-9999px";
+
+
+        document.body.appendChild(
+            textarea
+        );
+
+
+        textarea.focus();
+        textarea.select();
+
+
+        try {
+
+            document.execCommand(
+                "copy"
+            );
+
+        }
+
+        catch (error) {
+
+            console.error(
+                "[Networks] Copy failed:",
+                error
+            );
+
+        }
+
+
+        document.body.removeChild(
+            textarea
+        );
+
+    }
+
+
+    function showCopied(button) {
+
+
+        var oldText =
+            button.textContent;
+
+
+        button.textContent =
+            "COPIED!";
+
+
+        button.classList.add(
+            "copied"
+        );
+
+
+        setTimeout(
+
+            function () {
+
+
+                button.textContent =
+                    oldText;
+
+
+                button.classList.remove(
+                    "copied"
+                );
+
+            },
+
+            1200
+
+        );
+
+    }
+
+
+    buttons.forEach(
+
+        function (button) {
+
+
+            button.addEventListener(
+
+                "click",
+
+                function () {
+
+
+                    var value =
+                        button.getAttribute(
+                            "data-copy-network"
+                        );
+
+
+                    if (!value) {
+                        return;
+                    }
+
+
+                    if (
+                        navigator.clipboard
+                        &&
+                        navigator.clipboard.writeText
+                    ) {
+
+
+                        navigator.clipboard
+                            .writeText(value)
+
+                            .then(
+
+                                function () {
+
+                                    showCopied(
+                                        button
+                                    );
+
+                                }
+
+                            )
+
+                            .catch(
+
+                                function () {
+
+                                    fallbackCopy(
+                                        value
+                                    );
+
+
+                                    showCopied(
+                                        button
+                                    );
+
+                                }
+
+                            );
+
+                    }
+
+
+                    else {
+
+
+                        fallbackCopy(
+                            value
+                        );
+
+
+                        showCopied(
+                            button
+                        );
+
+                    }
+
+                }
+
+            );
+
+        }
+
+    );
+
+})();
+
+</script>
 
 
 
@@ -3731,6 +10574,170 @@ export async function registrarNuevoPost(textoPost, expresionActual) {
 
 </script>
 </div>
+
+<!-- ============================================================
+     MAKI'S BIO / MAKIIVERSE
+     SISTEMA GLOBAL DE INSIGNIA OFICIAL
+
+     CUENTA:
+         YosMakii99_PN
+
+     INSIGNIA:
+         img/official-user.png
+
+     FUNCIONA AUTOMÁTICAMENTE CON:
+
+     1. <img src="...nnid=YosMakii99_PN...">
+
+     2. <div style="
+            background-image:
+            url(...nnid=YosMakii99_PN...)
+        ">
+
+     Por lo tanto cubre:
+       - Profile Mii
+       - Sidebar Mii
+       - Modal post Mii
+       - Posts publicados
+       - Posts futuros
+       - Cambios de expresión
+       - otros Miis futuros
+
+     NO TOCA:
+       publicarPostGeneral()
+       renderizarMensajes()
+       actualizarAvatarModal()
+       cargarNombreRealMii()
+       Firebase
+       canvas
+     ============================================================ -->
+
+
+<style>
+
+/* ============================================================
+   DESACTIVAR LOS INTENTOS VIEJOS
+
+   Tu index ya tiene código antiguo que intenta crear:
+
+       .user-verified-mark
+
+   usando:
+
+       identified-user-mark.png
+
+   No queremos que se pelee con este sistema.
+   ============================================================ */
+
+.user-verified-mark {
+    display: none !important;
+}
+
+
+/* ============================================================
+   CONTENEDOR QUE TIENE UN MII OFICIAL
+
+   Se añade AUTOMÁTICAMENTE por JavaScript.
+   ============================================================ */
+
+.maki-official-avatar-host {
+
+    /*
+       Necesario para posicionar la palomita
+       respecto al propio avatar.
+    */
+
+    position: relative !important;
+}
+
+
+/* ============================================================
+   INSIGNIA REAL
+
+   USA EXACTAMENTE:
+
+       img/official-user.png
+
+   Se coloca DENTRO de la esquina del avatar.
+
+   No usamos offsets negativos porque algunos de tus
+   contenedores tienen overflow:hidden.
+   ============================================================ */
+
+.maki-official-user-badge {
+
+    position: absolute !important;
+
+    top: 0 !important;
+    left: 0 !important;
+
+    /*
+       Proporcional al Mii:
+
+       Mii 68px  -> ~22px
+       Mii 70px  -> ~22px
+       Mii 96px  -> ~31px
+
+       Así funciona en perfil, modal y posts.
+    */
+
+    width: 32% !important;
+    height: 32% !important;
+
+    min-width: 16px;
+    min-height: 16px;
+
+    max-width: 34px;
+    max-height: 34px;
+
+    object-fit: contain !important;
+
+    object-position:
+        top left !important;
+
+    z-index: 99999 !important;
+
+    margin: 0 !important;
+
+    padding: 0 !important;
+
+    border: 0 !important;
+
+    outline: 0 !important;
+
+    background:
+        transparent !important;
+
+    box-shadow:
+        none !important;
+
+    pointer-events:
+        none !important;
+
+    -webkit-user-select:
+        none !important;
+
+    user-select:
+        none !important;
+
+    /*
+       No permitir arrastrarla accidentalmente.
+    */
+
+    -webkit-user-drag:
+        none;
+
+    /*
+       No afecta el layout.
+    */
+
+    display:
+        block !important;
+}
+</style>
+
+
+
 
 
 

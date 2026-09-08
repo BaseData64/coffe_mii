@@ -518,3 +518,110 @@
     background-repeat: no-repeat;
     pointer-events: none;
 }
+
+.user-verified-mark {
+    display: none !important;
+}
+
+
+/* ============================================================
+   CONTENEDOR QUE TIENE UN MII OFICIAL
+
+   Se añade AUTOMÁTICAMENTE por JavaScript.
+   ============================================================ */
+
+.maki-official-avatar-host {
+
+    /*
+       Necesario para posicionar la palomita
+       respecto al propio avatar.
+    */
+
+    position: relative !important;
+}
+
+
+/* ============================================================
+   INSIGNIA REAL
+
+   USA EXACTAMENTE:
+
+       img/official-user.png
+
+   Se coloca DENTRO de la esquina del avatar.
+
+   No usamos offsets negativos porque algunos de tus
+   contenedores tienen overflow:hidden.
+   ============================================================ */
+
+.maki-official-user-badge {
+
+    position: absolute !important;
+
+    top: 0 !important;
+    left: 0 !important;
+
+    /*
+       Proporcional al Mii:
+
+       Mii 68px  -> ~22px
+       Mii 70px  -> ~22px
+       Mii 96px  -> ~31px
+
+       Así funciona en perfil, modal y posts.
+    */
+
+    width: 32% !important;
+    height: 32% !important;
+
+    min-width: 16px;
+    min-height: 16px;
+
+    max-width: 34px;
+    max-height: 34px;
+
+    object-fit: contain !important;
+
+    object-position:
+        top left !important;
+
+    z-index: 99999 !important;
+
+    margin: 0 !important;
+
+    padding: 0 !important;
+
+    border: 0 !important;
+
+    outline: 0 !important;
+
+    background:
+        transparent !important;
+
+    box-shadow:
+        none !important;
+
+    pointer-events:
+        none !important;
+
+    -webkit-user-select:
+        none !important;
+
+    user-select:
+        none !important;
+
+    /*
+       No permitir arrastrarla accidentalmente.
+    */
+
+    -webkit-user-drag:
+        none;
+
+    /*
+       No afecta el layout.
+    */
+
+    display:
+        block !important;
+}
+
