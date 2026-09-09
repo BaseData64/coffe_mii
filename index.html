@@ -433,7 +433,7 @@ body {
 <!-- SIDEBAR MENU GLOBAL -->
 <menu id="global-menu">
     <li id="global-menu-mymenu" class="card card-standard">
-        <a href="javascript:void(0);" onclick="conmutarPortal(5, 'global-menu-mymenu')">
+        <a href="javascript:void(0);" onclick="abrirMiPerfilPublico(); return false;">
             <span class="mii-icon">
                 <img id="user-sidebar-avatar"
                      src="img/games/Dummy_mii_user.png"
@@ -458,8 +458,8 @@ body {
         </a>
     </li>
 
-    <li id="global-menu-message" class="card card-standard" onclick="conmutarPortal(6, 'global-menu-message')">
-        <a href="#">
+    <li id="global-menu-message" class="card card-standard">
+        <a href="javascript:void(0);" onclick="abrirMiiClicker(); return false;">
             <span class="sidebar-old-icon symbol">o</span>
             <span class="sidebar-label label">messages</span>
         </a>
@@ -2045,12 +2045,7 @@ body {
                     community-clicker
                 "
 
-                onclick="
-                    conmutarPortal(
-                        6,
-                        'global-menu-message'
-                    )
-                "
+                onclick="abrirMiiClicker()"
             >
 
 
@@ -8982,7 +8977,7 @@ function toggleYeah(idMensaje) {
     
     <!-- Barra superior verde Miiverse -->
     <div style="background: linear-gradient(to bottom, #8ee331, #63b90b); width: 1400px; margin-left: 100px; margin-top: -50px; padding: 12px 20px; border-bottom: 2px solid #529c09; box-shadow: inset 0 1px 0 rgba(255,255,255,0.4);">
-        <h1 style="color: white; margin: 0; font-size: 20px; font-weight: bold; font-family: 'MiiverseFont', sans-serif; text-shadow: 0 1px 2px rgba(0,0,0,0.2);">Your Profile</h1>
+        <h1 style="color: white; margin: 0; font-size: 20px; font-weight: bold; font-family: 'MiiverseFont', sans-serif; text-shadow: 0 1px 2px rgba(0,0,0,0.2);" id="profile-page-title">User Page</h1>
     </div>
 
     <!-- Contenedor principal de la interfaz -->
@@ -9001,13 +8996,17 @@ function toggleYeah(idMensaje) {
                     <div>
                         <h2 id="profile-username" style="font-size: 20px; color: #333; margin: 0 0 4px 0; font-weight: bold;">Usuario</h2>
                         <span id="profile-pnid-sub" style="font-size: 13px; color: #777;">PNID</span>
+                        <div id="profile-public-id-line" style="margin-top: 5px; font-size: 11px; color: #9a9a9a;">
+                            Profile ID:
+                            <span id="profile-public-id" style="font-weight: bold; color: #139fcf;">---</span>
+                        </div>
                     </div>
                 </div>
 
                 
 
                 <!-- Botón Profile Settings estilo Wii U -->
-                <button onclick="alert('Configuraciones de perfil')" style="background: #eef2f5; border: 1px solid #ccd1d9; color: #444; padding: 8px 15px; border-radius: 6px; font-size: 13px; font-weight: bold; cursor: pointer; display: flex; align-items: center; gap: 6px;">
+                <button id="profile-settings-button" onclick="alert('Configuraciones de perfil')" style="background: #eef2f5; border: 1px solid #ccd1d9; color: #444; padding: 8px 15px; border-radius: 6px; font-size: 13px; font-weight: bold; cursor: pointer; display: flex; align-items: center; gap: 6px;">
                     <span style="color: #6ea100; font-size: 15px;">✎</span> Profile Settings
                 </button>
             </div>
@@ -9015,6 +9014,7 @@ function toggleYeah(idMensaje) {
             <!-- Descripción / Estado del usuario -->
             <div id="profile-bio" style="font-size: 14px; color: #444; line-height: 1.4; margin-bottom: 20px; min-height: 20px;">
             </div>
+
 
             <!-- Detalles de usuario (Solo Yeahs) -->
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; max-width: 600px;">
@@ -9038,7 +9038,7 @@ function toggleYeah(idMensaje) {
 
         <!-- Botón de Cerrar Sesión inferior para control del usuario -->
         <div style="margin-top: 20px; text-align: right;">
-            <button onclick="cerrarSesion()" style="background: #e60012; border: none; color: white; padding: 10px 20px; border-radius: 6px; font-weight: bold; cursor: pointer; font-size: 14px;">
+            <button id="profile-logout-button" onclick="cerrarSesion()" style="background: #e60012; border: none; color: white; padding: 10px 20px; border-radius: 6px; font-weight: bold; cursor: pointer; font-size: 14px;">
                 Cerrar sesión
             </button>
         </div>
@@ -10835,6 +10835,30 @@ function toggleYeah(idMensaje) {
 
 
 
+
+<script>
+/* ============================================================
+   MII CLICKER — NAVEGACIÓN ROBUSTA
+   Evita el href="#" y limpia la ruta de User Page antes de abrir.
+   ============================================================ */
+window.abrirMiiClicker = function() {
+    try {
+        if (
+            window.MakiPublicProfiles &&
+            typeof window.MakiPublicProfiles.syncRouteAfterPortal === "function"
+        ) {
+            window.MakiPublicProfiles.syncRouteAfterPortal(6, true);
+        }
+    } catch (error) {
+        console.warn("[Mii Clicker] No se pudo limpiar la ruta:", error);
+    }
+
+    if (typeof window.conmutarPortal === "function") {
+        window.conmutarPortal(6, "global-menu-message");
+    }
+};
+</script>
+
 <!-- ================= SCRIPT ÚNICO DE CONTROL DE NAVEGACIÓN ================= -->
 <script>
     // Creamos una "memoria" que guarde por dónde ha navegado el usuario.
@@ -10896,6 +10920,15 @@ function toggleYeah(idMensaje) {
         
         var destino = document.getElementById(mapaVistas[irA] || 'vista-perfil');
         if (destino) destino.style.display = 'block';
+
+        // Si salimos de User Page, regresamos la URL a la ruta base.
+        if (
+            irA !== 5 &&
+            window.MakiPublicProfiles &&
+            typeof window.MakiPublicProfiles.syncRouteAfterPortal === 'function'
+        ) {
+            window.MakiPublicProfiles.syncRouteAfterPortal(irA);
+        }
 
         // 5. Lógica del botón Back/Close
         // Ahora el modo subportal depende de si hay más de 1 página en el historial
@@ -12104,6 +12137,1294 @@ img, video, canvas {
     }
 }
 </style>
+
+
+<!-- ============================================================
+     MAKI'S BIO — PUBLIC USER ACCOUNTS / USER ROUTES
+     /user/289637623/
+     ============================================================ -->
+
+<style id="maki-public-profiles-style">
+    .maki-public-link-box {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 14px;
+        margin: 0 0 20px 0;
+        padding: 11px 13px;
+        border: 1px solid #b9d4de;
+        border-radius: 10px;
+        background:
+            linear-gradient(
+                to bottom,
+                #ffffff 0%,
+                #f3fbfe 100%
+            );
+        box-shadow:
+            inset 0 1px 0 #ffffff,
+            0 2px 5px rgba(0,90,130,.06);
+    }
+
+    .maki-public-link-info {
+        min-width: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
+    }
+
+    .maki-public-link-label {
+        color: #168fb8;
+        font-size: 10px;
+        font-weight: bold;
+        letter-spacing: .4px;
+    }
+
+    .maki-public-link-url {
+        overflow: hidden;
+        color: #65747a;
+        font-size: 12px;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+
+    .maki-public-copy-button {
+        flex-shrink: 0;
+        min-width: 72px;
+        padding: 8px 13px;
+        border: 1px solid #0794c5;
+        border-radius: 18px;
+        cursor: pointer;
+        color: #ffffff;
+        font-family: 'MiiverseFont', sans-serif;
+        font-size: 11px;
+        font-weight: bold;
+        background:
+            linear-gradient(
+                to bottom,
+                #55dcfa 0%,
+                #22bbe5 48%,
+                #078fbe 100%
+            );
+        box-shadow:
+            inset 0 1px 0 rgba(255,255,255,.5),
+            0 2px 4px rgba(0,100,145,.13);
+        text-shadow: 0 1px 1px rgba(0,70,110,.25);
+    }
+
+    .maki-public-copy-button:active {
+        transform: translateY(1px);
+    }
+
+    .maki-public-post {
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+        padding: 14px;
+        border: 1px solid #d2d2d2;
+        border-radius: 11px;
+        background: #ffffff;
+        box-shadow:
+            0 3px 8px rgba(0,0,0,.06),
+            inset 0 1px 0 #ffffff;
+    }
+
+    .maki-public-post-mii {
+        width: 58px;
+        height: 58px;
+        flex-shrink: 0;
+        overflow: hidden;
+        border: 1px solid #c8c8c8;
+        border-radius: 9px;
+        background: #eeeeee;
+    }
+
+    .maki-public-post-mii img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .maki-public-post-content {
+        min-width: 0;
+        flex: 1;
+    }
+
+    .maki-public-post-meta {
+        margin-bottom: 7px;
+        color: #9a9a9a;
+        font-size: 11px;
+    }
+
+    .maki-public-post-text {
+        margin: 0;
+        color: #414141;
+        font-size: 14px;
+        line-height: 1.45;
+        word-break: break-word;
+        white-space: pre-wrap;
+    }
+
+    .maki-public-empty {
+        padding: 28px 18px;
+        text-align: center;
+        color: #949494;
+        font-size: 13px;
+        border: 1px dashed #c9c9c9;
+        border-radius: 10px;
+        background: rgba(255,255,255,.55);
+    }
+
+    @media (max-width: 760px) {
+        .maki-public-link-box {
+            align-items: stretch;
+            flex-direction: column;
+        }
+
+        .maki-public-copy-button {
+            width: 100%;
+        }
+
+        #profile-public-id-line {
+            font-size: 10px !important;
+        }
+
+        .maki-public-post-mii {
+            width: 48px;
+            height: 48px;
+        }
+    }
+</style>
+
+<script type="module">
+import {
+    initializeApp,
+    getApp,
+    getApps
+}
+from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+
+import {
+    getAuth,
+    onAuthStateChanged,
+    signOut
+}
+from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+
+import {
+    getDatabase,
+    ref,
+    get,
+    update,
+    set,
+    runTransaction
+}
+from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+
+
+const makiPublicFirebaseConfig = {
+    apiKey: "AIzaSyBC1CU5NvbyYvgb6W2nbxAWXtdPV63qhnA",
+    authDomain: "maki-s-bio.firebaseapp.com",
+    databaseURL: "https://maki-s-bio-default-rtdb.firebaseio.com",
+    projectId: "maki-s-bio",
+    storageBucket: "maki-s-bio.firebasestorage.app",
+    messagingSenderId: "267692056127",
+    appId: "1:267692056127:web:472b5f1ca8c82db4a3228a"
+};
+
+
+const makiPublicApp =
+    getApps().length > 0
+        ? getApp()
+        : initializeApp(makiPublicFirebaseConfig);
+
+
+const makiPublicAuth =
+    getAuth(makiPublicApp);
+
+
+const makiPublicDB =
+    getDatabase(makiPublicApp);
+
+
+let makiCurrentUser = null;
+let makiCurrentPublicId = null;
+let makiViewingPublicId = null;
+let makiRouterReady = false;
+
+
+/* ============================================================
+   ROUTER
+   ============================================================ */
+
+function getAppBasePath() {
+    const pathname = window.location.pathname || "/";
+
+    const publicMatch =
+        pathname.match(/^(.*)\/user\/([0-9]{9})\/?$/);
+
+    if (publicMatch) {
+        return publicMatch[1] || "";
+    }
+
+    if (pathname.endsWith("/index.html")) {
+        return pathname.slice(0, -"/index.html".length);
+    }
+
+    if (pathname.endsWith("/")) {
+        return pathname.slice(0, -1);
+    }
+
+    const lastSlash = pathname.lastIndexOf("/");
+
+    if (lastSlash >= 0) {
+        return pathname.slice(0, lastSlash);
+    }
+
+    return "";
+}
+
+
+function isLocalDevHost() {
+    const host = String(window.location.hostname || "").toLowerCase();
+
+    return (
+        host === "127.0.0.1" ||
+        host === "localhost" ||
+        host === "0.0.0.0"
+    );
+}
+
+
+function getBaseUrlPath() {
+    const base = getAppBasePath();
+    return base ? base + "/" : "/";
+}
+
+
+function getLocalIndexPath() {
+    const base = getAppBasePath();
+    return (base || "") + "/index.html";
+}
+
+
+function getPublicProfilePath(publicId) {
+    const base = getAppBasePath();
+
+    /*
+       Live Server / localhost no hace SPA rewrites.
+       Por eso en local usamos hash-routing para que REFRESH funcione:
+
+           /index.html#/user/741307210/
+
+       En Firebase Hosting / producción mantenemos la URL bonita:
+
+           /user/741307210/
+    */
+    if (isLocalDevHost()) {
+        return (
+            (base || "") +
+            "/index.html#/user/" +
+            publicId +
+            "/"
+        );
+    }
+
+    return (
+        (base || "") +
+        "/user/" +
+        publicId +
+        "/"
+    );
+}
+
+
+function getPublicProfileAbsoluteUrl(publicId) {
+    return (
+        window.location.origin +
+        getPublicProfilePath(publicId)
+    );
+}
+
+
+function getPublicIdFromPath() {
+    const hashMatch =
+        String(window.location.hash || "")
+        .match(/^#\/user\/([0-9]{9})\/?$/);
+
+    if (hashMatch) {
+        return hashMatch[1];
+    }
+
+    const pathMatch =
+        String(window.location.pathname || "")
+        .match(/\/user\/([0-9]{9})\/?$/);
+
+    return pathMatch
+        ? pathMatch[1]
+        : null;
+}
+
+
+function routeToBase(replace = false) {
+    const hasPublicPath =
+        /\/user\/[0-9]{9}\/?$/.test(
+            window.location.pathname
+        );
+
+    const hasPublicHash =
+        /^#\/user\/[0-9]{9}\/?$/.test(
+            window.location.hash || ""
+        );
+
+    if (!hasPublicPath && !hasPublicHash) {
+        return;
+    }
+
+    const method =
+        replace
+            ? "replaceState"
+            : "pushState";
+
+    const destination =
+        isLocalDevHost()
+            ? getLocalIndexPath()
+            : getBaseUrlPath();
+
+    window.history[method](
+        { makiView: "home" },
+        "",
+        destination
+    );
+}
+
+
+/* ============================================================
+   PUBLIC ID
+   ============================================================ */
+
+function randomPublicId() {
+    let value;
+
+    if (
+        window.crypto &&
+        typeof window.crypto.getRandomValues === "function"
+    ) {
+        const buffer = new Uint32Array(1);
+        window.crypto.getRandomValues(buffer);
+
+        value =
+            100000000 +
+            (buffer[0] % 900000000);
+    } else {
+        value =
+            Math.floor(
+                100000000 +
+                Math.random() * 900000000
+            );
+    }
+
+    return String(value);
+}
+
+
+async function ensurePublicProfile(user, pnidFallback) {
+    if (!user) {
+        return null;
+    }
+
+    const userRef = ref(
+        makiPublicDB,
+        "users/" + user.uid
+    );
+
+    let userData = {};
+
+    try {
+        const userSnapshot = await get(userRef);
+
+        if (userSnapshot.exists()) {
+            userData = userSnapshot.val() || {};
+        }
+    } catch (error) {
+        console.error("No se pudo leer el perfil privado:", error);
+        window.__makiPublicProfileError = error;
+        return null;
+    }
+
+    const pnid = String(
+        userData.pnid ||
+        pnidFallback ||
+        localStorage.getItem("makiiverse_pnid") ||
+        (user.email ? user.email.split("@")[0] : "User")
+    ).trim();
+
+    /*
+       Si ya existe un publicId, JAMÁS lo cambiamos.
+       Solo reconstruimos public_users/{id} si faltara.
+    */
+    if (
+        userData.publicId &&
+        /^[0-9]{9}$/.test(String(userData.publicId))
+    ) {
+        const publicId = String(userData.publicId);
+        const publicRef = ref(
+            makiPublicDB,
+            "public_users/" + publicId
+        );
+
+        try {
+            const publicSnapshot = await get(publicRef);
+
+            if (!publicSnapshot.exists()) {
+                await set(publicRef, {
+                    publicId: publicId,
+                    pnid: pnid,
+                    pnidLower: pnid.toLowerCase(),
+                    displayName: pnid,
+                    createdAt: userData.createdAt || Date.now()
+                });
+            }
+
+            localStorage.setItem(
+                "makiiverse_public_id",
+                publicId
+            );
+
+            window.__makiPublicProfileError = null;
+            return publicId;
+
+        } catch (error) {
+            console.error("No se pudo reconstruir el perfil público:", error);
+            window.__makiPublicProfileError = error;
+            return null;
+        }
+    }
+
+    /*
+       Cuenta sin publicId.
+       1) buscamos un número libre
+       2) guardamos ese número en users/{uid}
+       3) ya como dueño, creamos public_users/{publicId}
+    */
+    for (let intento = 0; intento < 25; intento++) {
+        const candidate = randomPublicId();
+        const publicRef = ref(
+            makiPublicDB,
+            "public_users/" + candidate
+        );
+
+        try {
+            const existing = await get(publicRef);
+
+            if (existing.exists()) {
+                continue;
+            }
+
+            /*
+               Primero reclamamos el ID desde nuestro perfil privado.
+               Las reglas V8 hacen publicId inmutable una vez creado.
+            */
+            await update(userRef, {
+                uid: user.uid,
+                pnid: pnid,
+                pnidLower: pnid.toLowerCase(),
+                publicId: candidate
+            });
+
+            /*
+               Ahora public_users permite la escritura porque
+               users/{auth.uid}/publicId ya coincide con candidate.
+            */
+            await set(publicRef, {
+                publicId: candidate,
+                pnid: pnid,
+                pnidLower: pnid.toLowerCase(),
+                displayName: pnid,
+                createdAt: Date.now()
+            });
+
+            localStorage.setItem(
+                "makiiverse_public_id",
+                candidate
+            );
+
+            window.__makiPublicProfileError = null;
+            return candidate;
+
+        } catch (error) {
+            console.error(
+                "No se pudo reclamar Profile ID:",
+                error
+            );
+
+            window.__makiPublicProfileError = error;
+
+            /*
+               Si la primera escritura ya alcanzó a guardar publicId
+               pero falló la segunda, recuperamos ese ID y dejamos que
+               el siguiente intento/recarga reconstruya public_users.
+            */
+            try {
+                const reread = await get(userRef);
+
+                if (
+                    reread.exists() &&
+                    reread.val().publicId &&
+                    /^[0-9]{9}$/.test(String(reread.val().publicId))
+                ) {
+                    const savedId = String(reread.val().publicId);
+                    const savedPublicRef = ref(
+                        makiPublicDB,
+                        "public_users/" + savedId
+                    );
+
+                    await set(savedPublicRef, {
+                        publicId: savedId,
+                        pnid: pnid,
+                        pnidLower: pnid.toLowerCase(),
+                        displayName: pnid,
+                        createdAt: Date.now()
+                    });
+
+                    localStorage.setItem(
+                        "makiiverse_public_id",
+                        savedId
+                    );
+
+                    window.__makiPublicProfileError = null;
+                    return savedId;
+                }
+            } catch (recoveryError) {
+                console.warn(
+                    "No se pudo recuperar el Profile ID:",
+                    recoveryError
+                );
+            }
+
+            if (
+                error &&
+                (
+                    error.code === "PERMISSION_DENIED" ||
+                    error.code === "permission_denied"
+                )
+            ) {
+                break;
+            }
+        }
+    }
+
+    return null;
+}
+
+/* ============================================================
+   PROFILE HELPERS
+   ============================================================ */
+
+function escapeHTML(value) {
+    return String(value ?? "")
+        .replace(
+            /[&<>"']/g,
+            function(char) {
+                return {
+                    "&": "&amp;",
+                    "<": "&lt;",
+                    ">": "&gt;",
+                    '"': "&quot;",
+                    "'": "&#39;"
+                }[char];
+            }
+        );
+}
+
+
+async function getMiiName(pnid) {
+    try {
+        const response =
+            await fetch(
+                "https://mii-unsecure.ariankordi.net/mii_data/" +
+                encodeURIComponent(pnid) +
+                "?api_id=1"
+            );
+
+        if (!response.ok) {
+            return pnid;
+        }
+
+        const data =
+            await response.json();
+
+        return (
+            data?.name ||
+            data?.miiName ||
+            data?.mii?.name ||
+            pnid
+        );
+    } catch (error) {
+        return pnid;
+    }
+}
+
+
+function setProfileLoading(publicId) {
+    const username =
+        document.getElementById(
+            "profile-username"
+        );
+
+    const pnid =
+        document.getElementById(
+            "profile-pnid-sub"
+        );
+
+    const id =
+        document.getElementById(
+            "profile-public-id"
+        );
+
+    const url =
+        document.getElementById(
+            "profile-public-url"
+        );
+
+    const wall =
+        document.getElementById(
+            "muro-posts-usuario"
+        );
+
+    if (username) {
+        username.textContent = "Loading...";
+    }
+
+    if (pnid) {
+        pnid.textContent = "PNID";
+    }
+
+    if (id) {
+        id.textContent = publicId || "---";
+    }
+
+    if (url && publicId) {
+        url.textContent =
+            getPublicProfilePath(publicId);
+    }
+
+    if (wall) {
+        wall.innerHTML =
+            '<div class="maki-public-empty">Loading profile...</div>';
+    }
+}
+
+
+function setProfileOwnership(isOwn) {
+    const settings =
+        document.getElementById(
+            "profile-settings-button"
+        );
+
+    const logout =
+        document.getElementById(
+            "profile-logout-button"
+        );
+
+    const title =
+        document.getElementById(
+            "profile-page-title"
+        );
+
+    if (settings) {
+        settings.style.display =
+            isOwn
+                ? "flex"
+                : "none";
+    }
+
+    if (logout) {
+        logout.style.display =
+            isOwn
+                ? "inline-block"
+                : "none";
+    }
+
+    if (title) {
+        title.textContent =
+            isOwn
+                ? "Your Profile"
+                : "User Page";
+    }
+}
+
+
+async function renderPublicPosts(pnid) {
+    const wall =
+        document.getElementById(
+            "muro-posts-usuario"
+        );
+
+    const counter =
+        document.getElementById(
+            "contador-posts-usuario"
+        );
+
+    if (!wall) {
+        return;
+    }
+
+    wall.innerHTML =
+        '<div class="maki-public-empty">Loading posts...</div>';
+
+    let results = [];
+
+    try {
+        const snapshot =
+            await get(
+                ref(
+                    makiPublicDB,
+                    "posts"
+                )
+            );
+
+        if (snapshot.exists()) {
+            snapshot.forEach(
+                function(child) {
+                    const post =
+                        child.val() || {};
+
+                    if (
+                        String(post.autor || "")
+                        .toLowerCase() ===
+                        String(pnid || "")
+                        .toLowerCase()
+                    ) {
+                        results.push({
+                            id: child.key,
+                            ...post
+                        });
+                    }
+                }
+            );
+        }
+    } catch (error) {
+        console.warn(
+            "No se pudieron cargar posts públicos:",
+            error
+        );
+    }
+
+    results.reverse();
+
+    if (counter) {
+        counter.textContent =
+            String(results.length);
+    }
+
+    if (results.length === 0) {
+        wall.innerHTML =
+            '<div class="maki-public-empty">This user has no public posts yet.</div>';
+
+        return;
+    }
+
+    const miiBase =
+        "https://mii-unsecure.ariankordi.net/miis/image.png" +
+        "?nnid=" + encodeURIComponent(pnid) +
+        "&type=face&width=270&api_id=1";
+
+    wall.innerHTML =
+        results.map(
+            function(post) {
+                const expression =
+                    post.expresion ||
+                    "normal";
+
+                const miiUrl =
+                    miiBase +
+                    "&expression=" +
+                    encodeURIComponent(expression);
+
+                return `
+                    <article class="maki-public-post">
+                        <div class="maki-public-post-mii">
+                            <img
+                                src="${escapeHTML(miiUrl)}"
+                                alt=""
+                                onerror="this.src='img/games/Dummy_mii_user.png';"
+                            >
+                        </div>
+
+                        <div class="maki-public-post-content">
+                            <div class="maki-public-post-meta">
+                                ${escapeHTML(post.fecha || "")}
+                            </div>
+
+                            <p class="maki-public-post-text">${escapeHTML(post.contenido || "")}</p>
+                        </div>
+                    </article>
+                `;
+            }
+        ).join("");
+}
+
+
+async function renderProfile(publicId, profileData) {
+    const pnid =
+        String(
+            profileData.pnid ||
+            "User"
+        );
+
+    const username =
+        document.getElementById(
+            "profile-username"
+        );
+
+    const pnidElement =
+        document.getElementById(
+            "profile-pnid-sub"
+        );
+
+    const publicIdElement =
+        document.getElementById(
+            "profile-public-id"
+        );
+
+    const urlElement =
+        document.getElementById(
+            "profile-public-url"
+        );
+
+    const bio =
+        document.getElementById(
+            "profile-bio"
+        );
+
+    const mii =
+        document.getElementById(
+            "profile-mii-img"
+        );
+
+    const displayName =
+        await getMiiName(pnid);
+
+    if (username) {
+        username.textContent =
+            displayName;
+    }
+
+    if (pnidElement) {
+        pnidElement.textContent =
+            pnid;
+    }
+
+    if (publicIdElement) {
+        publicIdElement.textContent =
+            publicId;
+    }
+
+    if (urlElement) {
+        urlElement.textContent =
+            getPublicProfilePath(
+                publicId
+            );
+    }
+
+    if (bio) {
+        bio.textContent =
+            profileData.bio ||
+            "";
+    }
+
+    if (mii) {
+        mii.src =
+            "https://mii-unsecure.ariankordi.net/miis/image.png" +
+            "?nnid=" +
+            encodeURIComponent(pnid) +
+            "&type=face&width=270&api_id=1";
+
+        mii.onerror =
+            function() {
+                this.onerror = null;
+                this.src =
+                    "img/games/Dummy_mii_user.png";
+            };
+    }
+
+    let isOwn = false;
+
+    if (
+        makiCurrentUser &&
+        makiCurrentPublicId === publicId
+    ) {
+        isOwn = true;
+    }
+
+    setProfileOwnership(isOwn);
+
+    await renderPublicPosts(pnid);
+}
+
+
+/* ============================================================
+   OPEN PROFILE
+   ============================================================ */
+
+async function openPublicProfile(
+    publicId,
+    pushUrl = true
+) {
+    if (
+        !publicId ||
+        !/^[0-9]{9}$/.test(publicId)
+    ) {
+        return;
+    }
+
+    makiViewingPublicId =
+        publicId;
+
+    if (
+        typeof window.conmutarPortal === "function"
+    ) {
+        window.conmutarPortal(
+            5,
+            "global-menu-mymenu"
+        );
+    }
+
+    setProfileLoading(publicId);
+
+    try {
+        const snapshot =
+            await get(
+                ref(
+                    makiPublicDB,
+                    "public_users/" + publicId
+                )
+            );
+
+        if (!snapshot.exists()) {
+            const username =
+                document.getElementById(
+                    "profile-username"
+                );
+
+            const pnid =
+                document.getElementById(
+                    "profile-pnid-sub"
+                );
+
+            const wall =
+                document.getElementById(
+                    "muro-posts-usuario"
+                );
+
+            if (username) {
+                username.textContent =
+                    "User not found";
+            }
+
+            if (pnid) {
+                pnid.textContent =
+                    "This profile does not exist.";
+            }
+
+            if (wall) {
+                wall.innerHTML =
+                    '<div class="maki-public-empty">No account exists with this Profile ID.</div>';
+            }
+
+            setProfileOwnership(false);
+
+            return;
+        }
+
+        if (pushUrl) {
+            window.history.pushState(
+                {
+                    makiView: "user",
+                    publicId: publicId
+                },
+                "",
+                getPublicProfilePath(
+                    publicId
+                )
+            );
+        }
+
+        await renderProfile(
+            publicId,
+            snapshot.val() || {}
+        );
+
+    } catch (error) {
+        console.error(
+            "Error abriendo perfil público:",
+            error
+        );
+    }
+}
+
+
+/* ============================================================
+   GLOBAL API
+   ============================================================ */
+
+window.abrirMiPerfilPublico =
+    async function() {
+        if (!makiCurrentUser) {
+            window.location.href =
+                "login.html";
+
+            return;
+        }
+
+        const publicId =
+            makiCurrentPublicId ||
+            await ensurePublicProfile(
+                makiCurrentUser,
+                localStorage.getItem(
+                    "makiiverse_pnid"
+                )
+            );
+
+        if (!publicId) {
+            const profileError = window.__makiPublicProfileError;
+            const code = profileError && profileError.code
+                ? String(profileError.code)
+                : "UNKNOWN";
+
+            alert(
+                "No se pudo crear el Profile ID.\n\n" +
+                "Código: " + code + "\n\n" +
+                "Si dice PERMISSION_DENIED, publica database.rules.json V8 en Firebase Realtime Database > Rules."
+            );
+
+            return;
+        }
+
+        makiCurrentPublicId =
+            publicId;
+
+        await openPublicProfile(
+            publicId,
+            true
+        );
+    };
+
+
+window.abrirPerfilPublico =
+    async function(publicId) {
+        await openPublicProfile(
+            String(publicId || ""),
+            true
+        );
+    };
+
+
+window.copiarUrlPerfilPublico =
+    async function(button) {
+        const publicId =
+            makiViewingPublicId ||
+            makiCurrentPublicId;
+
+        if (!publicId) {
+            return;
+        }
+
+        const value =
+            getPublicProfileAbsoluteUrl(
+                publicId
+            );
+
+        try {
+            if (
+                navigator.clipboard &&
+                navigator.clipboard.writeText
+            ) {
+                await navigator.clipboard.writeText(
+                    value
+                );
+            } else {
+                const textarea =
+                    document.createElement(
+                        "textarea"
+                    );
+
+                textarea.value =
+                    value;
+
+                textarea.style.position =
+                    "fixed";
+
+                textarea.style.opacity =
+                    "0";
+
+                document.body.appendChild(
+                    textarea
+                );
+
+                textarea.select();
+
+                document.execCommand(
+                    "copy"
+                );
+
+                textarea.remove();
+            }
+
+            if (button) {
+                const original =
+                    button.textContent;
+
+                button.textContent =
+                    "COPIED!";
+
+                setTimeout(
+                    function() {
+                        button.textContent =
+                            original;
+                    },
+                    1100
+                );
+            }
+        } catch (error) {
+            window.prompt(
+                "Copy profile URL:",
+                value
+            );
+        }
+    };
+
+
+window.MakiPublicProfiles = {
+    syncRouteAfterPortal:
+        function(irA, replaceRoute) {
+            if (
+                Number(irA) !== 5
+            ) {
+                makiViewingPublicId =
+                    null;
+
+                routeToBase(
+                    Boolean(replaceRoute)
+                );
+            }
+        },
+
+    open:
+        openPublicProfile
+};
+
+
+/* ============================================================
+   REAL LOGOUT
+   ============================================================ */
+
+window.cerrarSesion =
+    async function() {
+        try {
+            await signOut(
+                makiPublicAuth
+            );
+        } catch (error) {
+            console.warn(
+                "No se pudo cerrar Firebase Auth:",
+                error
+            );
+        }
+
+        localStorage.removeItem(
+            "makiiverse_pnid"
+        );
+
+        localStorage.removeItem(
+            "makiiverse_public_id"
+        );
+
+        window.location.href =
+            "login.html";
+    };
+
+
+/* ============================================================
+   AUTH + INITIAL ROUTE
+   ============================================================ */
+
+onAuthStateChanged(
+    makiPublicAuth,
+    async function(user) {
+        makiCurrentUser =
+            user || null;
+
+        if (!user) {
+            localStorage.removeItem(
+                "makiiverse_public_id"
+            );
+
+            window.location.href =
+                "login.html";
+
+            return;
+        }
+
+        makiCurrentPublicId =
+            await ensurePublicProfile(
+                user,
+                localStorage.getItem(
+                    "makiiverse_pnid"
+                )
+            );
+
+        const publicIdFromPath =
+            getPublicIdFromPath();
+
+        makiRouterReady =
+            true;
+
+        if (publicIdFromPath) {
+            await openPublicProfile(
+                publicIdFromPath,
+                false
+            );
+        }
+    }
+);
+
+
+window.addEventListener(
+    "popstate",
+    async function() {
+        if (!makiRouterReady) {
+            return;
+        }
+
+        const publicId =
+            getPublicIdFromPath();
+
+        if (publicId) {
+            await openPublicProfile(
+                publicId,
+                false
+            );
+
+            return;
+        }
+
+        makiViewingPublicId =
+            null;
+
+        if (
+            typeof window.conmutarPortal === "function"
+        ) {
+            window.conmutarPortal(
+                0,
+                "global-menu-community",
+                true
+            );
+        }
+    }
+);
+</script>
 
 </body>
 </html>

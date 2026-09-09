@@ -702,7 +702,10 @@
         import {
             getDatabase,
             ref,
+            get,
             set,
+            update,
+            runTransaction,
             serverTimestamp
         } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
 
@@ -733,6 +736,104 @@
             await setPersistence(auth, browserLocalPersistence);
         }
 
+
+        function randomPublicId() {
+            let value;
+
+            if (window.crypto && typeof window.crypto.getRandomValues === "function") {
+                const buffer = new Uint32Array(1);
+                window.crypto.getRandomValues(buffer);
+                value = 100000000 + (buffer[0] % 900000000);
+            } else {
+                value = Math.floor(100000000 + Math.random() * 900000000);
+            }
+
+            return String(value);
+        }
+
+        async function asegurarPerfilPublico(user, pnid) {
+            const userRef = ref(db, "users/" + user.uid);
+
+            try {
+                const snap = await get(userRef);
+                const oldData = snap.exists() ? (snap.val() || {}) : {};
+
+                if (
+                    oldData.publicId &&
+                    /^[0-9]{9}$/.test(String(oldData.publicId))
+                ) {
+                    const publicId = String(oldData.publicId);
+                    const publicRef = ref(db, "public_users/" + publicId);
+                    const publicSnap = await get(publicRef);
+
+                    if (!publicSnap.exists()) {
+                        await set(publicRef, {
+                            publicId: publicId,
+                            pnid: pnid,
+                            pnidLower: pnid.toLowerCase(),
+                            displayName: pnid,
+                            createdAt: oldData.createdAt || Date.now()
+                        });
+                    }
+
+                    localStorage.setItem(
+                        "makiiverse_public_id",
+                        publicId
+                    );
+
+                    return publicId;
+                }
+
+                for (let i = 0; i < 25; i++) {
+                    const candidate = randomPublicId();
+                    const publicRef = ref(
+                        db,
+                        "public_users/" + candidate
+                    );
+
+                    const existing = await get(publicRef);
+
+                    if (existing.exists()) {
+                        continue;
+                    }
+
+                    /*
+                       Primero hacemos dueño al usuario del ID.
+                       Después creamos la ficha pública.
+                    */
+                    await update(userRef, {
+                        uid: user.uid,
+                        pnid: pnid,
+                        pnidLower: pnid.toLowerCase(),
+                        publicId: candidate
+                    });
+
+                    await set(publicRef, {
+                        publicId: candidate,
+                        pnid: pnid,
+                        pnidLower: pnid.toLowerCase(),
+                        displayName: pnid,
+                        createdAt: Date.now()
+                    });
+
+                    localStorage.setItem(
+                        "makiiverse_public_id",
+                        candidate
+                    );
+
+                    return candidate;
+                }
+
+            } catch (error) {
+                console.error(
+                    "No se pudo crear/leer Profile ID:",
+                    error
+                );
+            }
+
+            return null;
+        }
+
         window.iniciarSesionFirebase = async function(pnid, password) {
             try {
                 const limpio = limpiarPnid(pnid);
@@ -751,10 +852,16 @@
 
                 localStorage.setItem("makiiverse_pnid", limpio);
 
+                const publicId = await asegurarPerfilPublico(
+                    credencial.user,
+                    limpio
+                );
+
                 return {
                     exito: true,
                     user: credencial.user,
-                    pnid: limpio
+                    pnid: limpio,
+                    publicId: publicId
                 };
             } catch (error) {
                 console.error("LOGIN Firebase:", error);
@@ -785,26 +892,18 @@
                     password
                 );
 
-                // Guardamos un perfil mínimo en RTDB.
-                // Si tus reglas todavía bloquean la escritura, la cuenta Auth
-                // seguirá creada y el usuario podrá iniciar sesión.
-                try {
-                    await set(ref(db, "users/" + credencial.user.uid), {
-                        uid: credencial.user.uid,
-                        pnid: limpio,
-                        pnidLower: limpio.toLowerCase(),
-                        createdAt: serverTimestamp()
-                    });
-                } catch (dbError) {
-                    console.warn("Cuenta creada, pero RTDB rechazó el perfil:", dbError);
-                }
+                const publicId = await asegurarPerfilPublico(
+                    credencial.user,
+                    limpio
+                );
 
                 localStorage.setItem("makiiverse_pnid", limpio);
 
                 return {
                     exito: true,
                     user: credencial.user,
-                    pnid: limpio
+                    pnid: limpio,
+                    publicId: publicId
                 };
             } catch (error) {
                 console.error("REGISTER Firebase:", error);
