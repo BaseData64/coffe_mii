@@ -201,44 +201,274 @@ body {
 </head>
 <body style="background-image: url(background.png);">
 
+<style id="maki-miiverse-sidebar-remaster">
+/* ============================================================
+   MAKI'S BIO - SIDEBAR REMASTER V2
+   - 5 botones reales, sin espacio/botón vacío
+   - iconos MiiverseIcons originales de Maki's Bio
+   - selección azul cielo fuerte
+   - User Page también tiene estado selected
+   - no cambia ninguna función ni destino
+   ============================================================ */
+
+#global-menu {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 160px !important;
+    height: 600px !important; /* 5 filas x 120px */
+    padding: 0 !important;
+    margin: 0 !important;
+    list-style: none !important;
+    overflow: hidden !important;
+    z-index: 20 !important;
+    font-family: 'MiiverseFont', sans-serif !important;
+    background: linear-gradient(to right, #ffffff 0%, #e9e9e9 100%) !important;
+    border-radius: 0 60px 60px 0 !important;
+    -webkit-border-radius: 0 60px 60px 0 !important;
+    box-shadow: 0 3px 10px rgba(0,0,0,.60) !important;
+    -webkit-box-shadow: 0 3px 10px rgba(0,0,0,.60) !important;
+}
+
+#global-menu > li.card {
+    position: relative !important;
+    display: block !important;
+    width: auto !important;
+    height: 120px !important;
+    padding: 0 !important;
+    margin: 0 15px !important;
+    box-sizing: border-box !important;
+    list-style: none !important;
+    background: transparent !important;
+    border: 0 !important;
+    border-top: 2px solid #e5e5e5 !important;
+    border-radius: 0 !important;
+    box-shadow: inset 0 2px 0 #ffffff !important;
+    -webkit-box-shadow: inset 0 2px 0 #ffffff !important;
+    cursor: pointer !important;
+}
+
+#global-menu > li.card > a {
+    position: relative !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 160px !important;
+    height: 118px !important;
+    padding: 0 !important;
+    margin: 0 -15px !important;
+    box-sizing: border-box !important;
+    color: #323232 !important;
+    font-family: 'MiiverseFont', sans-serif !important;
+    font-size: 20px !important;
+    font-weight: normal !important;
+    line-height: 1 !important;
+    letter-spacing: -1px !important;
+    text-align: center !important;
+    text-decoration: none !important;
+    text-shadow: 0 2px 0 #ffffff !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+}
+
+#global-menu > #global-menu-mymenu {
+    border-top: 0 !important;
+    box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+}
+
+#global-menu > #global-menu-mymenu > a {
+    border-top-right-radius: 60px !important;
+    -webkit-border-top-right-radius: 60px !important;
+}
+
+#global-menu #global-menu-mymenu .mii-icon {
+    display: block !important;
+    width: 64px !important;
+    height: 64px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+    background: #ffffff !important;
+    border: 1px solid #d0d0d0 !important;
+    border-radius: 10px !important;
+    -webkit-border-radius: 10px !important;
+    box-shadow: 0 -1px 2px rgba(0,0,0,.40) !important;
+    -webkit-box-shadow: 0 -1px 2px rgba(0,0,0,.40) !important;
+    line-height: 0 !important;
+}
+
+#global-menu #global-menu-mymenu .mii-icon img {
+    display: block !important;
+    width: 64px !important;
+    height: 64px !important;
+    object-fit: cover !important;
+    border: 0 !important;
+    border-radius: 9px !important;
+    -webkit-border-radius: 9px !important;
+}
+
+#global-menu #user-sidebar-name {
+    display: block !important;
+    max-width: 145px !important;
+    margin-top: 7px !important;
+    overflow: hidden !important;
+    color: #323232 !important;
+    font-family: 'MiiverseFont', sans-serif !important;
+    font-size: 20px !important;
+    font-weight: normal !important;
+    line-height: 22px !important;
+    text-align: center !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+}
+
+#global-menu .sidebar-old-icon {
+    display: block !important;
+    height: 66px !important;
+    margin: 0 !important;
+    color: #9d9d9d !important;
+    font-family: 'MiiverseIcons' !important;
+    font-size: 64px !important;
+    font-weight: normal !important;
+    line-height: 66px !important;
+    text-align: center !important;
+    text-shadow: 0 2px 0 #ffffff !important;
+}
+
+#global-menu .sidebar-label {
+    display: block !important;
+    margin-top: 2px !important;
+    color: #323232 !important;
+    font-family: 'MiiverseFont', sans-serif !important;
+    font-size: 20px !important;
+    font-weight: normal !important;
+    line-height: 22px !important;
+    text-align: center !important;
+}
+
+#global-menu > li.card.selected > a {
+    color: #00aeff !important;
+    background: linear-gradient(to bottom, #dddddd 0%, #f0f0f0 100%) !important;
+    box-shadow: 0 2px 0 #ffffff, inset 0 1px 1px rgba(0,0,0,.20), inset 0 -1px 1px rgba(0,0,0,.10) !important;
+    -webkit-box-shadow: 0 2px 0 #ffffff, inset 0 1px 1px rgba(0,0,0,.20), inset 0 -1px 1px rgba(0,0,0,.10) !important;
+}
+
+#global-menu > li.card.selected .sidebar-old-icon,
+#global-menu > li.card.selected .sidebar-label,
+#global-menu > #global-menu-mymenu.selected #user-sidebar-name {
+    color: #00aeff !important;
+}
+
+#global-menu > #global-menu-mymenu.selected .mii-icon {
+    border-color: #00aeff !important;
+    box-shadow: 0 0 0 2px rgba(0,174,255,.20), 0 0 12px rgba(0,174,255,.55), 0 -1px 2px rgba(0,0,0,.25) !important;
+    -webkit-box-shadow: 0 0 0 2px rgba(0,174,255,.20), 0 0 12px rgba(0,174,255,.55), 0 -1px 2px rgba(0,0,0,.25) !important;
+}
+
+#global-menu > #boton-navegacion-miiverse {
+    margin: 0 15px !important;
+    border-top: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+}
+
+#global-menu > #boton-navegacion-miiverse > a {
+    height: 120px !important;
+    border-bottom-right-radius: 60px !important;
+    -webkit-border-bottom-right-radius: 60px !important;
+    background: linear-gradient(to right, #5a5a5a 0%, #242424 100%) !important;
+    color: #ffffff !important;
+    text-shadow: 0 -2px 0 rgba(0,0,0,.60) !important;
+}
+
+#nav-icono-wiiu {
+    display: block;
+    width: 64px;
+    height: 64px;
+    margin: 0;
+    text-align: center;
+}
+
+#nav-icono-wiiu:empty {
+    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADcAAAA3CAAAAACNsI2aAAACpklEQVR4AY3WhXb6ShDA4fsmFTRNT4u7Q7Tu7u44dXd/5DuLhf1nNuV3pMDsh5XN2f9URVEkUsrv9yeFNCmVSiWqxeOxWCxSLRRy9/X1eQOwyufzeRtO8PAc5GO6oM1kMnWbHLQTHHxsaWnJx7kYLmwzCfPz447u/hYHzJn9JW3YXagL23suyPxtoKtfc8Auf2rtAtS7gJ2/qC9Qu/obTqoyDepcwNJkBPI1JzmdF99aAGkHLHDeskDt7Km6oAsYBZ2UA/ZCLZjpdBDnufii2wGouaAl8PxFt2QHl1mHWzrYdEEbsH9LgBOeP3Vt2x11B+wJmYOb/kTatvIx4kLwasi4AG7sA2urCoE9YdMSOOX+HavSy8fCtuAjOtwibvudBe0M9pQkTsm9oZV7gw/4ZKr++8y+opXv0YcfBpr7gQFxJrbsv5OXdrsXqf1+/NxedyK13wE+tdMtMMohEGUBnZO2Hv/qRgwgTlh8MO5aDqBOWLw36koO4Q7gHbsrKcRwhvASGNuFlVu880DQwIU55QbvmLMFmQ7YNasjzubDHWFX7A45sw91xgygx+xBXISTL40re0wenYvw8sVfldwmD+2AKed/V3Sb3K0OmHzWTkVXt1tzKGPDpgN22m4FZ7er7mK8XGm/PIHEJXqlMtphoYyVc3R7iXPIDJZWWZAHJ6RLaAfpRELJo6MscamDItY+sERcyaHDIXDDTAYuLqNwDdxkAanGwMXkLDJeB6fk9e0J2rlAPtHPV4jbQFjrOUTUQ4G4wb0c3a5An3vE4xzdgo84GgITU7QjkGY1p6i7Wa1dUX+uE4+yWgvafiBQYzpHwYXW/afunNTaAaZ3AA/rC+bp/V6HK8xzcmb3hDSjuy5Nr2wujhicy6PDy2vTKcZ13sCRtOvn/+fgkQUcKzhKAAAAAElFTkSuQmCC") !important;
+    background-repeat: no-repeat !important;
+    background-position: center center !important;
+    background-size: 55px 55px !important;
+}
+
+#nav-icono-wiiu:not(:empty) {
+    background: none !important;
+    color: #999999 !important;
+    font-family: 'MiiverseIcons' !important;
+    font-size: 68px !important;
+    font-weight: normal !important;
+    line-height: 64px !important;
+}
+
+#nav-texto-wiiu {
+    display: block !important;
+    margin: 2px 0 0 !important;
+    color: #ffffff;
+    font-family: 'MiiverseFont', sans-serif !important;
+    font-size: 20px !important;
+    font-weight: normal !important;
+    line-height: 22px !important;
+    text-align: center !important;
+}
+
+#global-menu > #boton-navegacion-miiverse:has(#nav-icono-wiiu:not(:empty)) > a {
+    background: linear-gradient(to bottom, #ffffff 0%, #e6e6e6 100%) !important;
+    color: #323232 !important;
+    text-shadow: 0 2px 0 #ffffff !important;
+}
+
+#global-menu > #boton-navegacion-miiverse:has(#nav-icono-wiiu:not(:empty)) #nav-texto-wiiu {
+    color: #6b6969 !important;
+}
+</style>
+
 <!-- SIDEBAR MENU GLOBAL -->
-<menu id="global-menu" style="position: fixed; z-index: 10; padding: 0; margin: 0; list-style: none;">
-    <li id="global-menu-mymenu" class="card card-standard" style="position: fixed; border-top-right-radius: 80px; top: -30px; left: 2px; width: 165px; height: 170px; margin: 0;">
-        <a href="javascript:void(0);" onclick="conmutarPortal(5, 'global-menu-mymenu')" style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; text-decoration: none; padding: 0;">
-            <div class="mii-icon" style="width: 64px; height: 64px; background-color: #e1e1e1; border-radius: 12px; border: 1px solid #cbd5e1; box-shadow: inset 0 2px 4px rgba(0,0,0,0.05); overflow: hidden; display: flex; align-items: center; justify-content: center; margin-top: 20px;">
-                <img id="user-sidebar-avatar" src="img/games/Dummy_mii_user.png" style="width: 110%; height: 110%; object-fit: cover;" onerror="this.src='img/games/Dummy_mii_user.png';">
-            </div>
-            <span id="user-sidebar-name" class="label" style="font-family: 'MiiverseFont', sans-serif !important; font-size: 20px !important; font-weight: 600 !important;  !important; text-align: center; margin-top: 8px !important; display: block;">user page</span>
+<menu id="global-menu">
+    <li id="global-menu-mymenu" class="card card-standard">
+        <a href="javascript:void(0);" onclick="conmutarPortal(5, 'global-menu-mymenu')">
+            <span class="mii-icon">
+                <img id="user-sidebar-avatar"
+                     src="img/games/Dummy_mii_user.png"
+                     alt="User Page"
+                     onerror="this.src='img/games/Dummy_mii_user.png';">
+            </span>
+            <span id="user-sidebar-name">User Page</span>
         </a>
     </li>
 
-    <li id="global-menu-feed" class="card card-standard" style="position: fixed; top: 120px; left: 2px; width: 165px; height: 130px; margin: 0;">
-        <!-- Botón de Networks pasa el 4 y su propio ID -->
-        <a href="javascript:void(0);" onclick="conmutarPortal(4, 'global-menu-feed')" style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; text-decoration: none; padding: 0;">
-            <span class="icons" style="font-family: 'MiiverseIcons' !important; font-size: 65px !important; line-height: 1; display: block; margin-top: -15px;">1</span>
-            <span class="name" style="font-family: 'MiiverseFont', sans-serif !important; font-size: 20px !important; font-weight: 600 !important; text-align: center; margin-top: 5px; display: block;">Networks</span>
+    <li id="global-menu-feed" class="card card-standard">
+        <a href="javascript:void(0);" onclick="conmutarPortal(4, 'global-menu-feed')">
+            <span class="sidebar-old-icon icons">1</span>
+            <span class="sidebar-label name">Networks</span>
         </a>
     </li>
 
-    <li id="global-menu-community" class="card card-standard selected" style="position: fixed; top: 240px; left: -12px; width: 179px; height: 140px; margin: 0;">
-        <!-- Botón About Me pasa el 0 y su propio ID -->
-        <a href="javascript:void(0);" onclick="conmutarPortal(0, 'global-menu-community')" style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; text-decoration: none; padding: 0;">
-            <span class="symbol" style="font-family: 'MiiverseIcons' !important; font-size: 65px !important; line-height: 1; display: block; margin-top: -20px; margin-left: 20px;">a</span>
-            <span class="label" style="font-family: 'MiiverseFont', sans-serif !important; font-size: 20px !important; font-weight: 600 !important; text-align: center; margin-top: 5px; display: block;">about me</span>
+    <li id="global-menu-community" class="card card-standard selected">
+        <a href="javascript:void(0);" onclick="conmutarPortal(0, 'global-menu-community')">
+            <span class="sidebar-old-icon symbol">a</span>
+            <span class="sidebar-label label">about me</span>
         </a>
     </li>
 
-    <li id="global-menu-message" class="card card-standard" style="position: fixed; top: 380px; left: -12px; width: 179px; height: 139px; margin: 0;" onclick="conmutarPortal(6, 'global-menu-message')">
-    <a href="#" style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; text-decoration: none; padding: 0;">
-        <span class="symbol" style="font-family: 'MiiverseIcons' !important; font-size: 65px !important; line-height: 1; display: block; margin-top: -15px;">o</span>
-        <span class="label" style="font-family: 'MiiverseFont', sans-serif !important; font-size: 20px !important; font-weight: 600 !important; text-align: center; margin-top: 5px; display: block;">messages</span>
-    </a>
-</li>
+    <li id="global-menu-message" class="card card-standard" onclick="conmutarPortal(6, 'global-menu-message')">
+        <a href="#">
+            <span class="sidebar-old-icon symbol">o</span>
+            <span class="sidebar-label label">messages</span>
+        </a>
+    </li>
 
-    <li id="boton-navegacion-miiverse" class="card card-exit" style="position: fixed; top: 521px; left: -5px; width: 174px; height: 150px; border-bottom-right-radius: 105px; margin: 0; background: #3d3d3d !important; box-shadow: 0 12px 25px rgba(163, 161, 161, 0.5) !important; border: none !important;" onclick="manejadorNavegacionFija();">
-        <a href="#" role="button" style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; text-decoration: none; padding: 0;">
-            <span id="nav-icono-wiiu" class="" img src="img/closeX.png" style="color: #777; margin-top: 0px; font-size: 24px; font-weight: bold; display: block;"></span>
-            <span id="nav-texto-wiiu" class="" style="font-family: 'MiiverseFont', sans-serif !important; font-size: 20px !important; font-weight: 600 !important; color: #ccc !important; text-align: center; margin-top: -20px !important; display: block;">Close</span>
+    <li id="boton-navegacion-miiverse" class="card card-exit" onclick="manejadorNavegacionFija();">
+        <a href="#" role="button">
+            <span id="nav-icono-wiiu"></span>
+            <span id="nav-texto-wiiu">Close</span>
         </a>
     </li>
 </menu>
@@ -10740,6 +10970,735 @@ export async function registrarNuevoPost(textoPost, expresionActual) {
 
 
 
+
+
+
+<style id="maki-global-responsive-v1">
+/* ============================================================
+   MAKI'S BIO — RESPONSIVE GLOBAL
+   Desktop original preserved. Tablet/mobile only below 1100px.
+   ============================================================ */
+
+html, body {
+    max-width: 100%;
+}
+
+img, video, canvas {
+    max-width: 100%;
+}
+
+/* ------------------------------------------------------------
+   TABLET / PANTALLAS MEDIANAS
+   Mantiene la sidebar vertical, pero libera el contenido de
+   anchos fijos de 1385/1400px y márgenes grandes.
+   ------------------------------------------------------------ */
+@media screen and (max-width: 1100px) {
+    html,
+    body {
+        overflow-x: hidden !important;
+    }
+
+    body {
+        box-sizing: border-box !important;
+        padding: 20px 20px 55px 180px !important;
+    }
+
+    /* Todas las barras superiores de las vistas */
+    #vista-perfil .home-topbar,
+    #vista-juegos .games-clicker-style-topbar,
+    #vista-messages .mii-clicker-topbar,
+    #vista-proyectos .projects-clicker-style-topbar,
+    #vista-sobremi .about-clicker-style-topbar,
+    #vista-quepasara .chat-clicker-style-topbar,
+    #vista-networks .networks-topbar,
+    #vista-userpage > div[style*="width: 1400px"] {
+        box-sizing: border-box !important;
+        width: calc(100% + 40px) !important;
+        max-width: none !important;
+        margin-left: -20px !important;
+        margin-right: -20px !important;
+        margin-top: -20px !important;
+    }
+
+    /* Contenedores principales con clases */
+    #vista-perfil .home-page,
+    #vista-messages .mii-clicker-page,
+    #vista-networks .networks-page {
+        width: 100% !important;
+        max-width: none !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+    }
+
+    /* Favorite Games / About Me / General Chat / Projects */
+    #vista-juegos > div[style*="margin-left: 105px"],
+    #vista-juegos > div[style*="margin-left: 125px"],
+    #vista-sobremi > div[style*="margin-left: 105px"],
+    #vista-sobremi > div[style*="margin-left: 125px"],
+    #vista-quepasara > div[style*="margin-left: 108px"],
+    #vista-proyectos > div[style*="margin-left: 170px"],
+    #vista-userpage > div[style*="width: 82%"] {
+        box-sizing: border-box !important;
+        width: 100% !important;
+        max-width: none !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+    }
+
+    #contenedor-mensajes-chat,
+    #muro-mensajes,
+    #muro-posts-usuario {
+        box-sizing: border-box !important;
+        max-width: 100% !important;
+    }
+
+    /* El podio cabe mejor en tablets */
+    #vista-messages .mii-clicker-podium {
+        gap: 10px !important;
+        padding-left: 12px !important;
+        padding-right: 12px !important;
+    }
+
+    #vista-messages .mii-clicker-place {
+        width: 31% !important;
+        min-width: 0 !important;
+    }
+}
+
+/* ------------------------------------------------------------
+   TELÉFONOS
+   La sidebar se convierte en una barra inferior de 5 botones.
+   ------------------------------------------------------------ */
+@media screen and (max-width: 700px) {
+    html,
+    body {
+        width: 100% !important;
+        min-width: 0 !important;
+        overflow-x: hidden !important;
+    }
+
+    body {
+        box-sizing: border-box !important;
+        padding: 0 12px 100px 12px !important;
+    }
+
+    body::before {
+        background-position: center top !important;
+        background-size: cover !important;
+    }
+
+    /* ========================================================
+       SIDEBAR -> NAV INFERIOR
+       ======================================================== */
+    #global-menu {
+        top: auto !important;
+        right: 0 !important;
+        bottom: 0 !important;
+        left: 0 !important;
+        width: 100vw !important;
+        height: 82px !important;
+        display: flex !important;
+        align-items: stretch !important;
+        overflow: hidden !important;
+        border-radius: 22px 22px 0 0 !important;
+        -webkit-border-radius: 22px 22px 0 0 !important;
+        background: linear-gradient(to bottom, #ffffff 0%, #e9e9e9 100%) !important;
+        box-shadow: 0 -3px 12px rgba(0,0,0,.30) !important;
+        -webkit-box-shadow: 0 -3px 12px rgba(0,0,0,.30) !important;
+    }
+
+    #global-menu > li.card {
+        flex: 1 1 20% !important;
+        min-width: 0 !important;
+        width: 20% !important;
+        height: 82px !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        border-top: 0 !important;
+        border-left: 1px solid #d7d7d7 !important;
+        box-shadow: inset 1px 0 0 #ffffff !important;
+        -webkit-box-shadow: inset 1px 0 0 #ffffff !important;
+    }
+
+    #global-menu > li.card:first-child {
+        border-left: 0 !important;
+    }
+
+    #global-menu > li.card > a {
+        width: 100% !important;
+        height: 82px !important;
+        margin: 0 !important;
+        padding: 5px 2px 4px !important;
+        box-sizing: border-box !important;
+        border-radius: 0 !important;
+        -webkit-border-radius: 0 !important;
+        justify-content: center !important;
+    }
+
+    #global-menu > #global-menu-mymenu > a,
+    #global-menu > #boton-navegacion-miiverse > a {
+        border-radius: 0 !important;
+        -webkit-border-radius: 0 !important;
+    }
+
+    #global-menu #global-menu-mymenu .mii-icon {
+        width: 36px !important;
+        height: 36px !important;
+        border-radius: 7px !important;
+        -webkit-border-radius: 7px !important;
+    }
+
+    #global-menu #global-menu-mymenu .mii-icon img {
+        width: 36px !important;
+        height: 36px !important;
+        border-radius: 6px !important;
+        -webkit-border-radius: 6px !important;
+    }
+
+    #global-menu #user-sidebar-name,
+    #global-menu .sidebar-label,
+    #nav-texto-wiiu {
+        max-width: 100% !important;
+        margin-top: 3px !important;
+        font-size: 10px !important;
+        line-height: 11px !important;
+        letter-spacing: -.25px !important;
+        white-space: normal !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+    }
+
+    #global-menu .sidebar-old-icon {
+        height: 39px !important;
+        font-size: 38px !important;
+        line-height: 39px !important;
+    }
+
+    #nav-icono-wiiu {
+        width: 38px !important;
+        height: 38px !important;
+        margin: 0 auto !important;
+    }
+
+    #nav-icono-wiiu:empty {
+        background-size: 34px 34px !important;
+    }
+
+    #nav-icono-wiiu:not(:empty) {
+        font-size: 40px !important;
+        line-height: 38px !important;
+    }
+
+    #global-menu > #boton-navegacion-miiverse {
+        background: transparent !important;
+    }
+
+    #global-menu > #boton-navegacion-miiverse > a {
+        height: 82px !important;
+        background: linear-gradient(to bottom, #5a5a5a 0%, #242424 100%) !important;
+    }
+
+    /* ========================================================
+       TOPBARS
+       ======================================================== */
+    #vista-perfil .home-topbar,
+    #vista-juegos .games-clicker-style-topbar,
+    #vista-messages .mii-clicker-topbar,
+    #vista-proyectos .projects-clicker-style-topbar,
+    #vista-sobremi .about-clicker-style-topbar,
+    #vista-quepasara .chat-clicker-style-topbar,
+    #vista-networks .networks-topbar,
+    #vista-userpage > div[style*="width: 1400px"] {
+        width: calc(100% + 24px) !important;
+        max-width: none !important;
+        margin: 0 -12px !important;
+        padding: 13px 14px !important;
+        box-sizing: border-box !important;
+    }
+
+    #vista-perfil .home-topbar h1,
+    #vista-juegos .games-clicker-style-topbar h1,
+    #vista-messages .mii-clicker-topbar h1,
+    #vista-proyectos .projects-clicker-style-topbar h1,
+    #vista-sobremi .about-clicker-style-topbar h1,
+    #vista-quepasara .chat-clicker-style-topbar h1,
+    #vista-networks .networks-topbar h1,
+    #vista-userpage > div[style*="width: 1400px"] h1 {
+        font-size: 20px !important;
+    }
+
+    #vista-perfil .home-topbar-badge,
+    #vista-juegos .games-clicker-style-badge,
+    #vista-proyectos .projects-clicker-style-badge,
+    #vista-sobremi .about-clicker-style-badge,
+    #vista-quepasara .chat-clicker-style-badge,
+    #vista-networks .networks-topbar-badge,
+    #mii-clicker-status {
+        max-width: 45% !important;
+        padding: 4px 8px !important;
+        font-size: 9px !important;
+        white-space: nowrap !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+    }
+
+    /* ========================================================
+       HOME
+       ======================================================== */
+    #vista-perfil {
+        min-height: auto !important;
+    }
+
+    #vista-perfil .home-page {
+        width: 100% !important;
+        max-width: none !important;
+        margin: 18px 0 0 !important;
+        padding-bottom: 28px !important;
+    }
+
+    #vista-perfil .home-profile-card {
+        min-height: 0 !important;
+        align-items: flex-start !important;
+        padding: 18px !important;
+    }
+
+    #vista-perfil .home-profile-mii-frame {
+        width: 78px !important;
+        height: 78px !important;
+    }
+
+    #vista-perfil .home-profile-info {
+        margin-left: 14px !important;
+    }
+
+    #vista-perfil .home-profile-name {
+        font-size: 20px !important;
+    }
+
+    #vista-perfil .home-profile-description {
+        font-size: 13px !important;
+        line-height: 1.4 !important;
+    }
+
+    #vista-perfil .home-section-header {
+        margin-top: 20px !important;
+        font-size: 17px !important;
+    }
+
+    #vista-perfil .home-community {
+        min-height: 78px !important;
+        padding: 9px 38px 9px 10px !important;
+    }
+
+    #vista-perfil .home-community-icon {
+        width: 56px !important;
+        height: 56px !important;
+        margin-right: 12px !important;
+    }
+
+    #vista-perfil .home-community-title {
+        font-size: 16px !important;
+    }
+
+    #vista-perfil .home-community-description {
+        font-size: 11px !important;
+    }
+
+    #vista-perfil .home-community-arrow {
+        right: 13px !important;
+        font-size: 26px !important;
+    }
+
+    /* ========================================================
+       FAVORITE GAMES / ABOUT / PROJECTS / CHAT
+       Quita anchos/márgenes fijos del HTML inline.
+       ======================================================== */
+    #vista-juegos > div[style*="margin-left: 105px"],
+    #vista-juegos > div[style*="margin-left: 125px"],
+    #vista-sobremi > div[style*="margin-left: 105px"],
+    #vista-sobremi > div[style*="margin-left: 125px"],
+    #vista-quepasara > div[style*="margin-left: 108px"],
+    #vista-proyectos > div[style*="margin-left: 170px"] {
+        width: 100% !important;
+        max-width: none !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        box-sizing: border-box !important;
+    }
+
+    #vista-juegos > div[style*="margin-left: 125px"],
+    #vista-sobremi > div[style*="margin-left: 125px"],
+    #vista-proyectos > div[style*="margin-left: 170px"] {
+        margin-top: 16px !important;
+    }
+
+    /* Banners */
+    #vista-juegos > div[style*="margin-left: 105px"] > img,
+    #vista-sobremi > div[style*="margin-left: 105px"] > img,
+    #vista-quepasara > div[style*="margin-left: 108px"] > img {
+        width: 100% !important;
+        height: 155px !important;
+        border-radius: 9px !important;
+    }
+
+    /* Tarjeta flotante bajo banners */
+    #vista-juegos > div[style*="margin-left: 105px"] > div[style*="position: absolute"],
+    #vista-sobremi > div[style*="margin-left: 105px"] > div[style*="position: absolute"],
+    #vista-quepasara > div[style*="margin-left: 108px"] > div[style*="position: absolute"] {
+        min-height: 74px !important;
+        height: auto !important;
+        padding: 10px 12px !important;
+    }
+
+    /* Posts estáticos: avatar un poco más compacto */
+    #vista-juegos > div[style*="margin-left: 125px"] > div:first-child,
+    #vista-sobremi > div[style*="margin-left: 125px"] > div:first-child,
+    #vista-proyectos > div[style*="margin-left: 170px"] > div:first-child {
+        width: 50px !important;
+        height: 50px !important;
+    }
+
+    /* ========================================================
+       MII CLICKER
+       ======================================================== */
+    #vista-messages .mii-clicker-page {
+        width: 100% !important;
+        max-width: none !important;
+        margin: 18px 0 0 !important;
+        padding-bottom: 28px !important;
+    }
+
+    #vista-messages .mii-clicker-panel-title {
+        padding: 11px 14px !important;
+        font-size: 19px !important;
+    }
+
+    #vista-messages .mii-clicker-description {
+        padding: 10px 12px !important;
+        font-size: 12px !important;
+    }
+
+    #vista-messages .mii-clicker-podium {
+        min-height: 0 !important;
+        flex-direction: column !important;
+        align-items: stretch !important;
+        gap: 10px !important;
+        padding: 15px !important;
+    }
+
+    #vista-messages .mii-clicker-place,
+    #vista-messages .mii-clicker-place.first,
+    #vista-messages .mii-clicker-place.second,
+    #vista-messages .mii-clicker-place.third {
+        width: 100% !important;
+        min-height: 0 !important;
+    }
+
+    #vista-messages .mii-clicker-game {
+        padding: 20px 12px 28px !important;
+    }
+
+    #vista-messages #mii-clicker-score {
+        font-size: 44px !important;
+        line-height: 48px !important;
+    }
+
+    #vista-messages .mii-clicker-mii-stage {
+        width: min(280px, 92vw) !important;
+        height: 330px !important;
+    }
+
+    #vista-messages #mii-clicker-click-button {
+        width: min(280px, 92vw) !important;
+    }
+
+    #vista-messages .mii-clicker-rules {
+        flex-direction: column !important;
+        gap: 6px !important;
+        text-align: center !important;
+    }
+
+    /* ========================================================
+       NETWORKS
+       ======================================================== */
+    #vista-networks .networks-page {
+        width: 100% !important;
+        max-width: none !important;
+        margin: 18px 0 0 !important;
+        padding-bottom: 28px !important;
+    }
+
+    #vista-networks .network-card {
+        flex-wrap: wrap !important;
+        align-items: center !important;
+        padding: 10px 11px !important;
+    }
+
+    #vista-networks .network-icon-box {
+        width: 54px !important;
+        height: 54px !important;
+        margin-right: 12px !important;
+    }
+
+    #vista-networks .network-user {
+        font-size: 16px !important;
+    }
+
+    #vista-networks .network-actions {
+        width: 100% !important;
+        margin: 10px 0 0 0 !important;
+        padding-left: 65px !important;
+        box-sizing: border-box !important;
+    }
+
+    #vista-networks .network-button {
+        flex: 1 1 0 !important;
+        min-width: 0 !important;
+    }
+
+    /* ========================================================
+       USER PAGE
+       ======================================================== */
+    #vista-userpage > div[style*="width: 82%"] {
+        width: 100% !important;
+        margin: 18px 0 0 !important;
+        box-sizing: border-box !important;
+    }
+
+    #vista-userpage > div[style*="width: 82%"] > div:first-child {
+        padding: 14px !important;
+    }
+
+    #vista-userpage > div[style*="width: 82%"] > div:first-child > div:first-child {
+        flex-direction: column !important;
+        align-items: stretch !important;
+        gap: 12px !important;
+    }
+
+    #vista-userpage > div[style*="width: 82%"] > div:first-child > div:first-child > button {
+        width: 100% !important;
+        justify-content: center !important;
+    }
+
+    /* ========================================================
+       GENERAL CHAT + BOTÓN POST
+       ======================================================== */
+    #contenedor-mensajes-chat {
+        width: 100% !important;
+        margin-left: 0 !important;
+        padding-bottom: 70px !important;
+    }
+
+    #vista-quepasara > div[onclick*="abrirModalPostGeneral"] {
+        right: 10px !important;
+        bottom: 92px !important;
+        width: 126px !important;
+        height: 56px !important;
+        border-radius: 30px !important;
+        border: 1px solid #cccccc !important;
+        box-shadow: 0 4px 12px rgba(0,0,0,.16) !important;
+    }
+
+    #vista-quepasara > div[onclick*="abrirModalPostGeneral"] svg {
+        width: 28px !important;
+        height: 28px !important;
+        margin-right: 7px !important;
+    }
+
+    #vista-quepasara > div[onclick*="abrirModalPostGeneral"] span {
+        font-size: 20px !important;
+    }
+
+    /* ========================================================
+       MODAL DE POST
+       ======================================================== */
+    #modal-crear-post {
+        align-items: flex-start !important;
+        overflow-y: auto !important;
+        padding: 12px !important;
+        box-sizing: border-box !important;
+    }
+
+    #miiverse-post-composer,
+    #miiverse-post-window {
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+    }
+
+    #miiverse-post-window {
+        height: auto !important;
+        min-height: 0 !important;
+        padding: 18px 14px !important;
+        border-radius: 18px !important;
+    }
+
+    #miiverse-post-header {
+        height: auto !important;
+        min-height: 72px !important;
+        padding-right: 0 !important;
+    }
+
+    .mii-post-avatar-group {
+        width: 78px !important;
+        height: 56px !important;
+    }
+
+    #avatar-mii-post {
+        width: 54px !important;
+        height: 56px !important;
+    }
+
+    #boton-emociones-post {
+        width: 24px !important;
+        height: 56px !important;
+    }
+
+    .miiverse-post-userinfo {
+        width: auto !important;
+        flex: 1 1 auto !important;
+        margin-left: 9px !important;
+        padding-right: 0 !important;
+    }
+
+    #nombre-mii-post {
+        font-size: 18px !important;
+        line-height: 21px !important;
+    }
+
+    .miiverse-post-community-name {
+        font-size: 13px !important;
+    }
+
+    .miiverse-spoiler {
+        position: static !important;
+        width: auto !important;
+        height: 34px !important;
+        margin-left: 8px !important;
+        padding: 0 8px !important;
+        font-size: 12px !important;
+        flex-shrink: 0 !important;
+    }
+
+    #miiverse-post-editor {
+        height: auto !important;
+        flex-wrap: wrap !important;
+        margin-top: 10px !important;
+    }
+
+    .miiverse-mode-selector {
+        width: 46px !important;
+        height: 150px !important;
+    }
+
+    #btn-modo-texto,
+    #btn-modo-dibujo {
+        width: 44px !important;
+    }
+
+    .miiverse-post-input-area,
+    #texto-nuevo-post,
+    #canvas-post {
+        height: 150px !important;
+    }
+
+    .miiverse-image-column {
+        width: 100% !important;
+        height: 62px !important;
+        margin: 10px 0 0 0 !important;
+    }
+
+    #select-image-post {
+        width: 100% !important;
+        height: 62px !important;
+        flex-direction: row !important;
+        gap: 8px !important;
+    }
+
+    .miiverse-photo-symbol {
+        font-size: 38px !important;
+        line-height: 38px !important;
+    }
+
+    .miiverse-paperclip-symbol {
+        display: none !important;
+    }
+
+    .miiverse-select-image-text {
+        margin-top: 0 !important;
+        font-size: 14px !important;
+    }
+
+    #burbuja-emociones {
+        max-width: calc(100vw - 24px) !important;
+        overflow-x: auto !important;
+    }
+
+    /* ========================================================
+       POSTS DINÁMICOS / ELEMENTOS LARGOS
+       ======================================================== */
+    #contenedor-mensajes-chat *,
+    #muro-mensajes *,
+    #muro-posts-usuario * {
+        max-width: 100%;
+        box-sizing: border-box;
+    }
+
+    #contenedor-mensajes-chat img,
+    #muro-mensajes img,
+    #muro-posts-usuario img {
+        height: auto;
+    }
+}
+
+/* ------------------------------------------------------------
+   TELÉFONOS PEQUEÑOS
+   ------------------------------------------------------------ */
+@media screen and (max-width: 420px) {
+    #vista-perfil .home-topbar-badge,
+    #vista-juegos .games-clicker-style-badge,
+    #vista-proyectos .projects-clicker-style-badge,
+    #vista-sobremi .about-clicker-style-badge,
+    #vista-quepasara .chat-clicker-style-badge,
+    #vista-networks .networks-topbar-badge {
+        display: none !important;
+    }
+
+    #global-menu #user-sidebar-name,
+    #global-menu .sidebar-label,
+    #nav-texto-wiiu {
+        font-size: 9px !important;
+        line-height: 10px !important;
+    }
+
+    #vista-perfil .home-profile-card {
+        padding: 14px !important;
+    }
+
+    #vista-perfil .home-profile-mii-frame {
+        width: 66px !important;
+        height: 66px !important;
+    }
+
+    #vista-perfil .home-profile-info {
+        margin-left: 11px !important;
+    }
+
+    #vista-networks .network-actions {
+        padding-left: 0 !important;
+    }
+
+    #vista-networks .network-button {
+        height: 32px !important;
+        font-size: 11px !important;
+    }
+
+    .miiverse-spoiler {
+        font-size: 10px !important;
+        padding: 0 5px !important;
+    }
+}
+</style>
 
 </body>
 </html>
