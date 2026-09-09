@@ -6759,6 +6759,139 @@ if (
 
 
 /* ============================================================
+   SELECT IMAGE — ARCHIVO REAL + PREVIEW
+   ============================================================ */
+
+#select-image-empty-state {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    position: relative;
+}
+
+#preview-imagen-post {
+    display: none;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+    object-position: center;
+
+    border-radius: 3px;
+}
+
+#select-image-post.tiene-imagen {
+    overflow: hidden;
+
+    padding: 0;
+
+    background: #202020;
+
+    border-color: #8f8f8f;
+}
+
+#select-image-post.tiene-imagen #select-image-empty-state {
+    display: none;
+}
+
+#select-image-post.tiene-imagen #preview-imagen-post {
+    display: block;
+}
+
+#texto-cambiar-imagen-post {
+    display: none;
+
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    padding: 8px 5px;
+
+    box-sizing: border-box;
+
+    color: #ffffff;
+
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+
+    text-shadow: 0 1px 2px rgba(0,0,0,.8);
+
+    background:
+        linear-gradient(
+            to bottom,
+            rgba(0,0,0,0),
+            rgba(0,0,0,.78)
+        );
+
+    pointer-events: none;
+}
+
+#select-image-post.tiene-imagen #texto-cambiar-imagen-post {
+    display: block;
+}
+
+#quitar-imagen-post {
+    display: none;
+
+    position: absolute;
+    top: 6px;
+    right: 6px;
+
+    width: 31px;
+    height: 31px;
+
+    padding: 0;
+
+    border: 2px solid #ffffff;
+    border-radius: 50%;
+
+    background:
+        linear-gradient(
+            to bottom,
+            #777777,
+            #454545
+        );
+
+    color: #ffffff;
+
+    font-family: Arial, sans-serif;
+    font-size: 23px;
+    font-weight: bold;
+    line-height: 25px;
+
+    text-align: center;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 2px 5px rgba(0,0,0,.45);
+
+    z-index: 5;
+}
+
+#select-image-post.tiene-imagen #quitar-imagen-post {
+    display: block;
+}
+
+#select-image-post.tiene-imagen:hover #texto-cambiar-imagen-post {
+    background:
+        linear-gradient(
+            to bottom,
+            rgba(0,0,0,.06),
+            rgba(0,0,0,.88)
+        );
+}
+
+
+/* ============================================================
    ============================================================
            SELECTOR DE EMOCIONES E3
    ============================================================
@@ -7273,31 +7406,64 @@ if (
                 <!-- SELECT IMAGE -->
                 <div class="miiverse-image-column">
 
+                    <!-- Input real de archivos. El usuario lo abre pulsando el botón visual. -->
+                    <input
+                        type="file"
+                        id="input-imagen-post"
+                        accept="image/jpeg,image/png,image/webp"
+                        style="display:none;"
+                        onchange="manejarImagenSeleccionadaPost(event)"
+                    >
 
-                    <div id="select-image-post">
+                    <div
+                        id="select-image-post"
+                        role="button"
+                        tabindex="0"
+                        aria-label="Select Image"
+                        onclick="abrirSelectorImagenPost()"
+                        onkeydown="if(event.key === 'Enter' || event.key === ' '){ event.preventDefault(); abrirSelectorImagenPost(); }"
+                    >
 
+                        <!-- Estado normal -->
+                        <div id="select-image-empty-state">
 
-                        <!-- z = clip -->
+                            <!-- z = clip -->
+                            <span class="miiverse-paperclip-symbol">
+                                z
+                            </span>
 
-                        <span class="miiverse-paperclip-symbol">
-                            z
+                            <!-- X = image -->
+                            <span class="miiverse-photo-symbol">
+                                X
+                            </span>
+
+                            <span class="miiverse-select-image-text">
+                                Select Image
+                            </span>
+
+                        </div>
+
+                        <!-- Preview de la imagen elegida -->
+                        <img
+                            id="preview-imagen-post"
+                            alt="Selected image"
+                        >
+
+                        <span id="texto-cambiar-imagen-post">
+                            Change Image
                         </span>
 
-
-                        <!-- X = image -->
-
-                        <span class="miiverse-photo-symbol">
-                            X
-                        </span>
-
-
-                        <span class="miiverse-select-image-text">
-                            Select Image
-                        </span>
-
+                        <button
+                            type="button"
+                            id="quitar-imagen-post"
+                            aria-label="Remove selected image"
+                            title="Remove image"
+                            onclick="event.stopPropagation(); quitarImagenAdjuntaPost();"
+                        >
+                            ×
+                        </button>
 
                     </div>
-
 
                 </div>
 
@@ -8357,35 +8523,233 @@ function detenerTrazo() {
     ctx.closePath();
 }
 
+
+/* ============================================================
+   IMAGEN ADJUNTA EN POSTS
+   ============================================================ */
+
+let imagenAdjuntaPost = null;
+let nombreImagenAdjuntaPost = '';
+
+function abrirSelectorImagenPost() {
+    const input = document.getElementById('input-imagen-post');
+    if (input) {
+        input.click();
+    }
+}
+
+function manejarImagenSeleccionadaPost(event) {
+    const input = event && event.target
+        ? event.target
+        : document.getElementById('input-imagen-post');
+
+    if (!input || !input.files || !input.files.length) {
+        return;
+    }
+
+    const archivo = input.files[0];
+
+    if (!/^image\/(jpeg|png|webp)$/i.test(archivo.type)) {
+        alert('Selecciona una imagen JPG, PNG o WebP.');
+        input.value = '';
+        return;
+    }
+
+    /*
+       Evitamos intentar meter archivos gigantes al navegador.
+       Después la imagen se redimensiona para que el post no
+       reviente localStorage.
+    */
+    if (archivo.size > 12 * 1024 * 1024) {
+        alert('La imagen es demasiado grande. El máximo es 12 MB.');
+        input.value = '';
+        return;
+    }
+
+    optimizarImagenAdjuntaPost(archivo)
+        .then(function(dataUrl) {
+            imagenAdjuntaPost = dataUrl;
+            nombreImagenAdjuntaPost = archivo.name || 'image';
+            actualizarPreviewImagenPost();
+        })
+        .catch(function(error) {
+            console.error('No se pudo procesar la imagen:', error);
+            alert('No se pudo cargar esa imagen.');
+            input.value = '';
+        });
+}
+
+function optimizarImagenAdjuntaPost(archivo) {
+    return new Promise(function(resolve, reject) {
+        const lector = new FileReader();
+
+        lector.onerror = function() {
+            reject(new Error('FileReader error'));
+        };
+
+        lector.onload = function() {
+            const imagen = new Image();
+
+            imagen.onerror = function() {
+                reject(new Error('Invalid image'));
+            };
+
+            imagen.onload = function() {
+                const MAX_ANCHO = 1280;
+                const MAX_ALTO = 1280;
+
+                let ancho = imagen.naturalWidth || imagen.width;
+                let alto = imagen.naturalHeight || imagen.height;
+
+                if (!ancho || !alto) {
+                    reject(new Error('Invalid dimensions'));
+                    return;
+                }
+
+                const escala = Math.min(
+                    1,
+                    MAX_ANCHO / ancho,
+                    MAX_ALTO / alto
+                );
+
+                const anchoFinal = Math.max(1, Math.round(ancho * escala));
+                const altoFinal = Math.max(1, Math.round(alto * escala));
+
+                const lienzo = document.createElement('canvas');
+                lienzo.width = anchoFinal;
+                lienzo.height = altoFinal;
+
+                const contexto = lienzo.getContext('2d');
+
+                /*
+                   Fondo blanco para que PNG con transparencia no
+                   termine con fondo negro al convertir a JPEG.
+                */
+                contexto.fillStyle = '#ffffff';
+                contexto.fillRect(0, 0, anchoFinal, altoFinal);
+                contexto.drawImage(imagen, 0, 0, anchoFinal, altoFinal);
+
+                /*
+                   JPEG comprimido: suficiente para el prototipo actual
+                   que guarda General Chat en localStorage.
+                */
+                const dataUrl = lienzo.toDataURL('image/jpeg', 0.86);
+
+                resolve(dataUrl);
+            };
+
+            imagen.src = lector.result;
+        };
+
+        lector.readAsDataURL(archivo);
+    });
+}
+
+function actualizarPreviewImagenPost() {
+    const boton = document.getElementById('select-image-post');
+    const preview = document.getElementById('preview-imagen-post');
+
+    if (!boton || !preview) {
+        return;
+    }
+
+    if (imagenAdjuntaPost) {
+        preview.src = imagenAdjuntaPost;
+        preview.alt = nombreImagenAdjuntaPost || 'Selected image';
+        boton.classList.add('tiene-imagen');
+    } else {
+        preview.removeAttribute('src');
+        preview.alt = 'Selected image';
+        boton.classList.remove('tiene-imagen');
+    }
+}
+
+function quitarImagenAdjuntaPost() {
+    imagenAdjuntaPost = null;
+    nombreImagenAdjuntaPost = '';
+
+    const input = document.getElementById('input-imagen-post');
+
+    if (input) {
+        input.value = '';
+    }
+
+    actualizarPreviewImagenPost();
+}
+
 function publicarPostGeneral() {
     let contenidoPost = {};
 
     if (modoActual === 'texto') {
         const texto = document.getElementById('texto-nuevo-post').value;
-        if(texto.trim() === '') {
-            alert("¡No puedes enviar un mensaje vacío!");
+
+        /*
+           Ahora una imagen también cuenta como contenido:
+           - texto solo
+           - imagen sola
+           - texto + imagen
+        */
+        if (texto.trim() === '' && !imagenAdjuntaPost) {
+            alert("¡Escribe algo o adjunta una imagen!");
             return;
         }
-        contenidoPost = { tipo: 'texto', valor: texto };
+
+        contenidoPost = {
+            tipo: 'texto',
+            valor: texto
+        };
     } else {
         const imagenDataUrl = canvas.toDataURL('image/png');
-        contenidoPost = { tipo: 'dibujo', valor: imagenDataUrl };
+
+        contenidoPost = {
+            tipo: 'dibujo',
+            valor: imagenDataUrl
+        };
     }
 
     const pnid = localStorage.getItem('makiiverse_pnid') || 'Makii';
-    
+
     const nuevoMensaje = {
         id: Date.now(),
         autor: pnid,
         tipo: contenidoPost.tipo,
         contenido: contenidoPost.valor,
+
+        /*
+           La imagen seleccionada es independiente del texto/dibujo.
+           Así también se puede adjuntar una imagen a un dibujo.
+        */
+        imagenAdjunta: imagenAdjuntaPost || null,
+
         expresion: expresionActual,
+        spoiler: !!(
+            document.getElementById('check-spoiler')
+            && document.getElementById('check-spoiler').checked
+        ),
         fecha: new Date().toLocaleTimeString()
     };
 
-    let mensajesGuardados = JSON.parse(localStorage.getItem('makiiverse_mensajes') || '[]');
+    let mensajesGuardados = JSON.parse(
+        localStorage.getItem('makiiverse_mensajes') || '[]'
+    );
+
     mensajesGuardados.unshift(nuevoMensaje);
-    localStorage.setItem('makiiverse_mensajes', JSON.stringify(mensajesGuardados));
+
+    try {
+        localStorage.setItem(
+            'makiiverse_mensajes',
+            JSON.stringify(mensajesGuardados)
+        );
+    } catch (error) {
+        console.error('No se pudo guardar el post:', error);
+
+        alert(
+            'No hay suficiente espacio local para guardar esta imagen. ' +
+            'Prueba con una imagen más pequeña.'
+        );
+
+        return;
+    }
 
     cerrarModalPostGeneral();
     renderizarMensajes();
@@ -8518,10 +8882,39 @@ function renderizarMensajes() {
         }
 
         let contenidoHTML = '';
+
         if (msg.tipo === 'texto') {
-            contenidoHTML = `<p style="margin: 0; font-size: 21px; color: #333; word-break: break-word; font-family: sans-serif; line-height: 1.7;">${escapeHTML(msg.contenido)}</p>`;
+            if (msg.contenido && msg.contenido.trim() !== '') {
+                contenidoHTML = `<p style="margin: 0; font-size: 21px; color: #333; word-break: break-word; font-family: sans-serif; line-height: 1.7;">${escapeHTML(msg.contenido)}</p>`;
+            }
         } else {
-            contenidoHTML = `<img src="${msg.contenido}" style="max-width: 100%; border-radius: 6px; background: #fff; display: block;">`;
+            contenidoHTML = `<img src="${msg.contenido}" style="max-width: 100%; height: auto; border-radius: 6px; background: #fff; display: block;">`;
+        }
+
+        /*
+           Compatible con posts viejos:
+           si no existe imagenAdjunta simplemente no se agrega nada.
+        */
+        if (msg.imagenAdjunta) {
+            contenidoHTML += `
+                <img
+                    src="${msg.imagenAdjunta}"
+                    alt="Attached image"
+                    style="
+                        display:block;
+                        width:auto;
+                        max-width:100%;
+                        max-height:720px;
+                        height:auto;
+                        object-fit:contain;
+                        margin-top:${contenidoHTML ? '18px' : '0'};
+                        border:1px solid #d3d3d3;
+                        border-radius:8px;
+                        background:#f7f7f7;
+                        box-shadow:0 2px 5px rgba(0,0,0,.08);
+                    "
+                >
+            `;
         }
 
         contenedorPost.innerHTML = `
@@ -10644,6 +11037,18 @@ function abrirModalPostGeneral() {
 
 function cerrarModalPostGeneral() {
     document.getElementById('modal-crear-post').style.display = 'none';
+
+    /*
+       Limpiar la imagen seleccionada al cancelar o después de publicar.
+    */
+    if (typeof quitarImagenAdjuntaPost === 'function') {
+        quitarImagenAdjuntaPost();
+    }
+
+    const spoiler = document.getElementById('check-spoiler');
+    if (spoiler) {
+        spoiler.checked = false;
+    }
 }
 
 function actualizarAvatarModal(pnid, expresion) {

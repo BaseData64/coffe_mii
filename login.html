@@ -3,227 +3,1056 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Iniciar sesión - Miiverse</title>
-    <script type="module" src="login/basedata.js"></script>
+    <title>Maki's Bio - Iniciar sesión</title>
+
+    <script>
+        window.makiAuthReady = new Promise(function(resolve) {
+            window.__resolveMakiAuthReady = resolve;
+        });
+    </script>
+
+    <!-- Tu módulo real de Firebase -->
+
     <style>
+        @font-face {
+            font-family: "MiiverseFont";
+            src: url("font/nintendoNTLG-DB001.ttf") format("truetype");
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: "MiiverseIcons";
+            src: url("font/MiiverseSymbols-Regular.ttf") format("truetype");
+            font-weight: normal;
+            font-style: normal;
+        }
+
         :root {
-            --miiverse-green: #3fb927;
-            --miiverse-green-hover: #32991e;
-            --bg-gray: #f0f0f0;
-            --text-dark: #333333;
-            --text-light: #777777;
-            --border-color: #cccccc;
+            --wiiu-blue-top: #72e5ff;
+            --wiiu-blue: #22bde7;
+            --wiiu-blue-dark: #0787b5;
+            --wiiu-blue-strong: #00aeff;
+            --miiverse-green: #66c900;
+            --ink: #3e474c;
+            --muted: #7d898f;
+            --line: #cbd7dc;
+            --panel: #ffffff;
         }
 
         * {
             box-sizing: border-box;
+        }
+
+        html,
+        body {
             margin: 0;
-            padding: 0;
-            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            min-height: 100%;
         }
 
         body {
-            background-color: var(--bg-gray);
-            color: var(--text-dark);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
             min-height: 100vh;
+            color: var(--ink);
+            font-family: "MiiverseFont", "Helvetica Neue", Arial, sans-serif;
+            background: #eef1f2 url("background.png") center / cover fixed no-repeat;
         }
 
-        .header {
-            width: 100%;
-            background-color: #ffffff;
-            border-bottom: 4px solid var(--miiverse-green);
-            padding: 15px 20px;
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            background: rgba(255,255,255,.24);
+            z-index: -1;
+        }
+
+        .topbar {
+            min-height: 68px;
             display: flex;
+            align-items: center;
             justify-content: center;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            padding: 0 22px;
+            border-bottom: 2px solid #087ca5;
+            background:
+                linear-gradient(
+                    to bottom,
+                    var(--wiiu-blue-top) 0%,
+                    #45d4f4 25%,
+                    var(--wiiu-blue) 52%,
+                    #0d9dcd 76%,
+                    var(--wiiu-blue-dark) 100%
+                );
+            box-shadow:
+                inset 0 2px 0 rgba(255,255,255,.55),
+                0 4px 10px rgba(0,0,0,.15);
         }
 
-        .header h1 {
-            color: var(--miiverse-green);
-            font-size: 24px;
+        .topbar-inner {
+            width: min(1050px, 100%);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .brand {
+            color: #fff;
+            font-size: 28px;
             font-weight: bold;
-            letter-spacing: -0.5px;
+            text-shadow: 0 2px 2px rgba(0,70,110,.28);
         }
 
-        .login-container {
-            background-color: #ffffff;
+        .brand-badge {
+            padding: 6px 14px;
+            border: 1px solid rgba(255,255,255,.65);
+            border-radius: 18px;
+            color: #fff;
+            font-size: 11px;
+            font-weight: bold;
+            background: rgba(0,95,145,.16);
+            box-shadow: inset 0 1px 0 rgba(255,255,255,.25);
+        }
+
+        .page {
+            width: min(980px, calc(100% - 36px));
+            margin: 48px auto 70px;
+        }
+
+        .login-window {
+            overflow: hidden;
+            display: grid;
+            grid-template-columns: 0.85fr 1.15fr;
+            background: rgba(255,255,255,.96);
+            border: 1px solid #bfcdd3;
+            border-radius: 22px;
+            box-shadow:
+                0 10px 30px rgba(55,78,88,.22),
+                inset 0 1px 0 #fff;
+        }
+
+        .preview-panel {
+            position: relative;
+            min-height: 570px;
+            padding: 42px 32px;
+            text-align: center;
+            border-right: 1px solid #c8d4d9;
+            background:
+                linear-gradient(to bottom, #fafafa 0%, #f4f8fa 58%, #eaf6fa 100%);
+        }
+
+        .preview-panel::before {
+            content: "";
+            position: absolute;
+            inset: 0 0 auto 0;
+            height: 6px;
+            background:
+                linear-gradient(to right, #75e6ff, #25bfe9, #0789b8);
+        }
+
+        .preview-title {
+            margin: 0 0 8px;
+            color: #4b555a;
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .preview-subtitle {
+            margin: 0 auto 30px;
+            max-width: 270px;
+            color: #829097;
+            font-size: 13px;
+            line-height: 1.45;
+        }
+
+        .mii-frame {
+            width: 154px;
+            height: 154px;
+            margin: 0 auto 18px;
+            overflow: hidden;
+            border: 1px solid #9fc9d8;
+            border-radius: 20px;
+            background: radial-gradient(circle at center, #fff, #e5f5fa);
+            box-shadow:
+                0 5px 12px rgba(0,95,135,.15),
+                inset 0 1px 0 #fff;
+        }
+
+        .mii-frame img {
             width: 100%;
-            max-width: 450px;
-            margin-top: 50px;
+            height: 100%;
+            display: block;
+            object-fit: cover;
+        }
+
+        #preview-pnid {
+            display: block;
+            min-height: 28px;
+            color: #109fcf;
+            font-size: 18px;
+            font-weight: bold;
+            word-break: break-word;
+        }
+
+        .account-info {
+            margin-top: 34px;
+            padding: 17px 18px;
+            text-align: left;
+            border: 1px solid #c7d7dd;
             border-radius: 12px;
-            padding: 40px 30px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            background: rgba(255,255,255,.72);
+            box-shadow: inset 0 1px 0 #fff;
+        }
+
+        .account-info strong {
+            display: block;
+            margin-bottom: 6px;
+            color: #4b555a;
+            font-size: 13px;
+        }
+
+        .account-info p {
+            margin: 0;
+            color: #7a888e;
+            font-size: 12px;
+            line-height: 1.45;
+        }
+
+        .auth-panel {
+            min-width: 0;
+            padding: 36px 42px 38px;
+            background: #fff;
+        }
+
+        .tabs {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            margin-bottom: 28px;
+            padding: 5px;
+            border: 1px solid #c8d1d5;
+            border-radius: 14px;
+            background: linear-gradient(to bottom, #eeeeee, #e2e2e2);
+            box-shadow: inset 0 1px 2px rgba(0,0,0,.08);
+        }
+
+        .tab {
+            min-height: 44px;
+            border: 1px solid transparent;
+            border-radius: 10px;
+            cursor: pointer;
+            color: #7c8589;
+            font-family: inherit;
+            font-size: 14px;
+            font-weight: bold;
+            background: transparent;
+        }
+
+        .tab.active {
+            color: #fff;
+            border-color: #0589ba;
+            background:
+                linear-gradient(to bottom, #50d9f8, #19b5df 52%, #078fbe 100%);
+            box-shadow:
+                inset 0 1px 0 rgba(255,255,255,.5),
+                0 2px 4px rgba(0,115,160,.2);
+            text-shadow: 0 1px 1px rgba(0,70,110,.28);
+        }
+
+        .auth-title {
+            margin: 0;
+            color: #414b50;
+            font-size: 25px;
+            font-weight: bold;
+        }
+
+        .auth-description {
+            margin: 7px 0 24px;
+            color: #839097;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        .form-view {
+            display: none;
+        }
+
+        .form-view.active {
+            display: block;
+        }
+
+        .message {
+            display: none;
+            margin-bottom: 17px;
+            padding: 11px 13px;
+            border-radius: 9px;
+            font-size: 12px;
+            font-weight: bold;
+            line-height: 1.4;
+        }
+
+        .message.error {
+            display: block;
+            color: #c8202f;
+            border: 1px solid #efb6bd;
+            background: #fff3f4;
+        }
+
+        .message.success {
+            display: block;
+            color: #2d8d16;
+            border: 1px solid #b8dfab;
+            background: #f4fff0;
+        }
+
+        .field {
+            margin-bottom: 17px;
+        }
+
+        .field label {
+            display: block;
+            margin: 0 0 7px 3px;
+            color: #59656a;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .input-shell {
+            position: relative;
+        }
+
+        .input-shell input {
+            width: 100%;
+            height: 50px;
+            padding: 0 15px;
+            outline: 0;
+            color: #384247;
+            font-family: inherit;
+            font-size: 15px;
+            border: 1px solid #bdc8cd;
+            border-radius: 11px;
+            background: linear-gradient(to bottom, #fff, #fbfbfb);
+            box-shadow:
+                inset 0 2px 3px rgba(0,0,0,.045),
+                0 1px 0 #fff;
+            transition: .12s ease;
+        }
+
+        .input-shell input:focus {
+            border-color: #16aee0;
+            box-shadow:
+                0 0 0 3px rgba(0,174,255,.14),
+                inset 0 2px 3px rgba(0,0,0,.04);
+        }
+
+        .input-shell.has-toggle input {
+            padding-right: 62px;
+        }
+
+        .toggle-password {
+            position: absolute;
+            top: 6px;
+            right: 6px;
+            width: 49px;
+            height: 38px;
+            border: 1px solid #c8d0d4;
+            border-radius: 8px;
+            cursor: pointer;
+            color: #6f7b80;
+            font-family: inherit;
+            font-size: 10px;
+            font-weight: bold;
+            background: linear-gradient(to bottom, #fff, #e9e9e9);
+        }
+
+        .primary {
+            width: 100%;
+            min-height: 54px;
+            margin-top: 5px;
+            border: 1px solid #078bbb;
+            border-radius: 14px;
+            cursor: pointer;
+            color: #fff;
+            font-family: inherit;
+            font-size: 16px;
+            font-weight: bold;
+            background:
+                linear-gradient(to bottom, #54ddfa 0%, #20bbe5 45%, #0793c3 100%);
+            box-shadow:
+                inset 0 2px 0 rgba(255,255,255,.42),
+                0 4px 8px rgba(0,120,165,.18);
+            text-shadow: 0 1px 1px rgba(0,80,120,.25);
+        }
+
+        .primary:hover {
+            filter: brightness(1.035);
+        }
+
+        .primary:active {
+            transform: translateY(1px);
+        }
+
+        .primary:disabled {
+            cursor: default;
+            opacity: .62;
+            transform: none;
+        }
+
+        .password-note {
+            display: flex;
+            align-items: flex-start;
+            gap: 9px;
+            margin: 18px 0 0;
+            padding: 12px 13px;
+            border: 1px solid #d3d8da;
+            border-radius: 10px;
+            color: #777f83;
+            font-size: 11px;
+            line-height: 1.45;
+            background: #f7f7f7;
+        }
+
+        .password-note .icon {
+            color: var(--wiiu-blue-strong);
+            font-size: 18px;
+            line-height: 1;
+        }
+
+        .footer-note {
+            margin-top: 16px;
+            color: #9aa3a7;
+            font-size: 10px;
             text-align: center;
         }
 
-        .login-container h2 {
-            font-size: 20px;
-            margin-bottom: 10px;
-            color: var(--text-dark);
+        @media (max-width: 760px) {
+            .page {
+                width: min(94%, 540px);
+                margin-top: 24px;
+            }
+
+            .login-window {
+                grid-template-columns: 1fr;
+                border-radius: 17px;
+            }
+
+            .preview-panel {
+                min-height: 0;
+                padding: 28px 22px 24px;
+                border-right: 0;
+                border-bottom: 1px solid #cbd7dc;
+            }
+
+            .preview-subtitle,
+            .account-info {
+                display: none;
+            }
+
+            .mii-frame {
+                width: 104px;
+                height: 104px;
+                border-radius: 15px;
+                margin-bottom: 10px;
+            }
+
+            .preview-title {
+                font-size: 18px;
+            }
+
+            #preview-pnid {
+                min-height: 20px;
+                font-size: 14px;
+            }
+
+            .auth-panel {
+                padding: 25px 20px 28px;
+            }
+
+            .auth-title {
+                font-size: 22px;
+            }
+
+            .topbar {
+                min-height: 58px;
+            }
+
+            .brand {
+                font-size: 23px;
+            }
+
+            .brand-badge {
+                font-size: 9px;
+                padding: 5px 10px;
+            }
         }
 
-        .login-container p {
-            font-size: 14px;
-            color: var(--text-light);
-            margin-bottom: 20px;
-        }
+        @media (max-width: 430px) {
+            .page {
+                width: calc(100% - 18px);
+            }
 
-        .input-group {
-            margin-bottom: 20px;
-            text-align: left;
-        }
+            .tabs {
+                gap: 5px;
+            }
 
-        .input-group label {
-            display: block;
-            font-size: 14px;
-            font-weight: bold;
-            margin-bottom: 8px;
-            color: var(--text-dark);
-        }
+            .tab {
+                font-size: 12px;
+            }
 
-        .input-group input {
-            width: 100%;
-            padding: 12px 15px;
-            font-size: 16px;
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            outline: none;
-            transition: border-color 0.2s ease;
-        }
-
-        .input-group input:focus {
-            border-color: var(--miiverse-green);
-            box-shadow: 0 0 0 2px rgba(63, 185, 39, 0.2);
-        }
-
-        .btn-submit {
-            background-color: var(--miiverse-green);
-            color: #ffffff;
-            border: none;
-            width: 100%;
-            padding: 14px;
-            font-size: 16px;
-            font-weight: bold;
-            border-radius: 25px;
-            cursor: pointer;
-            transition: background-color 0.2s ease;
-            margin-top: 10px;
-        }
-
-        .btn-submit:hover {
-            background-color: var(--miiverse-green-hover);
-        }
-
-        #mensaje-error {
-            font-size: 14px;
-            font-weight: bold;
-            margin-bottom: 15px;
-            display: none;
-            text-align: left;
-            padding: 10px;
-            border-radius: 6px;
-            background: #faf8f5;
+            .auth-panel {
+                padding-left: 15px;
+                padding-right: 15px;
+            }
         }
     </style>
 </head>
+
 <body>
+    <header class="topbar">
+        <div class="topbar-inner">
+            <div class="brand">Maki's Bio</div>
+            <div class="brand-badge">ACCOUNT</div>
+        </div>
+    </header>
 
-    <div class="header">
-        <h1>Miiverse</h1>
-    </div>
+    <main class="page">
+        <section class="login-window">
+            <aside class="preview-panel">
+                <h2 class="preview-title">Your Mii</h2>
+                <p class="preview-subtitle">
+                    Tu PNID se usa como nombre de usuario dentro de Maki's Bio.
+                </p>
 
-    <div class="login-container">
-        <h2>Vincular un PNID</h2>
-        <p>Introduce tu Pretendo Network ID y contraseña para acceder a la comunidad.</p>
+                <div class="mii-frame">
+                    <img
+                        id="mii-preview"
+                        src="img/games/Dummy_mii_user.png"
+                        alt="Mii"
+                    >
+                </div>
 
-        <div id="mensaje-error"></div>
+                <span id="preview-pnid">User</span>
 
-        <form id="miiverseLoginForm">
-            <div class="input-group">
-                <label for="pnid">Pretendo Network ID</label>
-                <input type="text" id="pnid" name="pnid" placeholder="Ingresa tu PNID" required autocomplete="username">
+                <div class="account-info">
+                    <strong>Cuenta de Maki's Bio</strong>
+                    <p>
+                        El PNID identifica tu perfil, pero tu contraseña pertenece
+                        solamente a esta web.
+                    </p>
+                </div>
+            </aside>
+
+            <div class="auth-panel">
+                <div class="tabs">
+                    <button class="tab active" type="button" data-view="login">
+                        Iniciar sesión
+                    </button>
+                    <button class="tab" type="button" data-view="register">
+                        Crear cuenta
+                    </button>
+                </div>
+
+                <section id="login-view" class="form-view active">
+                    <h1 class="auth-title">Welcome back!</h1>
+                    <p class="auth-description">
+                        Entra con tu PNID y la contraseña de tu cuenta de Maki's Bio.
+                    </p>
+
+                    <div id="login-message" class="message"></div>
+
+                    <form id="login-form">
+                        <div class="field">
+                            <label for="login-pnid">Pretendo Network ID</label>
+                            <div class="input-shell">
+                                <input
+                                    id="login-pnid"
+                                    type="text"
+                                    autocomplete="username"
+                                    placeholder="Tu PNID"
+                                    maxlength="64"
+                                    required
+                                >
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label for="login-password">Contraseña de Maki's Bio</label>
+                            <div class="input-shell has-toggle">
+                                <input
+                                    id="login-password"
+                                    type="password"
+                                    autocomplete="current-password"
+                                    placeholder="Tu contraseña"
+                                    required
+                                >
+                                <button
+                                    class="toggle-password"
+                                    type="button"
+                                    data-target="login-password"
+                                >SHOW</button>
+                            </div>
+                        </div>
+
+                        <button id="login-submit" class="primary" type="submit">
+                            Iniciar sesión
+                        </button>
+                    </form>
+
+                    <div class="password-note">
+                        <span class="icon">●</span>
+                        <span>
+                            <b>No introduzcas tu contraseña de Pretendo.</b>
+                            Esta es una contraseña independiente creada para Maki's Bio.
+                        </span>
+                    </div>
+                </section>
+
+                <section id="register-view" class="form-view">
+                    <h1 class="auth-title">Create your account</h1>
+                    <p class="auth-description">
+                        Usa tu PNID como usuario y crea una contraseña exclusiva para esta web.
+                    </p>
+
+                    <div id="register-message" class="message"></div>
+
+                    <form id="register-form">
+                        <div class="field">
+                            <label for="register-pnid">Pretendo Network ID</label>
+                            <div class="input-shell">
+                                <input
+                                    id="register-pnid"
+                                    type="text"
+                                    autocomplete="username"
+                                    placeholder="Tu PNID"
+                                    maxlength="64"
+                                    required
+                                >
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label for="register-password">Nueva contraseña</label>
+                            <div class="input-shell has-toggle">
+                                <input
+                                    id="register-password"
+                                    type="password"
+                                    autocomplete="new-password"
+                                    placeholder="Mínimo 6 caracteres"
+                                    minlength="6"
+                                    required
+                                >
+                                <button
+                                    class="toggle-password"
+                                    type="button"
+                                    data-target="register-password"
+                                >SHOW</button>
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label for="register-confirm">Repite la contraseña</label>
+                            <div class="input-shell has-toggle">
+                                <input
+                                    id="register-confirm"
+                                    type="password"
+                                    autocomplete="new-password"
+                                    placeholder="Repite tu contraseña"
+                                    minlength="6"
+                                    required
+                                >
+                                <button
+                                    class="toggle-password"
+                                    type="button"
+                                    data-target="register-confirm"
+                                >SHOW</button>
+                            </div>
+                        </div>
+
+                        <button id="register-submit" class="primary" type="submit">
+                            Crear cuenta
+                        </button>
+                    </form>
+
+                    <div class="password-note">
+                        <span class="icon">●</span>
+                        <span>
+                            El PNID funciona como nombre de usuario. Esta pantalla
+                            <b>no verifica la propiedad de una cuenta de Pretendo</b>;
+                            la contraseña creada aquí solo pertenece a Maki's Bio.
+                        </span>
+                    </div>
+                </section>
+
+                <div class="footer-note">
+                    Maki's Bio • Wii U / Miiverse inspired community
+                </div>
             </div>
+        </section>
+    </main>
 
-            <div class="input-group">
-                <label for="password">Contraseña</label>
-                <input type="password" id="password" name="password" placeholder="Ingresa tu contraseña" required autocomplete="current-password">
-            </div>
 
-            <button type="submit" class="btn-submit">Iniciar sesión</button>
-        </form>
-    </div>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import {
+            getAuth,
+            setPersistence,
+            browserLocalPersistence,
+            signInWithEmailAndPassword,
+            createUserWithEmailAndPassword
+        } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+
+        import {
+            getDatabase,
+            ref,
+            set,
+            serverTimestamp
+        } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyBC1CU5NvbyYvgb6W2nbxAWXtdPV63qhnA",
+            authDomain: "maki-s-bio.firebaseapp.com",
+            databaseURL: "https://maki-s-bio-default-rtdb.firebaseio.com",
+            projectId: "maki-s-bio",
+            storageBucket: "maki-s-bio.firebasestorage.app",
+            messagingSenderId: "267692056127",
+            appId: "1:267692056127:web:472b5f1ca8c82db4a3228a",
+            measurementId: "G-VQNKS44LPK"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getDatabase(app);
+
+        function limpiarPnid(pnid) {
+            return String(pnid || "").trim();
+        }
+
+        function pnidAEmail(pnid) {
+            return limpiarPnid(pnid).toLowerCase() + "@makiiverse.com";
+        }
+
+        async function prepararPersistencia() {
+            await setPersistence(auth, browserLocalPersistence);
+        }
+
+        window.iniciarSesionFirebase = async function(pnid, password) {
+            try {
+                const limpio = limpiarPnid(pnid);
+
+                if (!limpio || !password) {
+                    return { exito: false, codigo: "auth/missing-credentials" };
+                }
+
+                await prepararPersistencia();
+
+                const credencial = await signInWithEmailAndPassword(
+                    auth,
+                    pnidAEmail(limpio),
+                    password
+                );
+
+                localStorage.setItem("makiiverse_pnid", limpio);
+
+                return {
+                    exito: true,
+                    user: credencial.user,
+                    pnid: limpio
+                };
+            } catch (error) {
+                console.error("LOGIN Firebase:", error);
+                return {
+                    exito: false,
+                    codigo: error.code || "auth/unknown-error"
+                };
+            }
+        };
+
+        window.registrarCuentaMaki = async function(pnid, password) {
+            try {
+                const limpio = limpiarPnid(pnid);
+
+                if (!limpio) {
+                    return { exito: false, codigo: "auth/missing-pnid" };
+                }
+
+                if (!password || password.length < 6) {
+                    return { exito: false, codigo: "auth/weak-password" };
+                }
+
+                await prepararPersistencia();
+
+                const credencial = await createUserWithEmailAndPassword(
+                    auth,
+                    pnidAEmail(limpio),
+                    password
+                );
+
+                // Guardamos un perfil mínimo en RTDB.
+                // Si tus reglas todavía bloquean la escritura, la cuenta Auth
+                // seguirá creada y el usuario podrá iniciar sesión.
+                try {
+                    await set(ref(db, "users/" + credencial.user.uid), {
+                        uid: credencial.user.uid,
+                        pnid: limpio,
+                        pnidLower: limpio.toLowerCase(),
+                        createdAt: serverTimestamp()
+                    });
+                } catch (dbError) {
+                    console.warn("Cuenta creada, pero RTDB rechazó el perfil:", dbError);
+                }
+
+                localStorage.setItem("makiiverse_pnid", limpio);
+
+                return {
+                    exito: true,
+                    user: credencial.user,
+                    pnid: limpio
+                };
+            } catch (error) {
+                console.error("REGISTER Firebase:", error);
+                return {
+                    exito: false,
+                    codigo: error.code || "auth/unknown-error"
+                };
+            }
+        };
+
+        if (window.__resolveMakiAuthReady) {
+            window.__resolveMakiAuthReady(true);
+        }
+    </script>
 
     <script>
-        document.getElementById('miiverseLoginForm').addEventListener('submit', async function(e) {
-            e.preventDefault(); 
+        const dummyMii = "img/games/Dummy_mii_user.png";
+        const miiPreview = document.getElementById("mii-preview");
+        const previewPnid = document.getElementById("preview-pnid");
 
-            const pnid = document.getElementById('pnid').value.trim();
-            const password = document.getElementById('password').value; 
-            const errorDiv = document.getElementById('mensaje-error');
-            const btnSubmit = document.querySelector('.btn-submit');
+        function mostrarMensaje(elemento, mensaje, tipo) {
+            elemento.textContent = mensaje || "";
+            elemento.className = "message" + (mensaje ? " " + tipo : "");
+        }
 
-            errorDiv.style.display = 'none';
+        function mensajeFirebase(codigo) {
+            switch (codigo) {
+                case "auth/invalid-credential":
+                case "auth/user-not-found":
+                case "auth/wrong-password":
+                    return "PNID o contraseña incorrectos.";
 
-            if (!pnid || !password) {
-                mostrarError("Por favor, completa todos los campos.");
+                case "auth/email-already-in-use":
+                    return "Ese PNID ya tiene una cuenta de Maki's Bio.";
+
+                case "auth/weak-password":
+                    return "La contraseña debe tener al menos 6 caracteres.";
+
+                case "auth/too-many-requests":
+                    return "Hay demasiados intentos. Espera un poco y vuelve a intentarlo.";
+
+                case "auth/network-request-failed":
+                    return "No se pudo conectar con Firebase. Revisa tu conexión.";
+
+                case "auth/operation-not-allowed":
+                    return "Firebase Email/Password no está habilitado para este proyecto.";
+
+                case "auth/unauthorized-domain":
+                    return "Este dominio no está autorizado en Firebase Authentication.";
+
+                default:
+                    return "No se pudo completar la autenticación (" + (codigo || "error-desconocido") + ").";
+            }
+        }
+
+        function setCargando(button, cargando, textoNormal, textoCarga) {
+            button.disabled = cargando;
+            button.textContent = cargando ? textoCarga : textoNormal;
+        }
+
+        // Tabs
+        document.querySelectorAll(".tab").forEach(function(tab) {
+            tab.addEventListener("click", function() {
+                const view = tab.dataset.view;
+
+                document.querySelectorAll(".tab").forEach(function(item) {
+                    item.classList.toggle("active", item === tab);
+                });
+
+                document.querySelectorAll(".form-view").forEach(function(section) {
+                    section.classList.toggle(
+                        "active",
+                        section.id === view + "-view"
+                    );
+                });
+
+                const source = view === "login"
+                    ? document.getElementById("login-pnid")
+                    : document.getElementById("register-pnid");
+
+                actualizarPreview(source.value);
+            });
+        });
+
+        // Mostrar/ocultar passwords
+        document.querySelectorAll(".toggle-password").forEach(function(button) {
+            button.addEventListener("click", function() {
+                const input = document.getElementById(button.dataset.target);
+                const visible = input.type === "text";
+
+                input.type = visible ? "password" : "text";
+                button.textContent = visible ? "SHOW" : "HIDE";
+            });
+        });
+
+        let previewTimer = null;
+
+        function actualizarPreview(pnid) {
+            const limpio = String(pnid || "").trim();
+
+            previewPnid.textContent = limpio || "User";
+
+            clearTimeout(previewTimer);
+
+            if (!limpio) {
+                miiPreview.src = dummyMii;
                 return;
             }
 
-            btnSubmit.textContent = "Verificando...";
-            btnSubmit.disabled = true;
+            previewTimer = setTimeout(function() {
+                miiPreview.onerror = function() {
+                    this.onerror = null;
+                    this.src = dummyMii;
+                };
 
-            // Valida que el Mii/PNID exista a través de la API antes de auth
-            const validadorMii = new Image();
-            
-            validadorMii.onload = async function() {
-                if (typeof window.iniciarSesionFirebase === 'function') {
-                    const resultado = await window.iniciarSesionFirebase(pnid, password);
+                miiPreview.src =
+                    "https://mii-unsecure.ariankordi.net/miis/image.png" +
+                    "?nnid=" + encodeURIComponent(limpio) +
+                    "&type=face&width=270&api_id=1";
+            }, 280);
+        }
 
-                    if (resultado.exito) {
-                        localStorage.setItem('makiiverse_pnid', pnid);
-                        window.location.href = 'index.html';
-                    } else {
-                        switch (resultado.codigo) {
-                            case 'auth/invalid-credential':
-                            case 'auth/user-not-found':
-                            case 'auth/wrong-password':
-                                mostrarError("Error 102-2128: PNID o contraseña incorrectos.");
-                                break;
-                            case 'auth/too-many-requests':
-                                mostrarError("Demasiados intentos fallidos. Inténtalo más tarde.");
-                                break;
-                            default:
-                                mostrarError("Error de autenticación: " + resultado.codigo);
-                                break;
-                        }
-                        reiniciarBoton();
-                    }
-                } else {
-                    mostrarError("Error crítico: El módulo de base de datos no se ha cargado correctamente.");
-                    reiniciarBoton();
+        ["login-pnid", "register-pnid"].forEach(function(id) {
+            document.getElementById(id).addEventListener("input", function() {
+                const active = this.closest(".form-view").classList.contains("active");
+                if (active) actualizarPreview(this.value);
+            });
+        });
+
+        // LOGIN
+        document.getElementById("login-form").addEventListener("submit", async function(e) {
+            e.preventDefault();
+
+            const pnid = document.getElementById("login-pnid").value.trim();
+            const password = document.getElementById("login-password").value;
+            const message = document.getElementById("login-message");
+            const button = document.getElementById("login-submit");
+
+            mostrarMensaje(message, "", "");
+            setCargando(button, true, "Iniciar sesión", "Verificando...");
+
+            try {
+                await Promise.race([
+                    window.makiAuthReady,
+                    new Promise(function(_, reject) {
+                        setTimeout(function() {
+                            reject(new Error("MODULE_NOT_READY"));
+                        }, 10000);
+                    })
+                ]);
+
+                if (typeof window.iniciarSesionFirebase !== "function") {
+                    throw new Error("MODULE_NOT_READY");
                 }
-            };
 
-            validadorMii.onerror = function() {
-                mostrarError("Error 102-2128: El Pretendo Network ID ingresado no existe o no es válido.");
-                reiniciarBoton();
-            };
+                const resultado = await window.iniciarSesionFirebase(pnid, password);
 
-            validadorMii.src = `https://mii-unsecure.ariankordi.net/miis/image.png?nnid=${encodeURIComponent(pnid)}&type=face&width=270&api_id=1`;
+                if (!resultado.exito) {
+                    mostrarMensaje(message, mensajeFirebase(resultado.codigo), "error");
+                    return;
+                }
 
-            function mostrarError(mensaje) {
-                errorDiv.style.color = "#e60012";
-                errorDiv.style.border = "1px solid #ffcccc";
-                errorDiv.textContent = mensaje;
-                errorDiv.style.display = 'block';
+                mostrarMensaje(message, "Sesión iniciada. Entrando...", "success");
+
+                setTimeout(function() {
+                    window.location.href = "index.html";
+                }, 350);
+
+            } catch (error) {
+                console.error(error);
+
+                mostrarMensaje(
+                    message,
+                    error.message === "MODULE_NOT_READY"
+                        ? "Firebase no pudo cargar. Revisa la consola (F12) o tu conexión y vuelve a intentar."
+                        : "Ocurrió un error inesperado al iniciar sesión.",
+                    "error"
+                );
+
+            } finally {
+                setCargando(button, false, "Iniciar sesión", "Verificando...");
+            }
+        });
+
+        // REGISTRO
+        document.getElementById("register-form").addEventListener("submit", async function(e) {
+            e.preventDefault();
+
+            const pnid = document.getElementById("register-pnid").value.trim();
+            const password = document.getElementById("register-password").value;
+            const confirm = document.getElementById("register-confirm").value;
+            const message = document.getElementById("register-message");
+            const button = document.getElementById("register-submit");
+
+            mostrarMensaje(message, "", "");
+
+            if (password !== confirm) {
+                mostrarMensaje(message, "Las contraseñas no coinciden.", "error");
+                return;
             }
 
-            function reiniciarBoton() {
-                btnSubmit.textContent = "Iniciar sesión";
-                btnSubmit.disabled = false;
+            if (password.length < 6) {
+                mostrarMensaje(message, "La contraseña debe tener al menos 6 caracteres.", "error");
+                return;
+            }
+
+            setCargando(button, true, "Crear cuenta", "Creando cuenta...");
+
+            try {
+                await Promise.race([
+                    window.makiAuthReady,
+                    new Promise(function(_, reject) {
+                        setTimeout(function() {
+                            reject(new Error("MODULE_NOT_READY"));
+                        }, 10000);
+                    })
+                ]);
+
+                if (typeof window.registrarCuentaMaki !== "function") {
+                    throw new Error("MODULE_NOT_READY");
+                }
+
+                const resultado = await window.registrarCuentaMaki(pnid, password);
+
+                if (!resultado.exito) {
+                    mostrarMensaje(message, mensajeFirebase(resultado.codigo), "error");
+                    return;
+                }
+
+                mostrarMensaje(message, "¡Cuenta creada! Entrando a Maki's Bio...", "success");
+
+                setTimeout(function() {
+                    window.location.href = "index.html";
+                }, 500);
+
+            } catch (error) {
+                console.error(error);
+
+                mostrarMensaje(
+                    message,
+                    error.message === "MODULE_NOT_READY"
+                        ? "Firebase no pudo cargar. Revisa la consola (F12) o tu conexión y vuelve a intentar."
+                        : "Ocurrió un error inesperado al crear la cuenta.",
+                    "error"
+                );
+
+            } finally {
+                setCargando(button, false, "Crear cuenta", "Creando cuenta...");
             }
         });
     </script>
