@@ -983,7 +983,9 @@ async function openPublicProfile(
     ) {
         window.conmutarPortal(
             5,
-            "global-menu-mymenu"
+            "global-menu-mymenu",
+            false,
+            publicId
         );
     }
 
@@ -1203,6 +1205,86 @@ window.MakiPublicProfiles = {
 
                 routeToBase(
                     Boolean(replaceRoute)
+                );
+            }
+        },
+
+    getViewingPublicId:
+        function() {
+            return makiViewingPublicId;
+        },
+
+    openFromNavigationHistory:
+        async function(publicId) {
+            publicId =
+                String(publicId || "");
+
+            if (
+                !/^[0-9]{9}$/.test(
+                    publicId
+                )
+            ) {
+                return;
+            }
+
+            /*
+             * Actualizamos URL SIN crear otro paso
+             * en el historial del navegador.
+             */
+            window.history.replaceState(
+                {
+                    makiView: "user",
+                    publicId: publicId
+                },
+                "",
+                getPublicProfilePath(
+                    publicId
+                )
+            );
+
+            makiViewingPublicId =
+                publicId;
+
+            if (
+                typeof window.conmutarPortal ===
+                "function"
+            ) {
+                window.conmutarPortal(
+                    5,
+                    "global-menu-mymenu",
+                    true,
+                    publicId
+                );
+            }
+
+            setProfileLoading(
+                publicId
+            );
+
+            try {
+                const snapshot =
+                    await get(
+                        ref(
+                            makiPublicDB,
+                            "public_users/" +
+                            publicId
+                        )
+                    );
+
+                if (
+                    snapshot.exists()
+                ) {
+                    await renderProfile(
+                        publicId,
+                        snapshot.val() || {}
+                    );
+                }
+            }
+
+            catch (error) {
+                console.error(
+                    "Error regresando al perfil anterior:",
+                    error
                 );
             }
         },

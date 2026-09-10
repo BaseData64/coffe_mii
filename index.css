@@ -8985,132 +8985,133 @@ img, video, canvas {
 
 
 /* ============================================================
-   V28 — RESPONSIVE TOPBARS FIX
-   Desktop V27 permanece intacto.
+   V29 — TOPBARS: FIX REAL MULTIDISPOSITIVO
    ============================================================ */
+
+/* User Page ahora usa una clase real, ya no un selector frágil
+   basado en style*="width: 1400px". */
+#vista-userpage .userpage-topbar {
+    position: relative;
+    box-sizing: border-box;
+    width: calc(100vw - 160px);
+    margin-left: 110px;
+    margin-top: -50px;
+    padding: 12px 20px;
+
+    background:
+        linear-gradient(
+            to bottom,
+            #48d4ff 0%,
+            #23bce9 42%,
+            #119ed1 56%,
+            #0784b6 100%
+        );
+
+    border-bottom: 2px solid #08759f;
+
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.40),
+        0 3px 6px rgba(0,0,0,.10);
+}
 
 
 /* ------------------------------------------------------------
-   TABLET / MOBILE EN "DESKTOP SITE"
-   701px — 1100px
+   EXTENSIÓN DEL FONDO A LA IZQUIERDA
 
-   El body usa:
-       padding-left: 180px
+   No movemos el contenido de la barra.
+   Solo pintamos el mismo fondo detrás de la sidebar.
 
-   Por eso -180px lleva el fondo de la barra hasta el borde
-   izquierdo real, detrás de la sidebar.
+   Esto evita depender del ancho CSS que Android reporte.
    ------------------------------------------------------------ */
 
-@media screen and (min-width: 701px) and (max-width: 1100px) {
+#vista-perfil .home-topbar,
+#vista-juegos .games-clicker-style-topbar,
+#vista-messages .mii-clicker-topbar,
+#vista-proyectos .projects-clicker-style-topbar,
+#vista-sobremi .about-clicker-style-topbar,
+#vista-quepasara .chat-clicker-style-topbar,
+#vista-networks .networks-topbar,
+#vista-userpage .userpage-topbar {
+    position: relative !important;
+    overflow: visible !important;
+}
 
-    #vista-perfil .home-topbar,
-    #vista-juegos .games-clicker-style-topbar,
-    #vista-messages .mii-clicker-topbar,
-    #vista-proyectos .projects-clicker-style-topbar,
-    #vista-sobremi .about-clicker-style-topbar,
-    #vista-quepasara .chat-clicker-style-topbar,
-    #vista-networks .networks-topbar,
-    #vista-userpage > div:first-child {
 
-        box-sizing: border-box !important;
+/* El fondo se extiende un viewport completo a la izquierda.
+   La sidebar tiene z-index:20, por lo que sigue viéndose encima. */
+#vista-perfil .home-topbar::before,
+#vista-juegos .games-clicker-style-topbar::before,
+#vista-messages .mii-clicker-topbar::before,
+#vista-proyectos .projects-clicker-style-topbar::before,
+#vista-sobremi .about-clicker-style-topbar::before,
+#vista-quepasara .chat-clicker-style-topbar::before,
+#vista-networks .networks-topbar::before,
+#vista-userpage .userpage-topbar::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: -2px;
+    right: calc(100% - 1px);
+    width: 100vw;
 
-        width: 100vw !important;
+    background: inherit;
+    border-bottom: inherit;
+
+    pointer-events: none;
+}
+
+
+/* ------------------------------------------------------------
+   TABLET / ANDROID CON VIEWPORT ANCHO
+   La barra mantiene su contenido después de la sidebar.
+   El ::before llena el hueco azul de la izquierda.
+   ------------------------------------------------------------ */
+
+@media screen and (max-width: 1100px) {
+    #vista-userpage .userpage-topbar {
+        width: calc(100% + 40px) !important;
         max-width: none !important;
 
-        margin-left: -180px !important;
-        margin-right: 0 !important;
+        margin-left: -20px !important;
+        margin-right: -20px !important;
         margin-top: -20px !important;
 
-        /*
-         * El FONDO ocupa toda la pantalla.
-         * El contenido empieza después de la sidebar.
-         */
-        padding-left: 175px !important;
-        padding-right: 22px !important;
-
-        position: relative !important;
-        z-index: 1 !important;
-    }
-
-
-    #vista-perfil .home-topbar-inner,
-    #vista-juegos .games-clicker-style-topbar-inner,
-    #vista-messages .mii-clicker-topbar-inner,
-    #vista-proyectos .projects-clicker-style-topbar-inner,
-    #vista-sobremi .about-clicker-style-topbar-inner,
-    #vista-quepasara .chat-clicker-style-topbar-inner,
-    #vista-networks .networks-topbar-inner {
-        width: 100% !important;
-        max-width: none !important;
-        box-sizing: border-box !important;
+        padding: 12px 20px !important;
     }
 }
 
 
 /* ------------------------------------------------------------
-   TELÉFONO REAL <=700px
-
-   Aquí el menú lateral se convierte en barra inferior.
-   El body usa 12px a cada lado, así que -12px llena todo.
+   TELÉFONO REAL
+   Cuando sí entra <=700px, sidebar abajo y barra 100% arriba.
    ------------------------------------------------------------ */
 
 @media screen and (max-width: 700px) {
-
-    #vista-perfil .home-topbar,
-    #vista-juegos .games-clicker-style-topbar,
-    #vista-messages .mii-clicker-topbar,
-    #vista-proyectos .projects-clicker-style-topbar,
-    #vista-sobremi .about-clicker-style-topbar,
-    #vista-quepasara .chat-clicker-style-topbar,
-    #vista-networks .networks-topbar,
-    #vista-userpage > div:first-child {
-
-        box-sizing: border-box !important;
-
-        width: 100vw !important;
+    #vista-userpage .userpage-topbar {
+        width: calc(100% + 24px) !important;
         max-width: none !important;
 
         margin-left: -12px !important;
-        margin-right: 0 !important;
+        margin-right: -12px !important;
         margin-top: 0 !important;
 
-        padding-left: 14px !important;
-        padding-right: 14px !important;
-
-        position: relative !important;
-        z-index: 1 !important;
+        padding: 13px 14px !important;
     }
-
-
-    #vista-perfil .home-topbar-inner,
-    #vista-juegos .games-clicker-style-topbar-inner,
-    #vista-messages .mii-clicker-topbar-inner,
-    #vista-proyectos .projects-clicker-style-topbar-inner,
-    #vista-sobremi .about-clicker-style-topbar-inner,
-    #vista-quepasara .chat-clicker-style-topbar-inner,
-    #vista-networks .networks-topbar-inner {
-        width: 100% !important;
-        max-width: none !important;
-        box-sizing: border-box !important;
-    }
-
 
     /*
-     * User Page tenía selectores responsivos viejos basados en
-     * style*="width: 1400px". Este selector sí apunta a la barra
-     * actual y evita que desaparezca/se desplace.
+     * Con la sidebar ya abajo no hace falta extender el fondo
+     * 100vw hacia la izquierda.
      */
-    #vista-userpage > div:first-child {
-        left: auto !important;
-        right: auto !important;
+    #vista-perfil .home-topbar::before,
+    #vista-juegos .games-clicker-style-topbar::before,
+    #vista-messages .mii-clicker-topbar::before,
+    #vista-proyectos .projects-clicker-style-topbar::before,
+    #vista-sobremi .about-clicker-style-topbar::before,
+    #vista-quepasara .chat-clicker-style-topbar::before,
+    #vista-networks .networks-topbar::before,
+    #vista-userpage .userpage-topbar::before {
+        display: none !important;
     }
 }
 
-
-/* ------------------------------------------------------------
-   PROTECCIÓN EXTRA:
-   algunos navegadores Android en "Sitio de escritorio" reportan
-   ~980 CSS px. Caen arriba en 701–1100 y conservan la sidebar,
-   pero las barras ahora siguen llenando TODO el borde superior.
-   ------------------------------------------------------------ */
 
