@@ -8983,3 +8983,134 @@ img, video, canvas {
         1px solid #08759f !important;
 }
 
+
+/* ============================================================
+   V28 — RESPONSIVE TOPBARS FIX
+   Desktop V27 permanece intacto.
+   ============================================================ */
+
+
+/* ------------------------------------------------------------
+   TABLET / MOBILE EN "DESKTOP SITE"
+   701px — 1100px
+
+   El body usa:
+       padding-left: 180px
+
+   Por eso -180px lleva el fondo de la barra hasta el borde
+   izquierdo real, detrás de la sidebar.
+   ------------------------------------------------------------ */
+
+@media screen and (min-width: 701px) and (max-width: 1100px) {
+
+    #vista-perfil .home-topbar,
+    #vista-juegos .games-clicker-style-topbar,
+    #vista-messages .mii-clicker-topbar,
+    #vista-proyectos .projects-clicker-style-topbar,
+    #vista-sobremi .about-clicker-style-topbar,
+    #vista-quepasara .chat-clicker-style-topbar,
+    #vista-networks .networks-topbar,
+    #vista-userpage > div:first-child {
+
+        box-sizing: border-box !important;
+
+        width: 100vw !important;
+        max-width: none !important;
+
+        margin-left: -180px !important;
+        margin-right: 0 !important;
+        margin-top: -20px !important;
+
+        /*
+         * El FONDO ocupa toda la pantalla.
+         * El contenido empieza después de la sidebar.
+         */
+        padding-left: 175px !important;
+        padding-right: 22px !important;
+
+        position: relative !important;
+        z-index: 1 !important;
+    }
+
+
+    #vista-perfil .home-topbar-inner,
+    #vista-juegos .games-clicker-style-topbar-inner,
+    #vista-messages .mii-clicker-topbar-inner,
+    #vista-proyectos .projects-clicker-style-topbar-inner,
+    #vista-sobremi .about-clicker-style-topbar-inner,
+    #vista-quepasara .chat-clicker-style-topbar-inner,
+    #vista-networks .networks-topbar-inner {
+        width: 100% !important;
+        max-width: none !important;
+        box-sizing: border-box !important;
+    }
+}
+
+
+/* ------------------------------------------------------------
+   TELÉFONO REAL <=700px
+
+   Aquí el menú lateral se convierte en barra inferior.
+   El body usa 12px a cada lado, así que -12px llena todo.
+   ------------------------------------------------------------ */
+
+@media screen and (max-width: 700px) {
+
+    #vista-perfil .home-topbar,
+    #vista-juegos .games-clicker-style-topbar,
+    #vista-messages .mii-clicker-topbar,
+    #vista-proyectos .projects-clicker-style-topbar,
+    #vista-sobremi .about-clicker-style-topbar,
+    #vista-quepasara .chat-clicker-style-topbar,
+    #vista-networks .networks-topbar,
+    #vista-userpage > div:first-child {
+
+        box-sizing: border-box !important;
+
+        width: 100vw !important;
+        max-width: none !important;
+
+        margin-left: -12px !important;
+        margin-right: 0 !important;
+        margin-top: 0 !important;
+
+        padding-left: 14px !important;
+        padding-right: 14px !important;
+
+        position: relative !important;
+        z-index: 1 !important;
+    }
+
+
+    #vista-perfil .home-topbar-inner,
+    #vista-juegos .games-clicker-style-topbar-inner,
+    #vista-messages .mii-clicker-topbar-inner,
+    #vista-proyectos .projects-clicker-style-topbar-inner,
+    #vista-sobremi .about-clicker-style-topbar-inner,
+    #vista-quepasara .chat-clicker-style-topbar-inner,
+    #vista-networks .networks-topbar-inner {
+        width: 100% !important;
+        max-width: none !important;
+        box-sizing: border-box !important;
+    }
+
+
+    /*
+     * User Page tenía selectores responsivos viejos basados en
+     * style*="width: 1400px". Este selector sí apunta a la barra
+     * actual y evita que desaparezca/se desplace.
+     */
+    #vista-userpage > div:first-child {
+        left: auto !important;
+        right: auto !important;
+    }
+}
+
+
+/* ------------------------------------------------------------
+   PROTECCIÓN EXTRA:
+   algunos navegadores Android en "Sitio de escritorio" reportan
+   ~980 CSS px. Caen arriba en 701–1100 y conservan la sidebar,
+   pero las barras ahora siguen llenando TODO el borde superior.
+   ------------------------------------------------------------ */
+
