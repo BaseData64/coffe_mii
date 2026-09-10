@@ -1,0 +1,73 @@
+{
+  "rules": {
+    ".read": false,
+    ".write": false,
+    "users": {
+      "$uid": {
+        ".read": "auth != null && auth.uid == $uid",
+        ".write": "auth != null && auth.uid == $uid",
+        "publicId": {
+          ".validate": "newData.isString() && newData.val().matches(/^[0-9]{9}$/) && (data.exists() ? newData.val() == data.val() : !root.child('public_users').child(newData.val()).exists())"
+        }
+      }
+    },
+    "public_users": {
+      "$publicId": {
+        ".read": true,
+        ".write": "auth != null && root.child('users').child(auth.uid).child('publicId').val() == $publicId",
+        ".validate": "newData.hasChildren(['publicId','pnid','pnidLower','displayName','createdAt']) && newData.child('publicId').val() == $publicId"
+      }
+    },
+    "admins": {
+      ".read": "auth != null",
+      ".write": false
+    },
+    "verified_users": {
+      ".read": "auth != null",
+      ".write": false
+    },
+    "posts": {
+      ".read": true,
+      ".indexOn": [
+        "createdAt"
+      ],
+      "$postId": {
+        ".write": "auth != null && ((!data.exists() && newData.exists() && newData.child('uid').val() == auth.uid && newData.child('autor').val() == root.child('users').child(auth.uid).child('pnid').val()) || (data.exists() && !newData.exists() && root.child('users').child(auth.uid).child('pnid').val() == 'YosMakii99_PN'))",
+        ".validate": "!newData.exists() || (newData.hasChildren(['uid','autor','tipo','contenido','expresion','spoiler','createdAt','fecha']) && newData.child('uid').isString() && newData.child('autor').isString() && newData.child('tipo').isString() && (newData.child('tipo').val() == 'texto' || newData.child('tipo').val() == 'dibujo') && newData.child('contenido').isString() && newData.child('expresion').isString() && newData.child('spoiler').isBoolean() && newData.child('createdAt').isNumber() && newData.child('fecha').isString())",
+        "imagenAdjunta": {
+          ".validate": "!newData.exists() || newData.isString()"
+        },
+        "miiName": {
+          ".validate": "!newData.exists() || newData.isString()"
+        }
+      }
+    },
+    "post_yeahs": {
+      ".read": true,
+      "$postId": {
+        ".write": "auth != null && !newData.exists() && root.child('users').child(auth.uid).child('pnid').val() == 'YosMakii99_PN'",
+        "$uid": {
+          ".write": "auth != null && auth.uid == $uid",
+          ".validate": "!newData.exists() || (newData.hasChildren(['pnid','miiName','givenAt']) && newData.child('pnid').isString() && newData.child('pnid').val() == root.child('users').child(auth.uid).child('pnid').val() && newData.child('miiName').isString() && newData.child('givenAt').isNumber())"
+        }
+      }
+    },
+    "mii_clicker": {
+      ".read": true,
+      ".write": "auth != null"
+    },
+    "favorite_games_yeahs": {
+      ".read": true,
+      ".write": "auth != null"
+    },
+    "page_post_yeahs": {
+      ".read": true,
+      "$postKey": {
+        "$uid": {
+          ".write": "auth != null && auth.uid == $uid",
+          ".validate": "!newData.exists() || newData.val() == true"
+        }
+      }
+    }
+  }
+}

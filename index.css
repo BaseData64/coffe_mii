@@ -1,0 +1,8985 @@
+/*
+============================================================
+MAKI'S BIO — index.css
+V23 SAFE SPLIT
+
+Este archivo contiene, EN EL MISMO ORDEN, todos los bloques
+<style> que antes estaban incrustados dentro de index.html.
+
+IMPORTANTE:
+- El proyecto ya usaba style.css.
+- NO lo reemplazamos.
+- index.html carga primero style.css y después index.css.
+- Así conservamos la cascada original de Maki's Bio.
+============================================================
+*/
+
+
+/* ============================================================
+   ORIGINAL STYLE BLOCK 01 — inline-style-01
+   ============================================================ */
+body {
+            margin: 0;
+            padding: 50px;
+            min-height: 100vh;
+            font-family: 'MiiverseFont', sans-serif;
+            position: relative;
+            /* Eliminamos el background de aquí para pasarlo al fondo fijo */
+        }
+
+        /* Capa de fondo fija independiente para móviles y PC */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-image: url('background.png');
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover; /* Cambiado a cover para que cubra toda la pantalla por completo */
+            z-index: -10; /* Lo envía al fondo detrás de todos los elementos */
+            pointer-events: none; /* Evita que interfiera con los clics o toques */
+        }
+
+        @media (max-width: 768px) {
+            body {
+                background-size: auto 110%;
+            }
+        }
+
+        .card, .card-standard, .card-user {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 170px;   
+            height: 150px;   
+            background-color: #ffffff;
+            border-radius: 0;
+            cursor: pointer;
+            margin-bottom: 0;
+            box-shadow: 0 10px 20px rgb(201, 201, 201);
+        }
+
+        .card-title-user {
+            font-size: 20px;
+            font-weight: 600;
+            margin-top: 85px;
+            color: #555555; 
+            text-align: center;
+            transition: color 0.2s ease;
+            font-family: 'MiiverseFont', sans-serif;
+        }
+
+        .card-title {
+            font-size: 20px;
+            font-family: "MiiverseFont", sans-serif;
+        }
+
+        .card.selected,
+        .card.selected .card-title,
+        .selected .card-title-user {
+            color:#00e1ff;
+        }
+
+        @font-face {
+            font-family: "MiiverseIcons"; 
+            src: url("font/MiiverseSymbols-Regular.ttf") format("truetype");
+            font-weight: normal;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: "MiiverseFont"; 
+            src: url("font/nintendoNTLG-DB001.ttf") format("truetype");
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        .favorite-button {
+            position: absolute;
+            top: 140px;      
+            right: 40px;   
+            width: 420px;
+            height: 100px;
+            background-color: #ffffff;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            padding-left: 20px;
+            box-shadow: 0 8px 18px rgba(0,0,0,0.25);
+            cursor: pointer;
+        }
+
+        .card-icons {
+            font-family: "MiiverseIcons";
+            font-size: 65px; 
+            color: #c4c2c2ff;
+            margin-left: 10px;
+            transition: color 0.2s ease;
+            margin-top: 10px;
+        }
+
+        .linea-degradada h1 {
+            color: white;
+            margin: 0;
+            font-size: 24px;    
+            text-transform: uppercase; 
+        }
+
+        .contenedor-seccion-roja {
+            background-color: #ffffff;
+            border: 1px solid #dcdcdc;
+            border-radius: 12px;
+            padding: 0 !important;   
+            overflow: hidden;        
+            margin-top: 25px;
+            width: 100%;
+            box-sizing: border-box;
+            box-shadow: 0 10px 20px rgb(201, 201, 201);
+        }
+
+        .barra-roja-interna {
+            width: 100%;
+            height: 62px;
+            background: linear-gradient(to right, #ff4d4d, #990000);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .barra-roja-interna h1 {
+            color: white !important;
+            margin: 0 !important;
+            font-size: 24px;
+            text-transform: uppercase;
+            font-family: "MiiverseFont", sans-serif;
+            font-weight: bold;
+        }
+
+        .lista-comunidades-pura {
+            display: flex;
+            flex-direction: column;
+            width: 90%;                                     
+            margin-left: 155px;              
+            margin-top: 35px;
+            font-family: "MiiverseFont", sans-serif;
+        }
+
+        /* --- CSS BLINDADO --- */
+        #global-menu .card .symbol, 
+        #global-menu .card .label, 
+        #global-menu .card .icons, 
+        #global-menu .card .name {
+            color: #c4c2c2 !important;
+        }
+
+        #global-menu .card.selected .symbol, 
+        #global-menu .card.selected .label, 
+        #global-menu .card.selected .icons, 
+        #global-menu .card.selected .name {
+            color: #04afff !important;
+        }
+
+        #global-menu a { 
+            text-decoration: none !important; 
+            color: inherit !important; 
+        }
+        /* -------------------- */
+    
+
+
+/* ============================================================
+   ORIGINAL STYLE BLOCK 02 — maki-miiverse-sidebar-remaster
+   ============================================================ */
+/* ============================================================
+   MAKI'S BIO - SIDEBAR REMASTER V2
+   - 5 botones reales, sin espacio/botón vacío
+   - iconos MiiverseIcons originales de Maki's Bio
+   - selección azul cielo fuerte
+   - User Page también tiene estado selected
+   - no cambia ninguna función ni destino
+   ============================================================ */
+
+#global-menu {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 160px !important;
+    height: 600px !important; /* 5 filas x 120px */
+    padding: 0 !important;
+    margin: 0 !important;
+    list-style: none !important;
+    overflow: hidden !important;
+    z-index: 20 !important;
+    font-family: 'MiiverseFont', sans-serif !important;
+    background: linear-gradient(to right, #ffffff 0%, #e9e9e9 100%) !important;
+    border-radius: 0 60px 60px 0 !important;
+    -webkit-border-radius: 0 60px 60px 0 !important;
+    box-shadow: 0 3px 10px rgba(0,0,0,.60) !important;
+    -webkit-box-shadow: 0 3px 10px rgba(0,0,0,.60) !important;
+}
+
+#global-menu > li.card {
+    position: relative !important;
+    display: block !important;
+    width: auto !important;
+    height: 120px !important;
+    padding: 0 !important;
+    margin: 0 15px !important;
+    box-sizing: border-box !important;
+    list-style: none !important;
+    background: transparent !important;
+    border: 0 !important;
+    border-top: 2px solid #e5e5e5 !important;
+    border-radius: 0 !important;
+    box-shadow: inset 0 2px 0 #ffffff !important;
+    -webkit-box-shadow: inset 0 2px 0 #ffffff !important;
+    cursor: pointer !important;
+}
+
+#global-menu > li.card > a {
+    position: relative !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 160px !important;
+    height: 118px !important;
+    padding: 0 !important;
+    margin: 0 -15px !important;
+    box-sizing: border-box !important;
+    color: #323232 !important;
+    font-family: 'MiiverseFont', sans-serif !important;
+    font-size: 20px !important;
+    font-weight: normal !important;
+    line-height: 1 !important;
+    letter-spacing: -1px !important;
+    text-align: center !important;
+    text-decoration: none !important;
+    text-shadow: 0 2px 0 #ffffff !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+}
+
+#global-menu > #global-menu-mymenu {
+    border-top: 0 !important;
+    box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+}
+
+#global-menu > #global-menu-mymenu > a {
+    border-top-right-radius: 60px !important;
+    -webkit-border-top-right-radius: 60px !important;
+}
+
+#global-menu #global-menu-mymenu .mii-icon {
+    display: block !important;
+    width: 64px !important;
+    height: 64px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+    background: #ffffff !important;
+    border: 1px solid #d0d0d0 !important;
+    border-radius: 10px !important;
+    -webkit-border-radius: 10px !important;
+    box-shadow: 0 -1px 2px rgba(0,0,0,.40) !important;
+    -webkit-box-shadow: 0 -1px 2px rgba(0,0,0,.40) !important;
+    line-height: 0 !important;
+}
+
+#global-menu #global-menu-mymenu .mii-icon img {
+    display: block !important;
+    width: 64px !important;
+    height: 64px !important;
+    object-fit: cover !important;
+    border: 0 !important;
+    border-radius: 9px !important;
+    -webkit-border-radius: 9px !important;
+}
+
+#global-menu #user-sidebar-name {
+    display: block !important;
+    max-width: 145px !important;
+    margin-top: 7px !important;
+    overflow: hidden !important;
+    color: #323232 !important;
+    font-family: 'MiiverseFont', sans-serif !important;
+    font-size: 20px !important;
+    font-weight: normal !important;
+    line-height: 22px !important;
+    text-align: center !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+}
+
+#global-menu .sidebar-old-icon {
+    display: block !important;
+    height: 66px !important;
+    margin: 0 !important;
+    color: #9d9d9d !important;
+    font-family: 'MiiverseIcons' !important;
+    font-size: 64px !important;
+    font-weight: normal !important;
+    line-height: 66px !important;
+    text-align: center !important;
+    text-shadow: 0 2px 0 #ffffff !important;
+}
+
+#global-menu .sidebar-label {
+    display: block !important;
+    margin-top: 2px !important;
+    color: #323232 !important;
+    font-family: 'MiiverseFont', sans-serif !important;
+    font-size: 20px !important;
+    font-weight: normal !important;
+    line-height: 22px !important;
+    text-align: center !important;
+}
+
+#global-menu > li.card.selected > a {
+    color: #00aeff !important;
+    background: linear-gradient(to bottom, #dddddd 0%, #f0f0f0 100%) !important;
+    box-shadow: 0 2px 0 #ffffff, inset 0 1px 1px rgba(0,0,0,.20), inset 0 -1px 1px rgba(0,0,0,.10) !important;
+    -webkit-box-shadow: 0 2px 0 #ffffff, inset 0 1px 1px rgba(0,0,0,.20), inset 0 -1px 1px rgba(0,0,0,.10) !important;
+}
+
+#global-menu > li.card.selected .sidebar-old-icon,
+#global-menu > li.card.selected .sidebar-label,
+#global-menu > #global-menu-mymenu.selected #user-sidebar-name {
+    color: #00aeff !important;
+}
+
+#global-menu > #global-menu-mymenu.selected .mii-icon {
+    border-color: #00aeff !important;
+    box-shadow: 0 0 0 2px rgba(0,174,255,.20), 0 0 12px rgba(0,174,255,.55), 0 -1px 2px rgba(0,0,0,.25) !important;
+    -webkit-box-shadow: 0 0 0 2px rgba(0,174,255,.20), 0 0 12px rgba(0,174,255,.55), 0 -1px 2px rgba(0,0,0,.25) !important;
+}
+
+#global-menu > #boton-navegacion-miiverse {
+    margin: 0 15px !important;
+    border-top: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+}
+
+#global-menu > #boton-navegacion-miiverse > a {
+    height: 120px !important;
+    border-bottom-right-radius: 60px !important;
+    -webkit-border-bottom-right-radius: 60px !important;
+    background: linear-gradient(to right, #5a5a5a 0%, #242424 100%) !important;
+    color: #ffffff !important;
+    text-shadow: 0 -2px 0 rgba(0,0,0,.60) !important;
+}
+
+#nav-icono-wiiu {
+    display: block;
+    width: 64px;
+    height: 64px;
+    margin: 0;
+    text-align: center;
+}
+
+#nav-icono-wiiu:empty {
+    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADcAAAA3CAAAAACNsI2aAAACpklEQVR4AY3WhXb6ShDA4fsmFTRNT4u7Q7Tu7u44dXd/5DuLhf1nNuV3pMDsh5XN2f9URVEkUsrv9yeFNCmVSiWqxeOxWCxSLRRy9/X1eQOwyufzeRtO8PAc5GO6oM1kMnWbHLQTHHxsaWnJx7kYLmwzCfPz447u/hYHzJn9JW3YXagL23suyPxtoKtfc8Auf2rtAtS7gJ2/qC9Qu/obTqoyDepcwNJkBPI1JzmdF99aAGkHLHDeskDt7Km6oAsYBZ2UA/ZCLZjpdBDnufii2wGouaAl8PxFt2QHl1mHWzrYdEEbsH9LgBOeP3Vt2x11B+wJmYOb/kTatvIx4kLwasi4AG7sA2urCoE9YdMSOOX+HavSy8fCtuAjOtwibvudBe0M9pQkTsm9oZV7gw/4ZKr++8y+opXv0YcfBpr7gQFxJrbsv5OXdrsXqf1+/NxedyK13wE+tdMtMMohEGUBnZO2Hv/qRgwgTlh8MO5aDqBOWLw36koO4Q7gHbsrKcRwhvASGNuFlVu880DQwIU55QbvmLMFmQ7YNasjzubDHWFX7A45sw91xgygx+xBXISTL40re0wenYvw8sVfldwmD+2AKed/V3Sb3K0OmHzWTkVXt1tzKGPDpgN22m4FZ7er7mK8XGm/PIHEJXqlMtphoYyVc3R7iXPIDJZWWZAHJ6RLaAfpRELJo6MscamDItY+sERcyaHDIXDDTAYuLqNwDdxkAanGwMXkLDJeB6fk9e0J2rlAPtHPV4jbQFjrOUTUQ4G4wb0c3a5An3vE4xzdgo84GgITU7QjkGY1p6i7Wa1dUX+uE4+yWgvafiBQYzpHwYXW/afunNTaAaZ3AA/rC+bp/V6HK8xzcmb3hDSjuy5Nr2wujhicy6PDy2vTKcZ13sCRtOvn/+fgkQUcKzhKAAAAAElFTkSuQmCC") !important;
+    background-repeat: no-repeat !important;
+    background-position: center center !important;
+    background-size: 55px 55px !important;
+}
+
+#nav-icono-wiiu:not(:empty) {
+    background: none !important;
+    color: #999999 !important;
+    font-family: 'MiiverseIcons' !important;
+    font-size: 68px !important;
+    font-weight: normal !important;
+    line-height: 64px !important;
+}
+
+#nav-texto-wiiu {
+    display: block !important;
+    margin: 2px 0 0 !important;
+    color: #ffffff;
+    font-family: 'MiiverseFont', sans-serif !important;
+    font-size: 20px !important;
+    font-weight: normal !important;
+    line-height: 22px !important;
+    text-align: center !important;
+}
+
+#global-menu > #boton-navegacion-miiverse:has(#nav-icono-wiiu:not(:empty)) > a {
+    background: linear-gradient(to bottom, #ffffff 0%, #e6e6e6 100%) !important;
+    color: #323232 !important;
+    text-shadow: 0 2px 0 #ffffff !important;
+}
+
+#global-menu > #boton-navegacion-miiverse:has(#nav-icono-wiiu:not(:empty)) #nav-texto-wiiu {
+    color: #6b6969 !important;
+}
+
+
+/* ============================================================
+   ORIGINAL STYLE BLOCK 03 — inline-style-03
+   ============================================================ */
+/* ============================================================
+   ============================================================
+                           HOME
+   ============================================================
+   ============================================================ */
+
+#vista-perfil {
+    position: relative;
+    z-index: 1;
+
+    min-height: 1000px;
+
+    font-family:
+        'MiiverseFont',
+        sans-serif;
+}
+
+
+/* ============================================================
+   ============================================================
+                      TOPBAR PRINCIPAL
+   ============================================================
+   ============================================================ */
+
+#vista-perfil .home-topbar {
+    margin-top: -50px;
+    margin-left: 100px;
+    width: 1385px;
+
+    padding:
+        15px 22px;
+
+    background:
+        linear-gradient(
+            to bottom,
+            #77e5ff 0%,
+            #48d2f5 24%,
+            #25bde6 50%,
+            #119dca 74%,
+            #0786b3 100%
+        );
+
+    border-bottom:
+        2px solid #0879a1;
+
+    box-shadow:
+        inset 0 2px 0 rgba(255,255,255,.52),
+        inset 0 -2px 0 rgba(0,75,115,.17),
+        0 3px 6px rgba(0,0,0,.10);
+}
+
+
+/* ============================================================
+   TOPBAR INNER
+   ============================================================ */
+
+#vista-perfil .home-topbar-inner {
+    display: flex;
+
+    align-items: center;
+
+    justify-content:
+        space-between;
+}
+
+
+/* ============================================================
+   TÍTULO
+   ============================================================ */
+
+#vista-perfil .home-topbar h1 {
+    margin: 0;
+
+    color:
+        #ffffff;
+
+    font-size:
+        25px;
+
+    font-weight:
+        bold;
+
+    line-height:
+        1;
+
+    text-shadow:
+        0 1px 2px rgba(0,70,110,.30);
+}
+
+
+/* ============================================================
+   BADGE HOME
+   ============================================================ */
+
+#vista-perfil .home-topbar-badge {
+    padding:
+        5px 13px;
+
+    color:
+        #ffffff;
+
+    font-size:
+        11px;
+
+    font-weight:
+        bold;
+
+    border:
+        1px solid rgba(255,255,255,.58);
+
+    border-radius:
+        20px;
+
+    background:
+        rgba(0,100,150,.17);
+
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.22);
+
+    text-shadow:
+        0 1px 1px rgba(0,0,0,.13);
+}
+
+
+/* ============================================================
+   ============================================================
+                        PAGE PRINCIPAL
+   ============================================================
+   ============================================================ */
+
+#vista-perfil .home-page {
+    width:
+        78%;
+
+    max-width:
+        1080px;
+
+    margin-left:
+        170px;
+
+    margin-top:
+        33px;
+
+    padding-bottom:
+        90px;
+
+    box-sizing:
+        border-box;
+}
+
+
+/* ============================================================
+   ============================================================
+                  TARJETA DE BIENVENIDA
+   ============================================================
+   ============================================================ */
+
+#vista-perfil .home-profile-card {
+    position:
+        relative;
+
+    overflow:
+        hidden;
+
+    min-height:
+        155px;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    padding:
+        23px 28px;
+
+    box-sizing:
+        border-box;
+
+    background:
+        linear-gradient(
+            to bottom,
+            #ffffff 0%,
+            #ffffff 69%,
+            #f3fbfe 100%
+        );
+
+    border:
+        1px solid #bcd5df;
+
+    border-radius:
+        14px;
+
+    box-shadow:
+        0 4px 13px rgba(0,90,130,.10),
+        inset 0 1px 0 #ffffff;
+}
+
+
+/* ============================================================
+   FRANJA AZUL SUPERIOR
+   ============================================================ */
+
+#vista-perfil .home-profile-card::before {
+    content:
+        "";
+
+    position:
+        absolute;
+
+    top:
+        0;
+
+    left:
+        0;
+
+    right:
+        0;
+
+    height:
+        6px;
+
+    background:
+        linear-gradient(
+            to right,
+            #73e4ff,
+            #28bfe9,
+            #0789b8
+        );
+}
+
+
+/* ============================================================
+   MII FRAME
+   ============================================================ */
+
+#vista-perfil .home-profile-mii-frame {
+    position:
+        relative;
+
+    width:
+        105px;
+
+    height:
+        105px;
+
+    flex-shrink:
+        0;
+
+    overflow:
+        hidden;
+
+    background:
+        radial-gradient(
+            circle at center,
+            #ffffff,
+            #eaf7fb
+        );
+
+    border:
+        1px solid #9fcbd9;
+
+    border-radius:
+        14px;
+
+    box-shadow:
+        0 3px 8px rgba(0,80,120,.12),
+        inset 0 1px 0 #ffffff;
+}
+
+
+/* ============================================================
+   MII
+   ============================================================ */
+
+#vista-perfil .home-profile-mii {
+    display:
+        block;
+
+    width:
+        100%;
+
+    height:
+        100%;
+
+    object-fit:
+        cover;
+
+    object-position:
+        center;
+}
+
+
+/* ============================================================
+   PROFILE INFO
+   ============================================================ */
+
+#vista-perfil .home-profile-info {
+    flex:
+        1;
+
+    min-width:
+        0;
+
+    margin-left:
+        23px;
+}
+
+
+/* ============================================================
+   NOMBRE
+   ============================================================ */
+
+#vista-perfil .home-profile-name {
+    display:
+        block;
+
+    color:
+        #34464e;
+
+    font-size:
+        24px;
+
+    font-weight:
+        bold;
+
+    line-height:
+        1.15;
+}
+
+
+/* ============================================================
+   PNID
+   ============================================================ */
+
+#vista-perfil .home-profile-pnid {
+    display:
+        block;
+
+    margin-top:
+        3px;
+
+    color:
+        #169ac8;
+
+    font-size:
+        13px;
+
+    font-weight:
+        bold;
+}
+
+
+/* ============================================================
+   DESCRIPCIÓN
+   ============================================================ */
+
+#vista-perfil .home-profile-description {
+    max-width:
+        720px;
+
+    margin:
+        12px 0 0 0;
+
+    color:
+        #66747b;
+
+    font-size:
+        14px;
+
+    line-height:
+        1.55;
+}
+
+
+/* ============================================================
+   STATUS
+   ============================================================ */
+
+#vista-perfil .home-profile-status {
+    margin-left:
+        25px;
+
+    padding:
+        7px 14px;
+
+    flex-shrink:
+        0;
+
+    color:
+        #138db8;
+
+    font-size:
+        11px;
+
+    font-weight:
+        bold;
+
+    background:
+        linear-gradient(
+            to bottom,
+            #ffffff,
+            #edf9fd
+        );
+
+    border:
+        1px solid #acd5e4;
+
+    border-radius:
+        16px;
+
+    box-shadow:
+        inset 0 1px 0 #ffffff;
+}
+
+
+/* ============================================================
+   ============================================================
+                    COMMUNITY HEADER
+   ============================================================
+   ============================================================ */
+
+#vista-perfil .home-section-header {
+    margin-top:
+        31px;
+
+    margin-bottom:
+        14px;
+
+    padding:
+        12px 18px;
+
+    color:
+        #ffffff;
+
+    font-size:
+        19px;
+
+    font-weight:
+        bold;
+
+    background:
+        linear-gradient(
+            to bottom,
+            #979797,
+            #858585
+        );
+
+    border:
+        1px solid #767676;
+
+    border-radius:
+        9px 9px 4px 4px;
+
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.22);
+
+    text-shadow:
+        0 1px 1px rgba(0,0,0,.20);
+}
+
+
+/* ============================================================
+   ============================================================
+                  LISTA DE UNA SOLA COLUMNA
+   ============================================================
+   ============================================================ */
+
+#vista-perfil .home-community-list {
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    width:
+        100%;
+
+    gap:
+        12px;
+}
+
+
+/* ============================================================
+   ============================================================
+                    COMMUNITY BUTTON
+   ============================================================
+   ============================================================ */
+
+#vista-perfil .home-community {
+    position:
+        relative;
+
+    width:
+        100%;
+
+    min-height:
+        96px;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    padding:
+        12px 58px 12px 14px;
+
+    box-sizing:
+        border-box;
+
+    overflow:
+        hidden;
+
+    cursor:
+        pointer;
+
+    text-align:
+        left;
+
+    font-family:
+        'MiiverseFont',
+        sans-serif;
+
+    background:
+        linear-gradient(
+            to bottom,
+            #ffffff 0%,
+            #ffffff 67%,
+            #f6f6f6 100%
+        );
+
+    border:
+        1px solid #cccccc;
+
+    border-radius:
+        11px;
+
+    box-shadow:
+        0 3px 8px rgba(0,0,0,.07),
+        inset 0 1px 0 #ffffff;
+
+    outline:
+        none;
+
+    transition:
+        transform .09s ease,
+        border-color .09s ease,
+        box-shadow .09s ease,
+        background .09s ease;
+}
+
+
+/* ============================================================
+   HOVER
+   ============================================================ */
+
+#vista-perfil .home-community:hover {
+    transform:
+        translateY(-2px);
+
+    border-color:
+        #9ccfdf;
+
+    background:
+        linear-gradient(
+            to bottom,
+            #ffffff,
+            #f7fcfe
+        );
+
+    box-shadow:
+        0 6px 12px rgba(0,110,160,.12),
+        inset 0 1px 0 #ffffff;
+}
+
+
+/* ============================================================
+   CLICK
+   ============================================================ */
+
+#vista-perfil .home-community:active {
+    transform:
+        translateY(1px);
+}
+
+
+/* ============================================================
+   COLOR STRIP IZQUIERDO
+   ============================================================ */
+
+#vista-perfil .home-community::before {
+    content:
+        "";
+
+    position:
+        absolute;
+
+    top:
+        0;
+
+    left:
+        0;
+
+    bottom:
+        0;
+
+    width:
+        5px;
+
+    background:
+        var(--community-color);
+
+    box-shadow:
+        1px 0 4px rgba(0,0,0,.06);
+}
+
+
+/* ============================================================
+   ============================================================
+                    ICONO DE COMUNIDAD
+   ============================================================
+   ============================================================ */
+
+#vista-perfil .home-community-icon {
+    position:
+        relative;
+
+    width:
+        72px;
+
+    height:
+        72px;
+
+    flex-shrink:
+        0;
+
+    overflow:
+        hidden;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    margin-left:
+        4px;
+
+    margin-right:
+        17px;
+
+    background:
+        linear-gradient(
+            to bottom,
+            #ffffff,
+            #f5f5f5
+        );
+
+    border:
+        1px solid #c3c3c3;
+
+    border-radius:
+        11px;
+
+    box-shadow:
+        0 2px 5px rgba(0,0,0,.09),
+        inset 0 1px 0 rgba(255,255,255,.85);
+}
+
+
+/* ============================================================
+   BRILLO EN ICONO
+   ============================================================ */
+
+#vista-perfil .home-community-icon::after {
+    content:
+        "";
+
+    position:
+        absolute;
+
+    left:
+        4px;
+
+    right:
+        4px;
+
+    top:
+        3px;
+
+    height:
+        18px;
+
+    pointer-events:
+        none;
+
+    border-radius:
+        8px 8px 50% 50%;
+
+    background:
+        linear-gradient(
+            to bottom,
+            rgba(255,255,255,.35),
+            rgba(255,255,255,0)
+        );
+}
+
+
+/* ============================================================
+   IMAGEN ICONO
+   ============================================================ */
+
+#vista-perfil .home-community-icon img {
+    display:
+        block;
+
+    width:
+        100%;
+
+    height:
+        100%;
+
+    object-fit:
+        cover;
+}
+
+
+/* ============================================================
+   CONTAIN
+   ============================================================ */
+
+#vista-perfil .home-community-icon img.contain {
+    width:
+        87%;
+
+    height:
+        87%;
+
+    object-fit:
+        contain;
+}
+
+
+/* ============================================================
+   ============================================================
+                        TEXTOS
+   ============================================================
+   ============================================================ */
+
+#vista-perfil .home-community-info {
+    flex:
+        1;
+
+    min-width:
+        0;
+}
+
+
+/* ============================================================
+   TÍTULO
+   ============================================================ */
+
+#vista-perfil .home-community-title {
+    display:
+        block;
+
+    color:
+        #414141;
+
+    font-size:
+        18px;
+
+    font-weight:
+        bold;
+
+    line-height:
+        1.2;
+}
+
+
+/* ============================================================
+   DESCRIPCIÓN
+   ============================================================ */
+
+#vista-perfil .home-community-description {
+    display:
+        block;
+
+    margin-top:
+        5px;
+
+    color:
+        #929292;
+
+    font-size:
+        12px;
+
+    line-height:
+        1.35;
+}
+
+
+/* ============================================================
+   ============================================================
+                         FLECHA
+   ============================================================
+   ============================================================ */
+
+#vista-perfil .home-community-arrow {
+    position:
+        absolute;
+
+    top:
+        50%;
+
+    right:
+        22px;
+
+    transform:
+        translateY(-50%);
+
+    color:
+        #aaaaaa;
+
+    font-family:
+        Arial,
+        sans-serif;
+
+    font-size:
+        31px;
+
+    font-weight:
+        normal;
+
+    transition:
+        color .09s ease,
+        right .09s ease;
+}
+
+
+/* ============================================================
+   FLECHA HOVER
+   ============================================================ */
+
+#vista-perfil
+.home-community:hover
+.home-community-arrow {
+
+    color:
+        var(--community-color);
+
+    right:
+        18px;
+}
+
+
+/* ============================================================
+   ============================================================
+                     COLORES COMUNIDADES
+   ============================================================
+   ============================================================ */
+
+
+/* FAVORITE GAMES */
+
+#vista-perfil .community-games {
+    --community-color:
+        #23b9e5;
+}
+
+
+/* PROJECTS */
+
+#vista-perfil .community-projects {
+    --community-color:
+        #eea421;
+}
+
+
+/* ABOUT ME */
+
+#vista-perfil .community-about {
+    --community-color:
+        #23b9e5;
+}
+
+
+/* GENERAL CHAT */
+
+#vista-perfil .community-general {
+    --community-color:
+        #23b9e5;
+}
+
+
+/* NETWORKS */
+
+#vista-perfil .community-networks {
+    --community-color:
+        #28bfe9;
+}
+
+
+/* MII CLICKER */
+
+#vista-perfil .community-clicker {
+    --community-color:
+        #72ce1f;
+}
+
+
+/* ============================================================
+   ============================================================
+                         MORE
+   ============================================================
+   ============================================================ */
+
+#vista-perfil .home-more-separator {
+    position:
+        relative;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    gap:
+        14px;
+
+    margin:
+        27px 0 16px 0;
+}
+
+
+/* ============================================================
+   LÍNEAS
+   ============================================================ */
+
+#vista-perfil .home-more-separator::before,
+#vista-perfil .home-more-separator::after {
+    content:
+        "";
+
+    flex:
+        1;
+
+    height:
+        1px;
+}
+
+
+#vista-perfil .home-more-separator::before {
+    background:
+        linear-gradient(
+            to right,
+            transparent,
+            #cacaca
+        );
+}
+
+
+#vista-perfil .home-more-separator::after {
+    background:
+        linear-gradient(
+            to left,
+            transparent,
+            #cacaca
+        );
+}
+
+
+/* ============================================================
+   PASTILLA MORE
+   ============================================================ */
+
+#vista-perfil .home-more-separator span {
+    min-width:
+        70px;
+
+    padding:
+        6px 17px;
+
+    box-sizing:
+        border-box;
+
+    text-align:
+        center;
+
+    color:
+        #777777;
+
+    font-size:
+        12px;
+
+    font-weight:
+        bold;
+
+    text-transform:
+        uppercase;
+
+    background:
+        linear-gradient(
+            to bottom,
+            #ffffff,
+            #eeeeee
+        );
+
+    border:
+        1px solid #c9c9c9;
+
+    border-radius:
+        18px;
+
+    box-shadow:
+        inset 0 1px 0 #ffffff,
+        0 2px 3px rgba(0,0,0,.05);
+}
+
+
+/* ============================================================
+   ============================================================
+                          FOOTER
+   ============================================================
+   ============================================================ */
+
+#vista-perfil .home-footer-info {
+    padding:
+        13px 18px;
+
+    margin-top:
+        24px;
+
+    text-align:
+        center;
+
+    color:
+        #8c9aa0;
+
+    font-size:
+        12px;
+
+    background:
+        linear-gradient(
+            to bottom,
+            #ffffff,
+            #f2fafc
+        );
+
+    border:
+        1px solid #c5dce4;
+
+    border-radius:
+        9px;
+
+    box-shadow:
+        inset 0 1px 0 #ffffff;
+}
+
+
+/* ============================================================
+   ============================================================
+                         RESPONSIVE
+   ============================================================
+   ============================================================ */
+
+@media screen and (max-width:1000px) {
+
+    #vista-perfil .home-page {
+        width:
+            auto;
+
+        margin-left:
+            185px;
+
+        margin-right:
+            20px;
+    }
+
+}
+
+
+@media screen and (max-width:760px) {
+
+    #vista-perfil .home-profile-status {
+        display:
+            none;
+    }
+
+
+    #vista-perfil .home-profile-mii-frame {
+        width:
+            85px;
+
+        height:
+            85px;
+    }
+
+
+    #vista-perfil .home-community-icon {
+        width:
+            62px;
+
+        height:
+            62px;
+    }
+
+
+    #vista-perfil .home-community {
+        min-height:
+            84px;
+    }
+
+}
+
+
+/* ============================================================
+   ORIGINAL STYLE BLOCK 04 — inline-style-04
+   ============================================================ */
+#vista-juegos .games-clicker-style-topbar {
+    margin-top: -50px;
+
+    padding:
+        15px 22px;
+        margin-left: 100px;
+        width: 1385px;
+
+    background:
+        linear-gradient(
+            to bottom,
+            #48d4ff 0%,
+            #23bce9 42%,
+            #119ed1 56%,
+            #0784b6 100%
+        );
+
+    border-bottom:
+        2px solid #08759f;
+
+    box-shadow:
+        inset 0 2px 0 rgba(255,255,255,.45),
+        inset 0 -2px 0 rgba(0,70,110,.16),
+        0 3px 6px rgba(0,0,0,.10);
+}
+
+#vista-juegos .games-clicker-style-topbar-inner {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+}
+
+#vista-juegos .games-clicker-style-topbar h1 {
+    margin: 0;
+
+    color: #ffffff;
+
+    font-family:
+        'MiiverseFont',
+        sans-serif;
+
+    font-size: 25px;
+
+    font-weight: bold;
+
+    line-height: 1;
+
+    text-shadow:
+        0 1px 2px rgba(0,0,0,.22);
+}
+#vista-juegos .games-clicker-style-badge {
+    padding:
+        5px 13px;
+
+    color: #ffffff;
+
+    font-family:
+        'MiiverseFont',
+        sans-serif;
+
+    font-size: 11px;
+
+    font-weight: bold;
+
+    border:
+        1px solid rgba(255,255,255,.48);
+
+    border-radius:
+        20px;
+
+    background:
+        rgba(0,0,0,.13);
+
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.18);
+
+    text-shadow:
+        0 1px 1px rgba(0,0,0,.15);
+}
+
+
+/* ============================================================
+   ORIGINAL STYLE BLOCK 05 — maki-community-post-remaster-v22
+   ============================================================ */
+/* ============================================================
+   COMMON COMMUNITY FEED
+   ============================================================ */
+
+#vista-juegos,
+#vista-proyectos,
+#vista-sobremi {
+    min-height: 760px;
+    font-family: 'MiiverseFont', sans-serif;
+}
+
+.maki-community-feed {
+    width: 78%;
+    max-width: 1050px;
+    margin-left: 170px;
+    margin-top: 28px;
+    padding-bottom: 75px;
+    box-sizing: border-box;
+}
+
+.maki-community-hero {
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 48px;
+    border: 1px solid #bfc8cc;
+    border-radius: 13px;
+    background: #fff;
+    box-shadow:
+        0 5px 14px rgba(0,0,0,.10),
+        inset 0 1px 0 #fff;
+}
+
+.maki-community-hero-banner {
+    position: relative;
+    height: 188px;
+    overflow: hidden;
+    background: #e8ecee;
+}
+
+.maki-community-hero-banner > img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.maki-community-hero-banner::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+        linear-gradient(
+            to bottom,
+            rgba(255,255,255,.06),
+            rgba(0,0,0,.12)
+        );
+}
+
+.maki-community-hero-card {
+    position: relative;
+    min-height: 83px;
+    display: flex;
+    align-items: center;
+    padding: 10px 18px 10px 100px;
+    box-sizing: border-box;
+    background:
+        linear-gradient(
+            to bottom,
+            #ffffff 0%,
+            #ffffff 64%,
+            #f4f4f4 100%
+        );
+    border-top: 1px solid #d1d8db;
+}
+
+.maki-community-hero-icon {
+    position: absolute;
+    left: 17px;
+    top: -31px;
+    width: 70px;
+    height: 70px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 3px solid #fff;
+    border-radius: 12px;
+    background: #fff;
+    box-shadow: 0 3px 8px rgba(0,0,0,.18);
+}
+
+.maki-community-hero-icon img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.maki-community-hero-icon img.contain {
+    width: 88%;
+    height: 88%;
+    object-fit: contain;
+}
+
+.maki-community-hero-copy {
+    min-width: 0;
+    flex: 1;
+}
+
+.maki-community-hero-title {
+    display: block;
+    color: #3f484c;
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 1.15;
+}
+
+.maki-community-hero-subtitle {
+    display: block;
+    margin-top: 4px;
+    color: #899398;
+    font-size: 12px;
+    line-height: 1.35;
+}
+
+.maki-community-hero-status {
+    flex-shrink: 0;
+    margin-left: 15px;
+    padding: 5px 11px;
+    border: 1px solid #c8d0d3;
+    border-radius: 16px;
+    color: #7b8589;
+    font-size: 10px;
+    font-weight: bold;
+    background: linear-gradient(to bottom,#fff,#e9ecee);
+    box-shadow: inset 0 1px 0 #fff;
+}
+
+.maki-feed-heading {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    margin: 0 0 16px 90px;
+    color: #747f84;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.maki-feed-heading::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background:
+        repeating-linear-gradient(
+            to right,
+            #c9cfd2 0,
+            #c9cfd2 6px,
+            transparent 6px,
+            transparent 11px
+        );
+}
+
+
+/* ============================================================
+   POST — MIIVERSE SPEECH BUBBLE STYLE
+   ============================================================ */
+
+.maki-retro-post {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    gap: 0;
+    margin-bottom: 24px;
+}
+
+.maki-retro-avatar {
+    position: relative;
+    width: 72px;
+    height: 72px;
+    flex: 0 0 72px;
+    overflow: hidden;
+    margin-top: 3px;
+    border: 1px solid #bfc8cc;
+    border-radius: 11px;
+    background:
+        linear-gradient(to bottom,#fff,#eef1f2);
+    box-shadow:
+        0 3px 7px rgba(0,0,0,.09),
+        inset 0 1px 0 #fff;
+}
+
+.maki-retro-avatar img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.maki-retro-pointer {
+    position: relative;
+    width: 17px;
+    height: 25px;
+    flex: 0 0 17px;
+    margin-top: 24px;
+    overflow: hidden;
+    z-index: 3;
+}
+
+.maki-retro-pointer::before {
+    content: "";
+    position: absolute;
+    right: -10px;
+    top: 4px;
+    width: 20px;
+    height: 20px;
+    transform: rotate(45deg);
+    border-left: 1px solid #c8cdd0;
+    border-bottom: 1px solid #c8cdd0;
+    background: #f4f5f5;
+    box-shadow: -2px 2px 3px rgba(0,0,0,.025);
+}
+
+.maki-retro-bubble {
+    min-width: 0;
+    flex: 1;
+    overflow: hidden;
+    border: 1px solid #c8cdd0;
+    border-radius: 11px;
+    background: #fff;
+    box-shadow:
+        0 4px 10px rgba(0,0,0,.075),
+        inset 0 1px 0 #fff;
+}
+
+.maki-retro-post-header {
+    min-height: 53px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    padding: 8px 14px 8px 16px;
+    box-sizing: border-box;
+    border-bottom: 1px solid #d8dddf;
+    background:
+        linear-gradient(
+            to bottom,
+            #f8f8f8 0%,
+            #eceeee 100%
+        );
+}
+
+.maki-retro-post-author {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.maki-retro-post-author strong {
+    overflow: hidden;
+    color: #434d52;
+    font-size: 14px;
+    font-weight: bold;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.maki-retro-post-community {
+    overflow: hidden;
+    color: #939da1;
+    font-size: 10px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.maki-retro-post-date {
+    flex-shrink: 0;
+    color: #9ca5a9;
+    font-size: 10px;
+}
+
+.maki-retro-post-body {
+    padding: 19px 20px 21px;
+    color: #3e474c;
+    font-size: 14px;
+    line-height: 1.55;
+}
+
+.maki-retro-post-body p {
+    margin: 0;
+}
+
+.maki-retro-post-body p + p {
+    margin-top: 15px;
+}
+
+.maki-retro-game-chip,
+.maki-retro-project-chip {
+    width: fit-content;
+    max-width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    margin-bottom: 14px;
+    padding: 6px 12px 6px 7px;
+    box-sizing: border-box;
+    border: 1px solid #d1d6d8;
+    border-radius: 8px;
+    color: #687277;
+    font-size: 11px;
+    font-weight: bold;
+    background: linear-gradient(to bottom,#fff,#f1f3f4);
+    box-shadow: inset 0 1px 0 #fff;
+}
+
+.maki-retro-game-chip img,
+.maki-retro-project-chip img {
+    width: 32px;
+    height: 32px;
+    flex: 0 0 32px;
+    object-fit: cover;
+    border: 1px solid #d0d5d7;
+    border-radius: 5px;
+    background: #fff;
+}
+
+.maki-retro-project-chip {
+    border-color: #ead0a0;
+    color: #986514;
+    background: linear-gradient(to bottom,#fffdfa,#fff4dd);
+}
+
+.maki-retro-post-footer {
+    min-height: 49px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 7px 13px;
+    border-top: 1px solid #dde1e3;
+    background:
+        linear-gradient(
+            to bottom,
+            #fafafa,
+            #f1f2f2
+        );
+}
+
+.maki-retro-post-footer .maki-page-yeah {
+    min-height: 32px;
+}
+
+.maki-retro-count {
+    min-width: 35px;
+    padding: 4px 9px;
+    text-align: center;
+    border: 1px solid #d2d7d9;
+    border-radius: 13px;
+    color: #778287;
+    font-size: 11px;
+    background: #fff;
+}
+
+
+/* ============================================================
+   IMAGE POST
+   ============================================================ */
+
+.maki-retro-post-image {
+    display: block;
+    max-width: 100%;
+    max-height: 560px;
+    width: auto;
+    height: auto;
+    margin-top: 13px;
+    border: 1px solid #cdd3d5;
+    border-radius: 7px;
+    background: #f6f6f6;
+}
+
+
+/* ============================================================
+   PROJECTS HERO
+   ============================================================ */
+
+.maki-projects-hero-banner {
+    height: 145px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background:
+        radial-gradient(circle at 75% 20%, rgba(255,255,255,.35), transparent 26%),
+        repeating-linear-gradient(
+            135deg,
+            rgba(255,255,255,.045) 0,
+            rgba(255,255,255,.045) 3px,
+            transparent 3px,
+            transparent 9px
+        ),
+        linear-gradient(
+            to bottom,
+            #ffc760,
+            #ed9d24
+        );
+}
+
+.maki-projects-hero-banner img {
+    width: 92px;
+    height: 92px;
+    object-fit: contain;
+    filter: drop-shadow(0 4px 8px rgba(120,65,0,.22));
+}
+
+
+/* ============================================================
+   ABOUT ME BODY
+   ============================================================ */
+
+.maki-about-intro {
+    margin-bottom: 17px !important;
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+.maki-about-group {
+    margin-top: 17px;
+    padding: 13px 15px;
+    border: 1px solid #d7dcde;
+    border-radius: 9px;
+    background:
+        linear-gradient(
+            to bottom,
+            #ffffff,
+            #f6f8f8
+        );
+    box-shadow: inset 0 1px 0 #fff;
+}
+
+.maki-about-group-title {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    margin-bottom: 9px;
+    color: #078fbe;
+    font-size: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.maki-about-group-title::before {
+    content: "";
+    width: 7px;
+    height: 7px;
+    flex: 0 0 7px;
+    border-radius: 50%;
+    background: #23bce9;
+    box-shadow: 0 0 0 2px rgba(35,188,233,.15);
+}
+
+.maki-about-list {
+    margin: 0;
+    padding-left: 19px;
+    color: #4d575c;
+    font-size: 13px;
+    line-height: 1.55;
+}
+
+.maki-about-list li + li {
+    margin-top: 6px;
+}
+
+.maki-character-cloud,
+.maki-interest-cloud {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+}
+
+.maki-character-cloud span,
+.maki-interest-cloud span {
+    padding: 5px 9px;
+    border: 1px solid #ccd3d5;
+    border-radius: 14px;
+    color: #697378;
+    font-size: 11px;
+    background: linear-gradient(to bottom,#fff,#ecefef);
+}
+
+.maki-interest-cloud span {
+    border-color: #a9ddec;
+    color: #078fbe;
+    background: linear-gradient(to bottom,#fbfffb,#eefaff);
+}
+
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+@media screen and (max-width: 1000px) {
+    .maki-community-feed {
+        width: auto;
+        max-width: none;
+        margin-left: 185px;
+        margin-right: 20px;
+    }
+}
+
+@media screen and (max-width: 760px) {
+    .maki-community-feed {
+        width: auto;
+        margin: 22px 12px 105px 12px;
+        padding-bottom: 25px;
+    }
+
+    .maki-community-hero {
+        margin-bottom: 31px;
+        border-radius: 10px;
+    }
+
+    .maki-community-hero-banner {
+        height: 130px;
+    }
+
+    .maki-community-hero-card {
+        min-height: 72px;
+        padding-left: 79px;
+        padding-right: 10px;
+    }
+
+    .maki-community-hero-icon {
+        left: 11px;
+        top: -22px;
+        width: 57px;
+        height: 57px;
+        border-radius: 9px;
+    }
+
+    .maki-community-hero-title {
+        font-size: 16px;
+    }
+
+    .maki-community-hero-subtitle {
+        font-size: 10px;
+    }
+
+    .maki-community-hero-status {
+        display: none;
+    }
+
+    .maki-feed-heading {
+        margin-left: 0;
+    }
+
+    .maki-retro-avatar {
+        width: 51px;
+        height: 51px;
+        flex-basis: 51px;
+        border-radius: 8px;
+    }
+
+    .maki-retro-pointer {
+        width: 12px;
+        flex-basis: 12px;
+        margin-top: 16px;
+    }
+
+    .maki-retro-pointer::before {
+        width: 16px;
+        height: 16px;
+        right: -10px;
+    }
+
+    .maki-retro-bubble {
+        border-radius: 9px;
+    }
+
+    .maki-retro-post-header {
+        min-height: 46px;
+        padding: 7px 10px;
+    }
+
+    .maki-retro-post-author strong {
+        font-size: 12px;
+    }
+
+    .maki-retro-post-community,
+    .maki-retro-post-date {
+        font-size: 9px;
+    }
+
+    .maki-retro-post-body {
+        padding: 14px;
+        font-size: 12px;
+    }
+
+    .maki-retro-post-footer {
+        padding: 6px 9px;
+    }
+
+    .maki-projects-hero-banner {
+        height: 118px;
+    }
+
+    .maki-projects-hero-banner img {
+        width: 72px;
+        height: 72px;
+    }
+}
+
+@media screen and (max-width: 430px) {
+    .maki-community-feed {
+        margin-left: 8px;
+        margin-right: 8px;
+    }
+
+    .maki-retro-avatar {
+        width: 44px;
+        height: 44px;
+        flex-basis: 44px;
+    }
+
+    .maki-retro-pointer {
+        width: 10px;
+        flex-basis: 10px;
+    }
+
+    .maki-retro-post-date {
+        display: none;
+    }
+
+    .maki-retro-post-body {
+        padding: 12px;
+    }
+
+    .maki-character-cloud span,
+    .maki-interest-cloud span {
+        font-size: 10px;
+    }
+}
+
+
+/* ============================================================
+   ORIGINAL STYLE BLOCK 06 — inline-style-06
+   ============================================================ */
+/* ============================================================
+   VISTA GENERAL
+   ============================================================ */
+
+#vista-messages {
+    position: relative;
+    z-index: 1;
+    min-height: 700px;
+
+    font-family:
+        'MiiverseFont',
+        sans-serif;
+}
+
+
+/* ============================================================
+   BARRA SUPERIOR VERDE
+   ============================================================ */
+
+#vista-messages .mii-clicker-topbar {
+    margin-top: -50px;
+
+    padding:
+        15px
+        22px;
+        width: 1385px;
+        margin-left: 100px;
+
+    background:
+        linear-gradient(
+            to bottom,
+            #48d4ff 0%,
+            #23bce9 48%,
+            #0784b6 100%
+        );
+
+    border-bottom:
+        2px solid #08759f;
+
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.42),
+        inset 0 -1px 0 rgba(0,0,0,.08);
+}
+
+
+#vista-messages .mii-clicker-topbar-content {
+    display: flex;
+
+    align-items: center;
+
+    justify-content:
+        space-between;
+}
+
+
+#vista-messages .mii-clicker-topbar h1 {
+    margin: 0;
+
+    color:
+        #ffffff;
+
+    font-size:
+        25px;
+
+    font-weight:
+        bold;
+
+    text-shadow:
+        0 1px 2px
+        rgba(0,0,0,.20);
+}
+
+
+/* ============================================================
+   CONTENEDOR PRINCIPAL
+   ============================================================ */
+
+#vista-messages .mii-clicker-page {
+    width:
+        78%;
+
+    max-width:
+        1050px;
+
+    margin-left:
+        170px;
+
+    margin-top:
+        35px;
+
+    padding-bottom:
+        60px;
+
+    box-sizing:
+        border-box;
+}
+
+
+/* ============================================================
+   PANEL GENERAL
+   ============================================================ */
+
+#vista-messages .mii-clicker-panel {
+    background:
+        #ffffff;
+
+    border:
+        1px solid #d1d1d1;
+
+    border-radius:
+        12px;
+
+    overflow:
+        hidden;
+
+    box-shadow:
+        0 4px 12px
+        rgba(0,0,0,.09);
+
+    margin-bottom:
+        26px;
+}
+
+
+/* ============================================================
+   CABECERA GRIS
+   ============================================================ */
+
+#vista-messages .mii-clicker-panel-title {
+    padding:
+        14px
+        20px;
+
+    background:
+        linear-gradient(
+            to bottom,
+            #979797 0%,
+            #888888 48%,
+            #797979 100%
+        );
+
+    border-bottom:
+        1px solid #707070;
+
+    color:
+        #ffffff;
+
+    font-size:
+        23px;
+
+    font-weight:
+        bold;
+
+    text-shadow:
+        0 1px 1px
+        rgba(0,0,0,.22);
+}
+
+
+/* ============================================================
+   DESCRIPCIÓN
+   ============================================================ */
+
+#vista-messages .mii-clicker-description {
+    padding:
+        13px
+        20px;
+
+    color:
+        #777777;
+
+    font-size:
+        15px;
+
+    text-align:
+        center;
+
+    background:
+        #fafafa;
+
+    border-bottom:
+        1px solid #e2e2e2;
+}
+
+
+/* ============================================================
+   ============================================================
+                         PODIO
+   ============================================================
+   ============================================================ */
+
+#vista-messages .mii-clicker-podium {
+    min-height:
+        250px;
+
+    display:
+        flex;
+
+    align-items:
+        flex-end;
+
+    justify-content:
+        center;
+
+    gap:
+        22px;
+
+    padding:
+        28px
+        24px
+        30px
+        24px;
+
+    box-sizing:
+        border-box;
+}
+
+
+/* ============================================================
+   TARJETAS DEL PODIO
+   ============================================================ */
+
+#vista-messages .mii-clicker-place {
+    position:
+        relative;
+
+    width:
+        185px;
+
+    box-sizing:
+        border-box;
+
+    text-align:
+        center;
+
+    background:
+        linear-gradient(
+            to bottom,
+            #ffffff,
+            #eeeeee
+        );
+
+    border:
+        1px solid #c7c7c7;
+
+    border-radius:
+        10px;
+
+    padding:
+        12px
+        10px
+        15px
+        10px;
+
+    box-shadow:
+        0 3px 6px rgba(0,0,0,.10),
+        inset 0 1px 0 #ffffff;
+}
+
+
+/* ============================================================
+   1ST
+   ============================================================ */
+
+#vista-messages .mii-clicker-place.first {
+    min-height:
+        210px;
+
+    border-top:
+        5px solid #f0c822;
+}
+
+
+/* ============================================================
+   2ND
+   ============================================================ */
+
+#vista-messages .mii-clicker-place.second {
+    min-height:
+        185px;
+
+    border-top:
+        5px solid #a9afb4;
+}
+
+
+/* ============================================================
+   3RD
+   ============================================================ */
+
+#vista-messages .mii-clicker-place.third {
+    min-height:
+        165px;
+
+    border-top:
+        5px solid #b77a47;
+}
+
+
+/* ============================================================
+   TEXTO DE POSICIÓN
+   ============================================================ */
+
+#vista-messages .mii-clicker-place-number {
+    font-size:
+        28px;
+
+    font-weight:
+        bold;
+
+    line-height:
+        32px;
+
+    margin-bottom:
+        7px;
+}
+
+
+#vista-messages .first .mii-clicker-place-number {
+    color:
+        #d0a900;
+}
+
+
+#vista-messages .second .mii-clicker-place-number {
+    color:
+        #858b91;
+}
+
+
+#vista-messages .third .mii-clicker-place-number {
+    color:
+        #9f6737;
+}
+
+
+/* ============================================================
+   MII DEL TOP 3
+
+   NINGÚN BADGE.
+   NINGUNA INSIGNIA.
+   ============================================================ */
+
+#vista-messages .mii-clicker-place-avatar {
+    width:
+        78px;
+
+    height:
+        78px;
+
+    margin:
+        0 auto
+        8px auto;
+
+    overflow:
+        hidden;
+
+    background-color:
+        #ececec;
+
+    background-image:
+        url('img/games/Dummy_mii_user.png');
+
+    background-size:
+        cover;
+
+    background-position:
+        center;
+
+    background-repeat:
+        no-repeat;
+
+    border:
+        1px solid #bbbbbb;
+
+    border-radius:
+        10px;
+
+    box-shadow:
+        inset 0 1px 2px
+        rgba(0,0,0,.07);
+}
+
+
+/* ============================================================
+   PNID DEL RANKING
+   ============================================================ */
+
+#vista-messages .mii-clicker-place-pnid {
+    display:
+        block;
+
+    width:
+        100%;
+
+    overflow:
+        hidden;
+
+    white-space:
+        nowrap;
+
+    text-overflow:
+        ellipsis;
+
+    color:
+        #484848;
+
+    font-size:
+        15px;
+
+    font-weight:
+        bold;
+}
+
+
+/* ============================================================
+   SCORE DEL RANKING
+   ============================================================ */
+
+#vista-messages .mii-clicker-place-score {
+    display:
+        block;
+
+    margin-top:
+        5px;
+
+    color:
+        #777777;
+
+    font-size:
+        13px;
+}
+
+
+/* ============================================================
+   ============================================================
+                       ZONA DEL JUEGO
+   ============================================================
+   ============================================================ */
+
+#vista-messages .mii-clicker-game {
+    position:
+        relative;
+
+    padding:
+        27px
+        25px
+        36px
+        25px;
+
+    text-align:
+        center;
+}
+
+
+/* ============================================================
+   PNID ACTUAL
+   ============================================================ */
+
+#vista-messages #mii-clicker-pnid {
+    color:
+        #555555;
+
+    font-size:
+        20px;
+
+    font-weight:
+        bold;
+
+    margin-bottom:
+        5px;
+}
+
+
+/* ============================================================
+   INSTRUCCIÓN
+   ============================================================ */
+
+#vista-messages .mii-clicker-instruction {
+    color:
+        #888888;
+
+    font-size:
+        14px;
+
+    margin-bottom:
+        18px;
+}
+
+
+/* ============================================================
+   SCORE PRINCIPAL
+   ============================================================ */
+
+#vista-messages #mii-clicker-score {
+    color:
+        #65bf0b;
+
+    font-size:
+        52px;
+
+    line-height:
+        55px;
+
+    font-weight:
+        bold;
+
+    margin-bottom:
+        0;
+
+    text-shadow:
+        0 1px 0
+        #ffffff;
+}
+
+
+#vista-messages .mii-clicker-score-label {
+    color:
+        #999999;
+
+    font-size:
+        14px;
+
+    margin-bottom:
+        22px;
+}
+
+#vista-messages .mii-clicker-mii-stage {
+    position:
+        relative;
+
+    width:
+        300px;
+
+    height:
+        360px;
+
+    margin:
+        0 auto
+        22px auto;
+
+    overflow:
+        hidden;
+
+    background:
+        radial-gradient(
+            ellipse at center bottom,
+            #ffffff 0%,
+            #f6f6f6 55%,
+            #e9e9e9 100%
+        );
+
+    border:
+        2px solid #c3c3c3;
+
+    border-radius:
+        18px;
+
+    box-shadow:
+        inset 0 2px 5px rgba(0,0,0,.07),
+        0 3px 6px rgba(0,0,0,.08);
+}
+
+
+/* ============================================================
+   SOMBRA DEL MII
+   ============================================================ */
+
+#vista-messages .mii-clicker-floor {
+    position:
+        absolute;
+
+    left:
+        50%;
+
+    bottom:
+        25px;
+
+    width:
+        190px;
+
+    height:
+        20px;
+
+    margin-left:
+        -95px;
+
+    border-radius:
+        50%;
+
+    background:
+        radial-gradient(
+            ellipse at center,
+            rgba(0,0,0,.16) 0%,
+            rgba(0,0,0,.06) 45%,
+            rgba(0,0,0,0) 72%
+        );
+
+    pointer-events:
+        none;
+}
+
+
+/* ============================================================
+   MII DE CUERPO COMPLETO
+   ============================================================ */
+
+#vista-messages #mii-clicker-mii {
+    position:
+        relative;
+
+    z-index:
+        2;
+
+    display:
+        block;
+
+    width:
+        100%;
+
+    height:
+        100%;
+
+    object-fit:
+        contain;
+
+    object-position:
+        center center;
+
+    pointer-events:
+        none;
+
+    -webkit-user-select:
+        none;
+
+    user-select:
+        none;
+}
+
+
+/* ============================================================
+   ============================================================
+                   BOTÓN WII U / MIIVERSE
+   ============================================================
+   ============================================================ */
+
+#vista-messages #mii-clicker-click-button {
+    position:
+        relative;
+
+    display:
+        block;
+
+    width:
+        300px;
+
+    height:
+        66px;
+
+    margin:
+        0 auto;
+
+    box-sizing:
+        border-box;
+
+    cursor:
+        pointer;
+
+    outline:
+        none;
+
+    color:
+        #ffffff;
+
+    font-family:
+        'MiiverseFont',
+        sans-serif;
+
+    font-size:
+        24px;
+
+    font-weight:
+        bold;
+
+    text-align:
+        center;
+
+    text-shadow:
+        0 1px 1px
+        rgba(0,0,0,.20);
+
+    background:
+        linear-gradient(
+            to bottom,
+            #92e93c 0%,
+            #78d51f 42%,
+            #64be12 55%,
+            #55aa09 100%
+        );
+
+    border:
+        2px solid #519f0b;
+
+    border-radius:
+        12px;
+
+    box-shadow:
+        inset 0 2px 0 rgba(255,255,255,.48),
+        inset 0 -3px 0 rgba(50,110,0,.22),
+        0 5px 0 #438b08,
+        0 7px 8px rgba(0,0,0,.18);
+
+    -webkit-tap-highlight-color:
+        transparent;
+
+    -webkit-user-select:
+        none;
+
+    user-select:
+        none;
+
+    transition:
+        transform .055s,
+        box-shadow .055s,
+        background .055s;
+}
+
+
+/* ============================================================
+   BRILLO DEL BOTÓN
+   ============================================================ */
+
+#vista-messages #mii-clicker-click-button::before {
+    content:
+        "";
+
+    position:
+        absolute;
+
+    top:
+        4px;
+
+    left:
+        10px;
+
+    right:
+        10px;
+
+    height:
+        17px;
+
+    border-radius:
+        8px 8px 50% 50%;
+
+    background:
+        linear-gradient(
+            to bottom,
+            rgba(255,255,255,.35),
+            rgba(255,255,255,0)
+        );
+
+    pointer-events:
+        none;
+}
+
+
+/* ============================================================
+   BOTÓN PRESIONADO
+   ============================================================ */
+
+#vista-messages
+#mii-clicker-click-button.mii-clicker-pressed {
+    transform:
+        translateY(4px);
+
+    background:
+        linear-gradient(
+            to bottom,
+            #80da2d,
+            #5eb811
+        );
+
+    box-shadow:
+        inset 0 2px 4px rgba(0,0,0,.12),
+        0 1px 0 #438b08,
+        0 3px 4px rgba(0,0,0,.14);
+}
+
+
+/* ============================================================
+   BOTÓN DESACTIVADO
+   ============================================================ */
+
+#vista-messages
+#mii-clicker-click-button:disabled {
+    opacity:
+        .45;
+
+    cursor:
+        default;
+}
+
+
+/* ============================================================
+   +1
+   ============================================================ */
+
+#vista-messages #mii-clicker-plus-one {
+    height:
+        38px;
+
+    margin-top:
+        18px;
+
+    color:
+        #68c212;
+
+    font-size:
+        28px;
+
+    font-weight:
+        bold;
+
+    opacity:
+        0;
+
+    transform:
+        translateY(0);
+
+    pointer-events:
+        none;
+}
+
+
+#vista-messages
+#mii-clicker-plus-one.show {
+    opacity:
+        1;
+
+    transform:
+        translateY(-7px);
+
+    transition:
+        opacity .12s,
+        transform .12s;
+}
+
+
+/* ============================================================
+   TU POSICIÓN
+   ============================================================ */
+
+#vista-messages .mii-clicker-personal-rank {
+    margin-top:
+        3px;
+
+    color:
+        #777777;
+
+    font-size:
+        15px;
+}
+
+
+/* ============================================================
+   TEXTO DE SYNC
+   ============================================================ */
+
+#vista-messages #mii-clicker-sync-text {
+    height:
+        18px;
+
+    margin-top:
+        8px;
+
+    color:
+        #999999;
+
+    font-size:
+        12px;
+}
+
+
+/* ============================================================
+   REGLAS VISUALES
+   ============================================================ */
+
+#vista-messages .mii-clicker-rules {
+    display:
+        flex;
+
+    justify-content:
+        center;
+
+    gap:
+        35px;
+
+    padding:
+        17px
+        20px;
+
+    background:
+        #f7f7f7;
+
+    border-top:
+        1px solid #dedede;
+
+    color:
+        #777777;
+
+    font-size:
+        13px;
+}
+
+
+#vista-messages .mii-clicker-rule {
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    gap:
+        7px;
+}
+
+
+#vista-messages .mii-clicker-rule-dot {
+    width:
+        9px;
+
+    height:
+        9px;
+
+    border-radius:
+        50%;
+
+    background:
+        #72cc1d;
+}
+
+
+/* ============================================================
+   BACK
+   ============================================================ */
+
+#vista-messages .mii-clicker-back {
+    display:
+        block;
+
+    width:
+        170px;
+
+    height:
+        43px;
+
+    margin:
+        22px auto 0 auto;
+
+    cursor:
+        pointer;
+
+    color:
+        #555555;
+
+    font-family:
+        'MiiverseFont',
+        sans-serif;
+
+    font-size:
+        16px;
+
+    font-weight:
+        bold;
+
+    background:
+        linear-gradient(
+            to bottom,
+            #ffffff,
+            #e4e4e4
+        );
+
+    border:
+        1px solid #aaaaaa;
+
+    border-radius:
+        7px;
+
+    box-shadow:
+        0 2px 4px rgba(0,0,0,.12),
+        inset 0 1px 0 #ffffff;
+}
+
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+@media screen and (max-width:950px) {
+
+    #vista-messages .mii-clicker-page {
+        width:
+            auto;
+
+        margin-left:
+            175px;
+
+        margin-right:
+            20px;
+    }
+
+
+    #vista-messages .mii-clicker-podium {
+        gap:
+            8px;
+    }
+
+
+    #vista-messages .mii-clicker-place {
+        width:
+            31%;
+    }
+
+}
+
+
+/* ============================================================
+   ORIGINAL STYLE BLOCK 07 — inline-style-07
+   ============================================================ */
+/* ============================================================
+   ABOUT MY PROJECTS — HEADER ESTILO MII CLICKER
+   ============================================================ */
+
+#vista-proyectos .projects-clicker-style-topbar {
+    margin-top: -50px;
+    margin-left: 100px;
+    width: 1385px;
+
+    padding:
+        15px 22px;
+
+    background:
+        linear-gradient(
+            to bottom,
+            #ffd27a 0%,
+            #ffb84d 42%,
+            #ee9d28 56%,
+            #d68910 100%
+        );
+
+    border-bottom:
+        2px solid #b8730d;
+
+    box-shadow:
+        inset 0 2px 0 rgba(255,255,255,.45),
+        inset 0 -2px 0 rgba(120,70,0,.16),
+        0 3px 6px rgba(0,0,0,.10);
+}
+
+
+/* ============================================================
+   CONTENIDO INTERNO
+   ============================================================ */
+
+#vista-proyectos .projects-clicker-style-topbar-inner {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+}
+
+
+/* ============================================================
+   TÍTULO
+   ============================================================ */
+
+#vista-proyectos .projects-clicker-style-topbar h1 {
+    margin: 0;
+
+    color: #ffffff;
+
+    font-family:
+        'MiiverseFont',
+        sans-serif;
+
+    font-size: 25px;
+
+    font-weight: bold;
+
+    line-height: 1;
+
+    text-shadow:
+        0 1px 2px rgba(0,0,0,.22);
+}
+
+
+/* ============================================================
+   BADGE DERECHO
+   ============================================================ */
+
+#vista-proyectos .projects-clicker-style-badge {
+    padding:
+        5px 13px;
+
+    color: #ffffff;
+
+    font-family:
+        'MiiverseFont',
+        sans-serif;
+
+    font-size: 11px;
+
+    font-weight: bold;
+
+    border:
+        1px solid rgba(255,255,255,.48);
+
+    border-radius:
+        20px;
+
+    background:
+        rgba(0,0,0,.13);
+
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.18);
+
+    text-shadow:
+        0 1px 1px rgba(0,0,0,.15);
+}
+
+
+/* ============================================================
+   ORIGINAL STYLE BLOCK 08 — inline-style-08
+   ============================================================ */
+/* ============================================================
+   ABOUT ME — HEADER ESTILO MII CLICKER
+   ============================================================ */
+
+#vista-sobremi .about-clicker-style-topbar {
+    margin-top: -50px;
+    margin-left: 100px;
+    width: 1385px;
+
+    padding:
+        15px 22px;
+
+    background:
+        linear-gradient(
+            to bottom,
+            #48d4ff 0%,
+            #23bce9 42%,
+            #119ed1 56%,
+            #0784b6 100%
+        );
+
+    border-bottom:
+        2px solid #08759f;
+
+    box-shadow:
+        inset 0 2px 0 rgba(255,255,255,.45),
+        inset 0 -2px 0 rgba(0,70,110,.16),
+        0 3px 6px rgba(0,0,0,.10);
+}
+
+
+/* ============================================================
+   CONTENIDO INTERNO
+   ============================================================ */
+
+#vista-sobremi .about-clicker-style-topbar-inner {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+}
+
+
+/* ============================================================
+   TÍTULO
+   ============================================================ */
+
+#vista-sobremi .about-clicker-style-topbar h1 {
+    margin: 0;
+
+    color: #ffffff;
+
+    font-family:
+        'MiiverseFont',
+        sans-serif;
+
+    font-size: 25px;
+
+    font-weight: bold;
+
+    line-height: 1;
+
+    text-shadow:
+        0 1px 2px rgba(0,0,0,.22);
+}
+
+
+/* ============================================================
+   BADGE DERECHO
+   ============================================================ */
+
+#vista-sobremi .about-clicker-style-badge {
+    padding:
+        5px 13px;
+
+    color: #ffffff;
+
+    font-family:
+        'MiiverseFont',
+        sans-serif;
+
+    font-size: 11px;
+
+    font-weight: bold;
+
+    border:
+        1px solid rgba(255,255,255,.48);
+
+    border-radius:
+        20px;
+
+    background:
+        rgba(0,0,0,.13);
+
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.18);
+
+    text-shadow:
+        0 1px 1px rgba(0,0,0,.15);
+}
+
+
+/* ============================================================
+   ORIGINAL STYLE BLOCK 09 — inline-style-09
+   ============================================================ */
+/* ============================================================
+   GENERAL CHAT — HEADER ESTILO MII CLICKER
+   ============================================================ */
+
+#vista-quepasara .chat-clicker-style-topbar {
+    margin-top: -50px;
+    margin-left: 100px;
+    width: 1385px;
+
+    padding:
+        15px 22px;
+
+    background:
+        linear-gradient(
+            to bottom,
+            #48d4ff 0%,
+            #23bce9 42%,
+            #119ed1 56%,
+            #0784b6 100%
+        );
+
+    border-bottom:
+        2px solid #08759f;
+
+    box-shadow:
+        inset 0 2px 0 rgba(255,255,255,.45),
+        inset 0 -2px 0 rgba(0,70,110,.16),
+        0 3px 6px rgba(0,0,0,.10);
+}
+
+
+/* ============================================================
+   CONTENIDO INTERNO
+   ============================================================ */
+
+#vista-quepasara .chat-clicker-style-topbar-inner {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+}
+
+
+/* ============================================================
+   TÍTULO
+   ============================================================ */
+
+#vista-quepasara .chat-clicker-style-topbar h1 {
+    margin: 0;
+
+    color: #ffffff;
+
+    font-family:
+        'MiiverseFont',
+        sans-serif;
+
+    font-size: 25px;
+
+    font-weight: bold;
+
+    line-height: 1;
+
+    text-shadow:
+        0 1px 2px rgba(0,0,0,.22);
+}
+
+
+/* ============================================================
+   BADGE DERECHO
+   ============================================================ */
+
+#vista-quepasara .chat-clicker-style-badge {
+    padding:
+        5px 13px;
+
+    color: #ffffff;
+
+    font-family:
+        'MiiverseFont',
+        sans-serif;
+
+    font-size: 11px;
+
+    font-weight: bold;
+
+    border:
+        1px solid rgba(255,255,255,.48);
+
+    border-radius:
+        20px;
+
+    background:
+        rgba(0,0,0,.13);
+
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.18);
+
+    text-shadow:
+        0 1px 1px rgba(0,0,0,.15);
+}
+
+
+/* ============================================================
+   ORIGINAL STYLE BLOCK 10 — inline-style-10
+   ============================================================ */
+@font-face {
+    font-family: 'MiiverseSymbols';
+
+    src:
+        url('font/MiiverseSymbols-Regular.woff2') format('woff2'),
+        url('font/MiiverseSymbols-Regular.woff') format('woff'),
+        url('font/MiiverseSymbols-Regular.ttf') format('truetype');
+
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+/* ============================================================
+   OVERLAY
+   ============================================================ */
+
+#modal-crear-post {
+    display: none;
+
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    width: 100vw;
+    height: 100vh;
+
+    justify-content: center;
+    align-items: center;
+
+    background: rgba(0, 0, 0, .53);
+
+    z-index: 9999;
+
+    font-family:
+        'MiiverseFont',
+        'FOT-Rodin',
+        'Segoe UI',
+        Arial,
+        sans-serif;
+}
+
+
+/* ============================================================
+   CONTENEDOR GENERAL
+   ============================================================ */
+
+#miiverse-post-composer {
+    position: relative;
+
+    width: 790px;
+
+    max-width: 95vw;
+
+    box-sizing: border-box;
+}
+
+
+/* ============================================================
+   VENTANA PRINCIPAL
+   ============================================================ */
+
+#miiverse-post-window {
+    position: relative;
+
+    width: 790px;
+    height: 355px;
+
+    box-sizing: border-box;
+
+    padding:
+        34px
+        35px
+        28px
+        35px;
+
+    background:
+        linear-gradient(
+            to bottom,
+            #fbfbfb 0%,
+            #f8f8f8 45%,
+            #eeeeee 100%
+        );
+
+    border:
+        2px solid #d5d5d5;
+
+    border-radius:
+        27px;
+
+    box-shadow:
+        0 7px 19px rgba(0,0,0,.27),
+        inset 0 1px 0 rgba(255,255,255,1);
+}
+
+
+/* ============================================================
+   HEADER
+   ============================================================ */
+
+#miiverse-post-header {
+    position: relative;
+
+    width: 100%;
+    height: 79px;
+
+    display: flex;
+
+    align-items: flex-start;
+}
+
+
+/* ============================================================
+   AVATAR + PESTAÑA
+   ============================================================ */
+
+.mii-post-avatar-group {
+    position: relative;
+
+    display: flex;
+
+    width: 101px;
+    height: 67px;
+
+    flex-shrink: 0;
+}
+
+
+#avatar-mii-post {
+    width: 68px;
+    height: 67px;
+
+    box-sizing: border-box;
+
+    flex-shrink: 0;
+
+    background-color: #ffffff;
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    border:
+        1px solid #cecece;
+
+    border-radius:
+        8px 0 0 8px;
+
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.95),
+        0 1px 2px rgba(0,0,0,.07);
+}
+
+
+/* ============================================================
+   BOTÓN EMOCIONES
+   ============================================================ */
+
+#boton-emociones-post {
+    width: 33px;
+    height: 67px;
+
+    box-sizing: border-box;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    flex-shrink: 0;
+
+    cursor: pointer;
+
+    background:
+        linear-gradient(
+            to bottom,
+            #70caec 0%,
+            #5cbfe2 50%,
+            #4dafd3 100%
+        );
+
+    border-radius:
+        0 6px 6px 0;
+
+    box-shadow:
+        inset 1px 0 0 rgba(255,255,255,.30),
+        inset 0 -3px 0 rgba(0,0,0,.07);
+
+    -webkit-tap-highlight-color: transparent;
+}
+
+
+.miiverse-arrow-down {
+    width: 0;
+    height: 0;
+
+    border-left:
+        6px solid transparent;
+
+    border-right:
+        6px solid transparent;
+
+    border-top:
+        9px solid white;
+
+    opacity: .94;
+}
+
+
+/* ============================================================
+   USER INFO
+   ============================================================ */
+
+.miiverse-post-userinfo {
+    position: relative;
+
+    width: 400px;
+
+    min-width: 0;
+
+    margin-left: 13px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: flex-start;
+}
+
+
+/* ============================================================
+   NOMBRE DEL MII
+   ============================================================ */
+
+#nombre-mii-post {
+    display: block;
+
+    width: 100%;
+
+    min-height: 30px;
+
+    color: #414141;
+
+    font-family:
+        'MiiverseFont',
+        'FOT-Rodin',
+        'Segoe UI',
+        'Segoe UI Symbol',
+        Arial,
+        sans-serif;
+
+    font-size: 23px;
+
+    line-height: 27px;
+
+    font-weight: bold;
+
+    white-space: pre-wrap;
+
+    overflow-wrap: anywhere;
+
+    word-break: break-word;
+
+    overflow: visible;
+
+    text-overflow: clip;
+
+    unicode-bidi: plaintext;
+
+    text-shadow:
+        0 1px 0 white;
+}
+
+
+/* ============================================================
+   COMUNIDAD
+   ============================================================ */
+
+.miiverse-post-community {
+    min-height: 29px;
+
+    display: flex;
+
+    align-items: center;
+
+    margin-top: 1px;
+
+    color: #666666;
+}
+
+
+.miiverse-post-community-logo {
+    width: 31px;
+
+    max-height: 24px;
+
+    object-fit: contain;
+
+    flex-shrink: 0;
+
+    margin-right: 7px;
+
+    border-radius: 3px;
+}
+
+
+.miiverse-post-community-name {
+    color: #666666;
+
+    font-size: 17px;
+
+    line-height: 23px;
+
+    font-weight: normal;
+
+    white-space: nowrap;
+
+    text-shadow:
+        0 1px 0 white;
+}
+
+
+/* ============================================================
+   SPOILER
+   ============================================================ */
+
+.miiverse-spoiler {
+    position: absolute;
+
+    top: 3px;
+    right: 0;
+
+    width: 148px;
+    height: 44px;
+
+    box-sizing: border-box;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    gap: 8px;
+
+    cursor: pointer;
+
+    background:
+        linear-gradient(
+            to bottom,
+            #f0f0f0,
+            #dddddd
+        );
+
+    border:
+        2px solid #d3d3d3;
+
+    border-radius:
+        7px;
+
+    color: #686868;
+
+    font-size: 18px;
+
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.95),
+        0 1px 1px rgba(0,0,0,.04);
+}
+
+
+#check-spoiler {
+    width: 19px;
+    height: 19px;
+
+    margin: 0;
+
+    accent-color: #5bbce0;
+}
+
+
+/* ============================================================
+   EDITOR
+   ============================================================ */
+
+#miiverse-post-editor {
+    position: relative;
+
+    width: 100%;
+    height: 181px;
+
+    display: flex;
+
+    box-sizing: border-box;
+}
+
+
+/* ============================================================
+   T / DIBUJO
+   ============================================================ */
+
+.miiverse-mode-selector {
+    width: 54px;
+    height: 181px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    flex-direction: column;
+
+    box-sizing: border-box;
+
+    overflow: hidden;
+
+    border:
+        2px solid #bdbdbd;
+
+    border-right:
+        none;
+}
+
+
+#btn-modo-texto,
+#btn-modo-dibujo {
+    width: 52px;
+
+    flex: 1;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    box-sizing: border-box;
+
+    cursor: pointer;
+}
+
+
+#btn-modo-texto {
+    font-family:
+        Georgia,
+        serif;
+
+    font-size: 31px;
+}
+
+
+/* J = LÁPIZ REAL DE LA FONT */
+
+.miiverse-pencil-symbol {
+    font-family: 'MiiverseSymbols';
+
+    font-size: 34px;
+
+    line-height: 1;
+
+    font-weight: normal;
+
+    -webkit-font-smoothing: antialiased;
+}
+
+
+#btn-modo-dibujo {
+    border-top:
+        2px solid #bcbcbc;
+}
+
+
+.tab-btn.activo-azul {
+    background:
+        linear-gradient(
+            to bottom,
+            #6ac9eb,
+            #51b7dd
+        ) !important;
+
+    color:
+        #ffffff !important;
+}
+
+
+.tab-btn.inactivo-gris {
+    background:
+        linear-gradient(
+            to bottom,
+            #f1f1f1,
+            #e5e5e5
+        ) !important;
+
+    color:
+        #999999 !important;
+}
+
+
+/* ============================================================
+   TEXTAREA / CANVAS
+   ============================================================ */
+
+.miiverse-post-input-area {
+    position: relative;
+
+    height: 181px;
+
+    flex-grow: 1;
+}
+
+
+#texto-nuevo-post {
+    display: block;
+
+    width: 100%;
+    height: 181px;
+
+    box-sizing: border-box;
+
+    padding:
+        14px
+        15px;
+
+    resize: none;
+
+    outline: none;
+
+    border:
+        2px solid #bdbdbd;
+
+    background:
+        #ffffff;
+
+    color:
+        #404040;
+
+    font-family: inherit;
+
+    font-size: 19px;
+
+    line-height: 24px;
+
+    box-shadow:
+        inset 0 3px 5px rgba(0,0,0,.045);
+}
+
+
+#texto-nuevo-post::placeholder {
+    color: #bebebe;
+}
+
+
+#canvas-post {
+    display: none;
+
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 181px;
+
+    box-sizing: border-box;
+
+    background: #ffffff;
+
+    border:
+        2px solid #bdbdbd;
+
+    cursor: crosshair;
+
+    touch-action: none;
+}
+
+
+/* ============================================================
+   SELECT IMAGE
+
+   TAMBIÉN USAMOS LA FONT DE MIIVERSE
+   ============================================================ */
+
+.miiverse-image-column {
+    width: 164px;
+    height: 181px;
+
+    margin-left: 13px;
+
+    flex-shrink: 0;
+}
+
+
+#select-image-post {
+    position: relative;
+
+    width: 164px;
+    height: 181px;
+
+    box-sizing: border-box;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+
+    color: #707070;
+
+    cursor: pointer;
+
+    background:
+        linear-gradient(
+            to bottom,
+            #eeeeee,
+            #e1e1e1
+        );
+
+    border:
+        2px solid #cccccc;
+
+    border-radius:
+        5px;
+
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.9);
+}
+
+
+/*
+   X = ICONO DE IMAGEN
+*/
+
+.miiverse-photo-symbol {
+    font-family: 'MiiverseSymbols';
+
+    color: #c8c8c8;
+
+    font-size: 70px;
+
+    line-height: 65px;
+
+    font-weight: normal;
+
+    -webkit-font-smoothing: antialiased;
+}
+
+
+/*
+   z = PAPERCLIP
+*/
+
+.miiverse-paperclip-symbol {
+    position: absolute;
+
+    top: 5px;
+    left: 50%;
+
+    transform:
+        translateX(-50%);
+
+    font-family:
+        'MiiverseSymbols';
+
+    color: #b4b4b4;
+
+    font-size: 27px;
+
+    line-height: 27px;
+
+    font-weight: normal;
+
+    -webkit-font-smoothing: antialiased;
+}
+
+
+.miiverse-select-image-text {
+    margin-top: 8px;
+
+    color: #6f6f6f;
+
+    font-size: 17px;
+}
+
+
+/* ============================================================
+   SELECT IMAGE — ARCHIVO REAL + PREVIEW
+   ============================================================ */
+
+#select-image-empty-state {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    position: relative;
+}
+
+#preview-imagen-post {
+    display: none;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+    object-position: center;
+
+    border-radius: 3px;
+}
+
+#select-image-post.tiene-imagen {
+    overflow: hidden;
+
+    padding: 0;
+
+    background: #202020;
+
+    border-color: #8f8f8f;
+}
+
+#select-image-post.tiene-imagen #select-image-empty-state {
+    display: none;
+}
+
+#select-image-post.tiene-imagen #preview-imagen-post {
+    display: block;
+}
+
+#texto-cambiar-imagen-post {
+    display: none;
+
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    padding: 8px 5px;
+
+    box-sizing: border-box;
+
+    color: #ffffff;
+
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+
+    text-shadow: 0 1px 2px rgba(0,0,0,.8);
+
+    background:
+        linear-gradient(
+            to bottom,
+            rgba(0,0,0,0),
+            rgba(0,0,0,.78)
+        );
+
+    pointer-events: none;
+}
+
+#select-image-post.tiene-imagen #texto-cambiar-imagen-post {
+    display: block;
+}
+
+#quitar-imagen-post {
+    display: none;
+
+    position: absolute;
+    top: 6px;
+    right: 6px;
+
+    width: 31px;
+    height: 31px;
+
+    padding: 0;
+
+    border: 2px solid #ffffff;
+    border-radius: 50%;
+
+    background:
+        linear-gradient(
+            to bottom,
+            #777777,
+            #454545
+        );
+
+    color: #ffffff;
+
+    font-family: Arial, sans-serif;
+    font-size: 23px;
+    font-weight: bold;
+    line-height: 25px;
+
+    text-align: center;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 2px 5px rgba(0,0,0,.45);
+
+    z-index: 5;
+}
+
+#select-image-post.tiene-imagen #quitar-imagen-post {
+    display: block;
+}
+
+#select-image-post.tiene-imagen:hover #texto-cambiar-imagen-post {
+    background:
+        linear-gradient(
+            to bottom,
+            rgba(0,0,0,.06),
+            rgba(0,0,0,.88)
+        );
+}
+
+
+/* ============================================================
+   ============================================================
+           SELECTOR DE EMOCIONES E3
+   ============================================================
+   ============================================================ */
+
+#burbuja-emociones {
+    display: none;
+
+    position: absolute;
+
+    top: 82px;
+    left: 6px;
+
+    width: 438px;
+    height: 75px;
+
+    box-sizing: border-box;
+
+    padding:
+        2px
+        5px;
+
+    z-index: 1000;
+
+    background:
+        linear-gradient(
+            to bottom,
+            rgba(87,92,94,.97) 0%,
+            rgba(64,69,71,.98) 47%,
+            rgba(44,49,51,.98) 100%
+        );
+
+    border:
+        3px solid #292d2f;
+
+    border-radius:
+        11px;
+
+    box-shadow:
+        0 4px 7px rgba(0,0,0,.42),
+        inset 0 1px 0 rgba(255,255,255,.17);
+}
+
+
+.miiverse-emotion-row {
+    width: 100%;
+    height: 66px;
+
+    display: flex;
+
+    justify-content: flex-start;
+    align-items: center;
+
+    gap: 0;
+}
+
+
+/* ============================================================
+   BOTÓN DE CADA CARA
+
+   NADA VERDE DETRÁS.
+   NADA DE PNG.
+   ============================================================ */
+
+#burbuja-emociones .emocion-btn {
+    position: relative;
+
+    width: 70px;
+    height: 66px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    padding: 0;
+    margin: 0;
+
+    cursor: pointer;
+
+    border: 0 !important;
+
+    outline: 0 !important;
+
+    border-radius: 0 !important;
+
+    background:
+        transparent !important;
+
+    background-color:
+        transparent !important;
+
+    background-image:
+        none !important;
+
+    box-shadow:
+        none !important;
+
+    -webkit-tap-highlight-color:
+        transparent;
+
+    -webkit-user-select:
+        none;
+
+    user-select:
+        none;
+}
+
+
+/* ============================================================
+   HOVER NO HACE NADA
+   ============================================================ */
+
+#burbuja-emociones .emocion-btn:hover,
+#burbuja-emociones .emocion-btn:focus,
+#burbuja-emociones .emocion-btn:active {
+    background:
+        transparent !important;
+
+    background-color:
+        transparent !important;
+
+    background-image:
+        none !important;
+
+    box-shadow:
+        none !important;
+
+    border:
+        0 !important;
+
+    outline:
+        0 !important;
+}
+
+
+/* ============================================================
+   LAS CARITAS REALES
+
+   ESTO ES TEXTO RENDERIZADO POR
+   MiiverseSymbols-Regular.
+   ============================================================ */
+
+.miiverse-feeling-glyph {
+    display: block;
+
+    width: 66px;
+    height: 66px;
+
+    line-height: 66px;
+
+    text-align: center;
+
+    /*
+       LO IMPORTANTE:
+    */
+
+    font-family:
+        'MiiverseSymbols' !important;
+
+    font-size: 64px;
+
+    font-weight: normal;
+
+    font-style: normal;
+
+    color: #eeeeee;
+
+    /*
+       Ligera profundidad del icono gris.
+    */
+
+    text-shadow:
+        0 1px 0 rgba(255,255,255,.13),
+        0 -1px 0 rgba(0,0,0,.13);
+
+    pointer-events: none;
+
+    -webkit-font-smoothing:
+        antialiased;
+
+    transition:
+        color .14s ease,
+        text-shadow .14s ease;
+}
+
+
+/* ============================================================
+   SELECCIONADA
+
+            GLIFO GRIS
+                 ↓
+            GLIFO VERDE
+
+   SIN CAMBIAR DE ARCHIVO.
+   ============================================================ */
+
+#burbuja-emociones
+.emocion-btn.emocion-seleccionada {
+    background:
+        transparent !important;
+
+    box-shadow:
+        none !important;
+}
+
+
+#burbuja-emociones
+.emocion-btn.emocion-seleccionada
+.miiverse-feeling-glyph {
+
+    /*
+       COLOR VERDE SELECCIONADO
+    */
+
+    color:
+        #80c4fc;
+
+    /*
+       BRILLO DEL GLIFO
+    */
+
+    text-shadow:
+        0 0 2px rgba(101, 193, 255, 0.82),
+        0 0 5px rgba(55, 141, 255, 0.42),
+        0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+
+/* ============================================================
+   BOTONES INFERIORES
+   ============================================================ */
+
+.miiverse-bottom-buttons {
+    width: 100%;
+    height: 78px;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: flex-end;
+
+    gap: 37px;
+}
+
+
+.miiverse-bottom-button {
+    width: 220px;
+    height: 59px;
+
+    box-sizing: border-box;
+
+    cursor: pointer;
+
+    background:
+        linear-gradient(
+            to bottom,
+            #ffffff 0%,
+            #fbfbfb 43%,
+            #e6e6e6 100%
+        );
+
+    border:
+        2px solid #a6a6a6;
+
+    border-radius:
+        12px;
+
+    color: #555555;
+
+    font-family: inherit;
+
+    font-size: 21px;
+
+    font-weight: bold;
+
+    text-shadow:
+        0 1px 0 white;
+
+    box-shadow:
+        0 4px 6px rgba(0,0,0,.19),
+        inset 0 1px 0 white;
+}
+
+
+.miiverse-bottom-button:active {
+    transform:
+        translateY(2px);
+
+    box-shadow:
+        0 2px 3px rgba(0,0,0,.18);
+}
+
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+@media screen and (max-width:850px) {
+
+    #miiverse-post-composer {
+        transform:
+            scale(.88);
+
+        transform-origin:
+            center;
+    }
+
+}
+
+
+@media screen and (max-width:700px) {
+
+    #miiverse-post-composer {
+        transform:
+            scale(.72);
+
+        transform-origin:
+            center;
+    }
+
+}
+
+
+/* ============================================================
+   ORIGINAL STYLE BLOCK 11 — inline-style-11
+   ============================================================ */
+#modal-crear-post {
+    animation: fadeInModal 0.2s ease-in-out;
+}
+@keyframes fadeInModal {
+    from { opacity: 0; transform: scale(0.98); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+.icono-exp {
+    pointer-events: none;
+    opacity: 0.85;
+    transition: opacity 0.15s;
+}
+
+.emocion-btn:hover .icono-exp {
+    opacity: 1;
+}
+
+.emocion-btn.activo {
+    background: linear-gradient(to bottom, #48d4ff 0%, #0784b6 100%) !important;
+    border-radius: 25px;
+    box-shadow: inset 0 2px 3px rgba(0,0,0,0.2), 0 1px 2px rgba(255,255,255,0.6);
+    border: 1px solid #08759f;
+}
+
+.emocion-btn.activo .icono-exp {
+    filter: brightness(0) invert(1);
+    opacity: 1;
+}
+
+.miiverse-card:hover .btn-eliminar-miiverse {
+    opacity: 1;
+}
+
+
+/* ============================================================
+   ORIGINAL STYLE BLOCK 12 — inline-style-12
+   ============================================================ */
+@font-face {
+    font-family: 'MiiverseSymbols';
+    src: url('MiiverseSymbols-Regular.ttf') format('truetype');
+}
+
+
+/* ============================================================
+   ORIGINAL STYLE BLOCK 13 — inline-style-13
+   ============================================================ */
+@font-face {
+    font-family: 'MiiverseSymbols';
+    src: url('MiiverseSymbols-Regular.ttf') format('truetype');
+}
+
+
+/* ============================================================
+   ORIGINAL STYLE BLOCK 14 — inline-style-14
+   ============================================================ */
+/* ============================================================
+   VISTA
+   ============================================================ */
+
+#vista-networks {
+    display: none;
+    position: relative;
+    z-index: 1;
+
+    min-height: 900px;
+
+    font-family:
+        'MiiverseFont',
+        sans-serif;
+}
+
+
+/* ============================================================
+   HEADER — AZUL CLARO REFORZADO
+   ============================================================ */
+
+#vista-networks .networks-topbar {
+    margin-left: 100px;
+    width: 1385px;
+    margin-top: -50px;
+
+    padding:
+        15px 22px;
+
+    background:
+        linear-gradient(
+            to bottom,
+            #78e6ff 0%,
+            #48d4f7 25%,
+            #25bfe9 52%,
+            #109fce 74%,
+            #0789b8 100%
+        );
+
+    border-bottom:
+        2px solid #087da8;
+
+    box-shadow:
+        inset 0 2px 0 rgba(255,255,255,.58),
+        inset 0 -2px 0 rgba(0,80,120,.18),
+        0 3px 6px rgba(0,0,0,.10);
+}
+
+
+/* ============================================================
+   HEADER INNER
+   ============================================================ */
+
+#vista-networks .networks-topbar-inner {
+    display: flex;
+
+    align-items: center;
+
+    justify-content:
+        space-between;
+}
+
+
+/* ============================================================
+   TÍTULO
+   ============================================================ */
+
+#vista-networks .networks-topbar h1 {
+    margin: 0;
+
+    color:
+        #ffffff;
+
+    font-size:
+        25px;
+
+    font-weight:
+        bold;
+
+    line-height:
+        1;
+
+    text-shadow:
+        0 1px 2px rgba(0,80,120,.32);
+}
+
+
+/* ============================================================
+   BADGE DERECHO
+   ============================================================ */
+
+#vista-networks .networks-topbar-badge {
+    padding:
+        5px 13px;
+
+    color:
+        #ffffff;
+
+    font-size:
+        11px;
+
+    font-weight:
+        bold;
+
+    border:
+        1px solid rgba(255,255,255,.60);
+
+    border-radius:
+        20px;
+
+    background:
+        rgba(0,115,165,.19);
+
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.24);
+
+    text-shadow:
+        0 1px 1px rgba(0,0,0,.15);
+}
+
+
+/* ============================================================
+   PAGE
+   ============================================================ */
+
+#vista-networks .networks-page {
+    width:
+        78%;
+
+    max-width:
+        1050px;
+
+    margin-left:
+        170px;
+
+    margin-top:
+        34px;
+
+    padding-bottom:
+        80px;
+
+    box-sizing:
+        border-box;
+}
+
+
+/* ============================================================
+   INTRO
+   ============================================================ */
+
+#vista-networks .networks-intro {
+    overflow:
+        hidden;
+
+    margin-bottom:
+        25px;
+
+    background:
+        #ffffff;
+
+    border:
+        1px solid #bcd8e3;
+
+    border-radius:
+        12px;
+
+    box-shadow:
+        0 4px 12px rgba(0,110,160,.09);
+}
+
+
+/* ============================================================
+   INTRO TITLE — AHORA AZUL
+   ============================================================ */
+
+#vista-networks .networks-intro-title {
+    padding:
+        14px 19px;
+
+    color:
+        #ffffff;
+
+    font-size:
+        22px;
+
+    font-weight:
+        bold;
+
+    background:
+        linear-gradient(
+            to bottom,
+            #69ddfa 0%,
+            #38c5ec 48%,
+            #159fcf 100%
+        );
+
+    border-bottom:
+        1px solid #0b8dbd;
+
+    text-shadow:
+        0 1px 1px rgba(0,70,110,.25);
+}
+
+
+/* ============================================================
+   INTRO DESCRIPTION
+   ============================================================ */
+
+#vista-networks .networks-intro-description {
+    padding:
+        15px 20px;
+
+    color:
+        #66747b;
+
+    font-size:
+        14px;
+
+    line-height:
+        1.5;
+
+    background:
+        linear-gradient(
+            to bottom,
+            #ffffff,
+            #f4fbfe
+        );
+}
+
+
+/* ============================================================
+   LISTA
+   ============================================================ */
+
+#vista-networks .networks-list {
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    gap:
+        13px;
+}
+
+
+/* ============================================================
+   TARJETAS
+   ============================================================ */
+
+#vista-networks .network-card {
+    position:
+        relative;
+
+    min-height:
+        88px;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    padding:
+        12px 15px;
+
+    box-sizing:
+        border-box;
+
+    overflow:
+        hidden;
+
+    background:
+        linear-gradient(
+            to bottom,
+            #ffffff 0%,
+            #ffffff 66%,
+            #f5fbfd 100%
+        );
+
+    border:
+        1px solid #c4d7df;
+
+    border-radius:
+        10px;
+
+    box-shadow:
+        0 3px 8px rgba(0,80,120,.07),
+        inset 0 1px 0 #ffffff;
+
+    transition:
+        transform .10s ease,
+        box-shadow .10s ease,
+        border-color .10s ease;
+}
+
+
+/* ============================================================
+   HOVER
+   ============================================================ */
+
+#vista-networks .network-card:hover {
+    transform:
+        translateY(-1px);
+
+    border-color:
+        #8acfe5;
+
+    box-shadow:
+        0 5px 12px rgba(0,130,180,.13),
+        inset 0 1px 0 #ffffff;
+}
+
+
+/* ============================================================
+   FRANJA AZUL
+   ============================================================ */
+
+#vista-networks .network-card::before {
+    content:
+        "";
+
+    position:
+        absolute;
+
+    top:
+        0;
+
+    left:
+        0;
+
+    bottom:
+        0;
+
+    width:
+        5px;
+
+    background:
+        linear-gradient(
+            to bottom,
+            #72e5ff 0%,
+            #30c7ed 45%,
+            #0c9aca 100%
+        );
+
+    box-shadow:
+        1px 0 4px rgba(0,170,220,.18);
+}
+
+
+/* ============================================================
+   ICON FRAME
+   ============================================================ */
+
+#vista-networks .network-icon-box {
+    position:
+        relative;
+
+    width:
+        64px;
+
+    height:
+        64px;
+
+    flex-shrink:
+        0;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    overflow:
+        hidden;
+
+    margin-left:
+        6px;
+
+    margin-right:
+        17px;
+
+    background:
+        linear-gradient(
+            to bottom,
+            #ffffff,
+            #f2fbfe
+        );
+
+    border:
+        1px solid #a8cfdd;
+
+    border-radius:
+        11px;
+
+    box-shadow:
+        inset 0 1px 2px rgba(0,0,0,.04),
+        0 2px 5px rgba(0,105,150,.10);
+}
+
+
+/* ============================================================
+   BRILLO ICONO
+   ============================================================ */
+
+#vista-networks .network-icon-box::after {
+    content:
+        "";
+
+    position:
+        absolute;
+
+    left:
+        4px;
+
+    right:
+        4px;
+
+    top:
+        3px;
+
+    height:
+        18px;
+
+    border-radius:
+        8px 8px 50% 50%;
+
+    background:
+        linear-gradient(
+            to bottom,
+            rgba(255,255,255,.40),
+            rgba(255,255,255,0)
+        );
+
+    pointer-events:
+        none;
+}
+
+
+/* ============================================================
+   ICONO
+   ============================================================ */
+
+#vista-networks .network-icon {
+    display:
+        block;
+
+    width:
+        100%;
+
+    height:
+        100%;
+
+    object-fit:
+        cover;
+}
+
+
+/* ============================================================
+   LOGOS CONTAIN
+   ============================================================ */
+
+#vista-networks .network-icon.contain {
+    width:
+        86%;
+
+    height:
+        86%;
+
+    object-fit:
+        contain;
+}
+
+
+/* ============================================================
+   MII PNID
+
+   El renderer devuelve la cara de YosMakii99_PN.
+   ============================================================ */
+
+#vista-networks .network-icon.pnid-mii {
+    width:
+        100%;
+
+    height:
+        100%;
+
+    object-fit:
+        cover;
+
+    object-position:
+        center;
+}
+
+
+/* ============================================================
+   PUNTO PNID ONLINE
+   ============================================================ */
+
+#vista-networks .pnid-status-dot {
+    position:
+        absolute;
+
+    z-index:
+        5;
+
+    right:
+        3px;
+
+    bottom:
+        3px;
+
+    width:
+        12px;
+
+    height:
+        12px;
+
+    box-sizing:
+        border-box;
+
+    background:
+        #59d719;
+
+    border:
+        2px solid #ffffff;
+
+    border-radius:
+        50%;
+
+    box-shadow:
+        0 1px 3px rgba(0,0,0,.25);
+}
+
+
+/* ============================================================
+   INFO
+   ============================================================ */
+
+#vista-networks .network-info {
+    flex:
+        1;
+
+    min-width:
+        0;
+}
+
+
+/* ============================================================
+   SERVICIO
+   ============================================================ */
+
+#vista-networks .network-service {
+    display:
+        block;
+
+    color:
+        #7a9aa7;
+
+    font-size:
+        13px;
+
+    margin-bottom:
+        4px;
+}
+
+
+/* ============================================================
+   USER
+   ============================================================ */
+
+#vista-networks .network-user {
+    display:
+        block;
+
+    overflow:
+        hidden;
+
+    white-space:
+        nowrap;
+
+    text-overflow:
+        ellipsis;
+
+    color:
+        #3d5159;
+
+    font-size:
+        18px;
+
+    font-weight:
+        bold;
+
+    line-height:
+        1.25;
+}
+
+
+/* ============================================================
+   SMALL
+   ============================================================ */
+
+#vista-networks .network-small-text {
+    display:
+        block;
+
+    margin-top:
+        3px;
+
+    color:
+        #9aafb7;
+
+    font-size:
+        11px;
+}
+
+
+/* ============================================================
+   ACCIONES
+   ============================================================ */
+
+#vista-networks .network-actions {
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    gap:
+        8px;
+
+    margin-left:
+        15px;
+}
+
+
+/* ============================================================
+   BOTÓN
+   ============================================================ */
+
+#vista-networks .network-button {
+    min-width:
+        83px;
+
+    height:
+        34px;
+
+    padding:
+        0 13px;
+
+    box-sizing:
+        border-box;
+
+    cursor:
+        pointer;
+
+    display:
+        inline-flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    text-decoration:
+        none;
+
+    color:
+        #5b7380;
+
+    font-family:
+        'MiiverseFont',
+        sans-serif;
+
+    font-size:
+        12px;
+
+    font-weight:
+        bold;
+
+    background:
+        linear-gradient(
+            to bottom,
+            #ffffff,
+            #edf7fa
+        );
+
+    border:
+        1px solid #a9cbd7;
+
+    border-radius:
+        17px;
+
+    box-shadow:
+        inset 0 1px 0 #ffffff,
+        0 2px 2px rgba(0,80,120,.07);
+
+    outline:
+        none;
+}
+
+
+/* ============================================================
+   OPEN AZUL CLARO
+   ============================================================ */
+
+#vista-networks .network-button.open {
+    color:
+        #ffffff;
+
+    background:
+        linear-gradient(
+            to bottom,
+            #71dcfa 0%,
+            #38c3eb 45%,
+            #159fce 100%
+        );
+
+    border-color:
+        #0b8dbb;
+
+    text-shadow:
+        0 1px 1px rgba(0,70,110,.22);
+
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.50),
+        0 2px 3px rgba(0,125,170,.15);
+}
+
+
+/* ============================================================
+   ACTIVE
+   ============================================================ */
+
+#vista-networks .network-button:active {
+    transform:
+        translateY(2px);
+}
+
+
+/* ============================================================
+   COPIED
+   ============================================================ */
+
+#vista-networks .network-button.copied {
+    color:
+        #ffffff;
+
+    background:
+        linear-gradient(
+            to bottom,
+            #65d7f5,
+            #159fce
+        );
+
+    border-color:
+        #0b8dbb;
+
+    box-shadow:
+        0 0 7px rgba(0,180,235,.40);
+}
+
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+
+#vista-networks .networks-footer-note {
+    margin-top:
+        24px;
+
+    padding:
+        13px 18px;
+
+    color:
+        #79919b;
+
+    font-size:
+        12px;
+
+    text-align:
+        center;
+
+    background:
+        linear-gradient(
+            to bottom,
+            #ffffff,
+            #eefafd
+        );
+
+    border:
+        1px solid #bdd7e1;
+
+    border-radius:
+        9px;
+}
+
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+@media screen and (max-width:950px) {
+
+    #vista-networks .networks-page {
+        width:
+            auto;
+
+        margin-left:
+            185px;
+
+        margin-right:
+            20px;
+    }
+
+
+    #vista-networks .network-actions {
+        margin-left:
+            8px;
+    }
+
+
+    #vista-networks .network-button {
+        min-width:
+            70px;
+
+        padding:
+            0 10px;
+    }
+
+}
+
+
+/* ============================================================
+   ORIGINAL STYLE BLOCK 15 — inline-style-15
+   ============================================================ */
+/* ============================================================
+   DESACTIVAR LOS INTENTOS VIEJOS
+
+   Tu index ya tiene código antiguo que intenta crear:
+
+       .user-verified-mark
+
+   usando:
+
+       identified-user-mark.png
+
+   No queremos que se pelee con este sistema.
+   ============================================================ */
+
+.user-verified-mark {
+    display: none !important;
+}
+
+
+/* ============================================================
+   CONTENEDOR QUE TIENE UN MII OFICIAL
+
+   Se añade AUTOMÁTICAMENTE por JavaScript.
+   ============================================================ */
+
+.maki-official-avatar-host {
+
+    /*
+       Necesario para posicionar la palomita
+       respecto al propio avatar.
+    */
+
+    position: relative !important;
+}
+
+
+/* ============================================================
+   INSIGNIA REAL
+
+   USA EXACTAMENTE:
+
+       img/official-user.png
+
+   Se coloca DENTRO de la esquina del avatar.
+
+   No usamos offsets negativos porque algunos de tus
+   contenedores tienen overflow:hidden.
+   ============================================================ */
+
+.maki-official-user-badge {
+
+    position: absolute !important;
+
+    top: 0 !important;
+    left: 0 !important;
+
+    /*
+       Proporcional al Mii:
+
+       Mii 68px  -> ~22px
+       Mii 70px  -> ~22px
+       Mii 96px  -> ~31px
+
+       Así funciona en perfil, modal y posts.
+    */
+
+    width: 32% !important;
+    height: 32% !important;
+
+    min-width: 16px;
+    min-height: 16px;
+
+    max-width: 34px;
+    max-height: 34px;
+
+    object-fit: contain !important;
+
+    object-position:
+        top left !important;
+
+    z-index: 99999 !important;
+
+    margin: 0 !important;
+
+    padding: 0 !important;
+
+    border: 0 !important;
+
+    outline: 0 !important;
+
+    background:
+        transparent !important;
+
+    box-shadow:
+        none !important;
+
+    pointer-events:
+        none !important;
+
+    -webkit-user-select:
+        none !important;
+
+    user-select:
+        none !important;
+
+    /*
+       No permitir arrastrarla accidentalmente.
+    */
+
+    -webkit-user-drag:
+        none;
+
+    /*
+       No afecta el layout.
+    */
+
+    display:
+        block !important;
+}
+
+
+/* ============================================================
+   ORIGINAL STYLE BLOCK 16 — maki-global-responsive-v1
+   ============================================================ */
+/* ============================================================
+   MAKI'S BIO — RESPONSIVE GLOBAL
+   Desktop original preserved. Tablet/mobile only below 1100px.
+   ============================================================ */
+
+html, body {
+    max-width: 100%;
+}
+
+img, video, canvas {
+    max-width: 100%;
+}
+
+/* ------------------------------------------------------------
+   TABLET / PANTALLAS MEDIANAS
+   Mantiene la sidebar vertical, pero libera el contenido de
+   anchos fijos de 1385/1400px y márgenes grandes.
+   ------------------------------------------------------------ */
+@media screen and (max-width: 1100px) {
+    html,
+    body {
+        overflow-x: hidden !important;
+    }
+
+    body {
+        box-sizing: border-box !important;
+        padding: 20px 20px 55px 180px !important;
+    }
+
+    /* Todas las barras superiores de las vistas */
+    #vista-perfil .home-topbar,
+    #vista-juegos .games-clicker-style-topbar,
+    #vista-messages .mii-clicker-topbar,
+    #vista-proyectos .projects-clicker-style-topbar,
+    #vista-sobremi .about-clicker-style-topbar,
+    #vista-quepasara .chat-clicker-style-topbar,
+    #vista-networks .networks-topbar,
+    #vista-userpage > div[style*="width: 1400px"] {
+        box-sizing: border-box !important;
+        width: calc(100% + 40px) !important;
+        max-width: none !important;
+        margin-left: -20px !important;
+        margin-right: -20px !important;
+        margin-top: -20px !important;
+    }
+
+    /* Contenedores principales con clases */
+    #vista-perfil .home-page,
+    #vista-messages .mii-clicker-page,
+    #vista-networks .networks-page {
+        width: 100% !important;
+        max-width: none !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+    }
+
+    /* Favorite Games / About Me / General Chat / Projects */
+    #vista-juegos > div[style*="margin-left: 105px"],
+    #vista-juegos > div[style*="margin-left: 125px"],
+    #vista-sobremi > div[style*="margin-left: 105px"],
+    #vista-sobremi > div[style*="margin-left: 125px"],
+    #vista-quepasara > div[style*="margin-left: 108px"],
+    #vista-proyectos > div[style*="margin-left: 170px"],
+    #vista-userpage > div[style*="width: 82%"] {
+        box-sizing: border-box !important;
+        width: 100% !important;
+        max-width: none !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+    }
+
+    #contenedor-mensajes-chat,
+    #muro-mensajes,
+    #muro-posts-usuario {
+        box-sizing: border-box !important;
+        max-width: 100% !important;
+    }
+
+    /* El podio cabe mejor en tablets */
+    #vista-messages .mii-clicker-podium {
+        gap: 10px !important;
+        padding-left: 12px !important;
+        padding-right: 12px !important;
+    }
+
+    #vista-messages .mii-clicker-place {
+        width: 31% !important;
+        min-width: 0 !important;
+    }
+}
+
+/* ------------------------------------------------------------
+   TELÉFONOS
+   La sidebar se convierte en una barra inferior de 5 botones.
+   ------------------------------------------------------------ */
+@media screen and (max-width: 700px) {
+    html,
+    body {
+        width: 100% !important;
+        min-width: 0 !important;
+        overflow-x: hidden !important;
+    }
+
+    body {
+        box-sizing: border-box !important;
+        padding: 0 12px 100px 12px !important;
+    }
+
+    body::before {
+        background-position: center top !important;
+        background-size: cover !important;
+    }
+
+    /* ========================================================
+       SIDEBAR -> NAV INFERIOR
+       ======================================================== */
+    #global-menu {
+        top: auto !important;
+        right: 0 !important;
+        bottom: 0 !important;
+        left: 0 !important;
+        width: 100vw !important;
+        height: 82px !important;
+        display: flex !important;
+        align-items: stretch !important;
+        overflow: hidden !important;
+        border-radius: 22px 22px 0 0 !important;
+        -webkit-border-radius: 22px 22px 0 0 !important;
+        background: linear-gradient(to bottom, #ffffff 0%, #e9e9e9 100%) !important;
+        box-shadow: 0 -3px 12px rgba(0,0,0,.30) !important;
+        -webkit-box-shadow: 0 -3px 12px rgba(0,0,0,.30) !important;
+    }
+
+    #global-menu > li.card {
+        flex: 1 1 20% !important;
+        min-width: 0 !important;
+        width: 20% !important;
+        height: 82px !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        border-top: 0 !important;
+        border-left: 1px solid #d7d7d7 !important;
+        box-shadow: inset 1px 0 0 #ffffff !important;
+        -webkit-box-shadow: inset 1px 0 0 #ffffff !important;
+    }
+
+    #global-menu > li.card:first-child {
+        border-left: 0 !important;
+    }
+
+    #global-menu > li.card > a {
+        width: 100% !important;
+        height: 82px !important;
+        margin: 0 !important;
+        padding: 5px 2px 4px !important;
+        box-sizing: border-box !important;
+        border-radius: 0 !important;
+        -webkit-border-radius: 0 !important;
+        justify-content: center !important;
+    }
+
+    #global-menu > #global-menu-mymenu > a,
+    #global-menu > #boton-navegacion-miiverse > a {
+        border-radius: 0 !important;
+        -webkit-border-radius: 0 !important;
+    }
+
+    #global-menu #global-menu-mymenu .mii-icon {
+        width: 36px !important;
+        height: 36px !important;
+        border-radius: 7px !important;
+        -webkit-border-radius: 7px !important;
+    }
+
+    #global-menu #global-menu-mymenu .mii-icon img {
+        width: 36px !important;
+        height: 36px !important;
+        border-radius: 6px !important;
+        -webkit-border-radius: 6px !important;
+    }
+
+    #global-menu #user-sidebar-name,
+    #global-menu .sidebar-label,
+    #nav-texto-wiiu {
+        max-width: 100% !important;
+        margin-top: 3px !important;
+        font-size: 10px !important;
+        line-height: 11px !important;
+        letter-spacing: -.25px !important;
+        white-space: normal !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+    }
+
+    #global-menu .sidebar-old-icon {
+        height: 39px !important;
+        font-size: 38px !important;
+        line-height: 39px !important;
+    }
+
+    #nav-icono-wiiu {
+        width: 38px !important;
+        height: 38px !important;
+        margin: 0 auto !important;
+    }
+
+    #nav-icono-wiiu:empty {
+        background-size: 34px 34px !important;
+    }
+
+    #nav-icono-wiiu:not(:empty) {
+        font-size: 40px !important;
+        line-height: 38px !important;
+    }
+
+    #global-menu > #boton-navegacion-miiverse {
+        background: transparent !important;
+    }
+
+    #global-menu > #boton-navegacion-miiverse > a {
+        height: 82px !important;
+        background: linear-gradient(to bottom, #5a5a5a 0%, #242424 100%) !important;
+    }
+
+    /* ========================================================
+       TOPBARS
+       ======================================================== */
+    #vista-perfil .home-topbar,
+    #vista-juegos .games-clicker-style-topbar,
+    #vista-messages .mii-clicker-topbar,
+    #vista-proyectos .projects-clicker-style-topbar,
+    #vista-sobremi .about-clicker-style-topbar,
+    #vista-quepasara .chat-clicker-style-topbar,
+    #vista-networks .networks-topbar,
+    #vista-userpage > div[style*="width: 1400px"] {
+        width: calc(100% + 24px) !important;
+        max-width: none !important;
+        margin: 0 -12px !important;
+        padding: 13px 14px !important;
+        box-sizing: border-box !important;
+    }
+
+    #vista-perfil .home-topbar h1,
+    #vista-juegos .games-clicker-style-topbar h1,
+    #vista-messages .mii-clicker-topbar h1,
+    #vista-proyectos .projects-clicker-style-topbar h1,
+    #vista-sobremi .about-clicker-style-topbar h1,
+    #vista-quepasara .chat-clicker-style-topbar h1,
+    #vista-networks .networks-topbar h1,
+    #vista-userpage > div[style*="width: 1400px"] h1 {
+        font-size: 20px !important;
+    }
+
+    #vista-perfil .home-topbar-badge,
+    #vista-juegos .games-clicker-style-badge,
+    #vista-proyectos .projects-clicker-style-badge,
+    #vista-sobremi .about-clicker-style-badge,
+    #vista-quepasara .chat-clicker-style-badge,
+    #vista-networks .networks-topbar-badge,
+    #mii-clicker-status {
+        max-width: 45% !important;
+        padding: 4px 8px !important;
+        font-size: 9px !important;
+        white-space: nowrap !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+    }
+
+    /* ========================================================
+       HOME
+       ======================================================== */
+    #vista-perfil {
+        min-height: auto !important;
+    }
+
+    #vista-perfil .home-page {
+        width: 100% !important;
+        max-width: none !important;
+        margin: 18px 0 0 !important;
+        padding-bottom: 28px !important;
+    }
+
+    #vista-perfil .home-profile-card {
+        min-height: 0 !important;
+        align-items: flex-start !important;
+        padding: 18px !important;
+    }
+
+    #vista-perfil .home-profile-mii-frame {
+        width: 78px !important;
+        height: 78px !important;
+    }
+
+    #vista-perfil .home-profile-info {
+        margin-left: 14px !important;
+    }
+
+    #vista-perfil .home-profile-name {
+        font-size: 20px !important;
+    }
+
+    #vista-perfil .home-profile-description {
+        font-size: 13px !important;
+        line-height: 1.4 !important;
+    }
+
+    #vista-perfil .home-section-header {
+        margin-top: 20px !important;
+        font-size: 17px !important;
+    }
+
+    #vista-perfil .home-community {
+        min-height: 78px !important;
+        padding: 9px 38px 9px 10px !important;
+    }
+
+    #vista-perfil .home-community-icon {
+        width: 56px !important;
+        height: 56px !important;
+        margin-right: 12px !important;
+    }
+
+    #vista-perfil .home-community-title {
+        font-size: 16px !important;
+    }
+
+    #vista-perfil .home-community-description {
+        font-size: 11px !important;
+    }
+
+    #vista-perfil .home-community-arrow {
+        right: 13px !important;
+        font-size: 26px !important;
+    }
+
+    /* ========================================================
+       FAVORITE GAMES / ABOUT / PROJECTS / CHAT
+       Quita anchos/márgenes fijos del HTML inline.
+       ======================================================== */
+    #vista-juegos > div[style*="margin-left: 105px"],
+    #vista-juegos > div[style*="margin-left: 125px"],
+    #vista-sobremi > div[style*="margin-left: 105px"],
+    #vista-sobremi > div[style*="margin-left: 125px"],
+    #vista-quepasara > div[style*="margin-left: 108px"],
+    #vista-proyectos > div[style*="margin-left: 170px"] {
+        width: 100% !important;
+        max-width: none !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        box-sizing: border-box !important;
+    }
+
+    #vista-juegos > div[style*="margin-left: 125px"],
+    #vista-sobremi > div[style*="margin-left: 125px"],
+    #vista-proyectos > div[style*="margin-left: 170px"] {
+        margin-top: 16px !important;
+    }
+
+    /* Banners */
+    #vista-juegos > div[style*="margin-left: 105px"] > img,
+    #vista-sobremi > div[style*="margin-left: 105px"] > img,
+    #vista-quepasara > div[style*="margin-left: 108px"] > img {
+        width: 100% !important;
+        height: 155px !important;
+        border-radius: 9px !important;
+    }
+
+    /* Tarjeta flotante bajo banners */
+    #vista-juegos > div[style*="margin-left: 105px"] > div[style*="position: absolute"],
+    #vista-sobremi > div[style*="margin-left: 105px"] > div[style*="position: absolute"],
+    #vista-quepasara > div[style*="margin-left: 108px"] > div[style*="position: absolute"] {
+        min-height: 74px !important;
+        height: auto !important;
+        padding: 10px 12px !important;
+    }
+
+    /* Posts estáticos: avatar un poco más compacto */
+    #vista-juegos > div[style*="margin-left: 125px"] > div:first-child,
+    #vista-sobremi > div[style*="margin-left: 125px"] > div:first-child,
+    #vista-proyectos > div[style*="margin-left: 170px"] > div:first-child {
+        width: 50px !important;
+        height: 50px !important;
+    }
+
+    /* ========================================================
+       MII CLICKER
+       ======================================================== */
+    #vista-messages .mii-clicker-page {
+        width: 100% !important;
+        max-width: none !important;
+        margin: 18px 0 0 !important;
+        padding-bottom: 28px !important;
+    }
+
+    #vista-messages .mii-clicker-panel-title {
+        padding: 11px 14px !important;
+        font-size: 19px !important;
+    }
+
+    #vista-messages .mii-clicker-description {
+        padding: 10px 12px !important;
+        font-size: 12px !important;
+    }
+
+    #vista-messages .mii-clicker-podium {
+        min-height: 0 !important;
+        flex-direction: column !important;
+        align-items: stretch !important;
+        gap: 10px !important;
+        padding: 15px !important;
+    }
+
+    #vista-messages .mii-clicker-place,
+    #vista-messages .mii-clicker-place.first,
+    #vista-messages .mii-clicker-place.second,
+    #vista-messages .mii-clicker-place.third {
+        width: 100% !important;
+        min-height: 0 !important;
+    }
+
+    #vista-messages .mii-clicker-game {
+        padding: 20px 12px 28px !important;
+    }
+
+    #vista-messages #mii-clicker-score {
+        font-size: 44px !important;
+        line-height: 48px !important;
+    }
+
+    #vista-messages .mii-clicker-mii-stage {
+        width: min(280px, 92vw) !important;
+        height: 330px !important;
+    }
+
+    #vista-messages #mii-clicker-click-button {
+        width: min(280px, 92vw) !important;
+    }
+
+    #vista-messages .mii-clicker-rules {
+        flex-direction: column !important;
+        gap: 6px !important;
+        text-align: center !important;
+    }
+
+    /* ========================================================
+       NETWORKS
+       ======================================================== */
+    #vista-networks .networks-page {
+        width: 100% !important;
+        max-width: none !important;
+        margin: 18px 0 0 !important;
+        padding-bottom: 28px !important;
+    }
+
+    #vista-networks .network-card {
+        flex-wrap: wrap !important;
+        align-items: center !important;
+        padding: 10px 11px !important;
+    }
+
+    #vista-networks .network-icon-box {
+        width: 54px !important;
+        height: 54px !important;
+        margin-right: 12px !important;
+    }
+
+    #vista-networks .network-user {
+        font-size: 16px !important;
+    }
+
+    #vista-networks .network-actions {
+        width: 100% !important;
+        margin: 10px 0 0 0 !important;
+        padding-left: 65px !important;
+        box-sizing: border-box !important;
+    }
+
+    #vista-networks .network-button {
+        flex: 1 1 0 !important;
+        min-width: 0 !important;
+    }
+
+    /* ========================================================
+       USER PAGE
+       ======================================================== */
+    #vista-userpage > div[style*="width: 82%"] {
+        width: 100% !important;
+        margin: 18px 0 0 !important;
+        box-sizing: border-box !important;
+    }
+
+    #vista-userpage > div[style*="width: 82%"] > div:first-child {
+        padding: 14px !important;
+    }
+
+    #vista-userpage > div[style*="width: 82%"] > div:first-child > div:first-child {
+        flex-direction: column !important;
+        align-items: stretch !important;
+        gap: 12px !important;
+    }
+
+    #vista-userpage > div[style*="width: 82%"] > div:first-child > div:first-child > button {
+        width: 100% !important;
+        justify-content: center !important;
+    }
+
+    /* ========================================================
+       GENERAL CHAT + BOTÓN POST
+       ======================================================== */
+    #contenedor-mensajes-chat {
+        width: 100% !important;
+        margin-left: 0 !important;
+        padding-bottom: 70px !important;
+    }
+
+    #vista-quepasara > div[onclick*="abrirModalPostGeneral"] {
+        right: 10px !important;
+        bottom: 92px !important;
+        width: 126px !important;
+        height: 56px !important;
+        border-radius: 30px !important;
+        border: 1px solid #cccccc !important;
+        box-shadow: 0 4px 12px rgba(0,0,0,.16) !important;
+    }
+
+    #vista-quepasara > div[onclick*="abrirModalPostGeneral"] svg {
+        width: 28px !important;
+        height: 28px !important;
+        margin-right: 7px !important;
+    }
+
+    #vista-quepasara > div[onclick*="abrirModalPostGeneral"] span {
+        font-size: 20px !important;
+    }
+
+    /* ========================================================
+       MODAL DE POST
+       ======================================================== */
+    #modal-crear-post {
+        align-items: flex-start !important;
+        overflow-y: auto !important;
+        padding: 12px !important;
+        box-sizing: border-box !important;
+    }
+
+    #miiverse-post-composer,
+    #miiverse-post-window {
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+    }
+
+    #miiverse-post-window {
+        height: auto !important;
+        min-height: 0 !important;
+        padding: 18px 14px !important;
+        border-radius: 18px !important;
+    }
+
+    #miiverse-post-header {
+        height: auto !important;
+        min-height: 72px !important;
+        padding-right: 0 !important;
+    }
+
+    .mii-post-avatar-group {
+        width: 78px !important;
+        height: 56px !important;
+    }
+
+    #avatar-mii-post {
+        width: 54px !important;
+        height: 56px !important;
+    }
+
+    #boton-emociones-post {
+        width: 24px !important;
+        height: 56px !important;
+    }
+
+    .miiverse-post-userinfo {
+        width: auto !important;
+        flex: 1 1 auto !important;
+        margin-left: 9px !important;
+        padding-right: 0 !important;
+    }
+
+    #nombre-mii-post {
+        font-size: 18px !important;
+        line-height: 21px !important;
+    }
+
+    .miiverse-post-community-name {
+        font-size: 13px !important;
+    }
+
+    .miiverse-spoiler {
+        position: static !important;
+        width: auto !important;
+        height: 34px !important;
+        margin-left: 8px !important;
+        padding: 0 8px !important;
+        font-size: 12px !important;
+        flex-shrink: 0 !important;
+    }
+
+    #miiverse-post-editor {
+        height: auto !important;
+        flex-wrap: wrap !important;
+        margin-top: 10px !important;
+    }
+
+    .miiverse-mode-selector {
+        width: 46px !important;
+        height: 150px !important;
+    }
+
+    #btn-modo-texto,
+    #btn-modo-dibujo {
+        width: 44px !important;
+    }
+
+    .miiverse-post-input-area,
+    #texto-nuevo-post,
+    #canvas-post {
+        height: 150px !important;
+    }
+
+    .miiverse-image-column {
+        width: 100% !important;
+        height: 62px !important;
+        margin: 10px 0 0 0 !important;
+    }
+
+    #select-image-post {
+        width: 100% !important;
+        height: 62px !important;
+        flex-direction: row !important;
+        gap: 8px !important;
+    }
+
+    .miiverse-photo-symbol {
+        font-size: 38px !important;
+        line-height: 38px !important;
+    }
+
+    .miiverse-paperclip-symbol {
+        display: none !important;
+    }
+
+    .miiverse-select-image-text {
+        margin-top: 0 !important;
+        font-size: 14px !important;
+    }
+
+    #burbuja-emociones {
+        max-width: calc(100vw - 24px) !important;
+        overflow-x: auto !important;
+    }
+
+    /* ========================================================
+       POSTS DINÁMICOS / ELEMENTOS LARGOS
+       ======================================================== */
+    #contenedor-mensajes-chat *,
+    #muro-mensajes *,
+    #muro-posts-usuario * {
+        max-width: 100%;
+        box-sizing: border-box;
+    }
+
+    #contenedor-mensajes-chat img,
+    #muro-mensajes img,
+    #muro-posts-usuario img {
+        height: auto;
+    }
+}
+
+/* ------------------------------------------------------------
+   TELÉFONOS PEQUEÑOS
+   ------------------------------------------------------------ */
+@media screen and (max-width: 420px) {
+    #vista-perfil .home-topbar-badge,
+    #vista-juegos .games-clicker-style-badge,
+    #vista-proyectos .projects-clicker-style-badge,
+    #vista-sobremi .about-clicker-style-badge,
+    #vista-quepasara .chat-clicker-style-badge,
+    #vista-networks .networks-topbar-badge {
+        display: none !important;
+    }
+
+    #global-menu #user-sidebar-name,
+    #global-menu .sidebar-label,
+    #nav-texto-wiiu {
+        font-size: 9px !important;
+        line-height: 10px !important;
+    }
+
+    #vista-perfil .home-profile-card {
+        padding: 14px !important;
+    }
+
+    #vista-perfil .home-profile-mii-frame {
+        width: 66px !important;
+        height: 66px !important;
+    }
+
+    #vista-perfil .home-profile-info {
+        margin-left: 11px !important;
+    }
+
+    #vista-networks .network-actions {
+        padding-left: 0 !important;
+    }
+
+    #vista-networks .network-button {
+        height: 32px !important;
+        font-size: 11px !important;
+    }
+
+    .miiverse-spoiler {
+        font-size: 10px !important;
+        padding: 0 5px !important;
+    }
+}
+
+
+/* ============================================================
+   ORIGINAL STYLE BLOCK 17 — maki-yeah-system-v11
+   ============================================================ */
+.maki-yeah-icon{display:inline-block;font-family:'MiiverseIcons'!important;font-size:21px;font-weight:normal!important;line-height:1;color:#7e7e7e;transform:translateY(1px)}
+.maki-page-yeah,.maki-profile-yeah{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:34px;padding:6px 15px;border:1px solid #c4cbd0;border-radius:20px;cursor:pointer;color:#566168;font-family:'MiiverseFont',sans-serif;font-size:13px;font-weight:bold;background:linear-gradient(to bottom,#fff 0%,#f4f4f4 48%,#e4e7e9 100%);box-shadow:inset 0 1px 0 rgba(255,255,255,.9),0 1px 2px rgba(0,0,0,.08)}
+.maki-page-yeah.active,.maki-profile-yeah.active{color:#087da8;border-color:#17aee0;background:linear-gradient(to bottom,#f9feff 0%,#daf7ff 100%);box-shadow:inset 0 1px 0 #fff,0 0 8px rgba(0,174,255,.42)}
+.maki-page-yeah.active .maki-yeah-icon,.maki-profile-yeah.active .maki-yeah-icon{color:#00aeff}
+.maki-page-yeah-count-wrap,.maki-page-yeah-count,.maki-profile-yeah-count{color:#718096;font-family:'MiiverseFont',sans-serif;font-size:13px}
+.maki-public-post-actions{display:flex;align-items:center;gap:9px;margin-top:12px;padding-top:10px;border-top:1px solid #ececec}
+
+
+/* ============================================================
+   ORIGINAL STYLE BLOCK 18 — maki-public-profiles-style
+   ============================================================ */
+    .maki-public-link-box {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 14px;
+        margin: 0 0 20px 0;
+        padding: 11px 13px;
+        border: 1px solid #b9d4de;
+        border-radius: 10px;
+        background:
+            linear-gradient(
+                to bottom,
+                #ffffff 0%,
+                #f3fbfe 100%
+            );
+        box-shadow:
+            inset 0 1px 0 #ffffff,
+            0 2px 5px rgba(0,90,130,.06);
+    }
+
+    .maki-public-link-info {
+        min-width: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
+    }
+
+    .maki-public-link-label {
+        color: #168fb8;
+        font-size: 10px;
+        font-weight: bold;
+        letter-spacing: .4px;
+    }
+
+    .maki-public-link-url {
+        overflow: hidden;
+        color: #65747a;
+        font-size: 12px;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+
+    .maki-public-copy-button {
+        flex-shrink: 0;
+        min-width: 72px;
+        padding: 8px 13px;
+        border: 1px solid #0794c5;
+        border-radius: 18px;
+        cursor: pointer;
+        color: #ffffff;
+        font-family: 'MiiverseFont', sans-serif;
+        font-size: 11px;
+        font-weight: bold;
+        background:
+            linear-gradient(
+                to bottom,
+                #55dcfa 0%,
+                #22bbe5 48%,
+                #078fbe 100%
+            );
+        box-shadow:
+            inset 0 1px 0 rgba(255,255,255,.5),
+            0 2px 4px rgba(0,100,145,.13);
+        text-shadow: 0 1px 1px rgba(0,70,110,.25);
+    }
+
+    .maki-public-copy-button:active {
+        transform: translateY(1px);
+    }
+
+    .maki-public-post {
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+        padding: 14px;
+        border: 1px solid #d2d2d2;
+        border-radius: 11px;
+        background: #ffffff;
+        box-shadow:
+            0 3px 8px rgba(0,0,0,.06),
+            inset 0 1px 0 #ffffff;
+    }
+
+    .maki-public-post-mii {
+        width: 58px;
+        height: 58px;
+        flex-shrink: 0;
+        overflow: hidden;
+        border: 1px solid #c8c8c8;
+        border-radius: 9px;
+        background: #eeeeee;
+    }
+
+    .maki-public-post-mii img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .maki-public-post-content {
+        min-width: 0;
+        flex: 1;
+    }
+
+    .maki-public-post-meta {
+        margin-bottom: 7px;
+        color: #9a9a9a;
+        font-size: 11px;
+    }
+
+    .maki-public-post-text {
+        margin: 0;
+        color: #414141;
+        font-size: 14px;
+        line-height: 1.45;
+        word-break: break-word;
+        white-space: pre-wrap;
+    }
+
+    .maki-public-post-image {
+        display: block;
+        width: auto;
+        max-width: 100%;
+        max-height: 520px;
+        height: auto;
+        margin: 0;
+        object-fit: contain;
+        border: 1px solid #d3d3d3;
+        border-radius: 7px;
+        background: #ffffff;
+    }
+
+    .maki-public-empty {
+        padding: 28px 18px;
+        text-align: center;
+        color: #949494;
+        font-size: 13px;
+        border: 1px dashed #c9c9c9;
+        border-radius: 10px;
+        background: rgba(255,255,255,.55);
+    }
+
+    @media (max-width: 760px) {
+        .maki-public-link-box {
+            align-items: stretch;
+            flex-direction: column;
+        }
+
+        .maki-public-copy-button {
+            width: 100%;
+        }
+
+        #profile-public-id-line {
+            font-size: 10px !important;
+        }
+
+        .maki-public-post-mii {
+            width: 48px;
+            height: 48px;
+        }
+    }
+
+
+/* ============================================================
+   ORIGINAL STYLE BLOCK 19 — maki-real-public-chat-v10
+   ============================================================ */
+    #muro-mensajes .maki-chat-delete {
+        position: absolute;
+        top: 10px;
+        right: 12px;
+        z-index: 40;
+        min-width: 72px;
+        padding: 7px 12px;
+        border: 1px solid #c5c5c5;
+        border-radius: 17px;
+        cursor: pointer;
+        color: #666;
+        font-family: 'MiiverseFont', sans-serif;
+        font-size: 11px;
+        font-weight: bold;
+        background: linear-gradient(to bottom, #ffffff 0%, #ededed 100%);
+        box-shadow:
+            inset 0 1px 0 #ffffff,
+            0 1px 3px rgba(0,0,0,.10);
+    }
+
+    #muro-mensajes .maki-chat-delete:hover {
+        color: #d21426;
+        border-color: #e5a7ad;
+        background: linear-gradient(to bottom, #fff 0%, #fff2f3 100%);
+    }
+
+    #muro-mensajes .maki-chat-avatar {
+        position: relative;
+        width: 96px;
+        height: 96px;
+        flex: 0 0 96px;
+        margin-top: 4px;
+        overflow: hidden;
+        border: 1px solid #b8b8b8;
+        border-radius: 8px;
+        background: #fff;
+        box-shadow: 0 2px 4px rgba(0,0,0,.10);
+    }
+
+    #muro-mensajes .maki-chat-avatar > img.mii-face {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    #muro-mensajes .maki-chat-verified {
+        position: absolute !important;
+        top: 2px !important;
+        left: 2px !important;
+        z-index: 50 !important;
+        width: 31px !important;
+        height: 31px !important;
+        max-width: 31px !important;
+        max-height: 31px !important;
+        object-fit: contain !important;
+        pointer-events: none !important;
+        border: 0 !important;
+        background: transparent !important;
+        box-shadow: none !important;
+    }
+
+    #muro-mensajes .maki-chat-name-row {
+        display: flex;
+        align-items: center;
+        gap: 7px;
+        min-width: 0;
+    }
+
+    #muro-mensajes .maki-chat-role {
+        flex-shrink: 0;
+        padding: 3px 7px;
+        border: 1px solid #9adcf0;
+        border-radius: 10px;
+        color: #0787b5;
+        font-size: 9px;
+        font-weight: bold;
+        background: #ecfaff;
+    }
+
+    #muro-mensajes .maki-chat-live-pill {
+        margin-left: auto;
+        color: #6c777c;
+        font-size: 10px;
+    }
+
+    #muro-mensajes .maki-chat-footer {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 16px;
+        border-top: 1px solid #e5e5e5;
+        background: #fafafa;
+    }
+
+    #muro-mensajes .maki-chat-yeah {
+        min-width: 94px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        padding: 7px 13px;
+        border: 1px solid #bcbcbc;
+        border-radius: 18px;
+        cursor: pointer;
+        color: #666;
+        font-family: 'MiiverseFont', sans-serif;
+        font-size: 11px;
+        font-weight: bold;
+        background: linear-gradient(to bottom, #ffffff, #ececec);
+        box-shadow: inset 0 1px 0 #fff;
+    }
+
+    #muro-mensajes .maki-chat-yeah.active {
+        color: #ffffff;
+        border-color: #048dc0;
+        background: linear-gradient(to bottom, #52daf9, #17b4df 55%, #078dbd);
+        text-shadow: 0 1px 1px rgba(0,60,100,.25);
+    }
+
+    #muro-mensajes .maki-chat-yeah.active .maki-yeah-icon {
+        color: #ffffff;
+    }
+
+    #muro-mensajes .maki-chat-state {
+        padding: 32px 18px;
+        text-align: center;
+        color: #7b858a;
+        font-family: 'MiiverseFont', sans-serif;
+        font-size: 14px;
+        border: 1px dashed #c9d1d4;
+        border-radius: 12px;
+        background: rgba(255,255,255,.64);
+    }
+
+    #muro-mensajes .maki-chat-image {
+        display: block;
+        width: auto;
+        max-width: 100%;
+        max-height: 720px;
+        height: auto;
+        object-fit: contain;
+        margin-top: 18px;
+        border: 1px solid #d3d3d3;
+        border-radius: 8px;
+        background: #f7f7f7;
+        box-shadow: 0 2px 5px rgba(0,0,0,.08);
+    }
+
+    #muro-mensajes .maki-chat-image:first-child {
+        margin-top: 0;
+    }
+
+    @media (max-width: 700px) {
+        #muro-mensajes .miiverse-card {
+            gap: 8px !important;
+        }
+
+        #muro-mensajes .maki-chat-avatar {
+            width: 54px;
+            height: 54px;
+            flex-basis: 54px;
+        }
+
+        #muro-mensajes .maki-chat-verified {
+            width: 21px !important;
+            height: 21px !important;
+        }
+
+        #muro-mensajes .maki-chat-delete {
+            position: static;
+            min-width: 0;
+            padding: 6px 9px;
+            font-size: 9px;
+        }
+
+        #muro-mensajes .maki-chat-header {
+            align-items: flex-start !important;
+            gap: 8px !important;
+            padding: 11px 12px !important;
+        }
+
+        #muro-mensajes .maki-chat-header-right {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 5px;
+        }
+
+        #muro-mensajes .maki-chat-body {
+            padding: 20px 14px !important;
+        }
+
+        #muro-mensajes .maki-chat-community-icon {
+            display: none !important;
+        }
+    }
+
+
+/* ============================================================
+   ORIGINAL STYLE BLOCK 20 — maki-post-detail-v12-style
+   ============================================================ */
+    #maki-post-detail-overlay {
+        position: fixed;
+        inset: 0;
+        z-index: 999999;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        padding: 18px;
+        background: rgba(20, 28, 32, .58);
+        backdrop-filter: blur(3px);
+        -webkit-backdrop-filter: blur(3px);
+    }
+
+    #maki-post-detail-overlay.open {
+        display: flex;
+    }
+
+    .maki-post-detail-window {
+        width: min(900px, 100%);
+        max-height: 92vh;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        border: 1px solid #aebdc3;
+        border-radius: 18px;
+        background: #f4f5f5;
+        box-shadow:
+            0 22px 60px rgba(0,0,0,.34),
+            inset 0 1px 0 #fff;
+    }
+
+    .maki-post-detail-topbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        min-height: 58px;
+        padding: 0 16px 0 22px;
+        color: #fff;
+        border-bottom: 2px solid #0786b3;
+        background:
+            linear-gradient(
+                to bottom,
+                #64def9 0%,
+                #2bc2e9 45%,
+                #0b9dce 100%
+            );
+        box-shadow:
+            inset 0 2px 0 rgba(255,255,255,.42),
+            0 2px 5px rgba(0,0,0,.12);
+    }
+
+    .maki-post-detail-topbar strong {
+        font-family: 'MiiverseFont', sans-serif;
+        font-size: 20px;
+        text-shadow: 0 1px 1px rgba(0,75,110,.25);
+    }
+
+    .maki-post-detail-close {
+        width: 38px;
+        height: 38px;
+        border: 1px solid rgba(255,255,255,.75);
+        border-radius: 50%;
+        cursor: pointer;
+        color: #fff;
+        font-size: 25px;
+        line-height: 32px;
+        background: rgba(0,90,130,.15);
+    }
+
+    .maki-post-detail-scroll {
+        overflow-y: auto;
+        padding: 20px;
+    }
+
+    .maki-post-detail-card {
+        overflow: hidden;
+        border: 1px solid #c8c8c8;
+        border-radius: 13px;
+        background: #fff;
+        box-shadow: 0 4px 10px rgba(0,0,0,.07);
+    }
+
+    .maki-post-detail-author {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        min-height: 82px;
+        padding: 12px 17px;
+        border-bottom: 1px solid #d5d5d5;
+        background: linear-gradient(to bottom, #fafafa, #eeeeee);
+    }
+
+    .maki-post-detail-author-mii {
+        width: 62px;
+        height: 62px;
+        flex: 0 0 62px;
+        overflow: hidden;
+        border: 1px solid #b9c2c6;
+        border-radius: 10px;
+        background: #fff;
+        box-shadow: 0 2px 4px rgba(0,0,0,.08);
+    }
+
+    .maki-post-detail-author-mii img {
+        width: 100%;
+        height: 100%;
+        display: block;
+        object-fit: cover;
+    }
+
+    .maki-post-detail-author-info {
+        min-width: 0;
+        flex: 1;
+    }
+
+    .maki-post-detail-name {
+        overflow: hidden;
+        color: #414b50;
+        font-size: 18px;
+        font-weight: bold;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+
+    .maki-post-detail-pnid {
+        margin-top: 3px;
+        color: #8a959a;
+        font-size: 11px;
+    }
+
+    .maki-post-detail-date {
+        flex-shrink: 0;
+        color: #8b9498;
+        font-size: 11px;
+    }
+
+    .maki-post-detail-content {
+        padding: 25px;
+        color: #333;
+        font-size: 18px;
+        line-height: 1.55;
+        word-break: break-word;
+        white-space: pre-wrap;
+    }
+
+    .maki-post-detail-image {
+        display: block;
+        max-width: 100%;
+        max-height: 620px;
+        width: auto;
+        height: auto;
+        margin: 18px auto 0;
+        border: 1px solid #d3d3d3;
+        border-radius: 9px;
+        background: #f8f8f8;
+    }
+
+    .maki-post-detail-actions {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 12px 16px;
+        border-top: 1px solid #e2e2e2;
+        background: #fafafa;
+    }
+
+    .maki-post-detail-yeah-button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        min-width: 102px;
+        min-height: 37px;
+        padding: 7px 15px;
+        border: 1px solid #bdc7cb;
+        border-radius: 20px;
+        cursor: pointer;
+        color: #5b656a;
+        font-family: 'MiiverseFont', sans-serif;
+        font-weight: bold;
+        background: linear-gradient(to bottom, #fff, #e9ecee);
+        box-shadow: inset 0 1px 0 #fff;
+    }
+
+    .maki-post-detail-yeah-button.active {
+        color: #087da8;
+        border-color: #15abe0;
+        background: linear-gradient(to bottom, #faffff, #d9f7ff);
+        box-shadow: 0 0 8px rgba(0,174,255,.38);
+    }
+
+    .maki-post-detail-yeah-button.active .maki-yeah-icon {
+        color: #00aeff;
+    }
+
+    #maki-post-detail-delete {
+        margin-left: auto;
+        min-height: 37px;
+        padding: 7px 18px;
+        border: 1px solid #c83b49;
+        border-radius: 20px;
+        cursor: pointer;
+        color: #fff;
+        font-family: 'MiiverseFont', sans-serif;
+        font-size: 12px;
+        font-weight: bold;
+        background:
+            linear-gradient(
+                to bottom,
+                #f06473,
+                #d93447
+            );
+        box-shadow:
+            inset 0 1px 0 rgba(255,255,255,.35),
+            0 2px 4px rgba(150,20,35,.15);
+    }
+
+    .maki-post-detail-yeah-section {
+        margin-top: 18px;
+        padding: 16px;
+        border: 1px solid #c9d2d6;
+        border-radius: 13px;
+        background: rgba(255,255,255,.90);
+        box-shadow: 0 3px 8px rgba(0,0,0,.05);
+    }
+
+    .maki-post-detail-yeah-title {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 13px;
+        color: #49545a;
+        font-family: 'MiiverseFont', sans-serif;
+        font-size: 14px;
+        font-weight: bold;
+    }
+
+    .maki-post-detail-happy-symbol {
+        color: #58c900;
+        font-family: 'MiiverseIcons', sans-serif;
+        font-size: 27px;
+        line-height: 1;
+    }
+
+    #maki-post-detail-people {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(116px, 1fr));
+        gap: 12px;
+    }
+
+    .maki-yeah-person {
+        min-width: 0;
+        padding: 10px 7px 8px;
+        text-align: center;
+        border: 1px solid #d2d8da;
+        border-radius: 11px;
+        background: linear-gradient(to bottom, #fff, #f5f7f7);
+        box-shadow: inset 0 1px 0 #fff;
+    }
+
+    .maki-yeah-person-mii {
+        width: 76px;
+        height: 76px;
+        margin: 0 auto 7px;
+        overflow: hidden;
+        border: 1px solid #bfc9cd;
+        border-radius: 11px;
+        background: #fff;
+    }
+
+    .maki-yeah-person-mii img {
+        width: 100%;
+        height: 100%;
+        display: block;
+        object-fit: cover;
+    }
+
+    .maki-yeah-person-name {
+        overflow: hidden;
+        color: #4c565b;
+        font-size: 11px;
+        font-weight: bold;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+
+    .maki-yeah-person-pnid {
+        overflow: hidden;
+        margin-top: 2px;
+        color: #99a1a5;
+        font-size: 9px;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+
+    .maki-post-detail-empty-yeahs {
+        grid-column: 1 / -1;
+        padding: 18px 10px;
+        text-align: center;
+        color: #929ca0;
+        font-size: 12px;
+    }
+
+    /* El Delete antiguo del feed queda desactivado definitivamente. */
+    #muro-mensajes .maki-chat-delete,
+    #muro-mensajes .btn-eliminar-miiverse {
+        display: none !important;
+    }
+
+    #muro-mensajes .miiverse-card {
+        cursor: pointer;
+    }
+
+    #muro-mensajes .miiverse-card:hover > div:last-child {
+        border-color: #9fcddd !important;
+        box-shadow:
+            0 4px 10px rgba(0,137,183,.10) !important;
+    }
+
+    @media (max-width: 650px) {
+        #maki-post-detail-overlay {
+            padding: 8px;
+        }
+
+        .maki-post-detail-window {
+            max-height: 96vh;
+            border-radius: 13px;
+        }
+
+        .maki-post-detail-scroll {
+            padding: 12px;
+        }
+
+        .maki-post-detail-content {
+            padding: 18px 14px;
+            font-size: 16px;
+        }
+
+        .maki-post-detail-author {
+            gap: 9px;
+            padding: 10px;
+        }
+
+        .maki-post-detail-author-mii {
+            width: 50px;
+            height: 50px;
+            flex-basis: 50px;
+        }
+
+        .maki-post-detail-date {
+            display: none;
+        }
+
+        #maki-post-detail-people {
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 7px;
+        }
+
+        .maki-yeah-person {
+            padding-left: 4px;
+            padding-right: 4px;
+        }
+
+        .maki-yeah-person-mii {
+            width: 60px;
+            height: 60px;
+        }
+    }
+
+
+/* ============================================================
+   ORIGINAL STYLE BLOCK 21 — maki-miiverse-drawing-v14
+   ============================================================ */
+/* Wii U / Grape memo-inspired drawing surface */
+#miiverse-drawing-surface {
+    display: none;
+    position: absolute;
+    inset: 0;
+    z-index: 8;
+    box-sizing: border-box;
+    align-items: stretch;
+    gap: 10px;
+    padding: 10px;
+    border: 2px solid #505657;
+    border-radius: 6px;
+    background:
+        radial-gradient(circle at 20% 10%, rgba(255,255,255,.055), transparent 32%),
+        linear-gradient(135deg, #444a4b 0%, #363b3c 55%, #2e3334 100%);
+    box-shadow:
+        inset 0 2px 5px rgba(0,0,0,.34),
+        inset 0 1px 0 rgba(255,255,255,.09),
+        0 1px 2px rgba(0,0,0,.18);
+}
+
+#miiverse-drawing-surface.active { display: flex !important; }
+
+#miiverse-drawing-toolbar {
+    width: 108px;
+    flex: 0 0 108px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.miiverse-tool-group {
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    min-height: 58px;
+    border: 1px solid #aeb5b7;
+    border-radius: 12px;
+    background: linear-gradient(to bottom, #fafafa 0%, #e5e7e8 100%);
+    box-shadow: inset 0 1px 0 #fff, 0 2px 3px rgba(0,0,0,.20);
+}
+
+.miiverse-draw-tool {
+    position: relative;
+    min-width: 0;
+    height: 58px;
+    padding: 0;
+    border: 0;
+    border-right: 1px solid #c0c5c7;
+    cursor: pointer;
+    background: linear-gradient(to bottom, #fafafa, #e3e5e6);
+    -webkit-tap-highlight-color: transparent;
+}
+.miiverse-draw-tool:last-child { border-right: 0; }
+.miiverse-draw-tool.selected {
+    background: linear-gradient(to bottom, #70e5e8 0%, #4bd3d8 46%, #31bdc6 100%);
+    box-shadow: inset 0 3px 6px rgba(0,105,120,.18), inset 0 1px 0 rgba(255,255,255,.38);
+}
+
+.eraser-icon, .pencil-icon {
+    position: absolute;
+    left: 50%; top: 50%;
+    display: block;
+    transform: translate(-50%,-50%) rotate(42deg);
+    border-radius: 2px;
+}
+.eraser-icon { border: 3px solid #82898b; background: transparent; }
+.eraser-large { width: 27px; height: 19px; }
+.eraser-medium { width: 21px; height: 14px; }
+.eraser-small { width: 15px; height: 10px; border-width: 2px; }
+
+.pencil-icon {
+    background: linear-gradient(to right,#858b8d 0%,#858b8d 73%,#e9eaeb 73%,#e9eaeb 88%,#54595a 88%,#54595a 100%);
+    box-shadow: 0 1px 1px rgba(0,0,0,.15);
+}
+.pencil-large { width: 31px; height: 14px; }
+.pencil-medium { width: 26px; height: 11px; }
+.pencil-small { width: 20px; height: 8px; }
+.miiverse-draw-tool.selected .eraser-icon { border-color: #fff; }
+.miiverse-draw-tool.selected .pencil-icon {
+    background: linear-gradient(to right,#fff 0%,#fff 73%,#dcfbff 73%,#dcfbff 88%,#fff 88%,#fff 100%);
+}
+
+.miiverse-draw-bottom-tools {
+    margin-top: auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+}
+.miiverse-draw-action {
+    height: 43px;
+    border: 1px solid #737a7c;
+    border-radius: 9px;
+    cursor: pointer;
+    color: #f5f6f6;
+    background: linear-gradient(to bottom,#5c6365,#414748);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.13),0 1px 2px rgba(0,0,0,.25);
+}
+.miiverse-draw-action:active { transform: translateY(1px); }
+.miiverse-undo-symbol { font-size: 28px; line-height: 1; }
+.miiverse-clear-symbol { font-size: 29px; line-height: 1; }
+
+.miiverse-canvas-frame {
+    min-width: 0;
+    flex: 1;
+    overflow: hidden;
+    display: flex;
+    border: 1px solid #aeb3b5;
+    background: #fff;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,.08),0 1px 2px rgba(0,0,0,.17);
+}
+
+#miiverse-drawing-surface #canvas-post {
+    display: block !important;
+    position: static !important;
+    inset: auto !important;
+    width: 100% !important;
+    height: 100% !important;
+    min-width: 0;
+    box-sizing: border-box !important;
+    border: 0 !important;
+    background: transparent !important;
+    cursor: crosshair;
+    touch-action: none;
+}
+
+#miiverse-post-editor.drawing-active { height: 240px !important; }
+#miiverse-post-editor.drawing-active .miiverse-mode-selector { height: 240px !important; }
+#miiverse-post-editor.drawing-active .miiverse-post-input-area { height: 240px !important; }
+#miiverse-post-editor.drawing-active .miiverse-image-column,
+#miiverse-post-editor.drawing-active #select-image-post { height: 240px !important; }
+
+@media (max-width: 760px) {
+    #miiverse-post-editor.drawing-active { height: auto !important; }
+    #miiverse-post-editor.drawing-active .miiverse-mode-selector { height: 210px !important; }
+    #miiverse-post-editor.drawing-active .miiverse-post-input-area {
+        height: 210px !important;
+        min-height: 210px !important;
+        flex-basis: calc(100% - 54px) !important;
+    }
+    #miiverse-drawing-surface { gap: 7px; padding: 7px; }
+    #miiverse-drawing-toolbar { width: 82px; flex-basis: 82px; gap: 7px; }
+    .miiverse-tool-group { min-height: 47px; border-radius: 9px; }
+    .miiverse-draw-tool { height: 47px; }
+    .miiverse-draw-action { height: 37px; }
+    #miiverse-post-editor.drawing-active .miiverse-image-column,
+    #miiverse-post-editor.drawing-active #select-image-post { height: 150px !important; }
+}
+
+@media (max-width: 430px) {
+    #miiverse-drawing-toolbar { width: 72px; flex-basis: 72px; }
+    .miiverse-tool-group { min-height: 43px; }
+    .miiverse-draw-tool { height: 43px; }
+    .eraser-large { width: 22px; height: 15px; }
+    .pencil-large { width: 25px; height: 11px; }
+}
+
+
+/* ============================================================
+   ORIGINAL STYLE BLOCK 22 — maki-miiverse-e3-memo-v17
+   ============================================================ */
+/* ============================================================
+   E3 2012 MIIVERSE MEMO — SCREEN-SPACE RECONSTRUCTION
+   ============================================================ */
+
+#miiverse-drawing-surface {
+    display: none !important;
+    position: fixed !important;
+    inset: 0 !important;
+    z-index: 1000015 !important;
+
+    align-items: center !important;
+    justify-content: center !important;
+
+    width: 100vw !important;
+    height: 100vh !important;
+
+    padding: 14px !important;
+    box-sizing: border-box !important;
+
+    background:
+        rgba(14, 18, 20, .76) !important;
+
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+}
+
+#miiverse-drawing-surface.active {
+    display: flex !important;
+}
+
+/*
+ * The actual GamePad capture maps extremely cleanly to 854×480.
+ * Everything inside is therefore positioned in percentages based
+ * on that screen coordinate system instead of normal web layout.
+ */
+#wiiu-memo-screen {
+    --screen-w: 854;
+    --screen-h: 480;
+
+    position: relative !important;
+
+    width:
+        min(
+            854px,
+            calc(100vw - 28px)
+        ) !important;
+
+    aspect-ratio:
+        854 / 480 !important;
+
+    max-height:
+        calc(100vh - 28px);
+
+    overflow:
+        hidden !important;
+
+    padding:
+        0 !important;
+
+    border:
+        2px solid
+        #161b1d !important;
+
+    border-radius:
+        2px !important;
+
+    background:
+        radial-gradient(
+            ellipse at 55% 14%,
+            rgba(255,255,255,.055) 0%,
+            rgba(255,255,255,.025) 28%,
+            transparent 50%
+        ),
+        linear-gradient(
+            to bottom,
+            #30373a 0%,
+            #242a2d 48%,
+            #202527 100%
+        ) !important;
+
+    box-shadow:
+        inset 0 0 12px rgba(0,0,0,.60),
+        inset 0 1px 0 rgba(255,255,255,.025),
+        0 25px 75px rgba(0,0,0,.50) !important;
+}
+
+/* ------------------------------------------------------------
+   USER STRIP — screenshot ≈ x 13%, y 14%
+   ------------------------------------------------------------ */
+
+#wiiu-memo-top-row {
+    position:
+        static !important;
+}
+
+#wiiu-memo-user-strip {
+    position:
+        absolute !important;
+
+    left:
+        12.75% !important;
+
+    top:
+        13.8% !important;
+
+    z-index:
+        10;
+
+    min-width:
+        0;
+
+    height:
+        13.5%;
+
+    display:
+        flex !important;
+
+    align-items:
+        center !important;
+
+    gap:
+        5px !important;
+
+    opacity:
+        .52;
+
+    filter:
+        saturate(.72);
+}
+
+/* Little square loading tile from the left side of the header. */
+#wiiu-memo-loading {
+    position:
+        relative !important;
+
+    width:
+        8.1% !important;
+
+    width:
+        clamp(30px, 4.5vw, 39px) !important;
+
+    height:
+        clamp(30px, 4.5vw, 39px) !important;
+
+    flex:
+        0 0 clamp(30px, 4.5vw, 39px) !important;
+
+    margin-right:
+        4px !important;
+
+    border-radius:
+        5px !important;
+
+    background:
+        rgba(204,214,218,.43) !important;
+
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.10) !important;
+}
+
+#wiiu-memo-loading i {
+    position:
+        absolute;
+
+    left:
+        50%;
+
+    top:
+        50%;
+
+    width:
+        4px;
+
+    height:
+        4px;
+
+    margin:
+        -2px 0 0 -2px;
+
+    border-radius:
+        50%;
+
+    background:
+        rgba(255,255,255,.86);
+}
+
+#wiiu-memo-loading i:nth-child(1) { transform: translate(0,-11px); opacity:1; }
+#wiiu-memo-loading i:nth-child(2) { transform: translate(8px,-8px); opacity:.86; }
+#wiiu-memo-loading i:nth-child(3) { transform: translate(11px,0); opacity:.72; }
+#wiiu-memo-loading i:nth-child(4) { transform: translate(8px,8px); opacity:.60; }
+#wiiu-memo-loading i:nth-child(5) { transform: translate(0,11px); opacity:.48; }
+#wiiu-memo-loading i:nth-child(6) { transform: translate(-8px,8px); opacity:.38; }
+#wiiu-memo-loading i:nth-child(7) { transform: translate(-11px,0); opacity:.30; }
+#wiiu-memo-loading i:nth-child(8) { transform: translate(-8px,-8px); opacity:.22; }
+
+#wiiu-memo-user-mii {
+    width:
+        clamp(32px, 4.8vw, 46px) !important;
+
+    height:
+        clamp(32px, 4.8vw, 46px) !important;
+
+    flex:
+        0 0 clamp(32px, 4.8vw, 46px) !important;
+
+    border-radius:
+        3px !important;
+
+    object-fit:
+        cover !important;
+
+    filter:
+        brightness(.74)
+        saturate(.66);
+}
+
+/* Narrow blue rectangle visible after the Mii in the E3 frame. */
+#wiiu-memo-service-tile {
+    position:
+        relative;
+
+    width:
+        clamp(16px, 2.2vw, 22px);
+
+    height:
+        clamp(35px, 5.2vw, 49px);
+
+    display:
+        inline-block;
+
+    flex:
+        0 0 auto;
+
+    border-radius:
+        3px;
+
+    background:
+        linear-gradient(
+            to bottom,
+            #3291bb,
+            #1d6f99
+        );
+
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.16);
+}
+
+#wiiu-memo-service-tile span {
+    position:
+        absolute;
+
+    left:
+        50%;
+
+    top:
+        50%;
+
+    width:
+        7px;
+
+    height:
+        7px;
+
+    transform:
+        translate(-50%, -50%)
+        rotate(45deg);
+
+    border:
+        1px solid rgba(255,255,255,.42);
+}
+
+#wiiu-memo-user-copy {
+    min-width:
+        0 !important;
+
+    display:
+        flex !important;
+
+    flex-direction:
+        column !important;
+
+    justify-content:
+        center !important;
+
+    gap:
+        1px !important;
+
+    color:
+        #c9d0d3 !important;
+}
+
+#wiiu-memo-user-name {
+    max-width:
+        130px !important;
+
+    overflow:
+        hidden !important;
+
+    color:
+        #b8c0c4 !important;
+
+    font-family:
+        'MiiverseFont',
+        sans-serif !important;
+
+    font-size:
+        clamp(10px, 1.7vw, 15px) !important;
+
+    font-weight:
+        bold !important;
+
+    line-height:
+        1.1 !important;
+
+    white-space:
+        nowrap !important;
+
+    text-overflow:
+        ellipsis !important;
+}
+
+#wiiu-memo-user-pnid {
+    max-width:
+        145px !important;
+
+    display:
+        inline-flex !important;
+
+    align-items:
+        center !important;
+
+    gap:
+        3px !important;
+
+    overflow:
+        hidden !important;
+
+    color:
+        #9da8ad !important;
+
+    font-size:
+        clamp(8px, 1.35vw, 11px) !important;
+
+    line-height:
+        1.1 !important;
+
+    white-space:
+        nowrap !important;
+}
+
+.wiiu-memo-mini-account-icon {
+    width:
+        11px;
+
+    height:
+        9px;
+
+    flex:
+        0 0 11px;
+
+    box-sizing:
+        border-box;
+
+    border:
+        1px solid #7d8b90;
+
+    border-radius:
+        1px;
+
+    opacity:
+        .85;
+}
+
+.wiiu-memo-pnid-text {
+    overflow:
+        hidden;
+
+    text-overflow:
+        ellipsis;
+}
+
+/* ------------------------------------------------------------
+   TOOLBOX — measured from screenshot:
+   x ≈ 48%, y ≈ 14%, w ≈ 39%, h ≈ 17%
+   ------------------------------------------------------------ */
+
+#wiiu-memo-toolbox {
+    position:
+        absolute !important;
+
+    left:
+        47.9% !important;
+
+    top:
+        13.5% !important;
+
+    z-index:
+        20;
+
+    width:
+        39.2% !important;
+
+    height:
+        17.2% !important;
+
+    min-width:
+        0 !important;
+
+    display:
+        grid !important;
+
+    grid-template-columns:
+        1fr
+        1fr
+        1fr
+        1fr
+        1fr !important;
+
+    overflow:
+        hidden !important;
+
+    box-sizing:
+        border-box !important;
+
+    padding:
+        5px !important;
+
+    border:
+        1px solid #aeb8bc !important;
+
+    border-radius:
+        18px !important;
+
+    background:
+        linear-gradient(
+            to bottom,
+            #f8fafa 0%,
+            #e9edee 100%
+        ) !important;
+
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.95),
+        0 3px 8px rgba(0,0,0,.38) !important;
+}
+
+.wiiu-memo-cell {
+    position:
+        relative !important;
+
+    min-width:
+        0 !important;
+
+    height:
+        100% !important;
+
+    padding:
+        0 !important;
+
+    border:
+        0 !important;
+
+    border-right:
+        1px solid #c9ced0 !important;
+
+    cursor:
+        pointer !important;
+
+    background:
+        linear-gradient(
+            to bottom,
+            #fbfbfb 0%,
+            #e9ebec 100%
+        ) !important;
+
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.86) !important;
+}
+
+.wiiu-memo-cell:first-child {
+    border-radius:
+        12px 0 0 12px !important;
+}
+
+.wiiu-memo-cell:last-child {
+    border-right:
+        0 !important;
+
+    border-radius:
+        0 12px 12px 0 !important;
+}
+
+.wiiu-memo-cell.selected {
+    background:
+        linear-gradient(
+            to bottom,
+            #5fdadd 0%,
+            #3fcbd0 52%,
+            #29b5bd 100%
+        ) !important;
+
+    box-shadow:
+        inset 0 2px 5px rgba(0,110,120,.24),
+        inset 0 1px 0 rgba(255,255,255,.34) !important;
+}
+
+/*
+ * Pencil: diagonal solid body with small pale end.
+ * Sized by the screenshot instead of generic icon proportions.
+ */
+.wiiu-pencil-shape {
+    position:
+        absolute !important;
+
+    left:
+        50% !important;
+
+    top:
+        50% !important;
+
+    width:
+        50% !important;
+
+    height:
+        20% !important;
+
+    min-height:
+        9px !important;
+
+    transform:
+        translate(-50%,-50%)
+        rotate(-43deg) !important;
+
+    border-radius:
+        2px !important;
+
+    background:
+        linear-gradient(
+            to right,
+            #80898c 0%,
+            #80898c 72%,
+            #eff1f2 72%,
+            #eff1f2 89%,
+            #626a6d 89%,
+            #626a6d 100%
+        ) !important;
+
+    box-shadow:
+        0 1px 1px rgba(0,0,0,.18) !important;
+}
+
+.wiiu-tool-cell.selected .wiiu-pencil-shape {
+    background:
+        linear-gradient(
+            to right,
+            #ffffff 0%,
+            #ffffff 72%,
+            #eaffff 72%,
+            #eaffff 89%,
+            #ffffff 89%,
+            #ffffff 100%
+        ) !important;
+}
+
+/*
+ * Second screenshot cell looks like a hollow tilted rectangular eraser.
+ */
+.wiiu-eraser-shape {
+    position:
+        absolute !important;
+
+    left:
+        50% !important;
+
+    top:
+        50% !important;
+
+    width:
+        39% !important;
+
+    aspect-ratio:
+        1.22 / 1;
+
+    box-sizing:
+        border-box !important;
+
+    transform:
+        translate(-50%,-50%)
+        rotate(42deg) !important;
+
+    border:
+        clamp(2px, .42vw, 4px)
+        solid
+        #7c8689 !important;
+
+    border-radius:
+        1px !important;
+
+    background:
+        transparent !important;
+}
+
+.wiiu-tool-cell.selected .wiiu-eraser-shape {
+    border-color:
+        #ffffff !important;
+}
+
+.wiiu-size-dot {
+    position:
+        absolute !important;
+
+    left:
+        50% !important;
+
+    top:
+        50% !important;
+
+    transform:
+        translate(-50%,-50%) !important;
+
+    border-radius:
+        50% !important;
+
+    background:
+        #7c8689 !important;
+}
+
+.wiiu-size-cell.selected .wiiu-size-dot {
+    background:
+        #ffffff !important;
+}
+
+.dot-small {
+    width:
+        5% !important;
+
+    min-width:
+        3px !important;
+
+    aspect-ratio:
+        1 / 1;
+}
+
+.dot-medium {
+    width:
+        13% !important;
+
+    min-width:
+        7px !important;
+
+    aspect-ratio:
+        1 / 1;
+}
+
+.dot-large {
+    width:
+        28% !important;
+
+    min-width:
+        14px !important;
+
+    aspect-ratio:
+        1 / 1;
+}
+
+/* ------------------------------------------------------------
+   MEMO PAPER — exact 640×240 logical drawing surface.
+   Screenshot mapping: x≈12.8%, y≈33.1%, w≈74.2%, h≈50%.
+   ------------------------------------------------------------ */
+
+#wiiu-memo-paper {
+    position:
+        absolute !important;
+
+    left:
+        12.75% !important;
+
+    top:
+        33.15% !important;
+
+    z-index:
+        5;
+
+    width:
+        74.25% !important;
+
+    height:
+        50% !important;
+
+    margin:
+        0 !important;
+
+    overflow:
+        hidden !important;
+
+    box-sizing:
+        border-box !important;
+
+    border:
+        1px solid #cbd0d2 !important;
+
+    border-radius:
+        0 !important;
+
+    background:
+        #ffffff !important;
+
+    box-shadow:
+        inset 0 1px 3px rgba(0,0,0,.04),
+        0 2px 5px rgba(0,0,0,.19) !important;
+}
+
+#wiiu-memo-paper #canvas-post {
+    display:
+        block !important;
+
+    position:
+        static !important;
+
+    width:
+        100% !important;
+
+    height:
+        100% !important;
+
+    margin:
+        0 !important;
+
+    padding:
+        0 !important;
+
+    border:
+        0 !important;
+
+    background:
+        #ffffff !important;
+
+    cursor:
+        crosshair !important;
+
+    touch-action:
+        none !important;
+}
+
+/* ------------------------------------------------------------
+   LOWER-LEFT B / BACK TAB
+   Screenshot: flush with left+bottom edges, white quarter-tab.
+   ------------------------------------------------------------ */
+
+#wiiu-memo-bottom-row {
+    position:
+        static !important;
+}
+
+#wiiu-memo-back {
+    position:
+        absolute !important;
+
+    left:
+        -1px !important;
+
+    bottom:
+        -1px !important;
+
+    z-index:
+        30;
+
+    width:
+        12.15% !important;
+
+    height:
+        13.6% !important;
+
+    min-width:
+        0 !important;
+
+    min-height:
+        0 !important;
+
+    display:
+        flex !important;
+
+    align-items:
+        center !important;
+
+    justify-content:
+        center !important;
+
+    gap:
+        2px !important;
+
+    padding:
+        7px 11px 4px 5px !important;
+
+    box-sizing:
+        border-box !important;
+
+    border:
+        1px solid #d3d6d7 !important;
+
+    border-left:
+        0 !important;
+
+    border-bottom:
+        0 !important;
+
+    border-radius:
+        0 38px 0 0 !important;
+
+    cursor:
+        pointer !important;
+
+    color:
+        #2e3639 !important;
+
+    background:
+        linear-gradient(
+            to bottom,
+            #f8f9f9 0%,
+            #e8ebec 100%
+        ) !important;
+
+    box-shadow:
+        inset 0 1px 0 #ffffff,
+        2px -2px 5px rgba(0,0,0,.12) !important;
+}
+
+.wiiu-back-arrow {
+    display:
+        inline-block !important;
+
+    transform:
+        rotate(-7deg);
+
+    color:
+        #283033 !important;
+
+    font-family:
+        Arial,
+        sans-serif !important;
+
+    font-size:
+        clamp(22px, 4.1vw, 37px) !important;
+
+    font-weight:
+        900 !important;
+
+    line-height:
+        .9 !important;
+}
+
+.wiiu-b-button {
+    width:
+        clamp(15px, 2.4vw, 22px) !important;
+
+    height:
+        clamp(15px, 2.4vw, 22px) !important;
+
+    display:
+        inline-flex !important;
+
+    align-items:
+        center !important;
+
+    justify-content:
+        center !important;
+
+    box-sizing:
+        border-box !important;
+
+    border:
+        2px solid #98a2a5 !important;
+
+    border-radius:
+        50% !important;
+
+    color:
+        #697478 !important;
+
+    font-family:
+        Arial,
+        sans-serif !important;
+
+    font-size:
+        clamp(8px, 1.3vw, 11px) !important;
+
+    font-weight:
+        bold !important;
+}
+
+/*
+ * V16 had utility buttons at bottom right. They remain functional in
+ * the code but are hidden because they are NOT visible in this E3 frame.
+ */
+#wiiu-memo-utility-tools {
+    display:
+        none !important;
+}
+
+/* ------------------------------------------------------------
+   Composer preview after leaving the third screen
+   ------------------------------------------------------------ */
+
+#miiverse-drawing-ready {
+    display:
+        none;
+
+    position:
+        absolute;
+
+    inset:
+        0;
+
+    z-index:
+        5;
+
+    overflow:
+        hidden;
+
+    box-sizing:
+        border-box;
+
+    border:
+        2px solid #bdbdbd;
+
+    background:
+        #ffffff;
+}
+
+#miiverse-drawing-ready.active {
+    display:
+        block;
+}
+
+#miiverse-drawing-preview-img {
+    width:
+        100%;
+
+    height:
+        100%;
+
+    display:
+        block;
+
+    object-fit:
+        contain;
+
+    background:
+        #ffffff;
+}
+
+#miiverse-edit-drawing {
+    position:
+        absolute;
+
+    right:
+        10px;
+
+    bottom:
+        10px;
+
+    min-width:
+        102px;
+
+    min-height:
+        32px;
+
+    border:
+        1px solid #85bfd3;
+
+    border-radius:
+        18px;
+
+    cursor:
+        pointer;
+
+    color:
+        #087fa9;
+
+    font-family:
+        'MiiverseFont',
+        sans-serif;
+
+    font-size:
+        10px;
+
+    font-weight:
+        bold;
+
+    background:
+        linear-gradient(
+            to bottom,
+            #ffffff,
+            #eaf6f9
+        );
+
+    box-shadow:
+        inset 0 1px 0 #ffffff,
+        0 2px 4px rgba(0,0,0,.12);
+}
+
+/* Third-screen design means the original composer does not grow. */
+#miiverse-post-editor.drawing-active,
+#miiverse-post-editor.drawing-active .miiverse-post-input-area {
+    height:
+        181px !important;
+}
+
+#miiverse-post-editor.drawing-active .miiverse-image-column,
+#miiverse-post-editor.drawing-active #select-image-post {
+    height:
+        181px !important;
+}
+
+/* ------------------------------------------------------------
+   Small-screen fallback.
+   Keep the SAME 854:480 composition and scale it as one screen.
+   This is closer to a GamePad emulator than rearranging its controls.
+   ------------------------------------------------------------ */
+
+@media (max-width: 760px) {
+    #miiverse-drawing-surface {
+        padding:
+            5px !important;
+    }
+
+    #wiiu-memo-screen {
+        width:
+            calc(100vw - 10px) !important;
+
+        max-height:
+            none !important;
+    }
+
+    #wiiu-memo-user-copy {
+        display:
+            none !important;
+    }
+
+    #wiiu-memo-user-strip {
+        gap:
+            3px !important;
+    }
+
+    #wiiu-memo-loading {
+        width:
+            25px !important;
+
+        height:
+            25px !important;
+
+        flex-basis:
+            25px !important;
+    }
+
+    #wiiu-memo-user-mii {
+        width:
+            28px !important;
+
+        height:
+            28px !important;
+
+        flex-basis:
+            28px !important;
+    }
+
+    #wiiu-memo-service-tile {
+        width:
+            12px;
+
+        height:
+            29px;
+    }
+
+    #wiiu-memo-toolbox {
+        padding:
+            3px !important;
+
+        border-radius:
+            10px !important;
+    }
+
+    .wiiu-memo-cell:first-child {
+        border-radius:
+            7px 0 0 7px !important;
+    }
+
+    .wiiu-memo-cell:last-child {
+        border-radius:
+            0 7px 7px 0 !important;
+    }
+}
+
+
+/* ============================================================
+   ORIGINAL STYLE BLOCK 23 — maki-miiverse-e3-memo-v18-polish
+   ============================================================ */
+/* ============================================================
+   V18 — requested polish
+   ============================================================ */
+
+/* Only the grey square remains on the upper-left. */
+#wiiu-memo-user-strip {
+    left: 12.75% !important;
+    top: 12.1% !important;
+
+    width: auto !important;
+    height: auto !important;
+
+    display: block !important;
+
+    opacity: 1 !important;
+    filter: none !important;
+}
+
+/*
+ * Grey button from the screenshot.
+ * In V17 it looked translucent/small because it inherited the faded
+ * user-strip treatment. V18 makes it a normal opaque Wii U button.
+ */
+#wiiu-memo-loading {
+    position: relative !important;
+
+    width: clamp(48px, 6.1vw, 58px) !important;
+    height: clamp(48px, 6.1vw, 58px) !important;
+    flex: none !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    display: block !important;
+
+    border: 1px solid #697174 !important;
+    border-radius: 7px !important;
+
+    cursor: pointer !important;
+
+    opacity: 1 !important;
+
+    background:
+        linear-gradient(
+            to bottom,
+            #747c7f 0%,
+            #626a6d 50%,
+            #555d60 100%
+        ) !important;
+
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.20),
+        inset 0 -1px 0 rgba(0,0,0,.18),
+        0 2px 4px rgba(0,0,0,.24) !important;
+}
+
+#wiiu-memo-loading:hover {
+    background:
+        linear-gradient(
+            to bottom,
+            #7c8588 0%,
+            #697174 50%,
+            #5a6265 100%
+        ) !important;
+}
+
+#wiiu-memo-loading:active {
+    transform: translateY(1px);
+    box-shadow:
+        inset 0 2px 4px rgba(0,0,0,.20),
+        0 1px 2px rgba(0,0,0,.18) !important;
+}
+
+/* Spinner/dotted mark centered inside the grey button. */
+#wiiu-memo-loading i {
+    width: 5px !important;
+    height: 5px !important;
+
+    margin: -2.5px 0 0 -2.5px !important;
+
+    background: #aeb6b9 !important;
+
+    opacity: 1 !important;
+}
+
+#wiiu-memo-loading i:nth-child(1) { transform: translate(0,-14px) !important; opacity:1 !important; }
+#wiiu-memo-loading i:nth-child(2) { transform: translate(10px,-10px) !important; opacity:.90 !important; }
+#wiiu-memo-loading i:nth-child(3) { transform: translate(14px,0) !important; opacity:.78 !important; }
+#wiiu-memo-loading i:nth-child(4) { transform: translate(10px,10px) !important; opacity:.66 !important; }
+#wiiu-memo-loading i:nth-child(5) { transform: translate(0,14px) !important; opacity:.56 !important; }
+#wiiu-memo-loading i:nth-child(6) { transform: translate(-10px,10px) !important; opacity:.48 !important; }
+#wiiu-memo-loading i:nth-child(7) { transform: translate(-14px,0) !important; opacity:.40 !important; }
+#wiiu-memo-loading i:nth-child(8) { transform: translate(-10px,-10px) !important; opacity:.34 !important; }
+
+/* Defensive: V18 intentionally removes all user identity from this window. */
+#wiiu-memo-user-mii,
+#wiiu-memo-service-tile,
+#wiiu-memo-user-copy,
+#wiiu-memo-user-name,
+#wiiu-memo-user-pnid {
+    display: none !important;
+}
+
+/* Bottom row occupies the whole screen so Listo can anchor bottom-right. */
+#wiiu-memo-bottom-row {
+    position: static !important;
+}
+
+/*
+ * Back/B remains lower-left, but now it really means "back/cancel".
+ * Listo is the action that accepts the drawing.
+ */
+#wiiu-memo-back {
+    z-index: 40 !important;
+}
+
+/* Wii U-style normal-sized confirmation button in the blank lower-right. */
+#wiiu-memo-done {
+    position: absolute !important;
+
+    right: 2.8% !important;
+    bottom: 3.3% !important;
+
+    z-index: 40 !important;
+
+    min-width: 126px !important;
+    height: 50px !important;
+
+    padding: 0 24px !important;
+
+    border: 1px solid #aeb7ba !important;
+    border-radius: 25px !important;
+
+    cursor: pointer !important;
+
+    color: #4a5559 !important;
+
+    font-family: 'MiiverseFont', Arial, sans-serif !important;
+    font-size: 17px !important;
+    font-weight: bold !important;
+
+    background:
+        linear-gradient(
+            to bottom,
+            #ffffff 0%,
+            #f7f8f8 45%,
+            #e7eaea 100%
+        ) !important;
+
+    box-shadow:
+        inset 0 1px 0 #ffffff,
+        0 2px 5px rgba(0,0,0,.22) !important;
+
+    text-shadow:
+        0 1px 0 #ffffff !important;
+}
+
+#wiiu-memo-done:hover {
+    color: #078dbb !important;
+    border-color: #75bfd8 !important;
+
+    background:
+        linear-gradient(
+            to bottom,
+            #ffffff 0%,
+            #f0fbfe 48%,
+            #daf3fa 100%
+        ) !important;
+}
+
+#wiiu-memo-done:active {
+    transform: translateY(1px);
+
+    box-shadow:
+        inset 0 2px 4px rgba(0,0,0,.10),
+        0 1px 2px rgba(0,0,0,.15) !important;
+}
+
+@media (max-width: 760px) {
+    #wiiu-memo-loading {
+        width: 42px !important;
+        height: 42px !important;
+    }
+
+    #wiiu-memo-loading i {
+        width: 4px !important;
+        height: 4px !important;
+        margin: -2px 0 0 -2px !important;
+    }
+
+    #wiiu-memo-loading i:nth-child(1) { transform: translate(0,-10px) !important; }
+    #wiiu-memo-loading i:nth-child(2) { transform: translate(7px,-7px) !important; }
+    #wiiu-memo-loading i:nth-child(3) { transform: translate(10px,0) !important; }
+    #wiiu-memo-loading i:nth-child(4) { transform: translate(7px,7px) !important; }
+    #wiiu-memo-loading i:nth-child(5) { transform: translate(0,10px) !important; }
+    #wiiu-memo-loading i:nth-child(6) { transform: translate(-7px,7px) !important; }
+    #wiiu-memo-loading i:nth-child(7) { transform: translate(-10px,0) !important; }
+    #wiiu-memo-loading i:nth-child(8) { transform: translate(-7px,-7px) !important; }
+
+    #wiiu-memo-done {
+        right: 2.2% !important;
+        bottom: 2.8% !important;
+
+        min-width: 90px !important;
+        height: 40px !important;
+
+        padding: 0 16px !important;
+
+        border-radius: 21px !important;
+
+        font-size: 13px !important;
+    }
+}
+
+
+/* ============================================================
+   ORIGINAL STYLE BLOCK 24 — maki-miiverse-e3-memo-v19-clear-button
+   ============================================================ */
+#wiiu-memo-loading.clear-flash {
+    transform: scale(.96);
+    background:
+        linear-gradient(
+            to bottom,
+            #666e71 0%,
+            #545c5f 50%,
+            #484f52 100%
+        ) !important;
+    box-shadow:
+        inset 0 2px 5px rgba(0,0,0,.24),
+        0 1px 2px rgba(0,0,0,.14) !important;
+}
+
+
+/* ============================================================
+   ORIGINAL STYLE BLOCK 25 — maki-miiverse-v20-remove-back-b
+   ============================================================ */
+#wiiu-memo-back {
+    display: none !important;
+}
+
+
+/* ============================================================
+   V24 — SKY BLUE THEME + FULL-WIDTH DESKTOP TOPBARS
+   ============================================================ */
+
+/*
+ * En escritorio:
+ * - la barra empieza exactamente después de la sidebar de 160px
+ * - termina exactamente en el borde derecho del viewport
+ * - queda pegada al borde superior
+ */
+@media screen and (min-width: 1101px) {
+    #vista-perfil .home-topbar,
+    #vista-juegos .games-clicker-style-topbar,
+    #vista-messages .mii-clicker-topbar,
+    #vista-proyectos .projects-clicker-style-topbar,
+    #vista-sobremi .about-clicker-style-topbar,
+    #vista-quepasara .chat-clicker-style-topbar,
+    #vista-networks .networks-topbar {
+        box-sizing: border-box !important;
+
+        /*
+         * El body en escritorio ya deja 50px a la izquierda.
+         * Con -50px la barra vuelve al borde REAL de la ventana
+         * y rellena también el hueco que queda detrás de la sidebar.
+         */
+        margin-left: -50px !important;
+        margin-right: 0 !important;
+        margin-top: -50px !important;
+
+        /*
+         * La barra cruza por detrás del menú lateral y llega
+         * hasta el borde derecho completo del viewport.
+         */
+        width: 100vw !important;
+        max-width: none !important;
+
+        /*
+         * El fondo sí pasa detrás de la sidebar, pero el contenido
+         * empieza después de ella para que título/badge no queden tapados.
+         */
+        padding-left: 175px !important;
+        padding-right: 22px !important;
+
+        position: relative !important;
+        z-index: 1 !important;
+    }
+
+    #vista-userpage > div:first-child {
+        box-sizing: border-box !important;
+
+        margin-left: -50px !important;
+        margin-right: 0 !important;
+        margin-top: -50px !important;
+
+        width: 100vw !important;
+        max-width: none !important;
+
+        padding-left: 175px !important;
+        padding-right: 22px !important;
+
+        position: relative !important;
+        z-index: 1 !important;
+    }
+}
+
+
+/* ============================================================
+   V24 — REMOVE THE LAST GREEN UI ACCENTS
+   ============================================================ */
+
+/* About Me + General Chat cards on Home */
+#vista-perfil .community-about,
+#vista-perfil .community-general {
+    --community-color: #23b9e5 !important;
+}
+
+/* Mii Clicker */
+#vista-messages .mii-clicker-topbar {
+    background:
+        linear-gradient(
+            to bottom,
+            #48d4ff 0%,
+            #23bce9 42%,
+            #119ed1 56%,
+            #0784b6 100%
+        ) !important;
+
+    border-bottom:
+        2px solid #08759f !important;
+
+    box-shadow:
+        inset 0 2px 0 rgba(255,255,255,.45),
+        inset 0 -2px 0 rgba(0,70,110,.16),
+        0 3px 6px rgba(0,0,0,.10) !important;
+}
+
+/* About Me */
+#vista-sobremi .about-clicker-style-topbar {
+    background:
+        linear-gradient(
+            to bottom,
+            #48d4ff 0%,
+            #23bce9 42%,
+            #119ed1 56%,
+            #0784b6 100%
+        ) !important;
+
+    border-bottom:
+        2px solid #08759f !important;
+
+    box-shadow:
+        inset 0 2px 0 rgba(255,255,255,.45),
+        inset 0 -2px 0 rgba(0,70,110,.16),
+        0 3px 6px rgba(0,0,0,.10) !important;
+}
+
+/* General Chat */
+#vista-quepasara .chat-clicker-style-topbar {
+    background:
+        linear-gradient(
+            to bottom,
+            #48d4ff 0%,
+            #23bce9 42%,
+            #119ed1 56%,
+            #0784b6 100%
+        ) !important;
+
+    border-bottom:
+        2px solid #08759f !important;
+
+    box-shadow:
+        inset 0 2px 0 rgba(255,255,255,.45),
+        inset 0 -2px 0 rgba(0,70,110,.16),
+        0 3px 6px rgba(0,0,0,.10) !important;
+}
+
+/* User Page topbar: override old inline green defensively */
+#vista-userpage > div:first-child {
+    background:
+        linear-gradient(
+            to bottom,
+            #48d4ff 0%,
+            #23bce9 42%,
+            #119ed1 56%,
+            #0784b6 100%
+        ) !important;
+
+    border-bottom:
+        2px solid #08759f !important;
+
+    box-shadow:
+        inset 0 2px 0 rgba(255,255,255,.45),
+        inset 0 -2px 0 rgba(0,70,110,.16),
+        0 3px 6px rgba(0,0,0,.10) !important;
+}
+
+/* User Page Posts tab */
+#vista-userpage #contador-posts-usuario {
+    background: #08759f !important;
+}
+
+#vista-userpage
+> div[style*="width: 82%"]
+> div[style*="grid-template-columns: 1fr"]
+> div {
+    background:
+        linear-gradient(
+            to bottom,
+            #48d4ff 0%,
+            #23bce9 50%,
+            #0784b6 100%
+        ) !important;
+}
+
+/* Profile Settings pencil */
+#profile-settings-button > span {
+    color: #078fbe !important;
+}
+
+/* About Me section details */
+.maki-about-group-title {
+    color: #078fbe !important;
+}
+
+.maki-about-group-title::before {
+    background: #23bce9 !important;
+    box-shadow: 0 0 0 2px rgba(35,188,233,.15) !important;
+}
+
+.maki-interest-cloud span {
+    border-color: #a9ddec !important;
+    color: #078fbe !important;
+    background:
+        linear-gradient(
+            to bottom,
+            #fbfeff,
+            #eefaff
+        ) !important;
+}
+
+/* Emotion selected in post composer */
+.emocion-btn.activo {
+    background:
+        linear-gradient(
+            to bottom,
+            #48d4ff 0%,
+            #0784b6 100%
+        ) !important;
+
+    border:
+        1px solid #08759f !important;
+}
+
