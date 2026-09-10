@@ -8983,3 +8983,29 @@ img, video, canvas {
         1px solid #08759f !important;
 }
 
+
+/* ============================================================
+   V26 — CHAT MII -> PUBLIC PROFILE
+   ============================================================ */
+
+.maki-chat-avatar-profile-link {
+    cursor: pointer;
+    transition:
+        transform .10s ease,
+        filter .10s ease;
+}
+
+.maki-chat-avatar-profile-link:hover {
+    transform: translateY(-1px);
+    filter: brightness(1.04);
+}
+
+.maki-chat-avatar-profile-link:active {
+    transform: translateY(1px) scale(.98);
+}
+
+.maki-chat-avatar-profile-link:focus-visible {
+    outline: 3px solid rgba(35, 188, 233, .55);
+    outline-offset: 3px;
+}
+

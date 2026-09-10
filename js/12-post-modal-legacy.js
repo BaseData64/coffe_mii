@@ -66,7 +66,7 @@ document.addEventListener('DOMContentLoaded', () => {
     botones.forEach(btn => {
         btn.addEventListener('click', function() {
             botones.forEach(b => b.style.backgroundColor = 'transparent');
-            this.style.backgroundColor = '#79c100';
+            this.style.backgroundColor = '#23bce9';
             
             expresionActual = this.getAttribute('data-exp');
             const pnid = localStorage.getItem('makiiverse_pnid') || 'Makii';

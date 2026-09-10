@@ -179,6 +179,8 @@ function getCurrentExpression() {
             )
         ).find(function(button) {
             return (
+                button.style.backgroundColor === "rgb(35, 188, 233)" ||
+                button.style.backgroundColor === "#23bce9" ||
                 button.style.backgroundColor === "rgb(121, 193, 0)" ||
                 button.style.backgroundColor === "#79c100"
             );
@@ -1594,6 +1596,94 @@ function renderRealChat() {
                     </div>
                 </div>
             `;
+
+            /* ====================================================
+               MII DEL CHAT -> PERFIL PÚBLICO
+               ==================================================== */
+
+            const chatAvatar =
+                card.querySelector(
+                    ".maki-chat-avatar"
+                );
+
+            const authorPublicId =
+                String(
+                    post.publicId || ""
+                ).trim();
+
+            if (
+                chatAvatar &&
+                /^[0-9]{9}$/.test(
+                    authorPublicId
+                )
+            ) {
+                chatAvatar.classList.add(
+                    "maki-chat-avatar-profile-link"
+                );
+
+                chatAvatar.setAttribute(
+                    "role",
+                    "button"
+                );
+
+                chatAvatar.setAttribute(
+                    "tabindex",
+                    "0"
+                );
+
+                chatAvatar.setAttribute(
+                    "title",
+                    "Open user profile"
+                );
+
+                chatAvatar.setAttribute(
+                    "aria-label",
+                    "Open " +
+                    chatDisplayName(post) +
+                    " profile"
+                );
+
+
+                function openAuthorProfile(
+                    event
+                ) {
+                    if (event) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+
+                    if (
+                        typeof window.abrirPerfilPublico ===
+                        "function"
+                    ) {
+                        window.abrirPerfilPublico(
+                            authorPublicId
+                        );
+                    }
+                }
+
+
+                chatAvatar.addEventListener(
+                    "click",
+                    openAuthorProfile
+                );
+
+
+                chatAvatar.addEventListener(
+                    "keydown",
+                    function(event) {
+                        if (
+                            event.key === "Enter" ||
+                            event.key === " "
+                        ) {
+                            openAuthorProfile(
+                                event
+                            );
+                        }
+                    }
+                );
+            }
+
 
             card.addEventListener(
                 "click",

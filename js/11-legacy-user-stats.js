@@ -18,7 +18,7 @@
         document.getElementById('info-yeahs').textContent = totalPosts; // (O el elemento de posts que tengas)
         
         // Si tienes un elemento específico para el contador de la pestaña de posts:
-        const contadorPostsTab = document.querySelector('#vista-userpage div[style*="background: #52a600"]');
+        const contadorPostsTab = document.getElementById('contador-posts-usuario');
         if (contadorPostsTab) {
             contadorPostsTab.textContent = totalPosts;
         }
