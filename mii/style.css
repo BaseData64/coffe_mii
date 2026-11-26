@@ -157,66 +157,6 @@
     letter-spacing: 0.5px;
 }
 
-/* Contenedor en cuadrícula (Grid) para las portadas de los juegos */
-.cuadricula-juegos {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-    gap: 25px;
-    margin-top: 30px;
-    padding: 10px;
-}
-
-/* Tarjeta individual de cada juego */
-.juego-card {
-    background: #ffffff;
-    border: 1px solid #dcdcdc;
-    border-radius: 16px;
-    overflow: hidden;
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.05);
-    transition: transform 0.15s ease, box-shadow 0.15s ease;
-    cursor: pointer;
-    display: flex;
-    flex-direction: column;
-}
-
-.juego-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-}
-
-/* Contenedor de la imagen del juego */
-.juego-portada {
-    width: 100%;
-    height: 140px;
-    background-size: cover;
-    background-position: center;
-    background-color: #e2e8f0;
-    border-bottom: 1px solid #e2e8f0;
-}
-
-/* Información del juego (Título y subtexto estilo Wii U) */
-.juego-info {
-    padding: 15px;
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-}
-
-.juego-titulo {
-    font-size: 16px;
-    font-weight: bold;
-    color: #333333;
-    font-family: "MiiverseFont", sans-serif;
-}
-
-.juego-detalles {
-    font-size: 12px;
-    color: #888888;
-    display: flex;
-    justify-content: space-between;
-    font-family: "MiiverseFont", sans-serif;
-}
-
 /* Botón flotante para regresar al perfil principal */
 .btn-volver-miiverse {
     background: linear-gradient(to bottom, #ffffff, #f2f2f2);

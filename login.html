@@ -319,7 +319,8 @@
             position: relative;
         }
 
-        .input-shell input {
+        .input-shell input,
+        .input-shell select {
             width: 100%;
             height: 50px;
             padding: 0 15px;
@@ -336,7 +337,13 @@
             transition: .12s ease;
         }
 
-        .input-shell input:focus {
+        .input-shell select {
+            appearance: none;
+            cursor: pointer;
+        }
+
+        .input-shell input:focus,
+        .input-shell select:focus {
             border-color: #16aee0;
             box-shadow:
                 0 0 0 3px rgba(0,174,255,.14),
@@ -553,14 +560,24 @@
                 <section id="login-view" class="form-view active">
                     <h1 class="auth-title">Welcome back!</h1>
                     <p class="auth-description">
-                        Entra con tu PNID y la contraseña de tu cuenta de Maki's Bio.
+                        Entra con tu PNID o con un NNID que ya hayas vinculado a tu perfil de Maki's Bio.
                     </p>
 
                     <div id="login-message" class="message"></div>
 
                     <form id="login-form">
                         <div class="field">
-                            <label for="login-pnid">Pretendo Network ID</label>
+                            <label for="login-id-type">Tipo de identidad</label>
+                            <div class="input-shell">
+                                <select id="login-id-type" autocomplete="off">
+                                    <option value="pnid">Pretendo Network ID (PNID)</option>
+                                    <option value="nnid">Nintendo Network ID (NNID vinculado)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label for="login-pnid" id="login-id-label">Pretendo Network ID</label>
                             <div class="input-shell">
                                 <input
                                     id="login-pnid"
@@ -599,8 +616,8 @@
                     <div class="password-note">
                         <span class="icon">●</span>
                         <span>
-                            <b>No introduzcas tu contraseña de Pretendo.</b>
-                            Esta es una contraseña independiente creada para Maki's Bio.
+                            <b>Usa únicamente tu contraseña de Maki's Bio.</b>
+                            Para entrar con NNID, primero debes vincularlo desde Networks. No es un inicio de sesión de Nintendo y nunca te pediremos tu contraseña Nintendo o Pretendo.
                         </span>
                     </div>
                 </section>
@@ -696,7 +713,8 @@
             setPersistence,
             browserLocalPersistence,
             signInWithEmailAndPassword,
-            createUserWithEmailAndPassword
+            createUserWithEmailAndPassword,
+            signOut
         } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 
         import {
@@ -706,7 +724,11 @@
             set,
             update,
             runTransaction,
-            serverTimestamp
+            serverTimestamp,
+            query,
+            orderByChild,
+            equalTo,
+            limitToFirst
         } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
 
         const firebaseConfig = {
@@ -834,9 +856,52 @@
             return null;
         }
 
-        window.iniciarSesionFirebase = async function(pnid, password) {
+        async function resolverPNIDDesdeNNID(nnid) {
+            const limpio = limpiarPnid(nnid);
+            if (!/^[A-Za-z0-9._-]{4,16}$/.test(limpio)) {
+                throw { code: "auth/invalid-nnid" };
+            }
+
+            const nnidLower = limpio.toLowerCase();
+            const nnidNormalized = nnidLower.replace(/[-_.]/g, "");
+            const matchesByPublicId = {};
+
+            const normalizedLookup = query(
+                ref(db, "public_users"),
+                orderByChild("nnidNormalized"),
+                equalTo(nnidNormalized),
+                limitToFirst(2)
+            );
+            const normalizedSnapshot = await get(normalizedLookup);
+            if (normalizedSnapshot.exists()) {
+                Object.assign(matchesByPublicId, normalizedSnapshot.val());
+            }
+
+            // Backward compatibility for profiles linked before normalized keys were added.
+            const legacyLookup = query(
+                ref(db, "public_users"),
+                orderByChild("nnidLower"),
+                equalTo(nnidLower),
+                limitToFirst(2)
+            );
+            const legacySnapshot = await get(legacyLookup);
+            if (legacySnapshot.exists()) {
+                Object.assign(matchesByPublicId, legacySnapshot.val());
+            }
+
+            const matches = Object.values(matchesByPublicId);
+            if (!matches.length) throw { code: "auth/nnid-not-linked" };
+            if (matches.length !== 1) throw { code: "auth/nnid-ambiguous" };
+
+            const pnid = String(matches[0].pnid || "").trim();
+            if (!pnid) throw { code: "auth/nnid-not-linked" };
+            return pnid;
+        }
+
+        window.iniciarSesionFirebase = async function(identifier, password, identifierType) {
             try {
-                const limpio = limpiarPnid(pnid);
+                const limpio = limpiarPnid(identifier);
+                const tipo = identifierType === "nnid" ? "nnid" : "pnid";
 
                 if (!limpio || !password) {
                     return { exito: false, codigo: "auth/missing-credentials" };
@@ -844,24 +909,48 @@
 
                 await prepararPersistencia();
 
+                // NNID is an alias for an existing Maki's Bio account, not Nintendo authentication.
+                const pnidCuenta = tipo === "nnid"
+                    ? await resolverPNIDDesdeNNID(limpio)
+                    : limpio;
+
                 const credencial = await signInWithEmailAndPassword(
                     auth,
-                    pnidAEmail(limpio),
+                    pnidAEmail(pnidCuenta),
                     password
                 );
 
-                localStorage.setItem("makiiverse_pnid", limpio);
+                const accountSnapshot = await get(ref(db, "users/" + credencial.user.uid));
+                const accountData = accountSnapshot.val() || {};
+
+                if (tipo === "nnid") {
+                    const savedNNID = String(accountData.nnid || "").trim();
+                    const savedNNIDKey = savedNNID.toLowerCase().replace(/[-_.]/g, "");
+                    const inputNNIDKey = limpio.toLowerCase().replace(/[-_.]/g, "");
+                    if (!savedNNID || savedNNIDKey !== inputNNIDKey) {
+                        await signOut(auth);
+                        return { exito: false, codigo: "auth/nnid-link-mismatch" };
+                    }
+                    localStorage.setItem("makiiverse_nnid", savedNNID);
+                } else if (accountData.nnid) {
+                    localStorage.setItem("makiiverse_nnid", String(accountData.nnid));
+                } else {
+                    localStorage.removeItem("makiiverse_nnid");
+                }
+
+                localStorage.setItem("makiiverse_pnid", pnidCuenta);
 
                 const publicId = await asegurarPerfilPublico(
                     credencial.user,
-                    limpio
+                    pnidCuenta
                 );
 
                 return {
                     exito: true,
                     user: credencial.user,
-                    pnid: limpio,
-                    publicId: publicId
+                    pnid: pnidCuenta,
+                    publicId: publicId,
+                    loginMethod: tipo
                 };
             } catch (error) {
                 console.error("LOGIN Firebase:", error);
@@ -934,13 +1023,21 @@
                 case "auth/invalid-credential":
                 case "auth/user-not-found":
                 case "auth/wrong-password":
-                    return "PNID o contraseña incorrectos.";
+                    return "Identificador o contraseña incorrectos.";
 
                 case "auth/email-already-in-use":
                     return "Ese PNID ya tiene una cuenta de Maki's Bio.";
 
                 case "auth/weak-password":
                     return "La contraseña debe tener al menos 6 caracteres.";
+                case "auth/invalid-nnid":
+                    return "El formato del NNID no es válido (4–16 caracteres).";
+                case "auth/nnid-not-linked":
+                    return "Ese NNID todavía no está vinculado a un perfil de Maki's Bio. Entra con PNID y vincúlalo desde Networks primero.";
+                case "auth/nnid-ambiguous":
+                    return "Ese NNID aparece vinculado a más de un perfil. Por seguridad, inicia sesión con tu PNID.";
+                case "auth/nnid-link-mismatch":
+                    return "El NNID no coincide con el vínculo guardado en esa cuenta. Inicia sesión con tu PNID.";
 
                 case "auth/too-many-requests":
                     return "Hay demasiados intentos. Espera un poco y vuelve a intentarlo.";
@@ -1019,12 +1116,26 @@
                     this.src = dummyMii;
                 };
 
+                const loginType = document.getElementById("login-id-type").value;
+                const apiId = loginType === "nnid" ? 0 : 1;
                 miiPreview.src =
                     "https://mii-unsecure.ariankordi.net/miis/image.png" +
                     "?nnid=" + encodeURIComponent(limpio) +
-                    "&type=face&width=270&api_id=1";
+                    "&type=face&width=270&api_id=" + apiId;
             }, 280);
         }
+
+
+        document.getElementById("login-id-type").addEventListener("change", function() {
+            const isNNID = this.value === "nnid";
+            document.getElementById("login-id-label").textContent = isNNID
+                ? "Nintendo Network ID (NNID vinculado)"
+                : "Pretendo Network ID";
+            document.getElementById("login-pnid").placeholder = isNNID
+                ? "Tu NNID vinculado"
+                : "Tu PNID";
+            actualizarPreview(document.getElementById("login-pnid").value);
+        });
 
         ["login-pnid", "register-pnid"].forEach(function(id) {
             document.getElementById(id).addEventListener("input", function() {
@@ -1038,6 +1149,7 @@
             e.preventDefault();
 
             const pnid = document.getElementById("login-pnid").value.trim();
+            const loginType = document.getElementById("login-id-type").value;
             const password = document.getElementById("login-password").value;
             const message = document.getElementById("login-message");
             const button = document.getElementById("login-submit");
@@ -1059,7 +1171,7 @@
                     throw new Error("MODULE_NOT_READY");
                 }
 
-                const resultado = await window.iniciarSesionFirebase(pnid, password);
+                const resultado = await window.iniciarSesionFirebase(pnid, password, loginType);
 
                 if (!resultado.exito) {
                     mostrarMensaje(message, mensajeFirebase(resultado.codigo), "error");

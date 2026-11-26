@@ -879,6 +879,13 @@ async function renderProfile(publicId, profileData) {
             "profile-pnid-sub"
         );
 
+    const nnidElement =
+        document.getElementById(
+            "profile-nnid-sub"
+        );
+    const linkedNNID =
+        String(profileData.nnid || "").trim();
+
     const publicIdElement =
         document.getElementById(
             "profile-public-id"
@@ -912,6 +919,12 @@ async function renderProfile(publicId, profileData) {
             pnid;
     }
 
+    if (nnidElement) {
+        nnidElement.textContent = linkedNNID
+            ? "NNID: " + linkedNNID + " · unverified"
+            : "NNID: not linked";
+    }
+
     if (publicIdElement) {
         publicIdElement.textContent =
             publicId;
@@ -931,6 +944,8 @@ async function renderProfile(publicId, profileData) {
     }
 
     if (mii) {
+        // A linked NNID is retained for account login/identity metadata only.
+        // Public avatars always represent the profile's own PNID Mii.
         mii.src =
             "https://mii-unsecure.ariankordi.net/miis/image.png" +
             "?nnid=" +
@@ -983,9 +998,7 @@ async function openPublicProfile(
     ) {
         window.conmutarPortal(
             5,
-            "global-menu-mymenu",
-            false,
-            publicId
+            "global-menu-mymenu"
         );
     }
 
@@ -1205,86 +1218,6 @@ window.MakiPublicProfiles = {
 
                 routeToBase(
                     Boolean(replaceRoute)
-                );
-            }
-        },
-
-    getViewingPublicId:
-        function() {
-            return makiViewingPublicId;
-        },
-
-    openFromNavigationHistory:
-        async function(publicId) {
-            publicId =
-                String(publicId || "");
-
-            if (
-                !/^[0-9]{9}$/.test(
-                    publicId
-                )
-            ) {
-                return;
-            }
-
-            /*
-             * Actualizamos URL SIN crear otro paso
-             * en el historial del navegador.
-             */
-            window.history.replaceState(
-                {
-                    makiView: "user",
-                    publicId: publicId
-                },
-                "",
-                getPublicProfilePath(
-                    publicId
-                )
-            );
-
-            makiViewingPublicId =
-                publicId;
-
-            if (
-                typeof window.conmutarPortal ===
-                "function"
-            ) {
-                window.conmutarPortal(
-                    5,
-                    "global-menu-mymenu",
-                    true,
-                    publicId
-                );
-            }
-
-            setProfileLoading(
-                publicId
-            );
-
-            try {
-                const snapshot =
-                    await get(
-                        ref(
-                            makiPublicDB,
-                            "public_users/" +
-                            publicId
-                        )
-                    );
-
-                if (
-                    snapshot.exists()
-                ) {
-                    await renderProfile(
-                        publicId,
-                        snapshot.val() || {}
-                    );
-                }
-            }
-
-            catch (error) {
-                console.error(
-                    "Error regresando al perfil anterior:",
-                    error
                 );
             }
         },

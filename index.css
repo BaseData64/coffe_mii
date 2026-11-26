@@ -22,7 +22,7 @@ body {
             margin: 0;
             padding: 50px;
             min-height: 100vh;
-            font-family: 'MiiverseFont', sans-serif;
+            font-family: "MiiverseFont", sans-serif;
             position: relative;
             /* Eliminamos el background de aquí para pasarlo al fondo fijo */
         }
@@ -35,7 +35,7 @@ body {
             left: 0;
             width: 100vw;
             height: 100vh;
-            background-image: url('background.png');
+            background-image: url("background.png");
             background-repeat: no-repeat;
             background-position: center;
             background-size: cover; /* Cambiado a cover para que cubra toda la pantalla por completo */
@@ -49,7 +49,7 @@ body {
             }
         }
 
-        .card, .card-standard, .card-user {
+        .card,   .card-standard,   .card-user {
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -70,7 +70,7 @@ body {
             color: #555555; 
             text-align: center;
             transition: color 0.2s ease;
-            font-family: 'MiiverseFont', sans-serif;
+            font-family: "MiiverseFont", sans-serif;
         }
 
         .card-title {
@@ -78,8 +78,8 @@ body {
             font-family: "MiiverseFont", sans-serif;
         }
 
-        .card.selected,
-        .card.selected .card-title,
+        .card.selected,  
+        .card.selected .card-title,  
         .selected .card-title-user {
             color:#00e1ff;
         }
@@ -168,16 +168,16 @@ body {
         }
 
         /* --- CSS BLINDADO --- */
-        #global-menu .card .symbol, 
-        #global-menu .card .label, 
-        #global-menu .card .icons, 
+        #global-menu .card .symbol,   
+        #global-menu .card .label,   
+        #global-menu .card .icons,   
         #global-menu .card .name {
             color: #c4c2c2 !important;
         }
 
-        #global-menu .card.selected .symbol, 
-        #global-menu .card.selected .label, 
-        #global-menu .card.selected .icons, 
+        #global-menu .card.selected .symbol,   
+        #global-menu .card.selected .label,   
+        #global-menu .card.selected .icons,   
         #global-menu .card.selected .name {
             color: #04afff !important;
         }
@@ -213,7 +213,7 @@ body {
     list-style: none !important;
     overflow: hidden !important;
     z-index: 20 !important;
-    font-family: 'MiiverseFont', sans-serif !important;
+    font-family: "MiiverseFont", sans-serif !important;
     background: linear-gradient(to right, #ffffff 0%, #e9e9e9 100%) !important;
     border-radius: 0 60px 60px 0 !important;
     -webkit-border-radius: 0 60px 60px 0 !important;
@@ -251,7 +251,7 @@ body {
     margin: 0 -15px !important;
     box-sizing: border-box !important;
     color: #323232 !important;
-    font-family: 'MiiverseFont', sans-serif !important;
+    font-family: "MiiverseFont", sans-serif !important;
     font-size: 20px !important;
     font-weight: normal !important;
     line-height: 1 !important;
@@ -306,7 +306,7 @@ body {
     margin-top: 7px !important;
     overflow: hidden !important;
     color: #323232 !important;
-    font-family: 'MiiverseFont', sans-serif !important;
+    font-family: "MiiverseFont", sans-serif !important;
     font-size: 20px !important;
     font-weight: normal !important;
     line-height: 22px !important;
@@ -320,7 +320,7 @@ body {
     height: 66px !important;
     margin: 0 !important;
     color: #9d9d9d !important;
-    font-family: 'MiiverseIcons' !important;
+    font-family: "MiiverseIcons" !important;
     font-size: 64px !important;
     font-weight: normal !important;
     line-height: 66px !important;
@@ -332,7 +332,7 @@ body {
     display: block !important;
     margin-top: 2px !important;
     color: #323232 !important;
-    font-family: 'MiiverseFont', sans-serif !important;
+    font-family: "MiiverseFont", sans-serif !important;
     font-size: 20px !important;
     font-weight: normal !important;
     line-height: 22px !important;
@@ -346,8 +346,8 @@ body {
     -webkit-box-shadow: 0 2px 0 #ffffff, inset 0 1px 1px rgba(0,0,0,.20), inset 0 -1px 1px rgba(0,0,0,.10) !important;
 }
 
-#global-menu > li.card.selected .sidebar-old-icon,
-#global-menu > li.card.selected .sidebar-label,
+#global-menu > li.card.selected .sidebar-old-icon,  
+#global-menu > li.card.selected .sidebar-label,  
 #global-menu > #global-menu-mymenu.selected #user-sidebar-name {
     color: #00aeff !important;
 }
@@ -393,7 +393,7 @@ body {
 #nav-icono-wiiu:not(:empty) {
     background: none !important;
     color: #999999 !important;
-    font-family: 'MiiverseIcons' !important;
+    font-family: "MiiverseIcons" !important;
     font-size: 68px !important;
     font-weight: normal !important;
     line-height: 64px !important;
@@ -403,7 +403,7 @@ body {
     display: block !important;
     margin: 2px 0 0 !important;
     color: #ffffff;
-    font-family: 'MiiverseFont', sans-serif !important;
+    font-family: "MiiverseFont", sans-serif !important;
     font-size: 20px !important;
     font-weight: normal !important;
     line-height: 22px !important;
@@ -437,7 +437,7 @@ body {
     min-height: 1000px;
 
     font-family:
-        'MiiverseFont',
+        "MiiverseFont",
         sans-serif;
 }
 
@@ -945,7 +945,7 @@ body {
         left;
 
     font-family:
-        'MiiverseFont',
+        "MiiverseFont",
         sans-serif;
 
     background:
@@ -1291,14 +1291,6 @@ body {
    ============================================================ */
 
 
-/* FAVORITE GAMES */
-
-#vista-perfil .community-games {
-    --community-color:
-        #23b9e5;
-}
-
-
 /* PROJECTS */
 
 #vista-perfil .community-projects {
@@ -1331,14 +1323,6 @@ body {
 }
 
 
-/* MII CLICKER */
-
-#vista-perfil .community-clicker {
-    --community-color:
-        #72ce1f;
-}
-
-
 /* ============================================================
    ============================================================
                          MORE
@@ -1367,7 +1351,7 @@ body {
    LÍNEAS
    ============================================================ */
 
-#vista-perfil .home-more-separator::before,
+#vista-perfil .home-more-separator::before,  
 #vista-perfil .home-more-separator::after {
     content:
         "";
@@ -1545,103 +1529,16 @@ body {
 
 
 /* ============================================================
-   ORIGINAL STYLE BLOCK 04 — inline-style-04
-   ============================================================ */
-#vista-juegos .games-clicker-style-topbar {
-    margin-top: -50px;
-
-    padding:
-        15px 22px;
-        margin-left: 100px;
-        width: 1385px;
-
-    background:
-        linear-gradient(
-            to bottom,
-            #48d4ff 0%,
-            #23bce9 42%,
-            #119ed1 56%,
-            #0784b6 100%
-        );
-
-    border-bottom:
-        2px solid #08759f;
-
-    box-shadow:
-        inset 0 2px 0 rgba(255,255,255,.45),
-        inset 0 -2px 0 rgba(0,70,110,.16),
-        0 3px 6px rgba(0,0,0,.10);
-}
-
-#vista-juegos .games-clicker-style-topbar-inner {
-    display: flex;
-
-    align-items: center;
-
-    justify-content: space-between;
-}
-
-#vista-juegos .games-clicker-style-topbar h1 {
-    margin: 0;
-
-    color: #ffffff;
-
-    font-family:
-        'MiiverseFont',
-        sans-serif;
-
-    font-size: 25px;
-
-    font-weight: bold;
-
-    line-height: 1;
-
-    text-shadow:
-        0 1px 2px rgba(0,0,0,.22);
-}
-#vista-juegos .games-clicker-style-badge {
-    padding:
-        5px 13px;
-
-    color: #ffffff;
-
-    font-family:
-        'MiiverseFont',
-        sans-serif;
-
-    font-size: 11px;
-
-    font-weight: bold;
-
-    border:
-        1px solid rgba(255,255,255,.48);
-
-    border-radius:
-        20px;
-
-    background:
-        rgba(0,0,0,.13);
-
-    box-shadow:
-        inset 0 1px 0 rgba(255,255,255,.18);
-
-    text-shadow:
-        0 1px 1px rgba(0,0,0,.15);
-}
-
-
-/* ============================================================
    ORIGINAL STYLE BLOCK 05 — maki-community-post-remaster-v22
    ============================================================ */
 /* ============================================================
    COMMON COMMUNITY FEED
    ============================================================ */
 
-#vista-juegos,
-#vista-proyectos,
+#vista-proyectos,  
 #vista-sobremi {
     min-height: 760px;
-    font-family: 'MiiverseFont', sans-serif;
+    font-family: "MiiverseFont", sans-serif;
 }
 
 .maki-community-feed {
@@ -1930,7 +1827,7 @@ body {
     margin-top: 15px;
 }
 
-.maki-retro-game-chip,
+
 .maki-retro-project-chip {
     width: fit-content;
     max-width: 100%;
@@ -1949,7 +1846,7 @@ body {
     box-shadow: inset 0 1px 0 #fff;
 }
 
-.maki-retro-game-chip img,
+
 .maki-retro-project-chip img {
     width: 32px;
     height: 32px;
@@ -2105,14 +2002,14 @@ body {
     margin-top: 6px;
 }
 
-.maki-character-cloud,
+.maki-character-cloud,  
 .maki-interest-cloud {
     display: flex;
     flex-wrap: wrap;
     gap: 7px;
 }
 
-.maki-character-cloud span,
+.maki-character-cloud span,  
 .maki-interest-cloud span {
     padding: 5px 9px;
     border: 1px solid #ccd3d5;
@@ -2220,7 +2117,7 @@ body {
         font-size: 12px;
     }
 
-    .maki-retro-post-community,
+    .maki-retro-post-community,  
     .maki-retro-post-date {
         font-size: 9px;
     }
@@ -2269,1039 +2166,10 @@ body {
         padding: 12px;
     }
 
-    .maki-character-cloud span,
+    .maki-character-cloud span,  
     .maki-interest-cloud span {
         font-size: 10px;
     }
-}
-
-
-/* ============================================================
-   ORIGINAL STYLE BLOCK 06 — inline-style-06
-   ============================================================ */
-/* ============================================================
-   VISTA GENERAL
-   ============================================================ */
-
-#vista-messages {
-    position: relative;
-    z-index: 1;
-    min-height: 700px;
-
-    font-family:
-        'MiiverseFont',
-        sans-serif;
-}
-
-
-/* ============================================================
-   BARRA SUPERIOR VERDE
-   ============================================================ */
-
-#vista-messages .mii-clicker-topbar {
-    margin-top: -50px;
-
-    padding:
-        15px
-        22px;
-        width: 1385px;
-        margin-left: 100px;
-
-    background:
-        linear-gradient(
-            to bottom,
-            #48d4ff 0%,
-            #23bce9 48%,
-            #0784b6 100%
-        );
-
-    border-bottom:
-        2px solid #08759f;
-
-    box-shadow:
-        inset 0 1px 0 rgba(255,255,255,.42),
-        inset 0 -1px 0 rgba(0,0,0,.08);
-}
-
-
-#vista-messages .mii-clicker-topbar-content {
-    display: flex;
-
-    align-items: center;
-
-    justify-content:
-        space-between;
-}
-
-
-#vista-messages .mii-clicker-topbar h1 {
-    margin: 0;
-
-    color:
-        #ffffff;
-
-    font-size:
-        25px;
-
-    font-weight:
-        bold;
-
-    text-shadow:
-        0 1px 2px
-        rgba(0,0,0,.20);
-}
-
-
-/* ============================================================
-   CONTENEDOR PRINCIPAL
-   ============================================================ */
-
-#vista-messages .mii-clicker-page {
-    width:
-        78%;
-
-    max-width:
-        1050px;
-
-    margin-left:
-        170px;
-
-    margin-top:
-        35px;
-
-    padding-bottom:
-        60px;
-
-    box-sizing:
-        border-box;
-}
-
-
-/* ============================================================
-   PANEL GENERAL
-   ============================================================ */
-
-#vista-messages .mii-clicker-panel {
-    background:
-        #ffffff;
-
-    border:
-        1px solid #d1d1d1;
-
-    border-radius:
-        12px;
-
-    overflow:
-        hidden;
-
-    box-shadow:
-        0 4px 12px
-        rgba(0,0,0,.09);
-
-    margin-bottom:
-        26px;
-}
-
-
-/* ============================================================
-   CABECERA GRIS
-   ============================================================ */
-
-#vista-messages .mii-clicker-panel-title {
-    padding:
-        14px
-        20px;
-
-    background:
-        linear-gradient(
-            to bottom,
-            #979797 0%,
-            #888888 48%,
-            #797979 100%
-        );
-
-    border-bottom:
-        1px solid #707070;
-
-    color:
-        #ffffff;
-
-    font-size:
-        23px;
-
-    font-weight:
-        bold;
-
-    text-shadow:
-        0 1px 1px
-        rgba(0,0,0,.22);
-}
-
-
-/* ============================================================
-   DESCRIPCIÓN
-   ============================================================ */
-
-#vista-messages .mii-clicker-description {
-    padding:
-        13px
-        20px;
-
-    color:
-        #777777;
-
-    font-size:
-        15px;
-
-    text-align:
-        center;
-
-    background:
-        #fafafa;
-
-    border-bottom:
-        1px solid #e2e2e2;
-}
-
-
-/* ============================================================
-   ============================================================
-                         PODIO
-   ============================================================
-   ============================================================ */
-
-#vista-messages .mii-clicker-podium {
-    min-height:
-        250px;
-
-    display:
-        flex;
-
-    align-items:
-        flex-end;
-
-    justify-content:
-        center;
-
-    gap:
-        22px;
-
-    padding:
-        28px
-        24px
-        30px
-        24px;
-
-    box-sizing:
-        border-box;
-}
-
-
-/* ============================================================
-   TARJETAS DEL PODIO
-   ============================================================ */
-
-#vista-messages .mii-clicker-place {
-    position:
-        relative;
-
-    width:
-        185px;
-
-    box-sizing:
-        border-box;
-
-    text-align:
-        center;
-
-    background:
-        linear-gradient(
-            to bottom,
-            #ffffff,
-            #eeeeee
-        );
-
-    border:
-        1px solid #c7c7c7;
-
-    border-radius:
-        10px;
-
-    padding:
-        12px
-        10px
-        15px
-        10px;
-
-    box-shadow:
-        0 3px 6px rgba(0,0,0,.10),
-        inset 0 1px 0 #ffffff;
-}
-
-
-/* ============================================================
-   1ST
-   ============================================================ */
-
-#vista-messages .mii-clicker-place.first {
-    min-height:
-        210px;
-
-    border-top:
-        5px solid #f0c822;
-}
-
-
-/* ============================================================
-   2ND
-   ============================================================ */
-
-#vista-messages .mii-clicker-place.second {
-    min-height:
-        185px;
-
-    border-top:
-        5px solid #a9afb4;
-}
-
-
-/* ============================================================
-   3RD
-   ============================================================ */
-
-#vista-messages .mii-clicker-place.third {
-    min-height:
-        165px;
-
-    border-top:
-        5px solid #b77a47;
-}
-
-
-/* ============================================================
-   TEXTO DE POSICIÓN
-   ============================================================ */
-
-#vista-messages .mii-clicker-place-number {
-    font-size:
-        28px;
-
-    font-weight:
-        bold;
-
-    line-height:
-        32px;
-
-    margin-bottom:
-        7px;
-}
-
-
-#vista-messages .first .mii-clicker-place-number {
-    color:
-        #d0a900;
-}
-
-
-#vista-messages .second .mii-clicker-place-number {
-    color:
-        #858b91;
-}
-
-
-#vista-messages .third .mii-clicker-place-number {
-    color:
-        #9f6737;
-}
-
-
-/* ============================================================
-   MII DEL TOP 3
-
-   NINGÚN BADGE.
-   NINGUNA INSIGNIA.
-   ============================================================ */
-
-#vista-messages .mii-clicker-place-avatar {
-    width:
-        78px;
-
-    height:
-        78px;
-
-    margin:
-        0 auto
-        8px auto;
-
-    overflow:
-        hidden;
-
-    background-color:
-        #ececec;
-
-    background-image:
-        url('img/games/Dummy_mii_user.png');
-
-    background-size:
-        cover;
-
-    background-position:
-        center;
-
-    background-repeat:
-        no-repeat;
-
-    border:
-        1px solid #bbbbbb;
-
-    border-radius:
-        10px;
-
-    box-shadow:
-        inset 0 1px 2px
-        rgba(0,0,0,.07);
-}
-
-
-/* ============================================================
-   PNID DEL RANKING
-   ============================================================ */
-
-#vista-messages .mii-clicker-place-pnid {
-    display:
-        block;
-
-    width:
-        100%;
-
-    overflow:
-        hidden;
-
-    white-space:
-        nowrap;
-
-    text-overflow:
-        ellipsis;
-
-    color:
-        #484848;
-
-    font-size:
-        15px;
-
-    font-weight:
-        bold;
-}
-
-
-/* ============================================================
-   SCORE DEL RANKING
-   ============================================================ */
-
-#vista-messages .mii-clicker-place-score {
-    display:
-        block;
-
-    margin-top:
-        5px;
-
-    color:
-        #777777;
-
-    font-size:
-        13px;
-}
-
-
-/* ============================================================
-   ============================================================
-                       ZONA DEL JUEGO
-   ============================================================
-   ============================================================ */
-
-#vista-messages .mii-clicker-game {
-    position:
-        relative;
-
-    padding:
-        27px
-        25px
-        36px
-        25px;
-
-    text-align:
-        center;
-}
-
-
-/* ============================================================
-   PNID ACTUAL
-   ============================================================ */
-
-#vista-messages #mii-clicker-pnid {
-    color:
-        #555555;
-
-    font-size:
-        20px;
-
-    font-weight:
-        bold;
-
-    margin-bottom:
-        5px;
-}
-
-
-/* ============================================================
-   INSTRUCCIÓN
-   ============================================================ */
-
-#vista-messages .mii-clicker-instruction {
-    color:
-        #888888;
-
-    font-size:
-        14px;
-
-    margin-bottom:
-        18px;
-}
-
-
-/* ============================================================
-   SCORE PRINCIPAL
-   ============================================================ */
-
-#vista-messages #mii-clicker-score {
-    color:
-        #65bf0b;
-
-    font-size:
-        52px;
-
-    line-height:
-        55px;
-
-    font-weight:
-        bold;
-
-    margin-bottom:
-        0;
-
-    text-shadow:
-        0 1px 0
-        #ffffff;
-}
-
-
-#vista-messages .mii-clicker-score-label {
-    color:
-        #999999;
-
-    font-size:
-        14px;
-
-    margin-bottom:
-        22px;
-}
-
-#vista-messages .mii-clicker-mii-stage {
-    position:
-        relative;
-
-    width:
-        300px;
-
-    height:
-        360px;
-
-    margin:
-        0 auto
-        22px auto;
-
-    overflow:
-        hidden;
-
-    background:
-        radial-gradient(
-            ellipse at center bottom,
-            #ffffff 0%,
-            #f6f6f6 55%,
-            #e9e9e9 100%
-        );
-
-    border:
-        2px solid #c3c3c3;
-
-    border-radius:
-        18px;
-
-    box-shadow:
-        inset 0 2px 5px rgba(0,0,0,.07),
-        0 3px 6px rgba(0,0,0,.08);
-}
-
-
-/* ============================================================
-   SOMBRA DEL MII
-   ============================================================ */
-
-#vista-messages .mii-clicker-floor {
-    position:
-        absolute;
-
-    left:
-        50%;
-
-    bottom:
-        25px;
-
-    width:
-        190px;
-
-    height:
-        20px;
-
-    margin-left:
-        -95px;
-
-    border-radius:
-        50%;
-
-    background:
-        radial-gradient(
-            ellipse at center,
-            rgba(0,0,0,.16) 0%,
-            rgba(0,0,0,.06) 45%,
-            rgba(0,0,0,0) 72%
-        );
-
-    pointer-events:
-        none;
-}
-
-
-/* ============================================================
-   MII DE CUERPO COMPLETO
-   ============================================================ */
-
-#vista-messages #mii-clicker-mii {
-    position:
-        relative;
-
-    z-index:
-        2;
-
-    display:
-        block;
-
-    width:
-        100%;
-
-    height:
-        100%;
-
-    object-fit:
-        contain;
-
-    object-position:
-        center center;
-
-    pointer-events:
-        none;
-
-    -webkit-user-select:
-        none;
-
-    user-select:
-        none;
-}
-
-
-/* ============================================================
-   ============================================================
-                   BOTÓN WII U / MIIVERSE
-   ============================================================
-   ============================================================ */
-
-#vista-messages #mii-clicker-click-button {
-    position:
-        relative;
-
-    display:
-        block;
-
-    width:
-        300px;
-
-    height:
-        66px;
-
-    margin:
-        0 auto;
-
-    box-sizing:
-        border-box;
-
-    cursor:
-        pointer;
-
-    outline:
-        none;
-
-    color:
-        #ffffff;
-
-    font-family:
-        'MiiverseFont',
-        sans-serif;
-
-    font-size:
-        24px;
-
-    font-weight:
-        bold;
-
-    text-align:
-        center;
-
-    text-shadow:
-        0 1px 1px
-        rgba(0,0,0,.20);
-
-    background:
-        linear-gradient(
-            to bottom,
-            #92e93c 0%,
-            #78d51f 42%,
-            #64be12 55%,
-            #55aa09 100%
-        );
-
-    border:
-        2px solid #519f0b;
-
-    border-radius:
-        12px;
-
-    box-shadow:
-        inset 0 2px 0 rgba(255,255,255,.48),
-        inset 0 -3px 0 rgba(50,110,0,.22),
-        0 5px 0 #438b08,
-        0 7px 8px rgba(0,0,0,.18);
-
-    -webkit-tap-highlight-color:
-        transparent;
-
-    -webkit-user-select:
-        none;
-
-    user-select:
-        none;
-
-    transition:
-        transform .055s,
-        box-shadow .055s,
-        background .055s;
-}
-
-
-/* ============================================================
-   BRILLO DEL BOTÓN
-   ============================================================ */
-
-#vista-messages #mii-clicker-click-button::before {
-    content:
-        "";
-
-    position:
-        absolute;
-
-    top:
-        4px;
-
-    left:
-        10px;
-
-    right:
-        10px;
-
-    height:
-        17px;
-
-    border-radius:
-        8px 8px 50% 50%;
-
-    background:
-        linear-gradient(
-            to bottom,
-            rgba(255,255,255,.35),
-            rgba(255,255,255,0)
-        );
-
-    pointer-events:
-        none;
-}
-
-
-/* ============================================================
-   BOTÓN PRESIONADO
-   ============================================================ */
-
-#vista-messages
-#mii-clicker-click-button.mii-clicker-pressed {
-    transform:
-        translateY(4px);
-
-    background:
-        linear-gradient(
-            to bottom,
-            #80da2d,
-            #5eb811
-        );
-
-    box-shadow:
-        inset 0 2px 4px rgba(0,0,0,.12),
-        0 1px 0 #438b08,
-        0 3px 4px rgba(0,0,0,.14);
-}
-
-
-/* ============================================================
-   BOTÓN DESACTIVADO
-   ============================================================ */
-
-#vista-messages
-#mii-clicker-click-button:disabled {
-    opacity:
-        .45;
-
-    cursor:
-        default;
-}
-
-
-/* ============================================================
-   +1
-   ============================================================ */
-
-#vista-messages #mii-clicker-plus-one {
-    height:
-        38px;
-
-    margin-top:
-        18px;
-
-    color:
-        #68c212;
-
-    font-size:
-        28px;
-
-    font-weight:
-        bold;
-
-    opacity:
-        0;
-
-    transform:
-        translateY(0);
-
-    pointer-events:
-        none;
-}
-
-
-#vista-messages
-#mii-clicker-plus-one.show {
-    opacity:
-        1;
-
-    transform:
-        translateY(-7px);
-
-    transition:
-        opacity .12s,
-        transform .12s;
-}
-
-
-/* ============================================================
-   TU POSICIÓN
-   ============================================================ */
-
-#vista-messages .mii-clicker-personal-rank {
-    margin-top:
-        3px;
-
-    color:
-        #777777;
-
-    font-size:
-        15px;
-}
-
-
-/* ============================================================
-   TEXTO DE SYNC
-   ============================================================ */
-
-#vista-messages #mii-clicker-sync-text {
-    height:
-        18px;
-
-    margin-top:
-        8px;
-
-    color:
-        #999999;
-
-    font-size:
-        12px;
-}
-
-
-/* ============================================================
-   REGLAS VISUALES
-   ============================================================ */
-
-#vista-messages .mii-clicker-rules {
-    display:
-        flex;
-
-    justify-content:
-        center;
-
-    gap:
-        35px;
-
-    padding:
-        17px
-        20px;
-
-    background:
-        #f7f7f7;
-
-    border-top:
-        1px solid #dedede;
-
-    color:
-        #777777;
-
-    font-size:
-        13px;
-}
-
-
-#vista-messages .mii-clicker-rule {
-    display:
-        flex;
-
-    align-items:
-        center;
-
-    gap:
-        7px;
-}
-
-
-#vista-messages .mii-clicker-rule-dot {
-    width:
-        9px;
-
-    height:
-        9px;
-
-    border-radius:
-        50%;
-
-    background:
-        #72cc1d;
-}
-
-
-/* ============================================================
-   BACK
-   ============================================================ */
-
-#vista-messages .mii-clicker-back {
-    display:
-        block;
-
-    width:
-        170px;
-
-    height:
-        43px;
-
-    margin:
-        22px auto 0 auto;
-
-    cursor:
-        pointer;
-
-    color:
-        #555555;
-
-    font-family:
-        'MiiverseFont',
-        sans-serif;
-
-    font-size:
-        16px;
-
-    font-weight:
-        bold;
-
-    background:
-        linear-gradient(
-            to bottom,
-            #ffffff,
-            #e4e4e4
-        );
-
-    border:
-        1px solid #aaaaaa;
-
-    border-radius:
-        7px;
-
-    box-shadow:
-        0 2px 4px rgba(0,0,0,.12),
-        inset 0 1px 0 #ffffff;
-}
-
-
-/* ============================================================
-   RESPONSIVE
-   ============================================================ */
-
-@media screen and (max-width:950px) {
-
-    #vista-messages .mii-clicker-page {
-        width:
-            auto;
-
-        margin-left:
-            175px;
-
-        margin-right:
-            20px;
-    }
-
-
-    #vista-messages .mii-clicker-podium {
-        gap:
-            8px;
-    }
-
-
-    #vista-messages .mii-clicker-place {
-        width:
-            31%;
-    }
-
 }
 
 
@@ -3362,7 +2230,7 @@ body {
     color: #ffffff;
 
     font-family:
-        'MiiverseFont',
+        "MiiverseFont",
         sans-serif;
 
     font-size: 25px;
@@ -3387,7 +2255,7 @@ body {
     color: #ffffff;
 
     font-family:
-        'MiiverseFont',
+        "MiiverseFont",
         sans-serif;
 
     font-size: 11px;
@@ -3468,7 +2336,7 @@ body {
     color: #ffffff;
 
     font-family:
-        'MiiverseFont',
+        "MiiverseFont",
         sans-serif;
 
     font-size: 25px;
@@ -3493,7 +2361,7 @@ body {
     color: #ffffff;
 
     font-family:
-        'MiiverseFont',
+        "MiiverseFont",
         sans-serif;
 
     font-size: 11px;
@@ -3574,7 +2442,7 @@ body {
     color: #ffffff;
 
     font-family:
-        'MiiverseFont',
+        "MiiverseFont",
         sans-serif;
 
     font-size: 25px;
@@ -3599,7 +2467,7 @@ body {
     color: #ffffff;
 
     font-family:
-        'MiiverseFont',
+        "MiiverseFont",
         sans-serif;
 
     font-size: 11px;
@@ -3627,12 +2495,12 @@ body {
    ORIGINAL STYLE BLOCK 10 — inline-style-10
    ============================================================ */
 @font-face {
-    font-family: 'MiiverseSymbols';
+    font-family: "MiiverseSymbols";
 
     src:
-        url('font/MiiverseSymbols-Regular.woff2') format('woff2'),
-        url('font/MiiverseSymbols-Regular.woff') format('woff'),
-        url('font/MiiverseSymbols-Regular.ttf') format('truetype');
+        url("font/MiiverseSymbols-Regular.woff2") format("woff2"),
+        url("font/MiiverseSymbols-Regular.woff") format("woff"),
+        url("font/MiiverseSymbols-Regular.ttf") format("truetype");
 
     font-weight: normal;
     font-style: normal;
@@ -3661,9 +2529,9 @@ body {
     z-index: 9999;
 
     font-family:
-        'MiiverseFont',
-        'FOT-Rodin',
-        'Segoe UI',
+        "MiiverseFont",
+        "FOT-Rodin",
+        "Segoe UI",
         Arial,
         sans-serif;
 }
@@ -3870,10 +2738,10 @@ body {
     color: #414141;
 
     font-family:
-        'MiiverseFont',
-        'FOT-Rodin',
-        'Segoe UI',
-        'Segoe UI Symbol',
+        "MiiverseFont",
+        "FOT-Rodin",
+        "Segoe UI",
+        "Segoe UI Symbol",
         Arial,
         sans-serif;
 
@@ -4047,7 +2915,7 @@ body {
 }
 
 
-#btn-modo-texto,
+#btn-modo-texto,  
 #btn-modo-dibujo {
     width: 52px;
 
@@ -4076,7 +2944,7 @@ body {
 /* J = LÁPIZ REAL DE LA FONT */
 
 .miiverse-pencil-symbol {
-    font-family: 'MiiverseSymbols';
+    font-family: "MiiverseSymbols";
 
     font-size: 34px;
 
@@ -4256,7 +3124,7 @@ body {
 */
 
 .miiverse-photo-symbol {
-    font-family: 'MiiverseSymbols';
+    font-family: "MiiverseSymbols";
 
     color: #c8c8c8;
 
@@ -4284,7 +3152,7 @@ body {
         translateX(-50%);
 
     font-family:
-        'MiiverseSymbols';
+        "MiiverseSymbols";
 
     color: #b4b4b4;
 
@@ -4556,8 +3424,8 @@ body {
    HOVER NO HACE NADA
    ============================================================ */
 
-#burbuja-emociones .emocion-btn:hover,
-#burbuja-emociones .emocion-btn:focus,
+#burbuja-emociones .emocion-btn:hover,  
+#burbuja-emociones .emocion-btn:focus,  
 #burbuja-emociones .emocion-btn:active {
     background:
         transparent !important;
@@ -4601,7 +3469,7 @@ body {
     */
 
     font-family:
-        'MiiverseSymbols' !important;
+        "MiiverseSymbols" !important;
 
     font-size: 64px;
 
@@ -4809,8 +3677,8 @@ body {
    ORIGINAL STYLE BLOCK 12 — inline-style-12
    ============================================================ */
 @font-face {
-    font-family: 'MiiverseSymbols';
-    src: url('MiiverseSymbols-Regular.ttf') format('truetype');
+    font-family: "MiiverseSymbols";
+    src: url("MiiverseSymbols-Regular.ttf") format("truetype");
 }
 
 
@@ -4818,8 +3686,8 @@ body {
    ORIGINAL STYLE BLOCK 13 — inline-style-13
    ============================================================ */
 @font-face {
-    font-family: 'MiiverseSymbols';
-    src: url('MiiverseSymbols-Regular.ttf') format('truetype');
+    font-family: "MiiverseSymbols";
+    src: url("MiiverseSymbols-Regular.ttf") format("truetype");
 }
 
 
@@ -4838,7 +3706,7 @@ body {
     min-height: 900px;
 
     font-family:
-        'MiiverseFont',
+        "MiiverseFont",
         sans-serif;
 }
 
@@ -5501,7 +4369,7 @@ body {
         #5b7380;
 
     font-family:
-        'MiiverseFont',
+        "MiiverseFont",
         sans-serif;
 
     font-size:
@@ -5795,11 +4663,11 @@ body {
    Desktop original preserved. Tablet/mobile only below 1100px.
    ============================================================ */
 
-html, body {
+html,   body {
     max-width: 100%;
 }
 
-img, video, canvas {
+img,   video,   canvas {
     max-width: 100%;
 }
 
@@ -5809,7 +4677,7 @@ img, video, canvas {
    anchos fijos de 1385/1400px y márgenes grandes.
    ------------------------------------------------------------ */
 @media screen and (max-width: 1100px) {
-    html,
+    html,  
     body {
         overflow-x: hidden !important;
     }
@@ -5820,13 +4688,11 @@ img, video, canvas {
     }
 
     /* Todas las barras superiores de las vistas */
-    #vista-perfil .home-topbar,
-    #vista-juegos .games-clicker-style-topbar,
-    #vista-messages .mii-clicker-topbar,
-    #vista-proyectos .projects-clicker-style-topbar,
-    #vista-sobremi .about-clicker-style-topbar,
-    #vista-quepasara .chat-clicker-style-topbar,
-    #vista-networks .networks-topbar,
+    #vista-perfil .home-topbar,  
+    #vista-proyectos .projects-clicker-style-topbar,  
+    #vista-sobremi .about-clicker-style-topbar,  
+    #vista-quepasara .chat-clicker-style-topbar,  
+    #vista-networks .networks-topbar,  
     #vista-userpage > div[style*="width: 1400px"] {
         box-sizing: border-box !important;
         width: calc(100% + 40px) !important;
@@ -5837,8 +4703,7 @@ img, video, canvas {
     }
 
     /* Contenedores principales con clases */
-    #vista-perfil .home-page,
-    #vista-messages .mii-clicker-page,
+    #vista-perfil .home-page,  
     #vista-networks .networks-page {
         width: 100% !important;
         max-width: none !important;
@@ -5847,12 +4712,11 @@ img, video, canvas {
     }
 
     /* Favorite Games / About Me / General Chat / Projects */
-    #vista-juegos > div[style*="margin-left: 105px"],
-    #vista-juegos > div[style*="margin-left: 125px"],
-    #vista-sobremi > div[style*="margin-left: 105px"],
-    #vista-sobremi > div[style*="margin-left: 125px"],
-    #vista-quepasara > div[style*="margin-left: 108px"],
-    #vista-proyectos > div[style*="margin-left: 170px"],
+    
+    #vista-sobremi > div[style*="margin-left: 105px"],  
+    #vista-sobremi > div[style*="margin-left: 125px"],  
+    #vista-quepasara > div[style*="margin-left: 108px"],  
+    #vista-proyectos > div[style*="margin-left: 170px"],  
     #vista-userpage > div[style*="width: 82%"] {
         box-sizing: border-box !important;
         width: 100% !important;
@@ -5861,24 +4725,17 @@ img, video, canvas {
         margin-right: 0 !important;
     }
 
-    #contenedor-mensajes-chat,
-    #muro-mensajes,
+    #contenedor-mensajes-chat,  
+    #muro-mensajes,  
     #muro-posts-usuario {
         box-sizing: border-box !important;
         max-width: 100% !important;
     }
 
     /* El podio cabe mejor en tablets */
-    #vista-messages .mii-clicker-podium {
-        gap: 10px !important;
-        padding-left: 12px !important;
-        padding-right: 12px !important;
-    }
+    
 
-    #vista-messages .mii-clicker-place {
-        width: 31% !important;
-        min-width: 0 !important;
-    }
+    
 }
 
 /* ------------------------------------------------------------
@@ -5886,7 +4743,7 @@ img, video, canvas {
    La sidebar se convierte en una barra inferior de 5 botones.
    ------------------------------------------------------------ */
 @media screen and (max-width: 700px) {
-    html,
+    html,  
     body {
         width: 100% !important;
         min-width: 0 !important;
@@ -5951,7 +4808,7 @@ img, video, canvas {
         justify-content: center !important;
     }
 
-    #global-menu > #global-menu-mymenu > a,
+    #global-menu > #global-menu-mymenu > a,  
     #global-menu > #boton-navegacion-miiverse > a {
         border-radius: 0 !important;
         -webkit-border-radius: 0 !important;
@@ -5971,8 +4828,8 @@ img, video, canvas {
         -webkit-border-radius: 6px !important;
     }
 
-    #global-menu #user-sidebar-name,
-    #global-menu .sidebar-label,
+    #global-menu #user-sidebar-name,  
+    #global-menu .sidebar-label,  
     #nav-texto-wiiu {
         max-width: 100% !important;
         margin-top: 3px !important;
@@ -6017,13 +4874,11 @@ img, video, canvas {
     /* ========================================================
        TOPBARS
        ======================================================== */
-    #vista-perfil .home-topbar,
-    #vista-juegos .games-clicker-style-topbar,
-    #vista-messages .mii-clicker-topbar,
-    #vista-proyectos .projects-clicker-style-topbar,
-    #vista-sobremi .about-clicker-style-topbar,
-    #vista-quepasara .chat-clicker-style-topbar,
-    #vista-networks .networks-topbar,
+    #vista-perfil .home-topbar,  
+    #vista-proyectos .projects-clicker-style-topbar,  
+    #vista-sobremi .about-clicker-style-topbar,  
+    #vista-quepasara .chat-clicker-style-topbar,  
+    #vista-networks .networks-topbar,  
     #vista-userpage > div[style*="width: 1400px"] {
         width: calc(100% + 24px) !important;
         max-width: none !important;
@@ -6032,24 +4887,20 @@ img, video, canvas {
         box-sizing: border-box !important;
     }
 
-    #vista-perfil .home-topbar h1,
-    #vista-juegos .games-clicker-style-topbar h1,
-    #vista-messages .mii-clicker-topbar h1,
-    #vista-proyectos .projects-clicker-style-topbar h1,
-    #vista-sobremi .about-clicker-style-topbar h1,
-    #vista-quepasara .chat-clicker-style-topbar h1,
-    #vista-networks .networks-topbar h1,
+    #vista-perfil .home-topbar h1,  
+    #vista-proyectos .projects-clicker-style-topbar h1,  
+    #vista-sobremi .about-clicker-style-topbar h1,  
+    #vista-quepasara .chat-clicker-style-topbar h1,  
+    #vista-networks .networks-topbar h1,  
     #vista-userpage > div[style*="width: 1400px"] h1 {
         font-size: 20px !important;
     }
 
-    #vista-perfil .home-topbar-badge,
-    #vista-juegos .games-clicker-style-badge,
-    #vista-proyectos .projects-clicker-style-badge,
-    #vista-sobremi .about-clicker-style-badge,
-    #vista-quepasara .chat-clicker-style-badge,
-    #vista-networks .networks-topbar-badge,
-    #mii-clicker-status {
+    #vista-perfil .home-topbar-badge,  
+    #vista-proyectos .projects-clicker-style-badge,  
+    #vista-sobremi .about-clicker-style-badge,  
+    #vista-quepasara .chat-clicker-style-badge,  
+    #vista-networks .networks-topbar-badge{
         max-width: 45% !important;
         padding: 4px 8px !important;
         font-size: 9px !important;
@@ -6129,11 +4980,10 @@ img, video, canvas {
        FAVORITE GAMES / ABOUT / PROJECTS / CHAT
        Quita anchos/márgenes fijos del HTML inline.
        ======================================================== */
-    #vista-juegos > div[style*="margin-left: 105px"],
-    #vista-juegos > div[style*="margin-left: 125px"],
-    #vista-sobremi > div[style*="margin-left: 105px"],
-    #vista-sobremi > div[style*="margin-left: 125px"],
-    #vista-quepasara > div[style*="margin-left: 108px"],
+    
+    #vista-sobremi > div[style*="margin-left: 105px"],  
+    #vista-sobremi > div[style*="margin-left: 125px"],  
+    #vista-quepasara > div[style*="margin-left: 108px"],  
     #vista-proyectos > div[style*="margin-left: 170px"] {
         width: 100% !important;
         max-width: none !important;
@@ -6142,15 +4992,15 @@ img, video, canvas {
         box-sizing: border-box !important;
     }
 
-    #vista-juegos > div[style*="margin-left: 125px"],
-    #vista-sobremi > div[style*="margin-left: 125px"],
+    
+    #vista-sobremi > div[style*="margin-left: 125px"],  
     #vista-proyectos > div[style*="margin-left: 170px"] {
         margin-top: 16px !important;
     }
 
     /* Banners */
-    #vista-juegos > div[style*="margin-left: 105px"] > img,
-    #vista-sobremi > div[style*="margin-left: 105px"] > img,
+    
+    #vista-sobremi > div[style*="margin-left: 105px"] > img,  
     #vista-quepasara > div[style*="margin-left: 108px"] > img {
         width: 100% !important;
         height: 155px !important;
@@ -6158,8 +5008,8 @@ img, video, canvas {
     }
 
     /* Tarjeta flotante bajo banners */
-    #vista-juegos > div[style*="margin-left: 105px"] > div[style*="position: absolute"],
-    #vista-sobremi > div[style*="margin-left: 105px"] > div[style*="position: absolute"],
+    
+    #vista-sobremi > div[style*="margin-left: 105px"] > div[style*="position: absolute"],  
     #vista-quepasara > div[style*="margin-left: 108px"] > div[style*="position: absolute"] {
         min-height: 74px !important;
         height: auto !important;
@@ -6167,8 +5017,8 @@ img, video, canvas {
     }
 
     /* Posts estáticos: avatar un poco más compacto */
-    #vista-juegos > div[style*="margin-left: 125px"] > div:first-child,
-    #vista-sobremi > div[style*="margin-left: 125px"] > div:first-child,
+    
+    #vista-sobremi > div[style*="margin-left: 125px"] > div:first-child,  
     #vista-proyectos > div[style*="margin-left: 170px"] > div:first-child {
         width: 50px !important;
         height: 50px !important;
@@ -6177,62 +5027,25 @@ img, video, canvas {
     /* ========================================================
        MII CLICKER
        ======================================================== */
-    #vista-messages .mii-clicker-page {
-        width: 100% !important;
-        max-width: none !important;
-        margin: 18px 0 0 !important;
-        padding-bottom: 28px !important;
-    }
+    
 
-    #vista-messages .mii-clicker-panel-title {
-        padding: 11px 14px !important;
-        font-size: 19px !important;
-    }
+    
 
-    #vista-messages .mii-clicker-description {
-        padding: 10px 12px !important;
-        font-size: 12px !important;
-    }
+    
 
-    #vista-messages .mii-clicker-podium {
-        min-height: 0 !important;
-        flex-direction: column !important;
-        align-items: stretch !important;
-        gap: 10px !important;
-        padding: 15px !important;
-    }
+    
 
-    #vista-messages .mii-clicker-place,
-    #vista-messages .mii-clicker-place.first,
-    #vista-messages .mii-clicker-place.second,
-    #vista-messages .mii-clicker-place.third {
-        width: 100% !important;
-        min-height: 0 !important;
-    }
+    
 
-    #vista-messages .mii-clicker-game {
-        padding: 20px 12px 28px !important;
-    }
+    
 
-    #vista-messages #mii-clicker-score {
-        font-size: 44px !important;
-        line-height: 48px !important;
-    }
+    
 
-    #vista-messages .mii-clicker-mii-stage {
-        width: min(280px, 92vw) !important;
-        height: 330px !important;
-    }
+    
 
-    #vista-messages #mii-clicker-click-button {
-        width: min(280px, 92vw) !important;
-    }
+    
 
-    #vista-messages .mii-clicker-rules {
-        flex-direction: column !important;
-        gap: 6px !important;
-        text-align: center !important;
-    }
+    
 
     /* ========================================================
        NETWORKS
@@ -6335,7 +5148,7 @@ img, video, canvas {
         box-sizing: border-box !important;
     }
 
-    #miiverse-post-composer,
+    #miiverse-post-composer,  
     #miiverse-post-window {
         width: 100% !important;
         max-width: 100% !important;
@@ -6407,13 +5220,13 @@ img, video, canvas {
         height: 150px !important;
     }
 
-    #btn-modo-texto,
+    #btn-modo-texto,  
     #btn-modo-dibujo {
         width: 44px !important;
     }
 
-    .miiverse-post-input-area,
-    #texto-nuevo-post,
+    .miiverse-post-input-area,  
+    #texto-nuevo-post,  
     #canvas-post {
         height: 150px !important;
     }
@@ -6453,15 +5266,15 @@ img, video, canvas {
     /* ========================================================
        POSTS DINÁMICOS / ELEMENTOS LARGOS
        ======================================================== */
-    #contenedor-mensajes-chat *,
-    #muro-mensajes *,
+    #contenedor-mensajes-chat *,  
+    #muro-mensajes *,  
     #muro-posts-usuario * {
         max-width: 100%;
         box-sizing: border-box;
     }
 
-    #contenedor-mensajes-chat img,
-    #muro-mensajes img,
+    #contenedor-mensajes-chat img,  
+    #muro-mensajes img,  
     #muro-posts-usuario img {
         height: auto;
     }
@@ -6471,17 +5284,16 @@ img, video, canvas {
    TELÉFONOS PEQUEÑOS
    ------------------------------------------------------------ */
 @media screen and (max-width: 420px) {
-    #vista-perfil .home-topbar-badge,
-    #vista-juegos .games-clicker-style-badge,
-    #vista-proyectos .projects-clicker-style-badge,
-    #vista-sobremi .about-clicker-style-badge,
-    #vista-quepasara .chat-clicker-style-badge,
+    #vista-perfil .home-topbar-badge,  
+    #vista-proyectos .projects-clicker-style-badge,  
+    #vista-sobremi .about-clicker-style-badge,  
+    #vista-quepasara .chat-clicker-style-badge,  
     #vista-networks .networks-topbar-badge {
         display: none !important;
     }
 
-    #global-menu #user-sidebar-name,
-    #global-menu .sidebar-label,
+    #global-menu #user-sidebar-name,  
+    #global-menu .sidebar-label,  
     #nav-texto-wiiu {
         font-size: 9px !important;
         line-height: 10px !important;
@@ -6519,11 +5331,11 @@ img, video, canvas {
 /* ============================================================
    ORIGINAL STYLE BLOCK 17 — maki-yeah-system-v11
    ============================================================ */
-.maki-yeah-icon{display:inline-block;font-family:'MiiverseIcons'!important;font-size:21px;font-weight:normal!important;line-height:1;color:#7e7e7e;transform:translateY(1px)}
-.maki-page-yeah,.maki-profile-yeah{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:34px;padding:6px 15px;border:1px solid #c4cbd0;border-radius:20px;cursor:pointer;color:#566168;font-family:'MiiverseFont',sans-serif;font-size:13px;font-weight:bold;background:linear-gradient(to bottom,#fff 0%,#f4f4f4 48%,#e4e7e9 100%);box-shadow:inset 0 1px 0 rgba(255,255,255,.9),0 1px 2px rgba(0,0,0,.08)}
-.maki-page-yeah.active,.maki-profile-yeah.active{color:#087da8;border-color:#17aee0;background:linear-gradient(to bottom,#f9feff 0%,#daf7ff 100%);box-shadow:inset 0 1px 0 #fff,0 0 8px rgba(0,174,255,.42)}
-.maki-page-yeah.active .maki-yeah-icon,.maki-profile-yeah.active .maki-yeah-icon{color:#00aeff}
-.maki-page-yeah-count-wrap,.maki-page-yeah-count,.maki-profile-yeah-count{color:#718096;font-family:'MiiverseFont',sans-serif;font-size:13px}
+.maki-yeah-icon{display:inline-block;font-family:"MiiverseIcons"!important;font-size:21px;font-weight:normal!important;line-height:1;color:#7e7e7e;transform:translateY(1px)}
+.maki-page-yeah,  .maki-profile-yeah{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:34px;padding:6px 15px;border:1px solid #c4cbd0;border-radius:20px;cursor:pointer;color:#566168;font-family:"MiiverseFont",sans-serif;font-size:13px;font-weight:bold;background:linear-gradient(to bottom,#fff 0%,#f4f4f4 48%,#e4e7e9 100%);box-shadow:inset 0 1px 0 rgba(255,255,255,.9),0 1px 2px rgba(0,0,0,.08)}
+.maki-page-yeah.active,  .maki-profile-yeah.active{color:#087da8;border-color:#17aee0;background:linear-gradient(to bottom,#f9feff 0%,#daf7ff 100%);box-shadow:inset 0 1px 0 #fff,0 0 8px rgba(0,174,255,.42)}
+.maki-page-yeah.active .maki-yeah-icon,  .maki-profile-yeah.active .maki-yeah-icon{color:#00aeff}
+.maki-page-yeah-count-wrap,  .maki-page-yeah-count,  .maki-profile-yeah-count{color:#718096;font-family:"MiiverseFont",sans-serif;font-size:13px}
 .maki-public-post-actions{display:flex;align-items:center;gap:9px;margin-top:12px;padding-top:10px;border-top:1px solid #ececec}
 
 
@@ -6580,7 +5392,7 @@ img, video, canvas {
         border-radius: 18px;
         cursor: pointer;
         color: #ffffff;
-        font-family: 'MiiverseFont', sans-serif;
+        font-family: "MiiverseFont", sans-serif;
         font-size: 11px;
         font-weight: bold;
         background:
@@ -6708,7 +5520,7 @@ img, video, canvas {
         border-radius: 17px;
         cursor: pointer;
         color: #666;
-        font-family: 'MiiverseFont', sans-serif;
+        font-family: "MiiverseFont", sans-serif;
         font-size: 11px;
         font-weight: bold;
         background: linear-gradient(to bottom, #ffffff 0%, #ededed 100%);
@@ -6803,7 +5615,7 @@ img, video, canvas {
         border-radius: 18px;
         cursor: pointer;
         color: #666;
-        font-family: 'MiiverseFont', sans-serif;
+        font-family: "MiiverseFont", sans-serif;
         font-size: 11px;
         font-weight: bold;
         background: linear-gradient(to bottom, #ffffff, #ececec);
@@ -6825,7 +5637,7 @@ img, video, canvas {
         padding: 32px 18px;
         text-align: center;
         color: #7b858a;
-        font-family: 'MiiverseFont', sans-serif;
+        font-family: "MiiverseFont", sans-serif;
         font-size: 14px;
         border: 1px dashed #c9d1d4;
         border-radius: 12px;
@@ -6951,7 +5763,7 @@ img, video, canvas {
     }
 
     .maki-post-detail-topbar strong {
-        font-family: 'MiiverseFont', sans-serif;
+        font-family: "MiiverseFont", sans-serif;
         font-size: 20px;
         text-shadow: 0 1px 1px rgba(0,75,110,.25);
     }
@@ -7077,7 +5889,7 @@ img, video, canvas {
         border-radius: 20px;
         cursor: pointer;
         color: #5b656a;
-        font-family: 'MiiverseFont', sans-serif;
+        font-family: "MiiverseFont", sans-serif;
         font-weight: bold;
         background: linear-gradient(to bottom, #fff, #e9ecee);
         box-shadow: inset 0 1px 0 #fff;
@@ -7102,7 +5914,7 @@ img, video, canvas {
         border-radius: 20px;
         cursor: pointer;
         color: #fff;
-        font-family: 'MiiverseFont', sans-serif;
+        font-family: "MiiverseFont", sans-serif;
         font-size: 12px;
         font-weight: bold;
         background:
@@ -7131,14 +5943,14 @@ img, video, canvas {
         gap: 8px;
         margin-bottom: 13px;
         color: #49545a;
-        font-family: 'MiiverseFont', sans-serif;
+        font-family: "MiiverseFont", sans-serif;
         font-size: 14px;
         font-weight: bold;
     }
 
     .maki-post-detail-happy-symbol {
         color: #58c900;
-        font-family: 'MiiverseIcons', sans-serif;
+        font-family: "MiiverseIcons", sans-serif;
         font-size: 27px;
         line-height: 1;
     }
@@ -7203,7 +6015,7 @@ img, video, canvas {
     }
 
     /* El Delete antiguo del feed queda desactivado definitivamente. */
-    #muro-mensajes .maki-chat-delete,
+    #muro-mensajes .maki-chat-delete,  
     #muro-mensajes .btn-eliminar-miiverse {
         display: none !important;
     }
@@ -7331,7 +6143,7 @@ img, video, canvas {
     box-shadow: inset 0 3px 6px rgba(0,105,120,.18), inset 0 1px 0 rgba(255,255,255,.38);
 }
 
-.eraser-icon, .pencil-icon {
+.eraser-icon,   .pencil-icon {
     position: absolute;
     left: 50%; top: 50%;
     display: block;
@@ -7401,7 +6213,7 @@ img, video, canvas {
 #miiverse-post-editor.drawing-active { height: 240px !important; }
 #miiverse-post-editor.drawing-active .miiverse-mode-selector { height: 240px !important; }
 #miiverse-post-editor.drawing-active .miiverse-post-input-area { height: 240px !important; }
-#miiverse-post-editor.drawing-active .miiverse-image-column,
+#miiverse-post-editor.drawing-active .miiverse-image-column,  
 #miiverse-post-editor.drawing-active #select-image-post { height: 240px !important; }
 
 @media (max-width: 760px) {
@@ -7417,7 +6229,7 @@ img, video, canvas {
     .miiverse-tool-group { min-height: 47px; border-radius: 9px; }
     .miiverse-draw-tool { height: 47px; }
     .miiverse-draw-action { height: 37px; }
-    #miiverse-post-editor.drawing-active .miiverse-image-column,
+    #miiverse-post-editor.drawing-active .miiverse-image-column,  
     #miiverse-post-editor.drawing-active #select-image-post { height: 150px !important; }
 }
 
@@ -7735,7 +6547,7 @@ img, video, canvas {
         #b8c0c4 !important;
 
     font-family:
-        'MiiverseFont',
+        "MiiverseFont",
         sans-serif !important;
 
     font-size:
@@ -8412,7 +7224,7 @@ img, video, canvas {
         #087fa9;
 
     font-family:
-        'MiiverseFont',
+        "MiiverseFont",
         sans-serif;
 
     font-size:
@@ -8434,13 +7246,13 @@ img, video, canvas {
 }
 
 /* Third-screen design means the original composer does not grow. */
-#miiverse-post-editor.drawing-active,
+#miiverse-post-editor.drawing-active,  
 #miiverse-post-editor.drawing-active .miiverse-post-input-area {
     height:
         181px !important;
 }
 
-#miiverse-post-editor.drawing-active .miiverse-image-column,
+#miiverse-post-editor.drawing-active .miiverse-image-column,  
 #miiverse-post-editor.drawing-active #select-image-post {
     height:
         181px !important;
@@ -8624,10 +7436,10 @@ img, video, canvas {
 #wiiu-memo-loading i:nth-child(8) { transform: translate(-10px,-10px) !important; opacity:.34 !important; }
 
 /* Defensive: V18 intentionally removes all user identity from this window. */
-#wiiu-memo-user-mii,
-#wiiu-memo-service-tile,
-#wiiu-memo-user-copy,
-#wiiu-memo-user-name,
+#wiiu-memo-user-mii,  
+#wiiu-memo-service-tile,  
+#wiiu-memo-user-copy,  
+#wiiu-memo-user-name,  
 #wiiu-memo-user-pnid {
     display: none !important;
 }
@@ -8666,7 +7478,7 @@ img, video, canvas {
 
     color: #4a5559 !important;
 
-    font-family: 'MiiverseFont', Arial, sans-serif !important;
+    font-family: "MiiverseFont", Arial, sans-serif !important;
     font-size: 17px !important;
     font-weight: bold !important;
 
@@ -8781,12 +7593,10 @@ img, video, canvas {
  * - queda pegada al borde superior
  */
 @media screen and (min-width: 1101px) {
-    #vista-perfil .home-topbar,
-    #vista-juegos .games-clicker-style-topbar,
-    #vista-messages .mii-clicker-topbar,
-    #vista-proyectos .projects-clicker-style-topbar,
-    #vista-sobremi .about-clicker-style-topbar,
-    #vista-quepasara .chat-clicker-style-topbar,
+    #vista-perfil .home-topbar,  
+    #vista-proyectos .projects-clicker-style-topbar,  
+    #vista-sobremi .about-clicker-style-topbar,  
+    #vista-quepasara .chat-clicker-style-topbar,  
     #vista-networks .networks-topbar {
         box-sizing: border-box !important;
 
@@ -8841,29 +7651,9 @@ img, video, canvas {
    ============================================================ */
 
 /* About Me + General Chat cards on Home */
-#vista-perfil .community-about,
+#vista-perfil .community-about,  
 #vista-perfil .community-general {
     --community-color: #23b9e5 !important;
-}
-
-/* Mii Clicker */
-#vista-messages .mii-clicker-topbar {
-    background:
-        linear-gradient(
-            to bottom,
-            #48d4ff 0%,
-            #23bce9 42%,
-            #119ed1 56%,
-            #0784b6 100%
-        ) !important;
-
-    border-bottom:
-        2px solid #08759f !important;
-
-    box-shadow:
-        inset 0 2px 0 rgba(255,255,255,.45),
-        inset 0 -2px 0 rgba(0,70,110,.16),
-        0 3px 6px rgba(0,0,0,.10) !important;
 }
 
 /* About Me */
@@ -8985,19 +7775,1678 @@ img, video, canvas {
 
 
 /* ============================================================
-   V29 — TOPBARS: FIX REAL MULTIDISPOSITIVO
+   HOME — WII U COMMUNITY CARDS
+   Uses the existing home-community card design; kept in the
+   same portal list as About Me and General Chat.
    ============================================================ */
 
-/* User Page ahora usa una clase real, ya no un selector frágil
-   basado en style*="width: 1400px". */
-#vista-userpage .userpage-topbar {
-    position: relative;
-    box-sizing: border-box;
-    width: calc(100vw - 160px);
-    margin-left: 110px;
-    margin-top: -50px;
-    padding: 12px 20px;
 
+
+/* ============================================================
+   MAKI'S BIO — VERIFIED BADGE STORE SUBPORTAL
+   Native Wii U / Miiverse visual language
+   ============================================================ */
+
+#vista-perfil .home-topbar-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+    flex-shrink: 0;
+}
+
+#vista-perfil .verified-store-trigger {
+    min-height: 28px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 0 11px;
+    box-sizing: border-box;
+    cursor: pointer;
+    color: #626d72;
+    font-family: "MiiverseFont", sans-serif;
+    font-size: 10px;
+    font-weight: bold;
+    letter-spacing: .05px;
+    white-space: nowrap;
+    background: linear-gradient(to bottom,#ffffff 0%,#fbfbfb 48%,#e9edef 100%);
+    border: 1px solid #c4cdd1;
+    border-radius: 15px;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.98),0 1px 2px rgba(0,45,65,.17),0 2px 3px rgba(0,45,65,.08);
+    text-shadow: 0 1px 0 #ffffff;
+    transition: background .12s ease,border-color .12s ease,box-shadow .12s ease,transform .09s ease;
+}
+
+#vista-perfil .verified-store-trigger:hover {
+    color: #3e5963;
+    background: linear-gradient(to bottom,#ffffff 0%,#f7fcfd 48%,#e0edf1 100%);
+    border-color: #a9c4ce;
+    box-shadow: inset 0 1px 0 #ffffff,0 2px 4px rgba(0,55,80,.17);
+}
+
+#vista-perfil .verified-store-trigger:active {
+    transform: translateY(1px);
+    background: linear-gradient(to bottom,#e4e9eb,#f7f9fa);
+    box-shadow: inset 0 1px 2px rgba(0,45,65,.13),0 1px 1px rgba(0,45,65,.08);
+}
+
+#vista-perfil .verified-store-trigger:focus-visible,  
+#vista-verified-store .verified-store-button:focus-visible {
+    outline: 3px solid rgba(31,178,224,.30);
+    outline-offset: 3px;
+}
+
+#vista-perfil .verified-store-trigger-icon {
+    width: 14px;
+    height: 14px;
+    flex: 0 0 14px;
+    fill: #879298;
+    stroke: #707b81;
+    stroke-width: .45;
+    stroke-linejoin: round;
+    filter: drop-shadow(0 1px 0 #ffffff);
+}
+
+#vista-verified-store {
+    min-height: 760px;
+    font-family: "MiiverseFont",sans-serif;
+}
+
+#vista-verified-store .verified-store-topbar {
+    margin-top: -50px;
+    margin-left: 100px;
+    width: 1385px;
+    padding: 15px 22px;
+    background: linear-gradient(to bottom,#77e5ff 0%,#48d2f5 24%,#25bde6 50%,#119dca 74%,#0786b3 100%);
+    border-bottom: 2px solid #0879a1;
+    box-shadow: inset 0 2px 0 rgba(255,255,255,.52),inset 0 -2px 0 rgba(0,75,115,.17),0 3px 6px rgba(0,0,0,.10);
+}
+
+#vista-verified-store .verified-store-topbar-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#vista-verified-store .verified-store-topbar h1 {
+    margin: 0;
+    color: #ffffff;
+    font-size: 25px;
+    font-weight: bold;
+    line-height: 1;
+    text-shadow: 0 1px 2px rgba(0,70,110,.30);
+}
+
+#vista-verified-store .verified-store-topbar-badge {
+    padding: 5px 13px;
+    color: #ffffff;
+    font-size: 11px;
+    font-weight: bold;
+    border: 1px solid rgba(255,255,255,.58);
+    border-radius: 20px;
+    background: rgba(0,100,150,.17);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.22);
+    text-shadow: 0 1px 1px rgba(0,0,0,.13);
+}
+
+#vista-verified-store .verified-store-page {
+    width: 78%;
+    max-width: 1080px;
+    margin: 27px 0 0 170px;
+    padding-bottom: 90px;
+    box-sizing: border-box;
+}
+
+#vista-verified-store .verified-store-breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    margin: 0 0 12px 4px;
+    color: #929da2;
+    font-size: 10px;
+    font-weight: bold;
+    letter-spacing: .45px;
+}
+
+#vista-verified-store .verified-store-breadcrumb-arrow {
+    color: #23b9e5;
+    font-size: 20px;
+    line-height: 10px;
+}
+
+#vista-verified-store .verified-store-breadcrumb strong {
+    color: #168eb8;
+}
+
+#vista-verified-store .verified-store-window {
+    overflow: hidden;
+    border: 1px solid #bcd5df;
+    border-radius: 13px;
+    background: linear-gradient(to bottom,#ffffff 0%,#ffffff 70%,#f5fbfd 100%);
+    box-shadow: 0 4px 13px rgba(0,90,130,.10),inset 0 1px 0 #ffffff;
+}
+
+#vista-verified-store .verified-store-window-header {
+    min-height: 68px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    padding: 12px 22px;
+    box-sizing: border-box;
+    background: linear-gradient(to bottom,#f7fbfc 0%,#e9f2f5 100%);
+    border-bottom: 1px solid #cbdde3;
+    box-shadow: inset 0 1px 0 #ffffff;
+}
+
+#vista-verified-store .verified-store-window-kicker {
+    display: block;
+    margin-bottom: 3px;
+    color: #188db6;
+    font-size: 9px;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+#vista-verified-store .verified-store-window-header h2 {
+    margin: 0;
+    color: #44545b;
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 1.15;
+    text-shadow: 0 1px 0 #ffffff;
+}
+
+#vista-verified-store .verified-store-item-tag {
+    flex-shrink: 0;
+    padding: 6px 10px;
+    color: #75868d;
+    font-size: 9px;
+    font-weight: bold;
+    border: 1px solid #c5d5db;
+    border-radius: 12px;
+    background: linear-gradient(to bottom,#ffffff,#edf4f6);
+    box-shadow: inset 0 1px 0 #ffffff;
+}
+
+#vista-verified-store .verified-store-intro {
+    margin: 19px 22px 0;
+    padding: 13px 16px;
+    color: #596b72;
+    font-size: 13px;
+    line-height: 1.5;
+    background: linear-gradient(to bottom,#f7fcfe,#eef8fb);
+    border: 1px solid #d0e4eb;
+    border-left: 4px solid #25b9e4;
+    border-radius: 7px;
+    box-shadow: inset 0 1px 0 #ffffff;
+}
+
+#vista-verified-store .verified-store-product-layout {
+    display: grid;
+    grid-template-columns: minmax(250px,.86fr) minmax(0,1.14fr);
+    align-items: stretch;
+    gap: 22px;
+    padding: 21px 22px 19px;
+}
+
+#vista-verified-store .verified-store-character-card {
+    min-width: 0;
+    margin: 0;
+    padding: 10px;
+    box-sizing: border-box;
+    border: 1px solid #c4d9e1;
+    border-radius: 11px;
+    background: linear-gradient(to bottom,#ffffff 0%,#f1fafd 100%);
+    box-shadow: inset 0 1px 0 #ffffff,0 2px 5px rgba(0,80,120,.07);
+}
+
+#vista-verified-store .verified-store-character-frame {
+    height: 340px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border: 1px solid #d2e3e8;
+    border-radius: 7px;
+    background: linear-gradient(145deg,#e5fff0 0%,#b8f8d4 46%,#b6f5ed 100%);
+}
+
+#vista-verified-store .verified-store-character-frame img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+}
+
+#vista-verified-store .verified-store-character-card figcaption {
+    padding: 10px 3px 2px;
+    color: #849198;
+    font-size: 11px;
+    font-style: italic;
+    text-align: center;
+}
+
+#vista-verified-store .verified-store-product-details {
+    min-width: 0;
+    padding: 19px 20px;
+    box-sizing: border-box;
+    border: 1px solid #d2dadd;
+    border-radius: 10px;
+    background: linear-gradient(to bottom,#ffffff 0%,#fbfdfe 100%);
+    box-shadow: inset 0 1px 0 #ffffff,0 2px 5px rgba(0,0,0,.035);
+}
+
+#vista-verified-store .verified-store-product-heading {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #e0e6e8;
+}
+
+#vista-verified-store .verified-store-product-badge {
+    width: 55px;
+    height: 55px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 55px;
+    border: 1px solid #acd7e5;
+    border-radius: 12px;
+    background: linear-gradient(to bottom,#ffffff,#eaf8fc);
+    box-shadow: inset 0 1px 0 #ffffff,0 2px 4px rgba(0,90,130,.08);
+}
+
+#vista-verified-store .verified-store-product-badge svg {
+    width: 37px;
+    height: 37px;
+    overflow: visible;
+}
+
+#vista-verified-store .verified-store-product-badge circle {
+    fill: #39c978;
+    stroke: #159b59;
+    stroke-width: 1.5;
+}
+
+#vista-verified-store .verified-store-product-badge path {
+    fill: none;
+    stroke: #ffffff;
+    stroke-width: 4;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+#vista-verified-store .verified-store-product-eyebrow {
+    display: block;
+    margin-bottom: 4px;
+    color: #9aa6ab;
+    font-size: 9px;
+    font-weight: bold;
+    letter-spacing: .7px;
+}
+
+#vista-verified-store .verified-store-product-heading h3 {
+    margin: 0;
+    color: #3e4e55;
+    font-size: 16px;
+    line-height: 1.2;
+}
+
+#vista-verified-store .verified-store-product-copy {
+    margin: 16px 0;
+    color: #738087;
+    font-size: 12px;
+    line-height: 1.55;
+}
+
+#vista-verified-store .verified-store-price-panel {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 13px 15px;
+    border: 1px solid #d7e6eb;
+    border-radius: 8px;
+    background: linear-gradient(to bottom,#f5fcfe,#eaf7fb);
+    box-shadow: inset 0 1px 0 #ffffff;
+}
+
+#vista-verified-store .verified-store-price-label {
+    color: #7d9098;
+    font-size: 10px;
+    font-weight: bold;
+    letter-spacing: .6px;
+}
+
+#vista-verified-store .verified-store-price-panel strong {
+    color: #168fb8;
+    font-size: 25px;
+    font-weight: bold;
+    white-space: nowrap;
+    text-shadow: 0 1px 0 #ffffff;
+}
+
+#vista-verified-store .verified-store-price-panel small {
+    color: #728d97;
+    font-size: 10px;
+}
+
+#vista-verified-store .verified-store-benefits {
+    display: grid;
+    gap: 10px;
+    margin: 17px 0 0;
+    padding: 0;
+    list-style: none;
+}
+
+#vista-verified-store .verified-store-benefits li {
+    display: flex;
+    align-items: flex-start;
+    gap: 9px;
+    color: #65757b;
+    font-size: 11px;
+    line-height: 1.4;
+}
+
+#vista-verified-store .verified-store-benefits li span {
+    width: 16px;
+    height: 16px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 16px;
+    color: #168c50;
+    font: bold 10px/1 Arial,sans-serif;
+    border: 1px solid #a8dfbf;
+    border-radius: 50%;
+    background: #f0fbf4;
+}
+
+#vista-verified-store .verified-store-action-area {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 12px;
+    padding: 15px 22px 17px;
+    border-top: 1px solid #e0e7e9;
+    background: linear-gradient(to bottom,#fbfcfc,#f1f4f5);
+}
+
+#vista-verified-store .verified-store-button {
+    min-height: 47px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    padding: 0 21px;
+    box-sizing: border-box;
+    cursor: pointer;
+    font-family: "MiiverseFont",sans-serif;
+    font-size: 13px;
+    font-weight: bold;
+    line-height: 1.2;
+    border-radius: 10px;
+    transition: transform .09s ease,box-shadow .09s ease,filter .09s ease;
+}
+
+#vista-verified-store .verified-store-button:active {
+    transform: translateY(2px);
+}
+
+#vista-verified-store .verified-store-button-secondary {
+    min-width: 112px;
+    color: #59676d;
+    text-shadow: 0 1px 0 #ffffff;
+    background: linear-gradient(to bottom,#ffffff 0%,#fafafa 45%,#e8ebec 100%);
+    border: 2px solid #b5c0c4;
+    box-shadow: inset 0 1px 0 #ffffff,0 3px 5px rgba(0,0,0,.12);
+}
+
+#vista-verified-store .verified-store-button-secondary:hover {
+    filter: brightness(1.025);
+    border-color: #91bccc;
+}
+
+#vista-verified-store .verified-store-button-primary {
+    min-width: 265px;
+    color: #ffffff;
+    text-shadow: 0 1px 1px rgba(0,55,85,.35);
+    background: linear-gradient(to bottom,#75e1ff 0%,#42c6ed 45%,#149aca 100%);
+    border: 2px solid #0c8db9;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.72),0 3px 6px rgba(0,95,135,.22);
+}
+
+#vista-verified-store .verified-store-button-primary:hover {
+    filter: brightness(1.06);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.78),0 5px 9px rgba(0,95,135,.24);
+}
+
+#vista-verified-store .verified-store-card-icon {
+    width: 20px;
+    height: 20px;
+    flex: 0 0 20px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+#vista-verified-store .verified-store-disclaimer {
+    margin: 0;
+    padding: 0 22px 17px;
+    color: #9aa4a8;
+    font-size: 9px;
+    line-height: 1.45;
+    text-align: right;
+}
+
+#vista-verified-store .verified-store-result[hidden] {
+    display: none !important;
+}
+
+#vista-verified-store .verified-store-result {
+    min-height: 425px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 35px 32px 40px;
+    box-sizing: border-box;
+    text-align: center;
+    background: linear-gradient(to bottom,#ffffff,#f2fafc);
+}
+
+#vista-verified-store .verified-store-result-icon {
+    width: 66px;
+    height: 66px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 16px;
+    color: #ffffff;
+    font: bold 36px/1 Arial,sans-serif;
+    border: 4px solid #ffffff;
+    border-radius: 50%;
+    background: linear-gradient(to bottom,#77ddf8,#169fce);
+    box-shadow: 0 3px 9px rgba(0,90,130,.20),inset 0 1px 0 rgba(255,255,255,.55);
+}
+
+#vista-verified-store .verified-store-result-kicker {
+    color: #168fb8;
+    font-size: 9px;
+    font-weight: bold;
+    letter-spacing: 1.2px;
+}
+
+#vista-verified-store .verified-store-result h2 {
+    margin: 8px 0 10px;
+    color: #44545b;
+    font-size: 21px;
+}
+
+#vista-verified-store .verified-store-result p {
+    max-width: 560px;
+    margin: 0 0 24px;
+    color: #77858b;
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+#vista-verified-store .verified-store-footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    margin-top: 13px;
+    color: #99a4a8;
+    font-size: 9px;
+    font-weight: bold;
+    letter-spacing: .45px;
+    text-align: center;
+}
+
+#vista-verified-store .verified-store-footer-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #28b9df;
+    box-shadow: 0 0 0 3px rgba(40,185,223,.12);
+}
+
+@media screen and (max-width: 1100px) {
+    #vista-verified-store .verified-store-page {
+        width: calc(100% - 210px);
+        max-width: 1080px;
+    }
+}
+
+@media screen and (max-width: 850px) {
+    #vista-verified-store .verified-store-page {
+        width: calc(100% - 145px);
+        margin-left: 125px;
+    }
+
+    #vista-verified-store .verified-store-product-layout {
+        grid-template-columns: minmax(190px,.8fr) minmax(0,1.2fr);
+        gap: 14px;
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    #vista-verified-store .verified-store-character-frame {
+        height: 300px;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    #vista-perfil .home-topbar-inner {
+        gap: 8px;
+    }
+
+    #vista-perfil .home-topbar-actions {
+        gap: 6px;
+    }
+
+    #vista-perfil .verified-store-trigger {
+        min-height: 30px;
+        gap: 5px;
+        padding: 0 8px;
+        font-size: 9px;
+    }
+
+    #vista-perfil .verified-store-trigger-icon {
+        width: 12px;
+        height: 12px;
+        flex-basis: 12px;
+    }
+
+    #vista-perfil .home-topbar-badge {
+        padding: 4px 7px;
+        font-size: 9px;
+    }
+
+    #vista-verified-store {
+        min-height: auto;
+    }
+
+    #vista-verified-store .verified-store-topbar {
+        width: calc(100% + 24px);
+        margin: 0 -12px;
+        padding: 13px 14px;
+    }
+
+    #vista-verified-store .verified-store-topbar h1 {
+        font-size: 20px;
+    }
+
+    #vista-verified-store .verified-store-topbar-badge {
+        max-width: 43%;
+        padding: 4px 8px;
+        overflow: hidden;
+        font-size: 9px;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+
+    #vista-verified-store .verified-store-page {
+        width: 100%;
+        max-width: none;
+        margin: 17px 0 0;
+        padding-bottom: 28px;
+    }
+
+    #vista-verified-store .verified-store-window-header {
+        min-height: 60px;
+        padding: 10px 13px;
+    }
+
+    #vista-verified-store .verified-store-window-header h2 {
+        font-size: 17px;
+    }
+
+    #vista-verified-store .verified-store-item-tag {
+        padding: 5px 7px;
+        font-size: 8px;
+    }
+
+    #vista-verified-store .verified-store-intro {
+        margin: 13px 13px 0;
+        padding: 10px 12px;
+        font-size: 12px;
+    }
+
+    #vista-verified-store .verified-store-product-layout {
+        grid-template-columns: 1fr;
+        gap: 13px;
+        padding: 13px;
+    }
+
+    #vista-verified-store .verified-store-character-frame {
+        height: 285px;
+    }
+
+    #vista-verified-store .verified-store-product-details {
+        padding: 15px;
+    }
+
+    #vista-verified-store .verified-store-action-area {
+        flex-wrap: wrap;
+        padding: 12px 13px;
+    }
+
+    #vista-verified-store .verified-store-button-secondary {
+        min-width: 90px;
+    }
+
+    #vista-verified-store .verified-store-button-primary {
+        min-width: 0;
+        flex: 1 1 210px;
+        padding: 0 12px;
+        font-size: 11px;
+    }
+
+    #vista-verified-store .verified-store-disclaimer {
+        padding: 0 13px 13px;
+        text-align: left;
+    }
+
+    #vista-verified-store .verified-store-result {
+        min-height: 360px;
+        padding: 25px 17px 30px;
+    }
+
+    #vista-verified-store .verified-store-result h2 {
+        font-size: 18px;
+    }
+
+    #vista-verified-store .verified-store-footer {
+        flex-wrap: wrap;
+        font-size: 8px;
+        line-height: 1.5;
+    }
+}
+
+
+/* ============================================================
+   RESTORED MII CLICKER — GAME FEATURE KEPT; GAME SECTIONS REMAIN REMOVED
+   ============================================================ */
+/* MII CLICKER */
+#vista-perfil .community-clicker {
+    --community-color:
+        #72ce1f;
+}
+#vista-messages {
+    position: relative;
+    z-index: 1;
+    min-height: 700px;
+
+    font-family:
+        "MiiverseFont",
+        sans-serif;
+}
+#vista-messages .mii-clicker-topbar {
+    margin-top: -50px;
+
+    padding:
+        15px
+        22px;
+        width: 1385px;
+        margin-left: 100px;
+
+    background:
+        linear-gradient(
+            to bottom,
+            #48d4ff 0%,
+            #23bce9 48%,
+            #0784b6 100%
+        );
+
+    border-bottom:
+        2px solid #08759f;
+
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.42),
+        inset 0 -1px 0 rgba(0,0,0,.08);
+}
+#vista-messages .mii-clicker-topbar-content {
+    display: flex;
+
+    align-items: center;
+
+    justify-content:
+        space-between;
+}
+#vista-messages .mii-clicker-topbar h1 {
+    margin: 0;
+
+    color:
+        #ffffff;
+
+    font-size:
+        25px;
+
+    font-weight:
+        bold;
+
+    text-shadow:
+        0 1px 2px
+        rgba(0,0,0,.20);
+}
+#vista-messages .mii-clicker-page {
+    width:
+        78%;
+
+    max-width:
+        1050px;
+
+    margin-left:
+        170px;
+
+    margin-top:
+        35px;
+
+    padding-bottom:
+        60px;
+
+    box-sizing:
+        border-box;
+}
+#vista-messages .mii-clicker-panel {
+    background:
+        #ffffff;
+
+    border:
+        1px solid #d1d1d1;
+
+    border-radius:
+        12px;
+
+    overflow:
+        hidden;
+
+    box-shadow:
+        0 4px 12px
+        rgba(0,0,0,.09);
+
+    margin-bottom:
+        26px;
+}
+#vista-messages .mii-clicker-panel-title {
+    padding:
+        14px
+        20px;
+
+    background:
+        linear-gradient(
+            to bottom,
+            #979797 0%,
+            #888888 48%,
+            #797979 100%
+        );
+
+    border-bottom:
+        1px solid #707070;
+
+    color:
+        #ffffff;
+
+    font-size:
+        23px;
+
+    font-weight:
+        bold;
+
+    text-shadow:
+        0 1px 1px
+        rgba(0,0,0,.22);
+}
+#vista-messages .mii-clicker-description {
+    padding:
+        13px
+        20px;
+
+    color:
+        #777777;
+
+    font-size:
+        15px;
+
+    text-align:
+        center;
+
+    background:
+        #fafafa;
+
+    border-bottom:
+        1px solid #e2e2e2;
+}
+#vista-messages .mii-clicker-podium {
+    min-height:
+        250px;
+
+    display:
+        flex;
+
+    align-items:
+        flex-end;
+
+    justify-content:
+        center;
+
+    gap:
+        22px;
+
+    padding:
+        28px
+        24px
+        30px
+        24px;
+
+    box-sizing:
+        border-box;
+}
+#vista-messages .mii-clicker-place {
+    position:
+        relative;
+
+    width:
+        185px;
+
+    box-sizing:
+        border-box;
+
+    text-align:
+        center;
+
+    background:
+        linear-gradient(
+            to bottom,
+            #ffffff,
+            #eeeeee
+        );
+
+    border:
+        1px solid #c7c7c7;
+
+    border-radius:
+        10px;
+
+    padding:
+        12px
+        10px
+        15px
+        10px;
+
+    box-shadow:
+        0 3px 6px rgba(0,0,0,.10),
+        inset 0 1px 0 #ffffff;
+}
+#vista-messages .mii-clicker-place.first {
+    min-height:
+        210px;
+
+    border-top:
+        5px solid #f0c822;
+}
+#vista-messages .mii-clicker-place.second {
+    min-height:
+        185px;
+
+    border-top:
+        5px solid #a9afb4;
+}
+#vista-messages .mii-clicker-place.third {
+    min-height:
+        165px;
+
+    border-top:
+        5px solid #b77a47;
+}
+#vista-messages .mii-clicker-place-number {
+    font-size:
+        28px;
+
+    font-weight:
+        bold;
+
+    line-height:
+        32px;
+
+    margin-bottom:
+        7px;
+}
+#vista-messages .first .mii-clicker-place-number {
+    color:
+        #d0a900;
+}
+#vista-messages .second .mii-clicker-place-number {
+    color:
+        #858b91;
+}
+#vista-messages .third .mii-clicker-place-number {
+    color:
+        #9f6737;
+}
+#vista-messages .mii-clicker-place-avatar {
+    width:
+        78px;
+
+    height:
+        78px;
+
+    margin:
+        0 auto
+        8px auto;
+
+    overflow:
+        hidden;
+
+    background-color:
+        #ececec;
+
+    background-image:
+        url("img/games/Dummy_mii_user.png");
+
+    background-size:
+        cover;
+
+    background-position:
+        center;
+
+    background-repeat:
+        no-repeat;
+
+    border:
+        1px solid #bbbbbb;
+
+    border-radius:
+        10px;
+
+    box-shadow:
+        inset 0 1px 2px
+        rgba(0,0,0,.07);
+}
+
+#vista-messages .mii-clicker-place-avatar .mii-clicker-render-image,
+#vista-messages .mii-clicker-rank-row-avatar .mii-clicker-render-image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center center;
+    image-rendering: auto;
+}
+
+#vista-messages .mii-clicker-place-pnid {
+    display:
+        block;
+
+    width:
+        100%;
+
+    overflow:
+        hidden;
+
+    white-space:
+        nowrap;
+
+    text-overflow:
+        ellipsis;
+
+    color:
+        #484848;
+
+    font-size:
+        15px;
+
+    font-weight:
+        bold;
+}
+#vista-messages .mii-clicker-place-score {
+    display:
+        block;
+
+    margin-top:
+        5px;
+
+    color:
+        #777777;
+
+    font-size:
+        13px;
+}
+#vista-messages .mii-clicker-game {
+    position:
+        relative;
+
+    padding:
+        27px
+        25px
+        36px
+        25px;
+
+    text-align:
+        center;
+}
+#vista-messages #mii-clicker-pnid {
+    color:
+        #555555;
+
+    font-size:
+        20px;
+
+    font-weight:
+        bold;
+
+    margin-bottom:
+        5px;
+}
+#vista-messages .mii-clicker-instruction {
+    color:
+        #888888;
+
+    font-size:
+        14px;
+
+    margin-bottom:
+        18px;
+}
+#vista-messages #mii-clicker-score {
+    color:
+        #65bf0b;
+
+    font-size:
+        52px;
+
+    line-height:
+        55px;
+
+    font-weight:
+        bold;
+
+    margin-bottom:
+        0;
+
+    text-shadow:
+        0 1px 0
+        #ffffff;
+}
+#vista-messages .mii-clicker-score-label {
+    color:
+        #999999;
+
+    font-size:
+        14px;
+
+    margin-bottom:
+        22px;
+}
+#vista-messages .mii-clicker-mii-stage {
+    position:
+        relative;
+
+    width:
+        300px;
+
+    height:
+        360px;
+
+    margin:
+        0 auto
+        22px auto;
+
+    overflow:
+        hidden;
+
+    background:
+        radial-gradient(
+            ellipse at center bottom,
+            #ffffff 0%,
+            #f6f6f6 55%,
+            #e9e9e9 100%
+        );
+
+    border:
+        2px solid #c3c3c3;
+
+    border-radius:
+        18px;
+
+    box-shadow:
+        inset 0 2px 5px rgba(0,0,0,.07),
+        0 3px 6px rgba(0,0,0,.08);
+}
+#vista-messages .mii-clicker-floor {
+    position:
+        absolute;
+
+    left:
+        50%;
+
+    bottom:
+        25px;
+
+    width:
+        190px;
+
+    height:
+        20px;
+
+    margin-left:
+        -95px;
+
+    border-radius:
+        50%;
+
+    background:
+        radial-gradient(
+            ellipse at center,
+            rgba(0,0,0,.16) 0%,
+            rgba(0,0,0,.06) 45%,
+            rgba(0,0,0,0) 72%
+        );
+
+    pointer-events:
+        none;
+}
+#vista-messages #mii-clicker-mii {
+    position:
+        relative;
+
+    z-index:
+        2;
+
+    display:
+        block;
+
+    width:
+        100%;
+
+    height:
+        100%;
+
+    object-fit:
+        contain;
+
+    object-position:
+        center center;
+
+    pointer-events:
+        none;
+
+    -webkit-user-select:
+        none;
+
+    user-select:
+        none;
+}
+#vista-messages #mii-clicker-click-button {
+    position:
+        relative;
+
+    display:
+        block;
+
+    width:
+        300px;
+
+    height:
+        66px;
+
+    margin:
+        0 auto;
+
+    box-sizing:
+        border-box;
+
+    cursor:
+        pointer;
+
+    outline:
+        none;
+
+    color:
+        #ffffff;
+
+    font-family:
+        "MiiverseFont",
+        sans-serif;
+
+    font-size:
+        24px;
+
+    font-weight:
+        bold;
+
+    text-align:
+        center;
+
+    text-shadow:
+        0 1px 1px
+        rgba(0,0,0,.20);
+
+    background:
+        linear-gradient(
+            to bottom,
+            #92e93c 0%,
+            #78d51f 42%,
+            #64be12 55%,
+            #55aa09 100%
+        );
+
+    border:
+        2px solid #519f0b;
+
+    border-radius:
+        12px;
+
+    box-shadow:
+        inset 0 2px 0 rgba(255,255,255,.48),
+        inset 0 -3px 0 rgba(50,110,0,.22),
+        0 5px 0 #438b08,
+        0 7px 8px rgba(0,0,0,.18);
+
+    -webkit-tap-highlight-color:
+        transparent;
+
+    -webkit-user-select:
+        none;
+
+    user-select:
+        none;
+
+    transition:
+        transform .055s,
+        box-shadow .055s,
+        background .055s;
+}
+#vista-messages #mii-clicker-click-button::before {
+    content:
+        "";
+
+    position:
+        absolute;
+
+    top:
+        4px;
+
+    left:
+        10px;
+
+    right:
+        10px;
+
+    height:
+        17px;
+
+    border-radius:
+        8px 8px 50% 50%;
+
+    background:
+        linear-gradient(
+            to bottom,
+            rgba(255,255,255,.35),
+            rgba(255,255,255,0)
+        );
+
+    pointer-events:
+        none;
+}
+#vista-messages
+#mii-clicker-click-button.mii-clicker-pressed {
+    transform:
+        translateY(4px);
+
+    background:
+        linear-gradient(
+            to bottom,
+            #80da2d,
+            #5eb811
+        );
+
+    box-shadow:
+        inset 0 2px 4px rgba(0,0,0,.12),
+        0 1px 0 #438b08,
+        0 3px 4px rgba(0,0,0,.14);
+}
+#vista-messages
+#mii-clicker-click-button:disabled {
+    opacity:
+        .45;
+
+    cursor:
+        default;
+}
+#vista-messages #mii-clicker-plus-one {
+    height:
+        38px;
+
+    margin-top:
+        18px;
+
+    color:
+        #68c212;
+
+    font-size:
+        28px;
+
+    font-weight:
+        bold;
+
+    opacity:
+        0;
+
+    transform:
+        translateY(0);
+
+    pointer-events:
+        none;
+}
+#vista-messages
+#mii-clicker-plus-one.show {
+    opacity:
+        1;
+
+    transform:
+        translateY(-7px);
+
+    transition:
+        opacity .12s,
+        transform .12s;
+}
+#vista-messages .mii-clicker-personal-rank {
+    margin-top:
+        3px;
+
+    color:
+        #777777;
+
+    font-size:
+        15px;
+}
+#vista-messages #mii-clicker-sync-text {
+    height:
+        18px;
+
+    margin-top:
+        8px;
+
+    color:
+        #999999;
+
+    font-size:
+        12px;
+}
+#vista-messages .mii-clicker-rules {
+    display:
+        flex;
+
+    justify-content:
+        center;
+
+    gap:
+        35px;
+
+    padding:
+        17px
+        20px;
+
+    background:
+        #f7f7f7;
+
+    border-top:
+        1px solid #dedede;
+
+    color:
+        #777777;
+
+    font-size:
+        13px;
+}
+#vista-messages .mii-clicker-rule {
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    gap:
+        7px;
+}
+#vista-messages .mii-clicker-rule-dot {
+    width:
+        9px;
+
+    height:
+        9px;
+
+    border-radius:
+        50%;
+
+    background:
+        #72cc1d;
+}
+#vista-messages .mii-clicker-back {
+    display:
+        block;
+
+    width:
+        170px;
+
+    height:
+        43px;
+
+    margin:
+        22px auto 0 auto;
+
+    cursor:
+        pointer;
+
+    color:
+        #555555;
+
+    font-family:
+        "MiiverseFont",
+        sans-serif;
+
+    font-size:
+        16px;
+
+    font-weight:
+        bold;
+
+    background:
+        linear-gradient(
+            to bottom,
+            #ffffff,
+            #e4e4e4
+        );
+
+    border:
+        1px solid #aaaaaa;
+
+    border-radius:
+        7px;
+
+    box-shadow:
+        0 2px 4px rgba(0,0,0,.12),
+        inset 0 1px 0 #ffffff;
+}
+@media screen and (max-width:950px) {#vista-messages .mii-clicker-page {
+        width:
+            auto;
+
+        margin-left:
+            175px;
+
+        margin-right:
+            20px;
+    }
+#vista-messages .mii-clicker-podium {
+        gap:
+            8px;
+    }
+#vista-messages .mii-clicker-place {
+        width:
+            31%;
+    }}
+/* ============================================================
+   ABOUT MY PROJECTS — HEADER ESTILO MII CLICKER
+   ============================================================ */
+/* ============================================================
+   ABOUT ME — HEADER ESTILO MII CLICKER
+   ============================================================ */
+/* ============================================================
+   GENERAL CHAT — HEADER ESTILO MII CLICKER
+   ============================================================ */
+@media screen and (max-width: 1100px) {#vista-perfil .home-topbar,
+    #vista-juegos .games-clicker-style-topbar,
+    #vista-messages .mii-clicker-topbar,
+    #vista-proyectos .projects-clicker-style-topbar,
+    #vista-sobremi .about-clicker-style-topbar,
+    #vista-quepasara .chat-clicker-style-topbar,
+    #vista-networks .networks-topbar,
+    #vista-userpage > div[style*="width: 1400px"] {
+        box-sizing: border-box !important;
+        width: calc(100% + 40px) !important;
+        max-width: none !important;
+        margin-left: -20px !important;
+        margin-right: -20px !important;
+        margin-top: -20px !important;
+    }
+#vista-perfil .home-page,
+    #vista-messages .mii-clicker-page,
+    #vista-networks .networks-page {
+        width: 100% !important;
+        max-width: none !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+    }
+#vista-messages .mii-clicker-podium {
+        gap: 10px !important;
+        padding-left: 12px !important;
+        padding-right: 12px !important;
+    }
+#vista-messages .mii-clicker-place {
+        width: 31% !important;
+        min-width: 0 !important;
+    }}
+@media screen and (max-width: 700px) {#vista-perfil .home-topbar,
+    #vista-juegos .games-clicker-style-topbar,
+    #vista-messages .mii-clicker-topbar,
+    #vista-proyectos .projects-clicker-style-topbar,
+    #vista-sobremi .about-clicker-style-topbar,
+    #vista-quepasara .chat-clicker-style-topbar,
+    #vista-networks .networks-topbar,
+    #vista-userpage > div[style*="width: 1400px"] {
+        width: calc(100% + 24px) !important;
+        max-width: none !important;
+        margin: 0 -12px !important;
+        padding: 13px 14px !important;
+        box-sizing: border-box !important;
+    }
+#vista-perfil .home-topbar h1,
+    #vista-juegos .games-clicker-style-topbar h1,
+    #vista-messages .mii-clicker-topbar h1,
+    #vista-proyectos .projects-clicker-style-topbar h1,
+    #vista-sobremi .about-clicker-style-topbar h1,
+    #vista-quepasara .chat-clicker-style-topbar h1,
+    #vista-networks .networks-topbar h1,
+    #vista-userpage > div[style*="width: 1400px"] h1 {
+        font-size: 20px !important;
+    }
+/* ========================================================
+       MII CLICKER
+       ======================================================== */
+#vista-messages .mii-clicker-page {
+        width: 100% !important;
+        max-width: none !important;
+        margin: 18px 0 0 !important;
+        padding-bottom: 28px !important;
+    }
+#vista-messages .mii-clicker-panel-title {
+        padding: 11px 14px !important;
+        font-size: 19px !important;
+    }
+#vista-messages .mii-clicker-description {
+        padding: 10px 12px !important;
+        font-size: 12px !important;
+    }
+#vista-messages .mii-clicker-podium {
+        min-height: 0 !important;
+        flex-direction: column !important;
+        align-items: stretch !important;
+        gap: 10px !important;
+        padding: 15px !important;
+    }
+#vista-messages .mii-clicker-place,
+    #vista-messages .mii-clicker-place.first,
+    #vista-messages .mii-clicker-place.second,
+    #vista-messages .mii-clicker-place.third {
+        width: 100% !important;
+        min-height: 0 !important;
+    }
+#vista-messages .mii-clicker-game {
+        padding: 20px 12px 28px !important;
+    }
+#vista-messages #mii-clicker-score {
+        font-size: 44px !important;
+        line-height: 48px !important;
+    }
+#vista-messages .mii-clicker-mii-stage {
+        width: min(280px, 92vw) !important;
+        height: 330px !important;
+    }
+#vista-messages #mii-clicker-click-button {
+        width: min(280px, 92vw) !important;
+    }
+#vista-messages .mii-clicker-rules {
+        flex-direction: column !important;
+        gap: 6px !important;
+        text-align: center !important;
+    }}
+@media screen and (min-width: 1101px) {#vista-perfil .home-topbar,
+    #vista-juegos .games-clicker-style-topbar,
+    #vista-messages .mii-clicker-topbar,
+    #vista-proyectos .projects-clicker-style-topbar,
+    #vista-sobremi .about-clicker-style-topbar,
+    #vista-quepasara .chat-clicker-style-topbar,
+    #vista-networks .networks-topbar {
+        box-sizing: border-box !important;
+
+        /*
+         * El body en escritorio ya deja 50px a la izquierda.
+         * Con -50px la barra vuelve al borde REAL de la ventana
+         * y rellena también el hueco que queda detrás de la sidebar.
+         */
+        margin-left: -50px !important;
+        margin-right: 0 !important;
+        margin-top: -50px !important;
+
+        /*
+         * La barra cruza por detrás del menú lateral y llega
+         * hasta el borde derecho completo del viewport.
+         */
+        width: 100vw !important;
+        max-width: none !important;
+
+        /*
+         * El fondo sí pasa detrás de la sidebar, pero el contenido
+         * empieza después de ella para que título/badge no queden tapados.
+         */
+        padding-left: 175px !important;
+        padding-right: 22px !important;
+
+        position: relative !important;
+        z-index: 1 !important;
+    }}
+/* Mii Clicker */
+#vista-messages .mii-clicker-topbar {
     background:
         linear-gradient(
             to bottom,
@@ -9005,113 +9454,1822 @@ img, video, canvas {
             #23bce9 42%,
             #119ed1 56%,
             #0784b6 100%
-        );
+        ) !important;
 
-    border-bottom: 2px solid #08759f;
+    border-bottom:
+        2px solid #08759f !important;
 
     box-shadow:
-        inset 0 1px 0 rgba(255,255,255,.40),
-        0 3px 6px rgba(0,0,0,.10);
+        inset 0 2px 0 rgba(255,255,255,.45),
+        inset 0 -2px 0 rgba(0,70,110,.16),
+        0 3px 6px rgba(0,0,0,.10) !important;
 }
 
 
-/* ------------------------------------------------------------
-   EXTENSIÓN DEL FONDO A LA IZQUIERDA
 
-   No movemos el contenido de la barra.
-   Solo pintamos el mismo fondo detrás de la sidebar.
 
-   Esto evita depender del ancho CSS que Android reporte.
-   ------------------------------------------------------------ */
-
-#vista-perfil .home-topbar,
-#vista-juegos .games-clicker-style-topbar,
-#vista-messages .mii-clicker-topbar,
-#vista-proyectos .projects-clicker-style-topbar,
-#vista-sobremi .about-clicker-style-topbar,
-#vista-quepasara .chat-clicker-style-topbar,
-#vista-networks .networks-topbar,
-#vista-userpage .userpage-topbar {
-    position: relative !important;
-    overflow: visible !important;
+/* Weekly preview card action: this now opens a separate portal page. */
+#vista-messages .mii-clicker-panel-title-ranking {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
 }
 
+#vista-messages .mii-clicker-view-ranking-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 38px;
+    padding: 6px 15px;
+    border: 1px solid #459d09;
+    border-radius: 20px;
+    background: linear-gradient(to bottom, #9bea4e 0%, #70d329 48%, #55b915 100%);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.72), 0 2px 3px rgba(0,0,0,.16);
+    color: #ffffff;
+    font-family: "MiiverseFont", sans-serif;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: .2px;
+    text-shadow: 0 1px 1px rgba(0,0,0,.22);
+    cursor: pointer;
+    transition: filter .12s ease, transform .12s ease;
+}
 
-/* El fondo se extiende un viewport completo a la izquierda.
-   La sidebar tiene z-index:20, por lo que sigue viéndose encima. */
-#vista-perfil .home-topbar::before,
-#vista-juegos .games-clicker-style-topbar::before,
-#vista-messages .mii-clicker-topbar::before,
-#vista-proyectos .projects-clicker-style-topbar::before,
-#vista-sobremi .about-clicker-style-topbar::before,
-#vista-quepasara .chat-clicker-style-topbar::before,
-#vista-networks .networks-topbar::before,
-#vista-userpage .userpage-topbar::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    bottom: -2px;
-    right: calc(100% - 1px);
+#vista-messages .mii-clicker-view-ranking-button:hover { filter: brightness(1.06); }
+#vista-messages .mii-clicker-view-ranking-button:active { transform: translateY(1px); }
+
+#vista-messages .mii-clicker-view-ranking-button svg {
+    width: 19px;
+    height: 19px;
+    fill: none;
+    stroke: #ffffff;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+#vista-messages #mii-clicker-week-label {
+    display: block;
+    margin-top: 6px;
+    color: #929292;
+    font-size: 12px;
+    font-weight: normal;
+}
+
+/* ============================================================
+   WEEKLY MII CLICKERS — FULL PORTAL SECTION
+   Replaces the old floating ranking window with a dedicated view.
+   ============================================================ */
+
+#vista-weekly-mii-clickers {
+    position: relative;
+    z-index: 1;
+    min-height: 700px;
+    font-family: "MiiverseFont", sans-serif;
+}
+
+#vista-weekly-mii-clickers .weekly-ranking-topbar {
+    box-sizing: border-box;
     width: 100vw;
-
-    background: inherit;
-    border-bottom: inherit;
-
-    pointer-events: none;
+    min-height: 132px;
+    margin-top: -50px;
+    margin-left: -50px;
+    padding: 20px 34px 20px 175px;
+    background: linear-gradient(to bottom, #48d4ff 0%, #23bce9 48%, #0784b6 100%);
+    border-bottom: 2px solid #08759f;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.42), inset 0 -1px 0 rgba(0,0,0,.08);
 }
 
+#vista-weekly-mii-clickers .weekly-ranking-topbar-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    width: 100%;
+    max-width: 1320px;
+    margin: 0 auto;
+}
 
-/* ------------------------------------------------------------
-   TABLET / ANDROID CON VIEWPORT ANCHO
-   La barra mantiene su contenido después de la sidebar.
-   El ::before llena el hueco azul de la izquierda.
-   ------------------------------------------------------------ */
+#vista-weekly-mii-clickers .weekly-ranking-heading { min-width: 0; }
+
+#vista-weekly-mii-clickers .weekly-ranking-kicker {
+    display: block;
+    margin-bottom: 5px;
+    color: rgba(255,255,255,.88);
+    font-size: 10px;
+    font-weight: bold;
+    letter-spacing: 1.25px;
+    text-shadow: 0 1px 1px rgba(0,0,0,.16);
+}
+
+#vista-weekly-mii-clickers .weekly-ranking-heading h1 {
+    margin: 0;
+    color: #ffffff;
+    font-size: 27px;
+    line-height: 1.15;
+    font-weight: bold;
+    text-shadow: 0 1px 2px rgba(0,0,0,.2);
+}
+
+#vista-weekly-mii-clickers .weekly-ranking-heading p {
+    margin: 7px 0 0;
+    color: rgba(255,255,255,.94);
+    font-size: 13px;
+    text-shadow: 0 1px 1px rgba(0,0,0,.14);
+}
+
+#vista-weekly-mii-clickers .weekly-ranking-topbar-actions {
+    display: flex;
+    flex: 0 0 auto;
+    align-items: flex-end;
+    flex-direction: column;
+    gap: 9px;
+}
+
+#vista-weekly-mii-clickers .weekly-ranking-week-chip {
+    display: inline-flex;
+    align-items: center;
+    min-height: 27px;
+    padding: 0 11px;
+    border: 1px solid rgba(255,255,255,.66);
+    border-radius: 16px;
+    background: rgba(0,91,130,.2);
+    color: #ffffff;
+    font-size: 11px;
+    font-weight: bold;
+    text-shadow: 0 1px 1px rgba(0,0,0,.14);
+}
+
+#vista-weekly-mii-clickers .weekly-ranking-return {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    min-height: 36px;
+    padding: 0 13px;
+    border: 1px solid rgba(255,255,255,.82);
+    border-radius: 6px;
+    background: linear-gradient(to bottom, #ffffff 0%, #e7f7fc 100%);
+    color: #167ea5;
+    box-shadow: 0 2px 4px rgba(0,0,0,.12), inset 0 1px 0 #ffffff;
+    font-family: "MiiverseFont", sans-serif;
+    font-size: 11px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#vista-weekly-mii-clickers .weekly-ranking-return span {
+    font-family: Arial, sans-serif;
+    font-size: 23px;
+    line-height: 12px;
+}
+
+#vista-weekly-mii-clickers .weekly-ranking-return:hover { filter: brightness(1.04); }
+
+#vista-weekly-mii-clickers .weekly-ranking-return:active {
+    transform: translateY(1px);
+    box-shadow: inset 0 2px 3px rgba(0,0,0,.12);
+}
+
+#vista-weekly-mii-clickers .weekly-ranking-return:focus-visible,
+#vista-messages .mii-clicker-view-ranking-button:focus-visible {
+    outline: 3px solid #f4d35e;
+    outline-offset: 3px;
+}
+
+#vista-weekly-mii-clickers .weekly-ranking-page {
+    width: 78%;
+    max-width: 1050px;
+    margin: 32px 0 60px 170px;
+    padding-bottom: 24px;
+    box-sizing: border-box;
+}
+
+#vista-weekly-mii-clickers .weekly-ranking-panel {
+    overflow: hidden;
+    border: 1px solid #d1d1d1;
+    border-radius: 12px;
+    background: #ffffff;
+    box-shadow: 0 4px 12px rgba(0,0,0,.09);
+}
+
+#vista-weekly-mii-clickers .weekly-ranking-panel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    min-height: 83px;
+    padding: 15px 22px;
+    box-sizing: border-box;
+    background: linear-gradient(to bottom, #ffffff 0%, #f4f4f4 100%);
+    border-bottom: 1px solid #dedede;
+}
+
+#vista-weekly-mii-clickers .weekly-ranking-panel-kicker {
+    display: block;
+    margin-bottom: 4px;
+    color: #8a8a8a;
+    font-size: 10px;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+#vista-weekly-mii-clickers .weekly-ranking-panel-header h2 {
+    margin: 0;
+    color: #4c4c4c;
+    font-size: 22px;
+    line-height: 1.2;
+}
+
+#vista-weekly-mii-clickers .weekly-ranking-player-count {
+    flex: 0 0 auto;
+    padding: 7px 11px;
+    border: 1px solid #d5e9f0;
+    border-radius: 18px;
+    background: #edf8fc;
+    color: #347d98;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+#vista-weekly-mii-clickers .weekly-ranking-description {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 42px;
+    padding: 0 22px;
+    border-bottom: 1px solid #e5e5e5;
+    background: #fafafa;
+    color: #777777;
+    font-size: 12px;
+}
+
+#vista-weekly-mii-clickers .weekly-ranking-live-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #64c92c;
+    box-shadow: 0 0 0 3px rgba(100,201,44,.13);
+}
+
+#vista-weekly-mii-clickers .weekly-ranking-list-wrap {
+    padding: 17px 20px 20px;
+    background: #eeeeee;
+}
+
+#vista-weekly-mii-clickers .mii-clicker-leaderboard-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+#vista-weekly-mii-clickers .mii-clicker-rank-row {
+    display: grid;
+    grid-template-columns: 56px 60px minmax(0, 1fr) minmax(110px, auto);
+    align-items: center;
+    gap: 13px;
+    min-height: 78px;
+    padding: 9px 16px;
+    box-sizing: border-box;
+    border: 1px solid #d1d1d1;
+    border-radius: 11px;
+    background: linear-gradient(to bottom, #ffffff 0%, #f8f8f8 100%);
+    box-shadow: inset 0 1px 0 #ffffff, 0 2px 4px rgba(0,0,0,.055);
+}
+
+#vista-weekly-mii-clickers .mii-clicker-rank-row-place {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    border-right: 1px solid #e4e4e4;
+    color: #777777;
+    font-size: 21px;
+    font-weight: bold;
+}
+
+#vista-weekly-mii-clickers .mii-clicker-rank-row-avatar {
+    width: 58px;
+    height: 58px;
+    box-sizing: border-box;
+    border: 1px solid #c6c6c6;
+    border-radius: 9px;
+    background-color: #ededed;
+    background-image: url("img/games/Dummy_mii_user.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    box-shadow: inset 0 1px 2px rgba(0,0,0,.08);
+}
+
+#vista-weekly-mii-clickers .mii-clicker-rank-row-avatar .mii-clicker-render-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+#vista-weekly-mii-clickers .mii-clicker-rank-row-identity {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    gap: 4px;
+}
+
+#vista-weekly-mii-clickers .mii-clicker-rank-row-pnid {
+    overflow: hidden;
+    color: #454545;
+    font-size: 16px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+#vista-weekly-mii-clickers .mii-clicker-rank-row-caption {
+    color: #969696;
+    font-size: 11px;
+}
+
+#vista-weekly-mii-clickers .mii-clicker-rank-row-score {
+    color: #555555;
+    font-size: 15px;
+    font-weight: bold;
+    text-align: right;
+    white-space: nowrap;
+}
+
+#vista-weekly-mii-clickers .mii-clicker-rank-row-first {
+    border-color: #d7b34b;
+    background: linear-gradient(to bottom, #fffdf3 0%, #fff8dc 100%);
+}
+
+#vista-weekly-mii-clickers .mii-clicker-rank-row-first .mii-clicker-rank-row-place {
+    border-right-color: #eadba9;
+    color: #b58a16;
+}
+
+#vista-weekly-mii-clickers .mii-clicker-rank-row-second {
+    border-color: #bfc6ca;
+    background: linear-gradient(to bottom, #ffffff 0%, #f0f3f4 100%);
+}
+
+#vista-weekly-mii-clickers .mii-clicker-rank-row-second .mii-clicker-rank-row-place {
+    border-right-color: #d6dcdf;
+    color: #78858c;
+}
+
+#vista-weekly-mii-clickers .mii-clicker-rank-row-third {
+    border-color: #cba17f;
+    background: linear-gradient(to bottom, #fffaf5 0%, #f8eee5 100%);
+}
+
+#vista-weekly-mii-clickers .mii-clicker-rank-row-third .mii-clicker-rank-row-place {
+    border-right-color: #e7d1bf;
+    color: #a96d3f;
+}
+
+#vista-weekly-mii-clickers .mii-clicker-leaderboard-empty {
+    padding: 22px 16px;
+    border: 1px dashed #cfcfcf;
+    border-radius: 9px;
+    background: #fafafa;
+    color: #858585;
+    font-size: 13px;
+    line-height: 1.5;
+    text-align: center;
+}
+
+#vista-weekly-mii-clickers .weekly-ranking-footer {
+    display: flex;
+    justify-content: center;
+    gap: 7px;
+    margin-top: 17px;
+    color: #9a9a9a;
+    font-size: 9px;
+    font-weight: bold;
+    letter-spacing: .8px;
+}
 
 @media screen and (max-width: 1100px) {
-    #vista-userpage .userpage-topbar {
-        width: calc(100% + 40px) !important;
-        max-width: none !important;
+    #vista-weekly-mii-clickers .weekly-ranking-topbar {
+        width: calc(100% + 40px);
+        margin: -20px -20px 0;
+        padding: 18px 22px;
+    }
 
-        margin-left: -20px !important;
-        margin-right: -20px !important;
-        margin-top: -20px !important;
-
-        padding: 12px 20px !important;
+    #vista-weekly-mii-clickers .weekly-ranking-page {
+        width: 100%;
+        max-width: none;
+        margin: 22px 0 45px;
     }
 }
-
-
-/* ------------------------------------------------------------
-   TELÉFONO REAL
-   Cuando sí entra <=700px, sidebar abajo y barra 100% arriba.
-   ------------------------------------------------------------ */
 
 @media screen and (max-width: 700px) {
-    #vista-userpage .userpage-topbar {
-        width: calc(100% + 24px) !important;
-        max-width: none !important;
-
-        margin-left: -12px !important;
-        margin-right: -12px !important;
-        margin-top: 0 !important;
-
-        padding: 13px 14px !important;
+    #vista-weekly-mii-clickers .weekly-ranking-topbar {
+        width: calc(100% + 24px);
+        min-height: 0;
+        margin: 0 -12px;
+        padding: 15px 14px;
     }
 
-    /*
-     * Con la sidebar ya abajo no hace falta extender el fondo
-     * 100vw hacia la izquierda.
-     */
-    #vista-perfil .home-topbar::before,
-    #vista-juegos .games-clicker-style-topbar::before,
-    #vista-messages .mii-clicker-topbar::before,
-    #vista-proyectos .projects-clicker-style-topbar::before,
-    #vista-sobremi .about-clicker-style-topbar::before,
-    #vista-quepasara .chat-clicker-style-topbar::before,
-    #vista-networks .networks-topbar::before,
-    #vista-userpage .userpage-topbar::before {
-        display: none !important;
+    #vista-weekly-mii-clickers .weekly-ranking-topbar-inner {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 13px;
+    }
+
+    #vista-weekly-mii-clickers .weekly-ranking-heading h1 { font-size: 21px; }
+    #vista-weekly-mii-clickers .weekly-ranking-heading p { font-size: 11px; line-height: 1.45; }
+
+    #vista-weekly-mii-clickers .weekly-ranking-topbar-actions {
+        align-items: flex-start;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    #vista-weekly-mii-clickers .weekly-ranking-week-chip { min-height: 34px; }
+
+    #vista-weekly-mii-clickers .weekly-ranking-panel-header {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 9px;
+        padding: 13px 14px;
+    }
+
+    #vista-weekly-mii-clickers .weekly-ranking-panel-header h2 { font-size: 19px; }
+
+    #vista-weekly-mii-clickers .weekly-ranking-description {
+        align-items: flex-start;
+        min-height: 0;
+        padding: 11px 14px;
+        font-size: 11px;
+        line-height: 1.45;
+    }
+
+    #vista-weekly-mii-clickers .weekly-ranking-list-wrap { padding: 10px; }
+
+    #vista-weekly-mii-clickers .mii-clicker-rank-row {
+        grid-template-columns: 38px 46px minmax(0, 1fr);
+        gap: 9px;
+        min-height: 65px;
+        padding: 7px 9px;
+    }
+
+    #vista-weekly-mii-clickers .mii-clicker-rank-row-place { min-height: 38px; font-size: 16px; }
+    #vista-weekly-mii-clickers .mii-clicker-rank-row-avatar { width: 44px; height: 44px; }
+    #vista-weekly-mii-clickers .mii-clicker-rank-row-pnid { font-size: 13px; }
+
+    #vista-weekly-mii-clickers .mii-clicker-rank-row-score {
+        grid-column: 3;
+        justify-self: start;
+        margin-top: -3px;
+        font-size: 12px;
+        text-align: left;
+    }
+
+    #vista-weekly-mii-clickers .mii-clicker-rank-row-identity { gap: 2px; }
+}
+
+@media screen and (max-width: 700px) {
+    #vista-messages .mii-clicker-panel-title-ranking { gap: 8px; }
+    #vista-messages .mii-clicker-view-ranking-button { min-height: 34px; gap: 5px; padding: 5px 10px; font-size: 10px; }
+    #vista-messages .mii-clicker-view-ranking-button svg { width: 16px; height: 16px; }
+}
+
+
+/* ============================================================
+   WEEKLY MII CLICKERS — LARGE TOP-THREE MII PODIUM
+   Dedicated section only; the small Mii Clicker preview is unchanged.
+   ============================================================ */
+#vista-weekly-mii-clickers .weekly-ranking-podium-panel {
+    overflow: hidden;
+    margin-bottom: 18px;
+    border: 1px solid #d1d1d1;
+    border-radius: 12px;
+    background: #ffffff;
+    box-shadow: 0 4px 12px rgba(0,0,0,.08);
+}
+
+#vista-weekly-mii-clickers .weekly-ranking-podium-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    min-height: 76px;
+    padding: 13px 22px;
+    box-sizing: border-box;
+    background: linear-gradient(to bottom, #ffffff 0%, #f4f4f4 100%);
+    border-bottom: 1px solid #dedede;
+}
+
+#vista-weekly-mii-clickers .weekly-ranking-podium-header h2 {
+    margin: 0;
+    color: #4c4c4c;
+    font-size: 21px;
+    line-height: 1.2;
+}
+
+#vista-weekly-mii-clickers .weekly-ranking-podium-caption {
+    padding: 7px 11px;
+    border: 1px solid #d5e9f0;
+    border-radius: 18px;
+    background: #edf8fc;
+    color: #347d98;
+    font-size: 11px;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+#vista-weekly-mii-clickers .weekly-ranking-podium-board {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-rows: auto;
+    align-items: end;
+    gap: 16px;
+    padding: 24px 24px 28px;
+    box-sizing: border-box;
+    background: linear-gradient(to bottom, #f7f7f7 0%, #e9e9e9 100%);
+}
+
+#vista-weekly-mii-clickers .weekly-ranking-podium-place {
+    display: flex;
+    min-width: 0;
+    align-items: center;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 17px 14px 16px;
+    box-sizing: border-box;
+    border: 1px solid #d0d0d0;
+    border-radius: 12px;
+    background: linear-gradient(to bottom, #ffffff 0%, #f4f4f4 100%);
+    box-shadow: inset 0 1px 0 #ffffff, 0 3px 7px rgba(0,0,0,.09);
+    text-align: center;
+}
+
+#vista-weekly-mii-clickers .weekly-ranking-podium-place.first {
+    grid-column: 2;
+    grid-row: 1;
+    min-height: 352px;
+    border-color: #d9bd63;
+    background: linear-gradient(to bottom, #fffef8 0%, #fff7d9 100%);
+    box-shadow: inset 0 1px 0 #ffffff, 0 5px 12px rgba(176,138,24,.16);
+}
+
+#vista-weekly-mii-clickers .weekly-ranking-podium-place.second {
+    grid-column: 1;
+    grid-row: 1;
+    min-height: 318px;
+    border-color: #c5cdd1;
+    background: linear-gradient(to bottom, #ffffff 0%, #eff2f3 100%);
+}
+
+#vista-weekly-mii-clickers .weekly-ranking-podium-place.third {
+    grid-column: 3;
+    grid-row: 1;
+    min-height: 298px;
+    border-color: #d4b092;
+    background: linear-gradient(to bottom, #fffdfb 0%, #f8eee5 100%);
+}
+
+#vista-weekly-mii-clickers .weekly-ranking-podium-medal {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 29px;
+    margin-bottom: 12px;
+    padding: 0 13px;
+    border: 1px solid #d3d3d3;
+    border-radius: 18px;
+    background: #ffffff;
+    color: #666666;
+    font-size: 11px;
+    font-weight: bold;
+    letter-spacing: .35px;
+    text-transform: uppercase;
+}
+
+#vista-weekly-mii-clickers .weekly-ranking-podium-place.first .weekly-ranking-podium-medal {
+    border-color: #e0c66e;
+    background: #fff8d7;
+    color: #a27c13;
+}
+
+#vista-weekly-mii-clickers .weekly-ranking-podium-place.second .weekly-ranking-podium-medal {
+    border-color: #cbd2d6;
+    background: #f4f6f7;
+    color: #65747b;
+}
+
+#vista-weekly-mii-clickers .weekly-ranking-podium-place.third .weekly-ranking-podium-medal {
+    border-color: #d7b493;
+    background: #fff5eb;
+    color: #9b673f;
+}
+
+#vista-weekly-mii-clickers .weekly-ranking-podium-avatar {
+    display: flex;
+    width: 196px;
+    height: 196px;
+    max-width: 100%;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    margin: 0 auto 12px;
+    border: 1px solid #cccccc;
+    border-radius: 12px;
+    background-color: #ededed;
+    background-image: url("img/games/Dummy_mii_user.png");
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,.09), 0 1px 2px rgba(0,0,0,.05);
+}
+
+#vista-weekly-mii-clickers .weekly-ranking-podium-place.first .weekly-ranking-podium-avatar {
+    width: 226px;
+    height: 226px;
+    border-color: #dfc66f;
+    background-color: #fffdf3;
+}
+
+#vista-weekly-mii-clickers .weekly-ranking-podium-place.third .weekly-ranking-podium-avatar {
+    width: 184px;
+    height: 184px;
+}
+
+#vista-weekly-mii-clickers .weekly-ranking-podium-avatar .mii-clicker-render-image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center center;
+    image-rendering: auto;
+}
+
+#vista-weekly-mii-clickers .weekly-ranking-podium-name {
+    display: block;
+    width: 100%;
+    overflow: hidden;
+    color: #454545;
+    font-size: 16px;
+    font-weight: bold;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+#vista-weekly-mii-clickers .weekly-ranking-podium-score {
+    display: block;
+    margin-top: 6px;
+    color: #777777;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+#vista-weekly-mii-clickers .weekly-ranking-podium-congrats {
+    display: block;
+    margin-top: 10px;
+    color: #999999;
+    font-size: 9px;
+    font-weight: bold;
+    letter-spacing: .8px;
+}
+
+#vista-weekly-mii-clickers .weekly-ranking-podium-place.first .weekly-ranking-podium-congrats {
+    color: #ad8a22;
+}
+
+#vista-weekly-mii-clickers .weekly-ranking-podium-place.is-empty .weekly-ranking-podium-avatar {
+    opacity: .62;
+}
+
+@media screen and (max-width: 700px) {
+    #vista-weekly-mii-clickers .weekly-ranking-podium-header {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 8px;
+        padding: 13px 14px;
+    }
+
+    #vista-weekly-mii-clickers .weekly-ranking-podium-header h2 { font-size: 19px; }
+
+    #vista-weekly-mii-clickers .weekly-ranking-podium-board {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 10px;
+        padding: 12px;
+    }
+
+    #vista-weekly-mii-clickers .weekly-ranking-podium-place.first,
+    #vista-weekly-mii-clickers .weekly-ranking-podium-place.second,
+    #vista-weekly-mii-clickers .weekly-ranking-podium-place.third {
+        grid-column: 1;
+        grid-row: auto;
+        display: grid;
+        grid-template-columns: 116px minmax(0, 1fr);
+        grid-template-rows: auto auto auto auto;
+        align-content: center;
+        justify-items: start;
+        column-gap: 13px;
+        min-height: 132px;
+        padding: 12px;
+        text-align: left;
+    }
+
+    #vista-weekly-mii-clickers .weekly-ranking-podium-medal {
+        grid-column: 2;
+        grid-row: 1;
+        min-height: 24px;
+        margin: 0 0 5px;
+        padding: 0 9px;
+        font-size: 9px;
+    }
+
+    #vista-weekly-mii-clickers .weekly-ranking-podium-avatar,
+    #vista-weekly-mii-clickers .weekly-ranking-podium-place.first .weekly-ranking-podium-avatar,
+    #vista-weekly-mii-clickers .weekly-ranking-podium-place.third .weekly-ranking-podium-avatar {
+        grid-column: 1;
+        grid-row: 1 / span 4;
+        width: 116px;
+        height: 116px;
+        margin: 0;
+    }
+
+    #vista-weekly-mii-clickers .weekly-ranking-podium-name {
+        grid-column: 2;
+        grid-row: 2;
+        align-self: end;
+        font-size: 14px;
+    }
+
+    #vista-weekly-mii-clickers .weekly-ranking-podium-score {
+        grid-column: 2;
+        grid-row: 3;
+        margin-top: 3px;
+        font-size: 12px;
+    }
+
+    #vista-weekly-mii-clickers .weekly-ranking-podium-congrats {
+        grid-column: 2;
+        grid-row: 4;
+        margin-top: 4px;
+        font-size: 8px;
     }
 }
 
 
+/* ============================================================
+   MII CLICKER TOPBAR — COMPACT MIIverse ACTION PLACEMENT
+   ============================================================ */
+#vista-messages .mii-clicker-topbar {
+    padding-top: 15px !important;
+    padding-bottom: 15px !important;
+}
+
+#vista-messages .mii-clicker-topbar h1 {
+    line-height: 1 !important;
+}
+
+#vista-messages .mii-clicker-topbar-actions {
+    display: flex;
+    flex: 0 0 auto;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 16px;
+    min-width: 0;
+}
+
+#vista-messages #mii-clicker-status {
+    color: rgba(0, 45, 68, .9);
+    font-family: "MiiverseFont", sans-serif;
+    font-size: 12px;
+    font-weight: normal;
+    letter-spacing: .2px;
+    line-height: 1;
+    white-space: nowrap;
+    text-shadow: 0 1px 0 rgba(255,255,255,.22);
+}
+
+#vista-messages .mii-clicker-view-ranking-button {
+    display: inline-flex;
+    flex: 0 0 auto;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    min-height: 27px;
+    padding: 0 12px;
+    border: 1px solid #c6d0d4;
+    border-radius: 5px;
+    background: linear-gradient(to bottom, #ffffff 0%, #f5f5f5 58%, #e9e9e9 100%);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.98), 0 1px 2px rgba(0,55,78,.12);
+    color: #367f98;
+    font-family: "MiiverseFont", sans-serif;
+    font-size: 11px;
+    font-weight: bold;
+    letter-spacing: .15px;
+    text-shadow: 0 1px 0 #ffffff;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: background .12s ease, box-shadow .12s ease, transform .12s ease;
+}
+
+#vista-messages .mii-clicker-view-ranking-button svg {
+    width: 17px;
+    height: 17px;
+    fill: none;
+    stroke: #43899f;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+#vista-messages .mii-clicker-view-ranking-button:hover {
+    background: linear-gradient(to bottom, #ffffff 0%, #f0f7f9 100%);
+    box-shadow: inset 0 1px 0 #ffffff, 0 2px 4px rgba(0,55,78,.16);
+}
+
+#vista-messages .mii-clicker-view-ranking-button:active {
+    transform: translateY(1px);
+    background: linear-gradient(to bottom, #e8e8e8 0%, #f5f5f5 100%);
+    box-shadow: inset 0 1px 2px rgba(0,0,0,.10);
+}
+
+#vista-messages .mii-clicker-panel-title-ranking {
+    display: block;
+}
+
+@media screen and (max-width: 700px) {
+    #vista-messages .mii-clicker-topbar {
+        padding-top: 10px !important;
+        padding-bottom: 10px !important;
+    }
+
+    #vista-messages .mii-clicker-topbar-content {
+        flex-wrap: wrap;
+        row-gap: 9px;
+    }
+
+    #vista-messages .mii-clicker-topbar-actions {
+        width: 100%;
+        gap: 9px;
+    }
+
+    #vista-messages #mii-clicker-status {
+        font-size: 10px;
+    }
+
+    #vista-messages .mii-clicker-view-ranking-button {
+        min-height: 29px;
+        padding: 0 9px;
+        font-size: 10px;
+    }
+}
+
+
+/* ============================================================
+   MII CLICKER — MIIVERSE-SIZED HEADER ACTION
+   Uses the bundled MiiverseSymbols-Regular font (glyph: solid star).
+   ============================================================ */
+#vista-messages .mii-clicker-topbar {
+    /* Keep the bar compact while allowing the full-size Miiverse control. */
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+}
+
+#vista-messages .mii-clicker-topbar-content {
+    min-height: 76px;
+    align-items: center;
+}
+
+#vista-messages .mii-clicker-topbar-actions {
+    align-items: center;
+    gap: 16px;
+}
+
+#vista-messages .mii-clicker-view-ranking-button {
+    box-sizing: border-box;
+    display: inline-flex;
+    flex: 0 0 420px;
+    width: 420px;
+    min-width: 420px;
+    height: 74px;
+    min-height: 74px;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 15px;
+    padding: 0 22px;
+    border: 1px solid #d7d7d7;
+    border-radius: 14px;
+    background: linear-gradient(to bottom, #ffffff 0%, #ffffff 48%, #f4f4f4 100%);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.98), 0 2px 5px rgba(0,0,0,.13);
+    color: #555555;
+    font-family: "MiiverseFont", sans-serif;
+    font-size: 28px;
+    font-weight: normal;
+    letter-spacing: 0;
+    line-height: 1;
+    text-align: left;
+    text-shadow: 0 1px 0 #ffffff;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: background .12s ease, box-shadow .12s ease, transform .12s ease;
+}
+
+#vista-messages .mii-clicker-ranking-miiverse-icon {
+    display: inline-flex;
+    flex: 0 0 40px;
+    width: 40px;
+    height: 44px;
+    align-items: center;
+    justify-content: center;
+    color: #8a8a8a;
+    font-family: "MiiverseSymbols" !important;
+    font-size: 42px;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+}
+
+#vista-messages .mii-clicker-ranking-button-label {
+    display: inline-block;
+    font-size: 28px;
+    line-height: 1.15;
+}
+
+#vista-messages .mii-clicker-view-ranking-button:hover {
+    background: linear-gradient(to bottom, #ffffff 0%, #f7f9fa 100%);
+    box-shadow: inset 0 1px 0 #ffffff, 0 3px 7px rgba(0,0,0,.16);
+}
+
+#vista-messages .mii-clicker-view-ranking-button:active {
+    transform: translateY(1px);
+    background: linear-gradient(to bottom, #eeeeee 0%, #f7f7f7 100%);
+    box-shadow: inset 0 1px 2px rgba(0,0,0,.09);
+}
+
+@media screen and (max-width: 700px) {
+    #vista-messages .mii-clicker-topbar {
+        padding-top: 8px !important;
+        padding-bottom: 8px !important;
+    }
+
+    #vista-messages .mii-clicker-topbar-content {
+        min-height: 0;
+        flex-wrap: wrap;
+        row-gap: 8px;
+    }
+
+    #vista-messages .mii-clicker-topbar-actions {
+        width: 100%;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    #vista-messages .mii-clicker-view-ranking-button {
+        flex: 1 1 100%;
+        width: 100%;
+        min-width: 0;
+        height: 60px;
+        min-height: 60px;
+        padding: 0 16px;
+        gap: 12px;
+    }
+
+    #vista-messages .mii-clicker-ranking-miiverse-icon {
+        flex-basis: 34px;
+        width: 34px;
+        font-size: 36px;
+    }
+
+    #vista-messages .mii-clicker-ranking-button-label {
+        font-size: 20px;
+    }
+}
+
+/* ============================================================
+   MII CLICKER — BUTTON ONLY; KEEP BLUE HEADER HEIGHT FIXED
+   The ranking button can be larger without increasing the blue bar.
+   ============================================================ */
+@media screen and (min-width: 1101px) {
+    #vista-messages .mii-clicker-topbar {
+        box-sizing: border-box !important;
+        position: relative !important;
+        height: 60px !important;
+        min-height: 60px !important;
+        padding-top: 0 !important;
+        padding-bottom: 0 !important;
+        overflow: visible !important;
+        z-index: 5 !important;
+    }
+
+    #vista-messages .mii-clicker-topbar-content {
+        position: relative !important;
+        box-sizing: border-box !important;
+        height: 60px !important;
+        min-height: 60px !important;
+        align-items: center !important;
+    }
+
+    #vista-messages .mii-clicker-topbar h1 {
+        font-size: 23px !important;
+        line-height: 1 !important;
+    }
+
+    /* Overlay the controls: they do not participate in header height. */
+    #vista-messages .mii-clicker-topbar-actions {
+        position: absolute !important;
+        top: 50% !important;
+        right: 0 !important;
+        height: 80px !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: flex-end !important;
+        gap: 16px !important;
+        transform: translateY(-50%) !important;
+        z-index: 10 !important;
+    }
+
+    #vista-messages #mii-clicker-status {
+        font-size: 11px !important;
+        line-height: 1 !important;
+        white-space: nowrap !important;
+    }
+
+    #vista-messages .mii-clicker-view-ranking-button {
+        box-sizing: border-box !important;
+        display: inline-flex !important;
+        flex: 0 0 450px !important;
+        width: 450px !important;
+        min-width: 450px !important;
+        height: 80px !important;
+        min-height: 80px !important;
+        align-items: center !important;
+        justify-content: flex-start !important;
+        gap: 16px !important;
+        padding: 0 24px !important;
+        border: 1px solid #d7d7d7 !important;
+        border-right: 0 !important;
+        border-radius: 24px 0 0 24px !important;
+        background: linear-gradient(to bottom, #ffffff 0%, #ffffff 48%, #f4f4f4 100%) !important;
+        box-shadow: inset 0 1px 0 rgba(255,255,255,.98), 0 2px 5px rgba(0,0,0,.13) !important;
+        color: #555555 !important;
+        font-family: "MiiverseFont", sans-serif !important;
+        font-size: 29px !important;
+        font-weight: normal !important;
+        letter-spacing: 0 !important;
+        line-height: 1 !important;
+        text-align: left !important;
+        text-shadow: 0 1px 0 #ffffff !important;
+        white-space: nowrap !important;
+    }
+
+    #vista-messages .mii-clicker-ranking-miiverse-icon {
+        display: inline-flex !important;
+        flex: 0 0 44px !important;
+        width: 44px !important;
+        height: 48px !important;
+        align-items: center !important;
+        justify-content: center !important;
+        color: #8a8a8a !important;
+        font-family: "MiiverseSymbols" !important;
+        font-size: 44px !important;
+        line-height: 1 !important;
+    }
+
+    #vista-messages .mii-clicker-ranking-button-label {
+        font-size: 29px !important;
+        line-height: 1 !important;
+    }
+}
+
+@media screen and (min-width: 701px) and (max-width: 1100px) {
+    #vista-messages .mii-clicker-topbar {
+        box-sizing: border-box !important;
+        position: relative !important;
+        height: 56px !important;
+        min-height: 56px !important;
+        padding-top: 0 !important;
+        padding-bottom: 0 !important;
+        overflow: visible !important;
+    }
+
+    #vista-messages .mii-clicker-topbar-content {
+        position: relative !important;
+        box-sizing: border-box !important;
+        height: 56px !important;
+        min-height: 56px !important;
+        align-items: center !important;
+    }
+
+    #vista-messages .mii-clicker-topbar-actions {
+        position: absolute !important;
+        top: 50% !important;
+        right: 0 !important;
+        height: 46px !important;
+        margin: 0 !important;
+        gap: 10px !important;
+        transform: translateY(-50%) !important;
+    }
+
+    #vista-messages .mii-clicker-view-ranking-button {
+        flex: 0 1 auto !important;
+        width: auto !important;
+        min-width: 0 !important;
+        height: 46px !important;
+        min-height: 46px !important;
+        padding: 0 16px !important;
+        gap: 9px !important;
+        border-radius: 23px 0 0 23px !important;
+        font-size: 16px !important;
+    }
+
+    #vista-messages .mii-clicker-ranking-miiverse-icon {
+        flex: 0 0 22px !important;
+        width: 22px !important;
+        height: 22px !important;
+        font-size: 22px !important;
+    }
+
+    #vista-messages .mii-clicker-ranking-button-label {
+        font-size: 16px !important;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    #vista-messages .mii-clicker-topbar {
+        height: auto !important;
+        min-height: 0 !important;
+        padding-top: 8px !important;
+        padding-bottom: 8px !important;
+        overflow: visible !important;
+    }
+
+    #vista-messages .mii-clicker-topbar-content {
+        height: auto !important;
+        min-height: 0 !important;
+        flex-wrap: wrap !important;
+        row-gap: 8px !important;
+    }
+
+    #vista-messages .mii-clicker-topbar-actions {
+        position: static !important;
+        width: 100% !important;
+        height: auto !important;
+        transform: none !important;
+        justify-content: flex-start !important;
+        gap: 8px !important;
+    }
+
+    #vista-messages .mii-clicker-view-ranking-button {
+        flex: 0 0 auto !important;
+        width: auto !important;
+        min-width: 0 !important;
+        height: 46px !important;
+        min-height: 46px !important;
+        padding: 0 17px !important;
+        gap: 9px !important;
+        border-radius: 23px !important;
+        font-size: 16px !important;
+    }
+
+    #vista-messages .mii-clicker-ranking-miiverse-icon {
+        flex: 0 0 22px !important;
+        width: 22px !important;
+        height: 22px !important;
+        font-size: 22px !important;
+    }
+
+    #vista-messages .mii-clicker-ranking-button-label {
+        font-size: 16px !important;
+    }
+}
+
+/* ============================================================
+   USER SETTINGS — CF_Miiverse layout adapted to Maki's Bio cyan
+   ============================================================ */
+#maki-settings-page-title,
+.maki-settings-topbar,
+.maki-settings-content,
+.maki-settings-modal {
+    font-family: 'MiiverseFont', Arial, sans-serif;
+}
+
+.maki-settings-topbar {
+    position: relative;
+    display: flex;
+    align-items: center;
+    min-height: 68px;
+    margin-left: 110px;
+    width: calc(100vw - 110px);
+    box-sizing: border-box;
+    padding: 0 28px;
+    color: #fff;
+    background: linear-gradient(to bottom, #48d4ff 0%, #23bce9 42%, #119ed1 56%, #0784b6 100%);
+    border-bottom: 2px solid #08759f;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.4), 0 3px 6px rgba(0,0,0,.10);
+}
+
+.maki-settings-topbar h1 {
+    margin: 0;
+    color: #fff;
+    font-size: 22px;
+    line-height: 1.3;
+    font-weight: 700;
+    text-shadow: 0 1px 2px rgba(0,0,0,.2);
+}
+
+.maki-settings-back {
+    min-width: 104px;
+    min-height: 42px;
+    padding: 5px 14px;
+    border: 1px solid rgba(0,80,120,.38);
+    border-radius: 10px;
+    color: #14516b;
+    background: linear-gradient(to bottom, #fff, #e8f8fd 70%, #c9edf8);
+    box-shadow: 0 2px 5px rgba(0,0,0,.22);
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.maki-settings-back-symbol {
+    display: inline-block;
+    margin-right: 6px;
+    font-family: 'MiiverseIcons', 'MiiverseSymbols', sans-serif;
+    font-size: 19px;
+}
+
+.maki-settings-content {
+    width: min(1060px, calc(100vw - 190px));
+    margin: 24px 30px 0 140px;
+    color: #323232;
+}
+
+.maki-settings-tabs {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 20px;
+    border-bottom: 3px solid #cbeaf4;
+    padding-bottom: 10px;
+}
+
+.maki-settings-tab {
+    min-height: 48px;
+    padding: 8px 24px;
+    border: 1px solid #b9dce8;
+    border-radius: 12px;
+    color: #36515c;
+    background: linear-gradient(to bottom, #fff, #f2f7f9 70%, #dce8ed);
+    box-shadow: 0 2px 5px rgba(0,0,0,.15);
+    font-family: inherit;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.maki-settings-tab.selected {
+    color: #fff;
+    border-color: #08759f;
+    background: linear-gradient(to bottom, #48d4ff, #0784b6);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.35), 0 2px 5px rgba(0,0,0,.16);
+}
+
+.maki-settings-panel[hidden],
+#maki-settings-modal[hidden] {
+    display: none !important;
+}
+
+.maki-settings-list {
+    list-style: none;
+    margin: 0;
+    padding: 0 12px;
+    background: rgba(255,255,255,.88);
+    border: 1px solid #d8e0e4;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,.07);
+}
+
+.maki-settings-list > li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 26px;
+    min-height: 84px;
+    padding: 20px 12px;
+    border-bottom: 3px dashed #ddd;
+    box-sizing: border-box;
+}
+
+.maki-settings-list > li:last-child {
+    border-bottom: 0;
+}
+
+.maki-settings-label {
+    margin: 0;
+    color: #323232;
+    font-size: 19px;
+    line-height: 1.4;
+    font-weight: 600;
+}
+
+.maki-settings-copy {
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+.maki-settings-note {
+    display: block;
+    margin-top: 6px;
+    color: #888;
+    font-size: 14px;
+    line-height: 1.45;
+}
+
+.maki-settings-button {
+    position: relative;
+    flex: 0 0 270px;
+    min-height: 58px;
+    padding: 9px 54px 9px 18px;
+    border: 0;
+    border-radius: 12px;
+    color: #323232;
+    background: linear-gradient(to bottom, #fff 0%, #fff 48%, #f6f6f6 78%, #bbb 100%);
+    box-shadow: 0 3px 10px rgba(0,0,0,.28);
+    font-family: inherit;
+    font-size: 18px;
+    line-height: 1.2;
+    text-align: center;
+    cursor: pointer;
+}
+
+.maki-settings-button::after {
+    content: '›';
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 46px;
+    height: 100%;
+    border-radius: 0 12px 12px 0;
+    color: #fff;
+    background: linear-gradient(to bottom, #48d4ff, #0784b6);
+    font-size: 30px;
+    font-weight: 400;
+}
+
+.maki-settings-button:disabled {
+    color: #888;
+    background: linear-gradient(to bottom, #f7f7f7, #ddd);
+    box-shadow: 0 2px 5px rgba(0,0,0,.12);
+    cursor: not-allowed;
+}
+
+.maki-settings-button:disabled::after {
+    content: '–';
+    background: linear-gradient(to bottom, #c6cdd1, #9da9af);
+}
+
+.maki-setting-comment {
+    display: block !important;
+    padding-top: 22px !important;
+}
+
+.maki-setting-comment .maki-settings-label {
+    margin-bottom: 10px;
+}
+
+#maki-profile-comment {
+    display: block;
+    width: 100%;
+    min-height: 136px;
+    padding: 12px 14px;
+    box-sizing: border-box;
+    border: 1px solid #d1dce1;
+    border-radius: 12px;
+    resize: vertical;
+    color: #323232;
+    background: #fff; /* Plain field: remove the internal Miiverse grid separators */
+    font-family: inherit;
+    font-size: 17px;
+    line-height: 1.45;
+}
+
+.maki-settings-row-foot {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-top: 10px;
+}
+
+.maki-settings-save,
+.maki-settings-cancel {
+    min-width: 120px;
+    min-height: 46px;
+    padding: 8px 20px;
+    border: 1px solid #08759f;
+    border-radius: 11px;
+    color: #fff;
+    background: linear-gradient(to bottom, #48d4ff, #0784b6);
+    box-shadow: 0 2px 6px rgba(0,0,0,.22);
+    font-family: inherit;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.maki-settings-save:disabled {
+    opacity: .55;
+    cursor: wait;
+}
+
+.maki-setting-group-title {
+    min-height: 54px !important;
+    padding-top: 14px !important;
+    padding-bottom: 10px !important;
+    background: linear-gradient(to bottom, #f5fcff, #e6f7fc);
+}
+
+.maki-setting-group-title .maki-settings-label {
+    color: #0784b6;
+    font-size: 17px;
+}
+
+.maki-settings-status {
+    flex: 0 0 auto;
+    min-width: 130px;
+    padding: 10px 16px;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 700;
+    text-align: center;
+}
+
+.maki-settings-status.connected {
+    color: #176b37;
+    border: 1px solid #a8d8b8;
+    background: linear-gradient(to bottom, #f7fff9, #def5e6);
+}
+
+.maki-settings-status.pending {
+    color: #6b7074;
+    border: 1px solid #d1d5d8;
+    background: linear-gradient(to bottom, #fafafa, #e7eaec);
+}
+
+.maki-settings-feedback {
+    min-height: 24px;
+    margin: 12px 4px 0;
+    color: #0784b6;
+    font-size: 14px;
+}
+
+.maki-settings-feedback.error {
+    color: #bd3939;
+}
+
+.maki-settings-modal {
+    position: fixed;
+    z-index: 10050;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    box-sizing: border-box;
+}
+
+.maki-settings-modal-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,.48);
+}
+
+.maki-settings-window {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: min(940px, calc(100vw - 48px));
+    min-height: 520px;
+    max-height: calc(100vh - 48px);
+    overflow: hidden;
+    border-radius: 28px;
+    background: #fff url('img/background.png') repeat;
+    box-shadow: 0 5px 24px rgba(0,0,0,.55);
+}
+
+.maki-settings-window-title {
+    flex: 0 0 auto;
+    height: 54px;
+    margin: 0;
+    padding: 0 20px;
+    border-top: 2px solid #48d4ff;
+    border-bottom: 2px solid #08759f;
+    border-radius: 28px 28px 0 0;
+    color: #fff;
+    background: linear-gradient(to bottom, #48d4ff, #0784b6);
+    font-size: 22px;
+    line-height: 50px;
+    text-align: center;
+    text-shadow: 0 -1px 0 rgba(0,0,0,.2);
+}
+
+.maki-settings-window-body {
+    display: flex;
+    flex: 1 1 auto;
+    align-items: center;
+    justify-content: center;
+    min-height: 120px;
+    padding: 26px 48px 12px;
+    text-align: center;
+}
+
+.maki-settings-window-body p {
+    max-width: 760px;
+    margin: 0;
+    color: #323232;
+    font-size: 20px;
+    line-height: 1.5;
+}
+
+.maki-settings-window-options {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    width: 100%;
+    padding: 18px 40px 20px;
+    box-sizing: border-box;
+    overflow-y: auto;
+}
+
+.maki-settings-option {
+    position: relative;
+    width: min(540px, 100%);
+    min-height: 58px;
+    padding: 9px 66px 9px 22px;
+    border: 0;
+    border-radius: 12px;
+    color: #323232;
+    background: linear-gradient(to bottom, #fff 0%, #fff 48%, #f6f6f6 78%, #bbb 100%);
+    box-shadow: 0 3px 10px rgba(0,0,0,.36);
+    font-family: inherit;
+    font-size: 18px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.maki-settings-option::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 48px;
+    height: 100%;
+    border-radius: 12px 0 0 12px;
+    background: linear-gradient(to bottom, #aaa, #666);
+    box-shadow: inset 0 0 16px rgba(0,0,0,.15);
+}
+
+.maki-settings-option.selected::before {
+    content: '✓';
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    background: linear-gradient(to bottom, #48d4ff, #0784b6);
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.maki-settings-window-footer {
+    display: flex;
+    justify-content: center;
+    padding: 6px 24px 24px;
+}
+
+@media (max-width: 900px) {
+    .maki-settings-topbar {
+        margin-left: 0;
+        width: 100%;
+        padding: 0 14px;
+    }
+    .maki-settings-content {
+        width: calc(100% - 28px);
+        margin: 18px 14px 0;
+    }
+    .maki-settings-list > li {
+        align-items: stretch;
+        flex-direction: column;
+        gap: 14px;
+    }
+    .maki-settings-button {
+        flex-basis: auto;
+        width: 100%;
+        box-sizing: border-box;
+    }
+    .maki-settings-tabs {
+        flex-wrap: wrap;
+    }
+    .maki-settings-window {
+        min-height: 0;
+    }
+    .maki-settings-window-body {
+        min-height: 90px;
+        padding: 22px 24px 8px;
+    }
+}
+
+/* USER SETTINGS refinement: normal-flow header, transparent content, no gray dividers */
+#maki-settings-topbar,
+.maki-settings-topbar {
+    position: relative !important;
+    top: auto !important;
+    z-index: auto;
+}
+.maki-settings-content {
+    background: transparent !important;
+}
+.maki-settings-list {
+    background: transparent !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    padding-left: 12px;
+    padding-right: 12px;
+}
+.maki-settings-list > li,
+.maki-settings-list > li:last-child {
+    border-bottom: 0 !important;
+}
+.maki-setting-group-title {
+    background: transparent !important;
+}
+.maki-wut-link-button {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-right: 0;
+    overflow: hidden;
+}
+.maki-wut-link-button > span:first-child {
+    flex: 1;
+    padding: 0 12px;
+}
+.maki-wut-miiverse-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-self: stretch;
+    width: 52px;
+    flex: 0 0 52px;
+    color: #fff;
+    background: linear-gradient(to bottom, #48d4ff, #0784b6);
+    border-radius: 0 12px 12px 0;
+    font-family: 'MiiverseIcons', 'MiiverseSymbols', sans-serif;
+    font-size: 27px;
+    line-height: 1;
+}
+.maki-wut-link-button::after { content: none !important; }
+.maki-wut-link-body { flex: 0 0 auto; min-height: 100px; }
+.maki-wut-link-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 0 42px 24px;
+}
+.maki-wut-link-form label {
+    color: #333;
+    font-size: 16px;
+    font-weight: 700;
+}
+#maki-wut-password {
+    width: 100%;
+    box-sizing: border-box;
+    min-height: 48px;
+    padding: 10px 14px;
+    border: 1px solid #b9dce8;
+    border-radius: 9px;
+    background: #fff;
+    color: #222;
+    font: inherit;
+}
+.maki-wut-security-note {
+    margin: 0;
+    color: #777;
+    font-size: 13px;
+}
+.maki-wut-link-form .maki-settings-window-footer {
+    gap: 12px;
+    padding: 8px 0 0;
+}
+.maki-wut-link-window { min-height: 0; }
+@media (max-width: 900px) {
+    .maki-settings-topbar { position: relative !important; top: auto !important; }
+    .maki-wut-link-form { padding: 0 20px 20px; }
+    .maki-wut-link-form .maki-settings-window-footer { flex-wrap: wrap; }
+}
+
+
+/* WUT-MIIVERSE LINK — dedicated full-page User Settings sub-section */
+#maki-wut-link-screen[hidden] { display: none !important; }
+#maki-wut-link-screen { display: block; min-height: calc(100vh - 10px); }
+.maki-wut-link-page-content {
+    width: min(960px, calc(100vw - 190px));
+    margin: 34px 30px 0 140px;
+    color: #323232;
+}
+.maki-wut-link-heading {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin: 0 0 28px;
+    padding: 0 0 22px;
+    border-bottom: 2px solid rgba(8,132,182,.18);
+}
+.maki-wut-link-heading > .maki-wut-miiverse-icon {
+    width: 74px; height: 74px; flex: 0 0 74px; border-radius: 14px;
+    font-size: 42px; box-shadow: 0 3px 8px rgba(0,0,0,.16);
+}
+.maki-wut-link-heading h2 { margin: 0 0 8px; color: #333; font-size: 23px; }
+.maki-wut-link-heading p { margin: 0; color: #777; font-size: 15px; line-height: 1.55; }
+.maki-wut-link-screen .maki-wut-link-form {
+    max-width: 720px; padding: 0; display: flex; flex-direction: column; gap: 12px;
+}
+.maki-wut-link-screen .maki-wut-link-form label { color: #333; font-size: 16px; font-weight: 700; }
+.maki-wut-link-screen #maki-wut-password {
+    width: 100%; min-height: 52px; box-sizing: border-box; padding: 12px 15px;
+    border: 1px solid #b9dce8; border-radius: 9px; background: #fff; color: #222; font: inherit;
+}
+.maki-wut-link-screen .maki-wut-security-note { max-width: 680px; margin: 0; color: #777; font-size: 13px; line-height: 1.5; }
+.maki-wut-link-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-top: 10px; }
+.maki-wut-link-actions .maki-settings-window-footer { padding: 0; }
+@media (max-width: 900px) {
+    .maki-wut-link-page-content { width: calc(100% - 28px); margin: 22px 14px 0; }
+    .maki-wut-link-heading { align-items: flex-start; gap: 13px; }
+    .maki-wut-link-heading > .maki-wut-miiverse-icon { width: 56px; height: 56px; flex-basis: 56px; font-size: 32px; }
+    .maki-wut-link-heading h2 { font-size: 19px; }
+    .maki-wut-link-actions { align-items: stretch; flex-direction: column; }
+}
+
+/* ============================================================
+   USER SETTINGS TOPBAR — MATCH THE REST OF THE PORTAL
+   Same normal-flow geometry as the other cyan section headers.
+   It is NOT fixed or sticky; it scrolls away with its section.
+   ============================================================ */
+.maki-settings-topbar {
+    position: relative !important;
+    top: auto !important;
+    inset: auto !important;
+    z-index: 1 !important;
+    box-sizing: border-box !important;
+    background: linear-gradient(to bottom, #48d4ff 0%, #23bce9 42%, #119ed1 56%, #0784b6 100%) !important;
+    border-bottom: 2px solid #08759f !important;
+    box-shadow: inset 0 2px 0 rgba(255,255,255,.45), inset 0 -2px 0 rgba(0,70,110,.16), 0 3px 6px rgba(0,0,0,.10) !important;
+}
+
+.maki-settings-topbar h1 {
+    margin: 0 !important;
+    color: #fff !important;
+    font-size: 25px !important;
+    line-height: 1.2 !important;
+    font-weight: 700 !important;
+    text-shadow: 0 1px 2px rgba(0,0,0,.20) !important;
+}
+
+/* Desktop: bleed to the viewport edges like Home, Networks and Mii Clicker. */
+@media screen and (min-width: 1101px) {
+    #vista-settings .maki-settings-topbar {
+        width: 100vw !important;
+        max-width: none !important;
+        margin: -50px 0 0 -50px !important;
+        padding: 15px 22px 15px 175px !important;
+    }
+}
+
+/* Tablet: use the same 20px body-gutter compensation as the other sections. */
+@media screen and (min-width: 701px) and (max-width: 1100px) {
+    #vista-settings .maki-settings-topbar {
+        width: calc(100% + 40px) !important;
+        max-width: none !important;
+        margin: -20px -20px 0 !important;
+        padding: 15px 22px !important;
+    }
+}
+
+/* Mobile: align with the other section bars above the bottom navigation. */
+@media screen and (max-width: 700px) {
+    #vista-settings .maki-settings-topbar {
+        width: calc(100% + 24px) !important;
+        max-width: none !important;
+        margin: 0 -12px !important;
+        padding: 13px 14px !important;
+        min-height: 0 !important;
+    }
+    .maki-settings-topbar h1 {
+        font-size: 20px !important;
+    }
+}

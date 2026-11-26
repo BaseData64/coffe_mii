@@ -94,6 +94,8 @@ function actualizarVistaUserPage() {
         return;
     }
 
+    // The linked NNID remains an account alias/metadata only.
+    // The account's visible Mii always comes from its own PNID.
     const miiUrl = `https://mii-unsecure.ariankordi.net/miis/image.png?nnid=${encodeURIComponent(pnidGuardado)}&type=face&width=270&api_id=1`;
 
     const subPnidEl = document.getElementById('profile-pnid-sub');
@@ -117,5 +119,6 @@ window.addEventListener('DOMContentLoaded', () => {
 
 window.cerrarSesion = function() {
     localStorage.removeItem('makiiverse_pnid');
+    localStorage.removeItem('makiiverse_nnid');
     window.location.href = 'login.html';
 };

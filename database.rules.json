@@ -8,6 +8,24 @@
         ".write": "auth != null && auth.uid == $uid",
         "publicId": {
           ".validate": "newData.isString() && newData.val().matches(/^[0-9]{9}$/) && (data.exists() ? newData.val() == data.val() : !root.child('public_users').child(newData.val()).exists())"
+        },
+        "nnid": {
+          ".validate": "!newData.exists() || (newData.isString() && newData.val().matches(/^[A-Za-z0-9._-]{4,16}$/))"
+        },
+        "nnidLower": {
+          ".validate": "!newData.exists() || (newData.isString() && newData.val().matches(/^[a-z0-9._-]{4,16}$/))"
+        },
+        "nnidNormalized": {
+          ".validate": "!newData.exists() || (newData.isString() && newData.val().matches(/^[a-z0-9]{1,16}$/))"
+        },
+        "nnidVerified": {
+          ".validate": "!newData.exists() || newData.val() == false"
+        },
+        "nnidSource": {
+          ".validate": "!newData.exists() || newData.val() == 'historical-archive-lookup'"
+        },
+        "nnidLinkedAt": {
+          ".validate": "!newData.exists() || newData.isNumber()"
         }
       }
     },
@@ -15,8 +33,30 @@
       "$publicId": {
         ".read": true,
         ".write": "auth != null && root.child('users').child(auth.uid).child('publicId').val() == $publicId",
-        ".validate": "newData.hasChildren(['publicId','pnid','pnidLower','displayName','createdAt']) && newData.child('publicId').val() == $publicId"
-      }
+        ".validate": "newData.hasChildren(['publicId','pnid','pnidLower','displayName','createdAt']) && newData.child('publicId').val() == $publicId",
+        "nnid": {
+          ".validate": "!newData.exists() || (newData.isString() && newData.val().matches(/^[A-Za-z0-9._-]{4,16}$/))"
+        },
+        "nnidLower": {
+          ".validate": "!newData.exists() || (newData.isString() && newData.val().matches(/^[a-z0-9._-]{4,16}$/))"
+        },
+        "nnidNormalized": {
+          ".validate": "!newData.exists() || (newData.isString() && newData.val().matches(/^[a-z0-9]{1,16}$/))"
+        },
+        "nnidVerified": {
+          ".validate": "!newData.exists() || newData.val() == false"
+        },
+        "nnidSource": {
+          ".validate": "!newData.exists() || newData.val() == 'historical-archive-lookup'"
+        },
+        "nnidLinkedAt": {
+          ".validate": "!newData.exists() || newData.isNumber()"
+        }
+      },
+      ".indexOn": [
+        "nnidLower",
+        "nnidNormalized"
+      ]
     },
     "admins": {
       ".read": "auth != null",
@@ -52,20 +92,30 @@
         }
       }
     },
-    "mii_clicker": {
-      ".read": true,
-      ".write": "auth != null"
-    },
-    "favorite_games_yeahs": {
-      ".read": true,
-      ".write": "auth != null"
-    },
     "page_post_yeahs": {
       ".read": true,
       "$postKey": {
         "$uid": {
           ".write": "auth != null && auth.uid == $uid",
           ".validate": "!newData.exists() || newData.val() == true"
+        }
+      }
+    },
+    "mii_clicker": {
+      ".read": true,
+      ".indexOn": [
+        "clicks"
+      ],
+      "$uid": {
+        ".write": "auth != null && auth.uid == $uid"
+      }
+    },
+    "mii_clicker_weekly": {
+      ".read": true,
+      "$weekKey": {
+        "$uid": {
+          ".write": "auth != null && auth.uid == $uid",
+          ".validate": "!newData.exists() || (newData.hasChildren(['uid','pnid','clicks','weekStart']) && newData.child('uid').val() == $uid && newData.child('pnid').isString() && newData.child('clicks').isNumber() && newData.child('weekStart').val() == $weekKey)"
         }
       }
     }

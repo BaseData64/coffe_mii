@@ -21,6 +21,17 @@ window.abrirMiiClicker = function() {
     }
 
     if (typeof window.conmutarPortal === "function") {
-        window.conmutarPortal(6, "global-menu-message");
+        window.conmutarPortal(6, "global-menu-mii-clicker");
+    }
+};
+
+
+/* ============================================================
+   WEEKLY MII CLICKERS — NAVEGACIÓN A SECCIÓN INDEPENDIENTE
+   ============================================================ */
+window.abrirWeeklyMiiClickers = function() {
+    if (typeof window.conmutarPortal === "function") {
+        window.conmutarPortal(9, "global-menu-mii-clicker");
+        window.scrollTo(0, 0);
     }
 };

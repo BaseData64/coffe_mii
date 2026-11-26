@@ -36,7 +36,7 @@ window.iniciarSesionFirebase = async function(pnid, password) {
     }
 };
 
-// 2. FUNCIONES DE PERFIL Y SESIÓN
+
 function actualizarVistaUserPage() {
     const pnidGuardado = localStorage.getItem('makiiverse_pnid');
 
