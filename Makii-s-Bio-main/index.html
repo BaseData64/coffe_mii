@@ -1,0 +1,3206 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="module" src="login/basedata.js?v=pnid-mii-restore-1"></script>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="index.css?v=user-settings-topbar-portal-match-1">
+    
+        
+    
+    <!-- 1. Primero cargamos el gestor -->
+    <script src="mii/MiiLog.js"></script> 
+    <script src="mii/Specialuser.js"></script> 
+    <script type="module" src="login/basedata.js?v=pnid-mii-restore-1"></script>
+    <script src="mii/Userdata.js"></script>
+    <script src="portal/post/accounts.js"></script>
+
+
+<script src="js/01-init-portal.js"></script>
+    <!-- 2. Después cargamos el manager que depende del primero -->
+    <script src="mii/baseDataMii/sessionManager.js"></script>
+
+
+    
+<!-- CSS EXTRAÍDO A index.css — bloque 01 -->
+</head>
+<body style="background-image: url(background.png);">
+
+
+<!-- CSS EXTRAÍDO A index.css — bloque 02 id=maki-miiverse-sidebar-remaster -->
+
+
+<!-- SIDEBAR MENU GLOBAL -->
+<menu id="global-menu">
+    <li id="global-menu-mymenu" class="card card-standard">
+        <a href="javascript:void(0);" onclick="abrirMiPerfilPublico(); return false;">
+            <span class="mii-icon">
+                <img id="user-sidebar-avatar"
+                     src="img/games/Dummy_mii_user.png"
+                     alt="User Page"
+                     onerror="this.src='img/games/Dummy_mii_user.png';">
+            </span>
+            <span id="user-sidebar-name">User Page</span>
+        </a>
+    </li>
+
+    <li id="global-menu-feed" class="card card-standard">
+        <a href="javascript:void(0);" onclick="conmutarPortal(4, 'global-menu-feed')">
+            <span class="sidebar-old-icon icons">1</span>
+            <span class="sidebar-label name">Networks</span>
+        </a>
+    </li>
+
+    <li id="global-menu-community" class="card card-standard selected">
+        <a href="javascript:void(0);" onclick="conmutarPortal(0, 'global-menu-community')">
+            <span class="sidebar-old-icon symbol">a</span>
+            <span class="sidebar-label label">about me</span>
+        </a>
+    </li>
+
+    <li id="global-menu-mii-clicker" class="card card-standard">
+        <a href="javascript:void(0);" onclick="abrirMiiClicker(); return false;" aria-label="Open Mii Clicker">
+            <span class="sidebar-old-icon icons" aria-hidden="true">o</span>
+            <span class="sidebar-label label">Mii Clicker</span>
+        </a>
+    </li>
+
+    <li id="boton-navegacion-miiverse" class="card card-exit">
+        <a href="javascript:void(0);" role="button" onclick="manejadorNavegacionFija(); return false;">
+            <span id="nav-icono-wiiu"></span>
+            <span id="nav-texto-wiiu">Close</span>
+        </a>
+    </li>
+</menu>
+
+
+<!-- ============================================================
+     ============================================================
+                    MAKI'S BIO — HOME PORTAL
+                  MIIVERSE / WII U REMASTER
+                       SINGLE LIST UI
+     ============================================================
+     ============================================================
+
+     NAVEGACIÓN:
+
+     2 = About my projects
+     4 = Networks
+     7 = General Chat
+
+     ============================================================ -->
+
+
+
+<!-- CSS EXTRAÍDO A index.css — bloque 03 -->
+
+
+
+
+<!-- ============================================================
+     ============================================================
+                         HOME VIEW
+     ============================================================
+     ============================================================ -->
+
+<div
+    id="vista-perfil"
+
+    style="
+        display:block;
+        position:relative;
+        z-index:1;
+    "
+>
+
+
+    <!-- ========================================================
+         ========================================================
+                            TOPBAR
+         ========================================================
+         ======================================================== -->
+
+    <div class="home-topbar">
+
+
+        <div class="home-topbar-inner">
+
+
+            <h1>
+                Maki's Bio
+            </h1>
+
+
+            <div class="home-topbar-actions">
+                <button
+                    id="verified-store-trigger"
+                    class="verified-store-trigger"
+                    type="button"
+                    aria-label="Obtener verificación"
+                    title="Obtener verificación"
+                >
+                    <svg class="verified-store-trigger-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                        <path d="M12 2.1 14.8 8h6.3l-4.8 4.1 1.8 6.2L12 14.9l-6.1 3.4 1.8-6.2L2.9 8h6.3z" />
+                    </svg>
+                    <span>OBTENER VERIFICACIÓN</span>
+                </button>
+
+                <div class="home-topbar-badge">
+                    HOME
+                </div>
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- ========================================================
+         ========================================================
+                          PAGE
+         ========================================================
+         ======================================================== -->
+
+    <div class="home-page">
+
+
+
+        <!-- ====================================================
+             ====================================================
+                       PROFILE / WELCOME
+             ====================================================
+             ==================================================== -->
+
+        <section class="home-profile-card">
+
+
+
+            <!-- =================================================
+                 MII
+                 ================================================= -->
+
+            <div class="home-profile-mii-frame">
+
+
+                <img
+                    class="home-profile-mii"
+
+                    src="mii/miiOwner.png"
+
+                    alt="Makii"
+                >
+
+
+            </div>
+
+
+
+            <!-- =================================================
+                 INFO
+                 ================================================= -->
+
+            <div class="home-profile-info">
+
+
+                <span class="home-profile-name">
+                    Makii
+                </span>
+
+
+                <span class="home-profile-pnid">
+                    YosMakii99_PN
+                </span>
+
+
+                <p class="home-profile-description">
+                    This is my website about myself... here you can
+                    see everything about me, my hobbies, my projects and more.
+                </p>
+
+
+            </div>
+
+
+
+            <!-- =================================================
+                 WELCOME
+                 ================================================= -->
+
+            <div class="home-profile-status">
+                WELCOME!
+            </div>
+
+
+        </section>
+
+
+
+        <!-- ====================================================
+             ====================================================
+                         COMMUNITIES
+             ====================================================
+             ==================================================== -->
+
+        <div class="home-section-header">
+            Communities
+        </div>
+
+
+
+        <!-- ====================================================
+             LISTA PRINCIPAL
+             ==================================================== -->
+
+        <div class="home-community-list">
+
+
+
+            <!-- =================================================
+                 MY FAVORITE GAMES
+                 ================================================= -->
+
+            
+
+
+
+            <!-- =================================================
+                 ABOUT MY PROJECTS
+                 ================================================= -->
+
+            <button
+                type="button"
+
+                class="
+                    home-community
+                    community-projects
+                "
+
+                onclick="
+                    conmutarPortal(
+                        2,
+                        'global-menu-community'
+                    )
+                "
+            >
+
+
+                <div class="home-community-icon">
+
+
+                    <img
+                        src="img/games/174095.png"
+
+                        alt="About my projects"
+                    >
+
+
+                </div>
+
+
+
+                <div class="home-community-info">
+
+
+                    <span class="home-community-title">
+                        About my projects
+                    </span>
+
+
+                    <span class="home-community-description">
+                        Experiments, websites and things
+                        I've been building.
+                    </span>
+
+
+                </div>
+
+
+
+                <span class="home-community-arrow">
+                    ›
+                </span>
+
+
+            </button>
+
+
+
+            <!-- =================================================
+                 ABOUT ME — RESTORED COMMUNITY
+                 ================================================= -->
+
+            <button
+                type="button"
+                class="
+                    home-community
+                    community-about
+                "
+                onclick="
+                    conmutarPortal(
+                        3,
+                        'global-menu-community'
+                    )
+                "
+            >
+                <div class="home-community-icon">
+                    <img
+                        class="contain"
+                        src="img/games/wii-u-logo-png_seeklogo-312570.png"
+                        alt="About Me"
+                    >
+                </div>
+
+                <div class="home-community-info">
+                    <span class="home-community-title">
+                        About Me
+                    </span>
+
+                    <span class="home-community-description">
+                        More information about me, my interests
+                        and some random stuff.
+                    </span>
+                </div>
+
+                <span class="home-community-arrow">
+                    ›
+                </span>
+            </button>
+
+
+
+            <!-- =================================================
+                 GENERAL CHAT
+                 ================================================= -->
+
+            <button
+                type="button"
+
+                class="
+                    home-community
+                    community-general
+                "
+
+                onclick="
+                    conmutarPortal(
+                        7,
+                        'global-menu-community'
+                    )
+                "
+            >
+
+
+                <div class="home-community-icon">
+
+
+                    <img
+                        class="contain"
+
+                        src="img/games/wii-u-logo-png_seeklogo-312570.png"
+
+                        alt="General Chat"
+                    >
+
+
+                </div>
+
+
+
+                <div class="home-community-info">
+
+
+                    <span class="home-community-title">
+                        General Chat
+                    </span>
+
+
+                    <span class="home-community-description">
+                        Posts, conversations and general stuff.
+                    </span>
+
+
+                </div>
+
+
+
+                <span class="home-community-arrow">
+                    ›
+                </span>
+
+
+            </button>
+
+        </div>
+
+
+
+
+
+
+
+            <!-- WII U COMMUNITIES — same card style as About Me / General Chat -->
+            <!-- Game icons: place the corresponding PNG files in "img/COMMU WiiU v24/". The img src paths below are preconfigured. -->
+            
+            
+
+
+
+
+
+        <!-- ====================================================
+             ====================================================
+                           MORE
+             ====================================================
+             ==================================================== -->
+
+        <div class="home-more-separator">
+
+            <span>
+                More
+            </span>
+
+        </div>
+
+
+
+        <!-- ====================================================
+             MORE LIST
+             ==================================================== -->
+
+        <div class="home-community-list">
+
+
+
+            <!-- =================================================
+                 NETWORKS
+                 ================================================= -->
+
+            <button
+                type="button"
+
+                class="
+                    home-community
+                    community-networks
+                "
+
+                onclick="
+                    conmutarPortal(
+                        4,
+                        'global-menu-community'
+                    )
+                "
+            >
+
+
+                <div class="home-community-icon">
+
+
+                    <img
+                        src="mii/miiOwner.png"
+
+                        alt="Networks"
+                    >
+
+
+                </div>
+
+
+
+                <div class="home-community-info">
+
+
+                    <span class="home-community-title">
+                        Networks
+                    </span>
+
+
+                    <span class="home-community-description">
+                        My gaming IDs, profiles and friend codes.
+                    </span>
+
+
+                </div>
+
+
+
+                <span class="home-community-arrow">
+                    ›
+                </span>
+
+
+            </button>
+
+
+
+            <!-- =================================================
+                 MII CLICKER
+                 ================================================= -->
+
+<button class="home-community community-clicker" onclick="abrirMiiClicker()" type="button">
+<div class="home-community-icon">
+<img alt="Mii Clicker" src="mii/miiOwner.png"/>
+</div>
+<div class="home-community-info">
+<span class="home-community-title">
+                        Mii Clicker
+                    </span>
+<span class="home-community-description">
+                        Click your Mii and compete in the
+                        global online ranking.
+                    </span>
+</div>
+<span class="home-community-arrow">
+                    ›
+                </span>
+</button>
+
+            
+
+
+
+        </div>
+
+
+
+        <!-- ====================================================
+             ====================================================
+                           FOOTER
+             ====================================================
+             ==================================================== -->
+
+        <div class="home-footer-info">
+            Welcome to my personal Wii U / Miiverse-inspired portal.
+        </div>
+
+
+
+    </div>
+
+
+</div>
+
+<!-- CSS EXTRAÍDO A index.css — bloque 04 -->
+
+
+
+<!-- CSS EXTRAÍDO A index.css — bloque 05 id=maki-community-post-remaster-v22 -->
+
+
+<!-- ============================================================
+     VERIFIED BADGE STORE — NATIVE MAKI'S BIO SUBPORTAL
+     ============================================================ -->
+<div
+    id="vista-verified-store"
+    style="display:none; position:relative; z-index:1;"
+>
+    <div class="verified-store-topbar">
+        <div class="verified-store-topbar-inner">
+            <h1>Verified Badge Store</h1>
+            <div class="verified-store-topbar-badge">SPECIAL ITEM</div>
+        </div>
+    </div>
+
+    <main class="verified-store-page">
+        <div class="verified-store-breadcrumb">
+            <span>MAKI'S BIO</span>
+            <span class="verified-store-breadcrumb-arrow">›</span>
+            <strong>VERIFIED BADGE STORE</strong>
+        </div>
+
+        <section class="verified-store-window">
+            <header class="verified-store-window-header">
+                <div>
+                    <span class="verified-store-window-kicker">SPECIAL OFFER</span>
+                    <h2>BUY VERIFIED BADGE</h2>
+                </div>
+                <span class="verified-store-item-tag">ITEM No. 001</span>
+            </header>
+
+            <div id="verified-store-main">
+                <div class="verified-store-intro">
+                    if you buy this, you will get the verified user badge for cool pfp
+                </div>
+
+                <div class="verified-store-product-layout">
+                    <figure class="verified-store-character-card">
+                        <div class="verified-store-character-frame">
+                            <img
+                                src="img/verified-store-mii.jpg"
+                                alt="Makii's Mii with a silly sales expression"
+                            >
+                        </div>
+                        <figcaption>She knows you want that green checkmark.</figcaption>
+                    </figure>
+
+                    <section class="verified-store-product-details" aria-label="Badge details">
+                        <div class="verified-store-product-heading">
+                            <span class="verified-store-product-badge" aria-hidden="true">
+                                <svg viewBox="0 0 48 48" focusable="false">
+                                    <circle cx="24" cy="24" r="21" />
+                                    <path d="M13.5 24.5 20.5 31 34.5 16.5" />
+                                </svg>
+                            </span>
+                            <div>
+                                <span class="verified-store-product-eyebrow">PROFILE ITEM</span>
+                                <h3>VERIFIED USER BADGE</h3>
+                            </div>
+                        </div>
+
+                        <p class="verified-store-product-copy">
+                            A shiny little green checkmark for your profile. That's it. That's the product.
+                        </p>
+
+                        <div class="verified-store-price-panel">
+                            <span class="verified-store-price-label">ONE-TIME PRICE</span>
+                            <strong>$1.00 <small>USD</small></strong>
+                        </div>
+
+                        <ul class="verified-store-benefits">
+                            <li><span>✓</span> Green verified mark on your profile</li>
+                            <li><span>✓</span> COOL PFP RN</li>
+                            <li><span>✓</span> BC YOU CAN PAY THIS!</li>
+                        </ul>
+                    </section>
+                </div>
+
+                <div class="verified-store-action-area">
+                    <button id="verified-store-no" class="verified-store-button verified-store-button-secondary" type="button">
+                        NO
+                    </button>
+
+                    <button id="verified-store-buy" class="verified-store-button verified-store-button-primary" type="button">
+                        <svg class="verified-store-card-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                            <rect x="2.5" y="4.5" width="19" height="15" rx="2.2" />
+                            <path d="M3 9h18M6 14.5h4" />
+                        </svg>
+                        <span>SHUT UP AND GIVE ME IT!</span>
+                    </button>
+                </div>
+
+                <p class="verified-store-disclaimer">
+                    * A completely serious business decision. This is a cosmetic item, not an official platform verification.
+                </p>
+            </div>
+
+            <section id="verified-store-result" class="verified-store-result" hidden aria-live="polite" aria-labelledby="verified-store-status-title">
+                <div class="verified-store-result-icon" aria-hidden="true">!</div>
+                <span class="verified-store-result-kicker">PAYMENT STATUS · COMING SOON</span>
+                <h2 id="verified-store-status-title">PAYMENT SYSTEM NOT AVAILABLE YET</h2>
+                <p>
+                    We're getting the payment system ready. Verified Badge purchases will be available soon.
+                    No money has been charged, and no badge has been added to your profile.
+                </p>
+                <button id="verified-store-return" class="verified-store-button verified-store-button-secondary" type="button">
+                    BACK TO THE OFFER
+                </button>
+            </section>
+        </section>
+
+        <div class="verified-store-footer">
+            <span class="verified-store-footer-dot"></span>
+            MAKI'S BIO ITEM SHOP <span>·</span> THANK YOU FOR YOUR QUESTIONABLE FINANCIAL DECISIONS
+        </div>
+    </main>
+</div>
+
+
+
+
+<!-- CSS EXTRAÍDO A index.css — bloque 06 -->
+
+
+
+
+<!-- ============================================================
+     ============================================================
+                       VISTA MII CLICKER
+     ============================================================
+     ============================================================ -->
+
+
+
+
+<div id="vista-messages" style="
+        display:none;
+        position:relative;
+        z-index:1;
+    ">
+<!-- ========================================================
+         HEADER
+         ======================================================== -->
+<div class="mii-clicker-topbar">
+<div class="mii-clicker-topbar-content">
+<h1>
+                Mii Clicker
+            </h1>
+<div class="mii-clicker-topbar-actions">
+    <div id="mii-clicker-status" aria-live="polite">
+        CONNECTING...
+    </div>
+    <button
+        id="mii-clicker-open-ranking"
+        class="mii-clicker-view-ranking-button"
+        type="button"
+        aria-controls="vista-weekly-mii-clickers"
+        title="Open the full weekly ranking"
+    >
+        <span class="mii-clicker-ranking-miiverse-icon" aria-hidden="true">s</span>
+        <span class="mii-clicker-ranking-button-label">View Full Ranking</span>
+    </button>
+</div>
+</div>
+</div>
+<!-- ========================================================
+         CONTENIDO
+         ======================================================== -->
+<div class="mii-clicker-page">
+<!-- ====================================================
+             RANKING ONLINE
+             ==================================================== -->
+<div class="mii-clicker-panel">
+<div class="mii-clicker-panel-title mii-clicker-panel-title-ranking">
+                <span>Weekly Mii Clickers</span>
+            </div>
+<div class="mii-clicker-description">
+                Weekly ranking — Monday to Sunday (UTC).
+                <span id="mii-clicker-week-label">Loading week...</span>
+            </div>
+<div class="mii-clicker-podium">
+<!-- =============================================
+                     2ND
+                     ============================================= -->
+<div class="mii-clicker-place second" id="mii-clicker-place-2">
+<div class="mii-clicker-place-number">
+                        2nd
+                    </div>
+<div class="mii-clicker-place-avatar">
+</div>
+<span class="mii-clicker-place-pnid">
+                        ---
+                    </span>
+<span class="mii-clicker-place-score">
+                        0 clicks
+                    </span>
+</div>
+<!-- =============================================
+                     1ST
+                     ============================================= -->
+<div class="mii-clicker-place first" id="mii-clicker-place-1">
+<div class="mii-clicker-place-number">
+                        1st
+                    </div>
+<div class="mii-clicker-place-avatar">
+</div>
+<span class="mii-clicker-place-pnid">
+                        ---
+                    </span>
+<span class="mii-clicker-place-score">
+                        0 clicks
+                    </span>
+</div>
+<!-- =============================================
+                     3RD
+                     ============================================= -->
+<div class="mii-clicker-place third" id="mii-clicker-place-3">
+<div class="mii-clicker-place-number">
+                        3rd
+                    </div>
+<div class="mii-clicker-place-avatar">
+</div>
+<span class="mii-clicker-place-pnid">
+                        ---
+                    </span>
+<span class="mii-clicker-place-score">
+                        0 clicks
+                    </span>
+</div>
+</div>
+</div>
+
+<!-- ====================================================
+             JUEGO
+             ==================================================== -->
+<div class="mii-clicker-panel">
+<div class="mii-clicker-panel-title">
+                Click your Mii!
+            </div>
+<div class="mii-clicker-game">
+<!-- =============================================
+                     PNID
+                     ============================================= -->
+<div id="mii-clicker-pnid">
+                    Loading account...
+                </div>
+<div class="mii-clicker-instruction">
+                    Every press adds one point to your online score.
+                </div>
+<!-- =============================================
+                     SCORE
+                     ============================================= -->
+<div id="mii-clicker-score">
+                    0
+                </div>
+<div class="mii-clicker-score-label">
+                    clicks this week
+                </div>
+<!-- =============================================
+                     MII COMPLETO
+
+                     SIN BADGE.
+                     SIN OFFICIAL USER.
+                     ============================================= -->
+<div class="mii-clicker-mii-stage">
+<div class="mii-clicker-floor">
+</div>
+<img alt="Your Mii" draggable="false" id="mii-clicker-mii" src="img/games/Dummy_mii_user.png"/>
+</div>
+<!-- =============================================
+                     BOTÓN WII U
+                     ============================================= -->
+<button disabled="" id="mii-clicker-click-button" type="button">
+                    Click!
+                </button>
+<!-- =============================================
+                     +1
+                     ============================================= -->
+<div id="mii-clicker-plus-one">
+                    +1
+                </div>
+<!-- =============================================
+                     TU RANK
+                     ============================================= -->
+<div class="mii-clicker-personal-rank">
+
+                    Your rank:
+
+                    <strong id="mii-clicker-rank-text">
+                        Loading...
+                    </strong>
+</div>
+<!-- =============================================
+                     SYNC
+                     ============================================= -->
+<div id="mii-clicker-sync-text">
+                    Connecting to online ranking...
+                </div>
+</div>
+<!-- =================================================
+                 INFO
+                 ================================================= -->
+<div class="mii-clicker-rules">
+<div class="mii-clicker-rule">
+<span class="mii-clicker-rule-dot">
+</span>
+
+                    1 click = 1 point
+
+                </div>
+<div class="mii-clicker-rule">
+<span class="mii-clicker-rule-dot">
+</span>
+
+                    Weekly scores reset Monday (UTC)
+
+                </div>
+<div class="mii-clicker-rule">
+<span class="mii-clicker-rule-dot">
+</span>
+
+                    Full ranking updates live
+
+                </div>
+</div>
+</div>
+<!-- ====================================================
+             BACK
+             ==================================================== -->
+<button class="mii-clicker-back" type="button" onclick="manejadorNavegacionFija();">
+            Back
+        </button>
+</div>
+</div>
+
+<!-- ============================================================
+     WEEKLY MII CLICKERS — DEDICATED PORTAL SECTION
+     The full leaderboard is a normal portal view, not a modal.
+     ============================================================ -->
+<div
+    id="vista-weekly-mii-clickers"
+    style="display:none; position:relative; z-index:1;"
+>
+    <header class="weekly-ranking-topbar">
+        <div class="weekly-ranking-topbar-inner">
+            <div class="weekly-ranking-heading">
+                <span class="weekly-ranking-kicker">MII CLICKER · GLOBAL COMPETITION</span>
+                <h1>Weekly Mii Clickers</h1>
+                <p>Compete with the community and climb this week's leaderboard.</p>
+            </div>
+            <div class="weekly-ranking-topbar-actions">
+                <span class="weekly-ranking-week-chip" id="mii-clicker-week-range-label">Loading week...</span>
+                <button class="weekly-ranking-return" type="button" onclick="manejadorNavegacionFija();">
+                    <span aria-hidden="true">‹</span>
+                    BACK TO MII CLICKER
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="weekly-ranking-page">
+        <section class="weekly-ranking-podium-panel" aria-labelledby="weekly-ranking-podium-title">
+            <header class="weekly-ranking-podium-header">
+                <div>
+                    <span class="weekly-ranking-panel-kicker">THIS WEEK'S LEADERS</span>
+                    <h2 id="weekly-ranking-podium-title">Weekly podium</h2>
+                </div>
+                <span class="weekly-ranking-podium-caption">Top 3 players</span>
+            </header>
+
+            <div class="weekly-ranking-podium-board" aria-live="polite">
+                <article class="weekly-ranking-podium-place first" id="weekly-ranking-podium-1">
+                    <span class="weekly-ranking-podium-medal">1st place</span>
+                    <div class="weekly-ranking-podium-avatar" aria-label="First place Mii"></div>
+                    <strong class="weekly-ranking-podium-name">---</strong>
+                    <span class="weekly-ranking-podium-score">0 clicks</span>
+                    <span class="weekly-ranking-podium-congrats">WEEKLY CHAMPION</span>
+                </article>
+
+                <article class="weekly-ranking-podium-place second" id="weekly-ranking-podium-2">
+                    <span class="weekly-ranking-podium-medal">2nd place</span>
+                    <div class="weekly-ranking-podium-avatar" aria-label="Second place Mii"></div>
+                    <strong class="weekly-ranking-podium-name">---</strong>
+                    <span class="weekly-ranking-podium-score">0 clicks</span>
+                    <span class="weekly-ranking-podium-congrats">GREAT WORK!</span>
+                </article>
+
+                <article class="weekly-ranking-podium-place third" id="weekly-ranking-podium-3">
+                    <span class="weekly-ranking-podium-medal">3rd place</span>
+                    <div class="weekly-ranking-podium-avatar" aria-label="Third place Mii"></div>
+                    <strong class="weekly-ranking-podium-name">---</strong>
+                    <span class="weekly-ranking-podium-score">0 clicks</span>
+                    <span class="weekly-ranking-podium-congrats">WELL PLAYED!</span>
+                </article>
+            </div>
+        </section>
+
+        <section class="weekly-ranking-panel" aria-labelledby="weekly-ranking-section-title">
+            <header class="weekly-ranking-panel-header">
+                <div>
+                    <span class="weekly-ranking-panel-kicker">LIVE LEADERBOARD</span>
+                    <h2 id="weekly-ranking-section-title">All players</h2>
+                </div>
+                <span id="mii-clicker-ranking-count" class="weekly-ranking-player-count" aria-live="polite">Loading players...</span>
+            </header>
+
+            <div class="weekly-ranking-description">
+                <span class="weekly-ranking-live-dot" aria-hidden="true"></span>
+                Weekly scores · Monday to Sunday (UTC) · Updated live
+            </div>
+
+            <div class="weekly-ranking-list-wrap">
+                <div id="mii-clicker-leaderboard-list" class="mii-clicker-leaderboard-list" aria-live="polite" aria-busy="true">
+                    <div class="mii-clicker-leaderboard-empty">Loading weekly standings...</div>
+                </div>
+            </div>
+        </section>
+
+        <footer class="weekly-ranking-footer">
+            <span>MAKI'S BIO</span>
+            <span>·</span>
+            <span>WEEKLY MII CLICKER RANKING</span>
+        </footer>
+    </main>
+</div>
+
+<!-- ================= VISTA PROYECTOS ================= -->
+
+<!-- CSS EXTRAÍDO A index.css — bloque 07 -->
+
+
+
+<div
+    id="vista-proyectos"
+    style="
+        display:none;
+        position:relative;
+        z-index:1;
+    "
+>
+    <div class="projects-clicker-style-topbar">
+        <div class="projects-clicker-style-topbar-inner">
+            <h1>About my projects</h1>
+
+            <div class="projects-clicker-style-badge">
+                PROJECTS
+            </div>
+        </div>
+    </div>
+
+    <main class="maki-community-feed">
+        <section class="maki-community-hero">
+            <div class="maki-projects-hero-banner">
+                <img
+                    src="img/games/174095.png"
+                    alt=""
+                >
+            </div>
+
+            <div class="maki-community-hero-card">
+                <div class="maki-community-hero-icon">
+                    <img
+                        src="img/games/174095.png"
+                        alt=""
+                    >
+                </div>
+
+                <div class="maki-community-hero-copy">
+                    <span class="maki-community-hero-title">
+                        About my projects
+                    </span>
+
+                    <span class="maki-community-hero-subtitle">
+                        Experiments, websites and things I've been building.
+                    </span>
+                </div>
+
+                <span class="maki-community-hero-status">
+                    PROJECT LOG
+                </span>
+            </div>
+        </section>
+
+        <div class="maki-feed-heading">
+            PROJECT POSTS
+        </div>
+
+
+        <!-- LOST MIIVERSE PROTOTYPE PROJECT -->
+        <article class="maki-retro-post">
+            <div class="maki-retro-avatar">
+                <img src="mii/miiOwner.png" alt="Makii">
+            </div>
+
+            <div class="maki-retro-pointer"></div>
+
+            <div class="maki-retro-bubble">
+                <header class="maki-retro-post-header">
+                    <div class="maki-retro-post-author">
+                        <strong>Makii</strong>
+                        <span class="maki-retro-post-community">
+                            Project log · Miiverse prototype recreation
+                        </span>
+                    </div>
+
+                    <time class="maki-retro-post-date">
+                        2024
+                    </time>
+                </header>
+
+                <div class="maki-retro-post-body">
+                    <div class="maki-retro-project-chip">
+                        <img
+                            src="img/games/wii-u-logo-png_seeklogo-312570.png"
+                            alt=""
+                        >
+                        <span>Lost Miiverse / Wii U research</span>
+                    </div>
+
+                    <p>
+                        "Back in 2024, I set out on what was perhaps my most ambitious technical project: attempting to recreate the Miiverse prototype originally presented by Satoru Iwata at E3. This was an immense challenge, as I had to hunt down rare, obscure materials across the internet. I spent weeks analyzing old screenshots, using logic and deduction to try and reverse-engineer features that were never officially released and whose functionality remained a mystery.
+                    </p>
+
+                    <p>
+                        I was dedicated to this for two months, working tirelessly to build a functional 'WUBH' environment that would allow others to experience this lost vision. I was only about a month and a half away from releasing the first public prototype. Unfortunately, disaster struck when my PC suffered a fatal system crash—the dreaded blue screen of death. I was forced to format my drive, losing not only the code but all the rare photographs and research materials I had gathered. The sheer exhaustion and frustration of losing two months of intense work without a proper backup was devastating. I ultimately decided to abandon the project, but the experience gave me a deep, unparalleled look into the Miiverse architecture that I'll never forget."
+                    </p>
+                </div>
+
+                <footer class="maki-retro-post-footer">
+                    <button
+                        type="button"
+                        class="maki-page-yeah"
+                        data-page-post="project-miiverse-prototype-2024"
+                        onclick="togglePageYeah('project-miiverse-prototype-2024')"
+                    >
+                        <span class="maki-yeah-icon">E</span>
+                        <span>Yeah!</span>
+                    </button>
+
+                    <span
+                        class="maki-page-yeah-count maki-retro-count"
+                        data-page-yeah-count="project-miiverse-prototype-2024"
+                    >0</span>
+                </footer>
+            </div>
+        </article>
+
+
+        <!-- MODDING JOURNEY -->
+        <article class="maki-retro-post">
+            <div class="maki-retro-avatar">
+                <img src="mii/miiOwner.png" alt="Makii">
+            </div>
+
+            <div class="maki-retro-pointer"></div>
+
+            <div class="maki-retro-bubble">
+                <header class="maki-retro-post-header">
+                    <div class="maki-retro-post-author">
+                        <strong>Makii</strong>
+                        <span class="maki-retro-post-community">
+                            Project log · Wii U modding
+                        </span>
+                    </div>
+
+                    <time class="maki-retro-post-date">
+                        Since 2023
+                    </time>
+                </header>
+
+                <div class="maki-retro-post-body">
+                    <div class="maki-retro-project-chip">
+                        <img
+                            src="img/games/wii-u-logo-png_seeklogo-312570.png"
+                            alt=""
+                        >
+                        <span>Wii U modding / Mario Kart 8</span>
+                    </div>
+
+                    <p>
+                        My journey into modding began in 2023, and it has been a steady progression of learning and experimentation. What started as simple modifications quickly evolved into more complex and fun cosmetic projects. Over time, I managed to dominate the internal file logic of Wii U games, which allowed me to start creating much more advanced and professional-grade mods.
+                    </p>
+
+                    <p>
+                        The process of understanding how these games handle assets, textures, and logic has been incredibly rewarding. Currently, I am working on a custom, comprehensive pack for Mario Kart 8 Deluxe. This project is a collection of my favorite personal mods—things that are tailored specifically to my taste and playstyle. It’s a great feeling to take a game I love and completely customize it to be 'mine.' I’m really enjoying this creative freedom, and I look forward to continuing to push what is possible within the game's engine.
+                    </p>
+                </div>
+
+                <footer class="maki-retro-post-footer">
+                    <button
+                        type="button"
+                        class="maki-page-yeah"
+                        data-page-post="project-wiiu-modding-2023"
+                        onclick="togglePageYeah('project-wiiu-modding-2023')"
+                    >
+                        <span class="maki-yeah-icon">E</span>
+                        <span>Yeah!</span>
+                    </button>
+
+                    <span
+                        class="maki-page-yeah-count maki-retro-count"
+                        data-page-yeah-count="project-wiiu-modding-2023"
+                    >0</span>
+                </footer>
+            </div>
+        </article>
+
+    </main>
+</div>
+
+
+<!-- ================= SECCIÓN 3: VISTA COSAS SOBRE MÍ ================= -->
+
+<!-- CSS EXTRAÍDO A index.css — bloque 08 -->
+
+
+
+<div
+    id="vista-sobremi"
+    style="
+        display:none;
+        position:relative;
+        z-index:1;
+    "
+>
+    <div class="about-clicker-style-topbar">
+        <div class="about-clicker-style-topbar-inner">
+            <h1>About Me</h1>
+
+            <div class="about-clicker-style-badge">
+                ABOUT ME
+            </div>
+        </div>
+    </div>
+
+    <main class="maki-community-feed">
+        <section class="maki-community-hero">
+            <div class="maki-community-hero-banner">
+                <img
+                    src="img/games/ownerBanner.png"
+                    alt=""
+                >
+            </div>
+
+            <div class="maki-community-hero-card">
+                <div class="maki-community-hero-icon">
+                    <img
+                        class="contain"
+                        src="img/games/wii-u-logo-png_seeklogo-312570.png"
+                        alt=""
+                    >
+                </div>
+
+                <div class="maki-community-hero-copy">
+                    <span class="maki-community-hero-title">
+                        About Me
+                    </span>
+
+                    <span class="maki-community-hero-subtitle">
+                        More information about me, my interests
+                        and some random stuff.
+                    </span>
+                </div>
+
+                <span class="maki-community-hero-status">
+                    PERSONAL
+                </span>
+            </div>
+        </section>
+
+        <div class="maki-feed-heading">
+            PROFILE POST
+        </div>
+
+        <article class="maki-retro-post">
+            <div class="maki-retro-avatar">
+                <img src="mii/miiOwner.png" alt="Makii">
+            </div>
+
+            <div class="maki-retro-pointer"></div>
+
+            <div class="maki-retro-bubble">
+                <header class="maki-retro-post-header">
+                    <div class="maki-retro-post-author">
+                        <strong>Makii</strong>
+                        <span class="maki-retro-post-community">
+                            About Me · Wii U Experience
+                        </span>
+                    </div>
+
+                    <time class="maki-retro-post-date">
+                        27/06/2026
+                    </time>
+                </header>
+
+                <div class="maki-retro-post-body">
+                    <p class="maki-about-intro">
+                        <strong>Wii U Experence</strong> It all started back in 2015 playing a kiosk version of Mario Kart 8.. Soon after, in 2016, I would get the Wii U for the first time or well.. in December 2015.. up until now, 2026.. I would have a total of 11 years of playing with the Wii U.. I started as a player.. then I became a cheater.. then I became a modder who MAYBE could have a lot of experience with the WII U to what I am now...
+                    </p>
+
+                    <section class="maki-about-group">
+                        <div class="maki-about-group-title">
+                            Experiences
+                        </div>
+
+                        <ul class="maki-about-list">
+                            <li>
+                                <strong>Mod Designer:</strong>
+                                modifying system or Wii U game files.. with a lot of experience basically I'm a modder
+                            </li>
+
+                            <li>
+                                <strong>Wii U system recovery:</strong>
+                                I can fix a lot of brick problems, both hardware and software... that is, I can also work on technical NAND recovery and bring a Wii U back to life
+                            </li>
+
+                            <li>
+                                <strong>Desarrollo Web:</strong>
+                                I am a web developer and I have experience with both old and modern WebKit... my biggest achievement was actually this lost prototype
+                            </li>
+                        </ul>
+                    </section>
+
+                    <section class="maki-about-group">
+                        <div class="maki-about-group-title">
+                            Favorite Characters
+                        </div>
+
+                        <div class="maki-character-cloud">
+                            <span>Meggy from smg4</span>
+                            <span>Yoshi</span>
+                            <span>Shantae</span>
+                            <span>Marine (from Splatoon 2)</span>
+                            <span>Pomni from Glitch</span>
+                            <span>Rosalina and Luma</span>
+                        </div>
+                    </section>
+
+                    <section class="maki-about-group">
+                        <div class="maki-about-group-title">
+                            Interests
+                        </div>
+
+                        <div class="maki-interest-cloud">
+                            <span>Mario Kart 8</span>
+                            <span>WII U</span>
+                            <span>Nintendo Switch</span>
+                            <span>KNY Hinokami Chronicles 2</span>
+                            <span>Minecraft</span>
+                            <span>Roblox</span>
+                            <span>Splatoon 2</span>
+                            <span>Shantae</span>
+                            <span>Fortnite</span>
+                            <span>Dragon Ball Rage</span>
+                            <span>Super Smash Bros.</span>
+                            <span>Splatoon</span>
+                            <span>Wii U modding</span>
+                            <span>GD Miiverse</span>
+                            <span>Wii U Lost Media</span>
+                        </div>
+                    </section>
+                </div>
+
+                <footer class="maki-retro-post-footer">
+                    <button
+                        type="button"
+                        class="maki-page-yeah"
+                        data-page-post="about-me-2026"
+                        onclick="togglePageYeah('about-me-2026')"
+                    >
+                        <span class="maki-yeah-icon">E</span>
+                        <span>Yeah!</span>
+                    </button>
+
+                    <span
+                        class="maki-page-yeah-count maki-retro-count"
+                        data-page-yeah-count="about-me-2026"
+                    >0</span>
+                </footer>
+            </div>
+        </article>
+
+
+    </main>
+</div>
+
+
+<!-- CSS EXTRAÍDO A index.css — bloque 09 -->
+
+
+
+<div
+    id="vista-quepasara"
+    class="vista-contenido"
+
+    style="
+        display:none;
+        position:relative;
+        min-height:100vh;
+        padding-bottom:120px;
+    "
+>
+
+
+    <!-- ========================================================
+         HEADER ESTILO MII CLICKER
+         ======================================================== -->
+
+    <div class="chat-clicker-style-topbar">
+
+
+        <div class="chat-clicker-style-topbar-inner">
+
+
+            <h1>
+                General Chat
+            </h1>
+
+
+            <div class="chat-clicker-style-badge">
+                GENERAL CHAT
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+    <!-- ========================================================
+         AQUÍ SIGUE TODO TU CONTENIDO ORIGINAL
+         ======================================================== -->
+    
+    <div style="position: relative; width: 95.90%; margin-left: 108px; margin-top: 0px;">
+        <img src="img/DummyLaunchBG.png" style="width: 101%; height: 230px; object-fit: cover; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); display: block;">
+
+        <div style="position: absolute; bottom: -30px; right: 0%; width: 100%; height: 90px; background-color: rgb(255, 255, 255); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); border-radius: 14px; border: 1px solid rgba(0, 0, 0, 0.12); box-shadow: 0 6px 16px rgba(0,0,0,0.12); display: flex; align-items: center; padding: 0 20px; box-sizing: border-box; font-family: 'MiiverseFont', sans-serif; z-index: 5;">
+            <div style="width: 72px; height: 72px; background-image: url('img/games/wii-u-logo-png_seeklogo-312570.png'); background-size: cover; background-position: center; border-radius: 14px; border: 2px solid #ffffff; flex-shrink: 0; box-shadow: 0 4px 8px rgba(0,0,0,0.15); margin-top: -35px; z-index: 6;"></div>
+            <div style="margin-left: 18px; display: flex; flex-direction: column; gap: 1px; flex-grow: 1;">
+                <span style="font-size: 21px; font-weight: bold; color: #1f2937;">General Chat</span>
+                <span style="font-size: 13px; color: #555555; line-height: 1.3; max-width: 80%;">Welcome to my personal section!</span>
+            </div>
+        </div>
+    </div>
+    
+    <div style="height: 60px;"></div>
+
+    <!-- Contenedor donde se cargarán los mensajes del chat -->
+    <div style="width: 95.90%; margin-left: 108px;" id="contenedor-mensajes-chat">
+        <!-- Aquí se pintarán dinámicamente los posts estilo Miiverse -->
+    </div>
+
+    <!-- Botón "Post" anclado a la esquina inferior derecha idéntico a Miiverse (Tamaño Agrandado) -->
+    <div onclick="abrirModalPostGeneral()" style="position: fixed; bottom: 0; right: 0; width: 240px; height: 90px; background: linear-gradient(to bottom, #ffffff, #e6e6e6); border-top-left-radius: 80px; border-top: 2px solid #cccccc; border-left: 2px solid #cccccc; box-shadow: -6px -6px 15px rgba(0,0,0,0.08); display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 999; transition: background 0.1s;">
+        <!-- Ícono de globo verde exacto más grande -->
+        <svg width="42" height="42" viewBox="0 0 24 24" fill="#69c200" xmlns="http://www.w3.org/2000/svg" style="margin-right: 12px;">
+            <path d="M3 4C3 2.89543 3.89543 2 5 2H19C20.1046 2 21 2.89543 21 4V15C21 16.1046 20.1046 17 19 17H7.5L3.5 21V17C3.1 16.7 3 16.4 3 16V4Z"/>
+        </svg>
+        <!-- Texto "Post" más grande -->
+        <span style="font-family: 'MiiverseFont', sans-serif; font-size: 32px; color: #444444; font-weight: normal; margin-top: 4px;">Post</span>
+    </div>
+
+
+<!-- CSS EXTRAÍDO A index.css — bloque 10 -->
+
+
+
+
+<!-- ============================================================
+     HTML
+     ============================================================ -->
+
+<div id="modal-crear-post">
+
+
+    <div id="miiverse-post-composer">
+
+
+        <div id="miiverse-post-window">
+
+
+            <!-- =================================================
+                 HEADER
+                 ================================================= -->
+
+            <div id="miiverse-post-header">
+
+
+                <!-- MII + BOTÓN -->
+                <div class="mii-post-avatar-group">
+
+
+                    <div id="avatar-mii-post">
+                    </div>
+
+
+                    <div
+                        id="boton-emociones-post"
+
+                        onclick="toggleBurbujaEmociones()"
+                    >
+
+                        <div class="miiverse-arrow-down">
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- =================================================
+                     USER + COMMUNITY
+                     ================================================= -->
+
+                <div class="miiverse-post-userinfo">
+
+
+                    <span
+                        id="nombre-mii-post"
+
+                        dir="auto"
+                    >dummy</span>
+
+
+                    <div class="miiverse-post-community">
+
+
+                        <img
+                            class="miiverse-post-community-logo"
+
+                            src="/img/games/wii-u-logo-png_seeklogo-312570.png"
+
+                            alt=""
+                        >
+
+
+                        <span
+                            class="miiverse-post-community-name"
+                        >
+                            General Chat
+                        </span>
+
+
+                    </div>
+
+
+                </div>
+
+
+
+                <span
+                    id="nnid-mii-post"
+
+                    style="display:none;"
+                ></span>
+
+
+
+                <!-- SPOILER -->
+                <label class="miiverse-spoiler">
+
+
+                    <input
+                        type="checkbox"
+
+                        id="check-spoiler"
+                    >
+
+
+                    <span>
+                        spoiler
+                    </span>
+
+
+                </label>
+
+
+            </div>
+
+
+
+            <!-- =================================================
+                 EDITOR
+                 ================================================= -->
+
+            <div id="miiverse-post-editor">
+
+
+                <!-- TEXT / DRAW -->
+                <div class="miiverse-mode-selector">
+
+
+                    <div
+                        id="btn-modo-texto"
+
+                        onclick="cambiarModoEntrada('texto')"
+
+                        class="tab-btn activo-azul"
+                    >
+                        T
+                    </div>
+
+
+                    <div
+                        id="btn-modo-dibujo"
+
+                        onclick="cambiarModoEntrada('dibujo')"
+
+                        class="tab-btn inactivo-gris"
+                    >
+
+                        <!--
+                            FONT MIIVERSE:
+                            J = lápiz
+                        -->
+
+                        <span class="miiverse-pencil-symbol">
+                            J
+                        </span>
+
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- INPUT -->
+                <div class="miiverse-post-input-area">
+
+
+                    <textarea
+                        id="texto-nuevo-post"
+
+                        placeholder="Please input post text."
+                    ></textarea>
+
+
+                    <div
+                        id="miiverse-drawing-surface"
+                        aria-label="Miiverse drawing editor"
+                        aria-hidden="true"
+                    >
+                        <div id="wiiu-memo-screen">
+                            <!-- TOP ROW SEEN IN THE E3 GAMEPAD UI -->
+                            <div id="wiiu-memo-top-row">
+                                <div id="wiiu-memo-user-strip">
+                                    <button
+                                        type="button"
+                                        id="wiiu-memo-loading"
+                                        title="Borrar dibujo"
+                                        aria-label="Borrar dibujo"
+                                        onclick="limpiarCanvasDibujo(); this.blur();"
+                                    >
+                                        <i></i><i></i><i></i><i></i>
+                                        <i></i><i></i><i></i><i></i>
+                                    </button>
+                                </div>
+
+                                
+                                <!--
+                                    Screenshot logic:
+                                    [ pencil ][ eraser ][ • ][ ● ][ ● ]
+                                    Tool and stroke size are independent selections.
+                                -->
+                                <div id="wiiu-memo-toolbox" aria-label="Drawing tools">
+                                    <button
+                                        type="button"
+                                        id="wiiu-tool-pencil"
+                                        class="wiiu-memo-cell wiiu-tool-cell selected"
+                                        title="Pencil"
+                                        aria-label="Pencil"
+                                        onclick="seleccionarTipoDibujo('pencil', this)"
+                                    >
+                                        <span class="wiiu-pencil-shape"></span>
+                                    </button>
+
+                                    <button
+                                        type="button"
+                                        id="wiiu-tool-eraser"
+                                        class="wiiu-memo-cell wiiu-tool-cell"
+                                        title="Eraser"
+                                        aria-label="Eraser"
+                                        onclick="seleccionarTipoDibujo('eraser', this)"
+                                    >
+                                        <span class="wiiu-eraser-shape"></span>
+                                    </button>
+
+                                    <button
+                                        type="button"
+                                        class="wiiu-memo-cell wiiu-size-cell"
+                                        data-draw-size="2"
+                                        title="Thin"
+                                        aria-label="Thin stroke"
+                                        onclick="seleccionarGrosorDibujo(2, this)"
+                                    >
+                                        <span class="wiiu-size-dot dot-small"></span>
+                                    </button>
+
+                                    <button
+                                        type="button"
+                                        class="wiiu-memo-cell wiiu-size-cell"
+                                        data-draw-size="5"
+                                        title="Medium"
+                                        aria-label="Medium stroke"
+                                        onclick="seleccionarGrosorDibujo(5, this)"
+                                    >
+                                        <span class="wiiu-size-dot dot-medium"></span>
+                                    </button>
+
+                                    <button
+                                        type="button"
+                                        class="wiiu-memo-cell wiiu-size-cell selected"
+                                        data-draw-size="9"
+                                        title="Thick"
+                                        aria-label="Thick stroke"
+                                        onclick="seleccionarGrosorDibujo(9, this)"
+                                    >
+                                        <span class="wiiu-size-dot dot-large"></span>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- WHITE MEMO, SAME 8:3 / 640x240 PROPORTION -->
+                            <div id="wiiu-memo-paper">
+                                <canvas
+                                    id="canvas-post"
+                                    width="640"
+                                    height="240"
+                                ></canvas>
+                            </div>
+
+                            <div id="wiiu-memo-bottom-row">
+
+                                <div id="wiiu-memo-utility-tools">
+                                    <button
+                                        type="button"
+                                        class="wiiu-memo-mini-button"
+                                        onclick="deshacerCanvasDibujo()"
+                                        title="Undo"
+                                    >
+                                        ↶
+                                    </button>
+
+                                    <button
+                                        type="button"
+                                        class="wiiu-memo-mini-button"
+                                        onclick="limpiarCanvasDibujo()"
+                                        title="Clear"
+                                    >
+                                        CLEAR
+                                    </button>
+                                </div>
+
+                                <button
+                                    type="button"
+                                    id="wiiu-memo-done"
+                                    onclick="aceptarVentanaDibujo()"
+                                >
+                                    Listo
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- PREVIEW SHOWN BACK IN THE POST COMPOSER -->
+                    <div id="miiverse-drawing-ready" aria-hidden="true">
+                        <img id="miiverse-drawing-preview-img" alt="Drawing preview">
+                        <button
+                            type="button"
+                            id="miiverse-edit-drawing"
+                            onclick="editarDibujoPost()"
+                        >
+                            Edit drawing
+                        </button>
+                    </div>
+                </div>
+
+
+
+                <!-- SELECT IMAGE -->
+                <div class="miiverse-image-column">
+
+                    <!-- Input real de archivos. El usuario lo abre pulsando el botón visual. -->
+                    <input
+                        type="file"
+                        id="input-imagen-post"
+                        accept="image/jpeg,image/png,image/webp"
+                        style="display:none;"
+                        onchange="manejarImagenSeleccionadaPost(event)"
+                    >
+
+                    <div
+                        id="select-image-post"
+                        role="button"
+                        tabindex="0"
+                        aria-label="Select Image"
+                        onclick="abrirSelectorImagenPost()"
+                        onkeydown="if(event.key === 'Enter' || event.key === ' '){ event.preventDefault(); abrirSelectorImagenPost(); }"
+                    >
+
+                        <!-- Estado normal -->
+                        <div id="select-image-empty-state">
+
+                            <!-- z = clip -->
+                            <span class="miiverse-paperclip-symbol">
+                                z
+                            </span>
+
+                            <!-- X = image -->
+                            <span class="miiverse-photo-symbol">
+                                X
+                            </span>
+
+                            <span class="miiverse-select-image-text">
+                                Select Image
+                            </span>
+
+                        </div>
+
+                        <!-- Preview de la imagen elegida -->
+                        <img
+                            id="preview-imagen-post"
+                            alt="Selected image"
+                        >
+
+                        <span id="texto-cambiar-imagen-post">
+                            Change Image
+                        </span>
+
+                        <button
+                            type="button"
+                            id="quitar-imagen-post"
+                            aria-label="Remove selected image"
+                            title="Remove image"
+                            onclick="event.stopPropagation(); quitarImagenAdjuntaPost();"
+                        >
+                            ×
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- =================================================
+                 REACCIONES
+
+                 0 PNG.
+                 100% FONT MIIVERSE.
+                 ================================================= -->
+
+            <div id="burbuja-emociones">
+
+
+                <div class="miiverse-emotion-row">
+
+
+                    <!-- NORMAL = e -->
+
+                    <div
+                        class="emocion-btn"
+
+                        data-exp="normal"
+
+                        onclick="seleccionarEmocion(this)"
+                    >
+
+                        <span class="miiverse-feeling-glyph">e</span>
+
+                    </div>
+
+
+
+                    <!-- WINK = L -->
+
+                    <div
+                        class="emocion-btn"
+
+                        data-exp="smile"
+
+                        onclick="seleccionarEmocion(this)"
+                    >
+
+                        <span class="miiverse-feeling-glyph">H</span>
+
+                    </div>
+
+
+
+                    <!-- HAPPY = H -->
+
+                    <div
+                        class="emocion-btn"
+
+                        data-exp="like"
+
+                        onclick="seleccionarEmocion(this)"
+                    >
+
+                        <span class="miiverse-feeling-glyph">L</span>
+
+                    </div>
+
+
+
+                    <!-- SURPRISED = O -->
+
+                    <div
+                        class="emocion-btn"
+
+                        data-exp="surprised"
+
+                        onclick="seleccionarEmocion(this)"
+                    >
+
+                        <span class="miiverse-feeling-glyph">O</span>
+
+                    </div>
+
+
+
+                    <!-- FRUSTRATED = G -->
+
+                    <div
+                        class="emocion-btn"
+
+                        data-exp="frustrated"
+
+                        onclick="seleccionarEmocion(this)"
+                    >
+
+                        <span class="miiverse-feeling-glyph">G</span>
+
+                    </div>
+
+
+
+                    <!-- SORROW = U -->
+
+                    <div
+                        class="emocion-btn"
+
+                        data-exp="sorrow"
+
+                        onclick="seleccionarEmocion(this)"
+                    >
+
+                        <span class="miiverse-feeling-glyph">U</span>
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- ====================================================
+             BOTONES
+             ==================================================== -->
+
+        <div class="miiverse-bottom-buttons">
+
+
+            <button
+                class="miiverse-bottom-button"
+
+                onclick="cerrarModalPostGeneral()"
+            >
+                Cancel
+            </button>
+
+
+            <button
+                class="miiverse-bottom-button"
+
+                onclick="publicarPostGeneral()"
+            >
+                Post
+            </button>
+
+
+        </div>
+
+
+    </div>
+
+
+</div>
+
+
+
+<!-- ============================================================
+     JAVASCRIPT
+     ============================================================ -->
+
+<script src="js/03-mii-name.js"></script>
+</script>
+
+
+
+<!-- ================= 2. MURO ESTILO MIIVERSE ================= -->
+<div id="muro-mensajes" style="max-width: 1060px; margin: 40px auto; display: flex; flex-direction: column; gap: 32px; padding: 0 15px; box-sizing: border-box;"></div>
+
+
+<!-- CSS EXTRAÍDO A index.css — bloque 11 -->
+
+
+<script type="module" src="js/04-miijs-loader.js"></script>
+
+<script src="js/05-post-composer-canvas.js"></script>
+
+<!-- Agrega esta etiqueta en el <head> de tu documento para cargar la fuente de símbolos de Miiverse -->
+
+<!-- CSS EXTRAÍDO A index.css — bloque 12 -->
+
+
+<!-- Reemplaza el bloque de la tarjeta de mensaje en renderizarMensajes() con el siguiente código integrado: -->
+<script src="js/06-legacy-chat-renderer.js"></script>
+</div>
+
+
+<!-- CSS EXTRAÍDO A index.css — bloque 13 -->
+
+
+</div>
+
+
+ <!-- ================= SECCIÓN 5: VISTA USER PAGE ================= -->
+<div id="vista-userpage" style="display: none; position: relative; z-index: 1;  min-height: 100vh; padding-bottom: 40px;">
+    
+    <!-- Barra superior verde Miiverse -->
+    <div style="background: linear-gradient(to bottom, #48d4ff 0%, #23bce9 42%, #119ed1 56%, #0784b6 100%); width: calc(100vw - 160px); box-sizing: border-box; margin-left: 110px; margin-top: -50px; padding: 12px 20px; border-bottom: 2px solid #08759f; box-shadow: inset 0 1px 0 rgba(255,255,255,0.4);">
+        <h1 style="color: white; margin: 0; font-size: 20px; font-weight: bold; font-family: 'MiiverseFont', sans-serif; text-shadow: 0 1px 2px rgba(0,0,0,0.2);" id="profile-page-title">User Page</h1>
+    </div>
+
+    <!-- Contenedor principal de la interfaz -->
+    <div style="width: 82%; margin-left: 140px; margin-top: 25px; font-family: 'MiiverseFont', sans-serif;">
+        
+        <!-- Tarjeta de perfil superior -->
+        <div style="background: #ffffff; border: 1px solid #d0cce1; border-radius: 8px; padding: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); position: relative;">
+            
+            <!-- Encabezado con Mii, Nombre y Botón de Ajustes -->
+            <div style="display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 15px;">
+                <div style="display: flex; align-items: center; gap: 15px;">
+                    <!-- Avatar Mii dinámico -->
+                    <div style="width: 70px; height: 70px; background: #e1e1e1; border-radius: 10px; border: 1px solid #ccc; overflow: hidden; display: flex; align-items: center; justify-content: center;">
+                        <img id="profile-mii-img" src="img/games/Dummy_mii_user.png" style="width: 110%; height: 110%; object-fit: cover;">
+                    </div>
+                    <div>
+                        <h2 id="profile-username" style="font-size: 20px; color: #333; margin: 0 0 4px 0; font-weight: bold;">Usuario</h2>
+                        <span id="profile-pnid-sub" style="font-size: 13px; color: #777;">PNID</span>
+                        <span id="profile-nnid-sub" style="display:block; margin-top:3px; font-size:12px; color:#8499a2;">NNID: not linked</span>
+                        <div id="profile-public-id-line" style="margin-top: 5px; font-size: 11px; color: #9a9a9a;">
+                            Profile ID:
+                            <span id="profile-public-id" style="font-weight: bold; color: #139fcf;">---</span>
+                        </div>
+                    </div>
+                </div>
+
+                
+
+                <!-- Botón Profile Settings estilo Wii U -->
+                <button id="profile-settings-button" type="button" onclick="openMakiUserSettings()" style="background: #eef2f5; border: 1px solid #ccd1d9; color: #444; padding: 8px 15px; border-radius: 6px; font-size: 13px; font-weight: bold; cursor: pointer; display: flex; align-items: center; gap: 6px;">
+                    <span style="color: #078fbe; font-size: 15px;">✎</span> Profile Settings
+                </button>
+            </div>
+
+            <!-- Descripción / Estado del usuario -->
+            <div id="profile-bio" style="font-size: 14px; color: #444; line-height: 1.4; margin-bottom: 20px; min-height: 20px;">
+            </div>
+
+
+            <!-- Detalles de usuario (Solo Yeahs) -->
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; max-width: 600px;">
+                <div style="background: #f0ecfa; border-radius: 20px; padding: 6px 15px; display: flex; justify-content: space-between; align-items: center; font-size: 13px;">
+                    <span style="color: #7b7393; font-weight: bold;">Yeahs</span>
+                    <span
+                        id="info-yeahs"
+                        title="Total de Yeahs recibidos en los posts públicos de este usuario"
+                        style="
+                            min-width: 42px;
+                            padding: 2px 9px;
+                            text-align: center;
+                            color: #0787b5;
+                            font-weight: bold;
+                            border: 1px solid #a7d9e9;
+                            border-radius: 12px;
+                            background: #f5fdff;
+                            transition: transform .15s ease, box-shadow .15s ease;
+                        "
+                    >0</span>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Pestañas de Navegación (Solo Posts) -->
+        <div style="display: grid; grid-template-columns: 1fr; background: #e0dceb; border: 1px solid #d0cce1; border-top: none; border-radius: 0 0 8px 8px; overflow: hidden; text-align: center; margin-bottom: 20px;">
+            
+            <div style="background: linear-gradient(to bottom, #48d4ff 0%, #23bce9 50%, #0784b6 100%); color: white; padding: 12px 0; cursor: pointer;">
+                <div style="font-size: 14px; font-weight: bold; margin-bottom: 4px;">Posts</div>
+                <div id="contador-posts-usuario" style="background: #08759f; width: 60px; margin: 0 auto; border-radius: 10px; font-size: 12px; padding: 2px 0; font-weight: bold;">0</div>
+            </div>
+
+        </div>
+
+        <!-- Botón de Cerrar Sesión inferior para control del usuario -->
+        <div style="margin-top: 20px; text-align: right;">
+            <button id="profile-logout-button" onclick="cerrarSesion()" style="background: #e60012; border: none; color: white; padding: 10px 20px; border-radius: 6px; font-weight: bold; cursor: pointer; font-size: 14px;">
+                Cerrar sesión
+            </button>
+        </div>
+
+        <!-- Contenedor donde se cargarán los posts del usuario en su perfil -->
+        <div style="margin-top: 30px;">
+            <h3 style="font-size: 18px; color: #444; margin-bottom: 15px; border-bottom: 2px solid #d0cce1; padding-bottom: 8px;">My Posts History</h3>
+            <div id="muro-posts-usuario" style="display: flex; flex-direction: column; gap: 20px;">
+                <!-- Aquí se inyectarán dinámicamente las tarjetas de los posts del usuario -->
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<!-- ============================================================
+     MAKI'S BIO — USER SETTINGS
+     Inspired by the original CF_Miiverse Profile/Account Settings
+     ============================================================ -->
+<div id="vista-settings" style="display:none; position:relative; z-index:1; min-height:100vh; padding-bottom:40px;">
+    <div id="maki-settings-main-view">
+    <header class="maki-settings-topbar">
+        <h1 id="maki-settings-page-title">Profile Settings</h1>
+    </header>
+
+    <div class="maki-settings-content">
+        <nav class="maki-settings-tabs" aria-label="User settings sections">
+            <button type="button" class="maki-settings-tab selected" data-settings-tab="profile">Profile Settings</button>
+            <button type="button" class="maki-settings-tab" data-settings-tab="account">Account Settings</button>
+        </nav>
+
+        <section id="maki-settings-profile" class="maki-settings-panel">
+            <ul class="maki-settings-list">
+                <li class="maki-setting-comment">
+                    <p class="maki-settings-label">Profile Comment</p>
+                    <textarea id="maki-profile-comment" maxlength="1200" placeholder="Write about yourself here."></textarea>
+                    <div class="maki-settings-row-foot">
+                        <span class="maki-settings-note">This comment appears on your User Page.</span>
+                        <button type="button" id="maki-profile-comment-save" class="maki-settings-save">Save</button>
+                    </div>
+                </li>
+                <li class="maki-setting-favorite">
+                    <div class="maki-settings-copy">
+                        <p class="maki-settings-label">Favorite Post</p>
+                        <span class="maki-settings-note">You can set one of your own posts as your favorite when this feature becomes available.</span>
+                    </div>
+                    <button type="button" class="maki-settings-button" disabled>Not available</button>
+                </li>
+                <li data-setting="game_experience">
+                    <p class="maki-settings-label">How would you describe your experience with games?</p>
+                    <button type="button" class="maki-settings-button" data-open-setting="game_experience"><span data-setting-value="game_experience">Beginner</span></button>
+                </li>
+                <li data-setting="country">
+                    <p class="maki-settings-label">What is your region?</p>
+                    <button type="button" class="maki-settings-button" data-open-setting="country"><span data-setting-value="country">Not Set</span></button>
+                </li>
+                <li data-setting="gender">
+                    <p class="maki-settings-label">What is your gender? (optional)</p>
+                    <button type="button" class="maki-settings-button" data-open-setting="gender"><span data-setting-value="gender">Not Set</span></button>
+                </li>
+                <li data-setting="relationship_visibility">
+                    <div class="maki-settings-copy">
+                        <p class="maki-settings-label">Who should be able to see your friend list, followers, and followed users?</p>
+                        <span class="maki-settings-note">This preference is stored now; visibility controls will apply when relationship features are available.</span>
+                    </div>
+                    <button type="button" class="maki-settings-button" data-open-setting="relationship_visibility"><span data-setting-value="relationship_visibility">Everyone</span></button>
+                </li>
+            </ul>
+        </section>
+
+        <section id="maki-settings-account" class="maki-settings-panel" hidden>
+            <ul class="maki-settings-list">
+                <li class="maki-setting-group-title"><p class="maki-settings-label">Linked Accounts</p></li>
+                <li class="maki-setting-linked-account">
+                    <div class="maki-settings-copy">
+                        <p class="maki-settings-label">Maki's Bio</p>
+                        <span class="maki-settings-note">Your current account is connected to this profile.</span>
+                    </div>
+                    <span class="maki-settings-status connected">Connected</span>
+                </li>
+                <li class="maki-setting-linked-account maki-setting-wut">
+                    <div class="maki-settings-copy">
+                        <p class="maki-settings-label">WUT-Miiverse</p>
+                        <span class="maki-settings-note">Link the WUT account that uses the same sign-in password. Your password is sent only for verification and is never saved by Maki's Bio.</span>
+                    </div>
+                    <button type="button" id="maki-wut-link-open" class="maki-settings-button maki-wut-link-button">
+                        <span>LINK with WUT-Miiverse</span><span class="maki-wut-miiverse-icon" aria-hidden="true">a</span>
+                    </button>
+                </li>
+                <li class="maki-setting-group-title"><p class="maki-settings-label">Account Preferences</p></li>
+                <li>
+                    <div class="maki-settings-copy">
+                        <p class="maki-settings-label">Do you want to allow friend requests?</p>
+                        <span class="maki-settings-note">Friend requests are not available in Maki's Bio yet.</span>
+                    </div>
+                    <button type="button" class="maki-settings-button" disabled>Coming Soon</button>
+                </li>
+                <li>
+                    <div class="maki-settings-copy">
+                        <p class="maki-settings-label">Do you want to receive notifications about Yeahs?</p>
+                        <span class="maki-settings-note">Account notifications are not available yet.</span>
+                    </div>
+                    <button type="button" class="maki-settings-button" disabled>Coming Soon</button>
+                </li>
+            </ul>
+        </section>
+
+        <p id="maki-settings-feedback" class="maki-settings-feedback" role="status" aria-live="polite"></p>
+    </div>
+    </div>
+
+    <!-- Full-page WUT linking sub-section. Opened only from Account Settings. -->
+    <section id="maki-wut-link-screen" class="maki-wut-link-screen" hidden aria-labelledby="maki-wut-link-title">
+        <header class="maki-settings-topbar maki-wut-link-topbar">
+            <h1 id="maki-wut-link-title">Link with WUT-Miiverse</h1>
+        </header>
+        <div class="maki-wut-link-page-content">
+            <div class="maki-wut-link-heading">
+                <span class="maki-wut-miiverse-icon" aria-hidden="true">a</span>
+                <div>
+                    <h2>Link your WUT-Miiverse account</h2>
+                    <p>Connect the WUT account that belongs to you. Once verified by WUT, your Mii can receive the exclusive linked-account badge.</p>
+                </div>
+            </div>
+            <form id="maki-wut-link-form" class="maki-wut-link-form">
+                <label for="maki-wut-password">WUT-Miiverse password</label>
+                <input id="maki-wut-password" name="password" type="password" autocomplete="current-password" required maxlength="256" />
+                <p class="maki-wut-security-note">Your password is used only for verification through WUT's secure endpoint. It is not stored in Maki's Bio or Firebase.</p>
+                <p id="maki-wut-link-feedback" class="maki-settings-feedback" role="status" aria-live="polite"></p>
+                <div class="maki-wut-link-actions">
+                    <button type="button" class="maki-settings-cancel" id="maki-wut-link-cancel">Back to Account Settings</button>
+                    <button type="submit" class="maki-settings-save" id="maki-wut-link-submit">Verify &amp; Link</button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <div id="maki-settings-modal" class="maki-settings-modal" hidden aria-hidden="true">
+        <div class="maki-settings-modal-backdrop" data-close-settings-modal></div>
+        <section class="maki-settings-window" role="dialog" aria-modal="true" aria-labelledby="maki-settings-modal-title">
+            <h2 class="maki-settings-window-title" id="maki-settings-modal-title">Profile Settings</h2>
+            <div class="maki-settings-window-body">
+                <p id="maki-settings-modal-question"></p>
+            </div>
+            <div id="maki-settings-modal-options" class="maki-settings-window-options"></div>
+            <div class="maki-settings-window-footer">
+                <button type="button" class="maki-settings-cancel" data-close-settings-modal>Cancel</button>
+            </div>
+        </section>
+    </div>
+</div>
+
+<!-- ============================================================
+     ============================================================
+                       NETWORKS REMAKE
+                 LIGHT BLUE / WII U STYLE
+     ============================================================
+     ============================================================ -->
+
+
+<!-- CSS EXTRAÍDO A index.css — bloque 14 -->
+
+
+
+
+<!-- ============================================================
+     ============================================================
+                        NETWORKS VIEW
+     ============================================================
+     ============================================================ -->
+
+<div
+    id="vista-networks"
+
+    style="
+        display:none;
+        position:relative;
+        z-index:1;
+    "
+>
+
+
+    <!-- ========================================================
+         HEADER
+         ======================================================== -->
+
+    <div class="networks-topbar">
+
+
+        <div class="networks-topbar-inner">
+
+
+            <h1>
+                Networks
+            </h1>
+
+
+            <div class="networks-topbar-badge">
+                CONNECTED ACCOUNTS
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- ========================================================
+         PAGE
+         ======================================================== -->
+
+    <div class="networks-page">
+
+
+
+        <!-- ====================================================
+             INTRO
+             ==================================================== -->
+
+        <div class="networks-intro">
+
+
+            <div class="networks-intro-title">
+                My Networks
+            </div>
+
+
+            <div class="networks-intro-description">
+                Here you can find my gaming accounts, social networks
+                and friend codes. Feel free to add me!
+            </div>
+
+
+        </div>
+
+
+
+        <!-- ====================================================
+             LIST
+             ==================================================== -->
+
+        <div class="networks-list">
+
+
+
+            <!-- =================================================
+                 PRETENDO / PNID
+
+                 AQUÍ USAMOS TU MII REAL.
+                 ================================================= -->
+
+            <div class="network-card">
+
+
+                <div class="network-icon-box">
+
+
+                    <img
+                        class="network-icon pnid-mii"
+
+                        src="https://mii-unsecure.ariankordi.net/miis/image.png?nnid=YosMakii99_PN&type=face&width=270&api_id=1"
+
+                        alt="YosMakii99_PN Mii"
+
+                        onerror="
+                            this.onerror = null;
+                            this.src = 'mii/miiOwner.png';
+                        "
+                    >
+
+
+                    <span class="pnid-status-dot">
+                    </span>
+
+
+                </div>
+
+
+
+                <div class="network-info">
+
+
+                    <span class="network-service">
+                        Pretendo Network (PNID)
+                    </span>
+
+
+                    <span class="network-user">
+                        YosMakii99_PN
+                    </span>
+
+
+                    <span class="network-small-text">
+                        My Wii U / Pretendo profile
+                    </span>
+
+
+                </div>
+
+
+
+                <div class="network-actions">
+
+
+                    <button
+                        type="button"
+
+                        class="network-button"
+
+                        data-copy-network="YosMakii99_PN"
+                    >
+                        COPY
+                    </button>
+
+
+                </div>
+
+
+            </div>
+            <!-- =================================================
+                 ROBLOX
+                 ================================================= -->
+
+            <div class="network-card">
+
+
+                <div class="network-icon-box">
+
+
+                    <img
+                        class="network-icon"
+
+                        src="img/pfp/RobloxUser.png"
+
+                        alt="Roblox"
+                    >
+
+
+                </div>
+
+
+
+                <div class="network-info">
+
+
+                    <span class="network-service">
+                        Roblox
+                    </span>
+
+
+                    <span class="network-user">
+                        amke01_WiiU
+                    </span>
+
+
+                    <span class="network-small-text">
+                        Roblox profile
+                    </span>
+
+
+                </div>
+
+
+
+                <div class="network-actions">
+
+
+                    <button
+                        type="button"
+
+                        class="network-button"
+
+                        data-copy-network="amke01_WiiU"
+                    >
+                        COPY
+                    </button>
+
+
+                    <a
+                        class="network-button open"
+
+                        href="https://www.roblox.com/es/users/10030521486/profile"
+
+                        target="_blank"
+
+                        rel="noopener noreferrer"
+                    >
+                        OPEN
+                    </a>
+
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- =================================================
+                 DISCORD
+                 ================================================= -->
+
+            <div class="network-card">
+
+
+                <div class="network-icon-box">
+
+
+                    <img
+                        class="network-icon"
+
+                        src="img/pfp/Discord.jpg"
+
+                        alt="Discord"
+                    >
+
+
+                </div>
+
+
+
+                <div class="network-info">
+
+
+                    <span class="network-service">
+                        Discord
+                    </span>
+
+
+                    <span class="network-user">
+                        amke01
+                    </span>
+
+
+                    <span class="network-small-text">
+                        Discord username
+                    </span>
+
+
+                </div>
+
+
+
+                <div class="network-actions">
+
+
+                    <button
+                        type="button"
+
+                        class="network-button"
+
+                        data-copy-network="amke01"
+                    >
+                        COPY
+                    </button>
+
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- =================================================
+                 YOUTUBE
+                 ================================================= -->
+
+            <div class="network-card">
+
+
+                <div class="network-icon-box">
+
+
+                    <img
+                        class="network-icon"
+
+                        src="https://unavatar.io/youtube/@cafe_laila"
+
+                        alt="YouTube"
+                    >
+
+
+                </div>
+
+
+
+                <div class="network-info">
+
+
+                    <span class="network-service">
+                        YouTube
+                    </span>
+
+
+                    <span class="network-user">
+                        @cafe_laila
+                    </span>
+
+
+                    <span class="network-small-text">
+                        YouTube channel
+                    </span>
+
+
+                </div>
+
+
+
+                <div class="network-actions">
+
+
+                    <button
+                        type="button"
+
+                        class="network-button"
+
+                        data-copy-network="@cafe_laila"
+                    >
+                        COPY
+                    </button>
+
+
+                    <a
+                        class="network-button open"
+
+                        href="https://www.youtube.com/@cafe_laila"
+
+                        target="_blank"
+
+                        rel="noopener noreferrer"
+                    >
+                        OPEN
+                    </a>
+
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- =================================================
+                 NINTENDO SWITCH
+                 ================================================= -->
+
+            <div class="network-card">
+
+
+                <div class="network-icon-box">
+
+
+                    <img
+                        class="network-icon contain"
+
+                        src="img/pfp/Nintendo_Switch-Logo.wine.png"
+
+                        alt="Nintendo Switch"
+                    >
+
+
+                </div>
+
+
+
+                <div class="network-info">
+
+
+                    <span class="network-service">
+                        Nintendo Switch
+                    </span>
+
+
+                    <span class="network-user">
+                        SW-7284-9105-6325
+                    </span>
+
+
+                    <span class="network-small-text">
+                        Friend Code
+                    </span>
+
+
+                </div>
+
+
+
+                <div class="network-actions">
+
+
+                    <button
+                        type="button"
+
+                        class="network-button"
+
+                        data-copy-network="SW-7284-9105-6325"
+                    >
+                        COPY
+                    </button>
+
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- =================================================
+                 FACEBOOK
+                 ================================================= -->
+
+            <div class="network-card">
+
+
+                <div class="network-icon-box">
+
+
+                    <img
+                        class="network-icon"
+
+                        src="img/pfp/facebook.jpg"
+
+                        alt="Facebook"
+                    >
+
+
+                </div>
+
+
+
+                <div class="network-info">
+
+
+                    <span class="network-service">
+                        Facebook
+                    </span>
+
+
+                    <span class="network-user">
+                        amkr01
+                    </span>
+
+
+                    <span class="network-small-text">
+                        Facebook profile
+                    </span>
+
+
+                </div>
+
+
+
+                <div class="network-actions">
+
+
+                    <a
+                        class="network-button open"
+
+                        href="https://www.facebook.com/amkr01/"
+
+                        target="_blank"
+
+                        rel="noopener noreferrer"
+                    >
+                        OPEN
+                    </a>
+
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- =================================================
+                 MARIO KART WII
+                 ================================================= -->
+
+            <div class="network-card">
+
+
+                <div class="network-icon-box">
+
+
+                    <img
+                        class="network-icon"
+
+                        src="img/pfp/mkwii.png"
+
+                        alt="Mario Kart Wii"
+                    >
+
+
+                </div>
+
+
+
+                <div class="network-info">
+
+
+                    <span class="network-service">
+                        Mario Kart Wii (Wiimmfi)
+                    </span>
+
+
+                    <span class="network-user">
+                        FC-4429-8513-7239
+                    </span>
+
+
+                    <span class="network-small-text">
+                        Wiimmfi Friend Code
+                    </span>
+
+
+                </div>
+
+
+
+                <div class="network-actions">
+
+
+                    <button
+                        type="button"
+
+                        class="network-button"
+
+                        data-copy-network="4429-8513-7239"
+                    >
+                        COPY
+                    </button>
+
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- =================================================
+                 WII
+                 ================================================= -->
+
+            <div class="network-card">
+
+
+                <div class="network-icon-box">
+
+
+                    <img
+                        class="network-icon contain"
+
+                        src="img/pfp/Wii-Logo-PNG-Cutout.png"
+
+                        alt="Wii"
+                    >
+
+
+                </div>
+
+
+
+                <div class="network-info">
+
+
+                    <span class="network-service">
+                        Wii (Friend Code)
+                    </span>
+
+
+                    <span class="network-user">
+                        FC-7536-1862-9058-8245
+                    </span>
+
+
+                    <span class="network-small-text">
+                        Wii Friend Code
+                    </span>
+
+
+                </div>
+
+
+
+                <div class="network-actions">
+
+
+                    <button
+                        type="button"
+
+                        class="network-button"
+
+                        data-copy-network="7536-1862-9058-8245"
+                    >
+                        COPY
+                    </button>
+
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- =================================================
+                 EPIC GAMES
+                 ================================================= -->
+
+            <div class="network-card">
+
+
+                <div class="network-icon-box">
+
+
+                    <img
+                        class="network-icon contain"
+
+                        src="img/pfp/Epic-Games-Symbol.png"
+
+                        alt="Epic Games"
+                    >
+
+
+                </div>
+
+
+
+                <div class="network-info">
+
+
+                    <span class="network-service">
+                        Epic Games
+                    </span>
+
+
+                    <span class="network-user">
+                        YosMaki999
+                    </span>
+
+
+                    <span class="network-small-text">
+                        Epic Games ID
+                    </span>
+
+
+                </div>
+
+
+
+                <div class="network-actions">
+
+
+                    <button
+                        type="button"
+
+                        class="network-button"
+
+                        data-copy-network="YosMaki999"
+                    >
+                        COPY
+                    </button>
+
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+
+        <div class="networks-footer-note">
+            Gaming IDs and social profiles connected to my profile.
+        </div>
+
+
+    </div>
+
+
+</div>
+
+
+
+<!-- ============================================================
+     COPY SYSTEM
+     ============================================================ -->
+
+<script src="js/07-networks-copy.js"></script>
+
+
+
+
+
+<!-- ================= SCRIPT ÚNICO DE CONTROL DE NAVEGACIÓN ================= -->
+<script src="js/08-mii-clicker-navigation.js?v=weekly-podium-happy-2"></script>
+<script src="js/09-navigation.js?v=weekly-podium-happy-2"></script>
+<script src="js/10-sidebar-user-mii.js?v=pnid-mii-restore-1"></script>
+
+<script src="js/11-legacy-user-stats.js"></script>
+
+<script src="js/12-post-modal-legacy.js"></script>
+
+<script src="js/13-official-user-badge.js"></script>
+</div>
+
+<!-- ============================================================
+     MAKI'S BIO / MAKIIVERSE
+     SISTEMA GLOBAL DE INSIGNIA OFICIAL
+
+     CUENTA:
+         YosMakii99_PN
+
+     INSIGNIA:
+         img/official-user.png
+
+     FUNCIONA AUTOMÁTICAMENTE CON:
+
+     1. <img src="...nnid=YosMakii99_PN...">
+
+     2. <div style="
+            background-image:
+            url(...nnid=YosMakii99_PN...)
+        ">
+
+     Por lo tanto cubre:
+       - Profile Mii
+       - Sidebar Mii
+       - Modal post Mii
+       - Posts publicados
+       - Posts futuros
+       - Cambios de expresión
+       - otros Miis futuros
+
+     NO TOCA:
+       publicarPostGeneral()
+       renderizarMensajes()
+       actualizarAvatarModal()
+       cargarNombreRealMii()
+       Firebase
+       canvas
+     ============================================================ -->
+
+
+
+<!-- CSS EXTRAÍDO A index.css — bloque 15 -->
+
+
+
+
+
+
+
+
+
+
+<!-- CSS EXTRAÍDO A index.css — bloque 16 id=maki-global-responsive-v1 -->
+
+
+
+
+
+<!-- CSS EXTRAÍDO A index.css — bloque 17 id=maki-yeah-system-v11 -->
+
+
+<!-- ============================================================
+     MAKI'S BIO — PUBLIC USER ACCOUNTS / USER ROUTES
+     /user/289637623/
+     ============================================================ -->
+
+
+<!-- CSS EXTRAÍDO A index.css — bloque 18 id=maki-public-profiles-style -->
+
+
+<script type="module" src="js/14-public-profiles.js?v=pnid-mii-restore-1"></script>
+
+
+<!-- ============================================================
+     MAKI'S BIO — GENERAL CHAT REAL / FIREBASE RTDB
+     V10
+     - posts shared between devices
+     - live updates
+     - real shared Yeahs
+     - owners delete own posts
+     - admins / verified users can moderate any post
+     ============================================================ -->
+
+
+<!-- CSS EXTRAÍDO A index.css — bloque 19 id=maki-real-public-chat-v10 -->
+
+
+
+<!-- ============================================================
+     MAKI'S BIO V12 — POST DETAIL / YEAH PEOPLE
+     ============================================================ -->
+
+<!-- CSS EXTRAÍDO A index.css — bloque 20 id=maki-post-detail-v12-style -->
+
+
+<div id="maki-post-detail-overlay" aria-hidden="true">
+    <section class="maki-post-detail-window" role="dialog" aria-modal="true" aria-labelledby="maki-post-detail-title">
+        <header class="maki-post-detail-topbar">
+            <strong id="maki-post-detail-title">Post</strong>
+            <button
+                class="maki-post-detail-close"
+                type="button"
+                onclick="cerrarDetallePost()"
+                aria-label="Cerrar"
+            >×</button>
+        </header>
+
+        <div class="maki-post-detail-scroll">
+            <div id="maki-post-detail-card"></div>
+
+            <section class="maki-post-detail-yeah-section">
+                <div class="maki-post-detail-yeah-title">
+                    <span class="maki-post-detail-happy-symbol">H</span>
+                    <span>
+                        People who gave a Yeah!
+                        (<span id="maki-post-detail-yeah-count">0</span>)
+                    </span>
+                </div>
+
+                <div id="maki-post-detail-people"></div>
+            </section>
+        </div>
+    </section>
+</div>
+
+<script type="module" src="js/15-public-chat.js"></script>
+<script type="module" src="js/02-mii-clicker-firebase.js?v=weekly-podium-happy-2"></script>
+<script type="module" src="js/20-nnid-mii-link.js?v=pnid-mii-restore-1"></script>
+<script type="module" src="js/21-user-settings.js?v=cf-profile-settings-miiverse-icon-2"></script>
+
+
+
+<!-- CSS EXTRAÍDO A index.css — bloque 21 id=maki-miiverse-drawing-v14 -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- CSS EXTRAÍDO A index.css — bloque 22 id=maki-miiverse-e3-memo-v17 -->
+
+
+
+<script id="maki-miiverse-e3-memo-v17-js" src="js/16-memo-shortcuts.js"></script>
+
+
+
+<!-- CSS EXTRAÍDO A index.css — bloque 23 id=maki-miiverse-e3-memo-v18-polish -->
+
+
+
+
+<!-- CSS EXTRAÍDO A index.css — bloque 24 id=maki-miiverse-e3-memo-v19-clear-button -->
+
+
+
+<script id="maki-miiverse-e3-memo-v19-clear-button-js" src="js/17-memo-clear-feedback.js"></script>
+
+
+
+<!-- CSS EXTRAÍDO A index.css — bloque 25 id=maki-miiverse-v20-remove-back-b -->
+
+
+
+
+    <script src="js/19-verified-store.js"></script>
+
+</body>
+</html>

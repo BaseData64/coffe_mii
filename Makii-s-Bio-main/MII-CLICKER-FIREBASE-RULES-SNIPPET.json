@@ -1,0 +1,18 @@
+{
+  "mii_clicker": {
+    ".read": true,
+    ".indexOn": ["clicks"],
+    "$uid": {
+      ".write": "auth != null && auth.uid == $uid"
+    }
+  },
+  "mii_clicker_weekly": {
+    ".read": true,
+    "$weekKey": {
+      "$uid": {
+        ".write": "auth != null && auth.uid == $uid",
+        ".validate": "!newData.exists() || (newData.hasChildren(['uid','pnid','clicks','weekStart']) && newData.child('uid').val() == $uid && newData.child('pnid').isString() && newData.child('clicks').isNumber() && newData.child('weekStart').val() == $weekKey)"
+      }
+    }
+  }
+}

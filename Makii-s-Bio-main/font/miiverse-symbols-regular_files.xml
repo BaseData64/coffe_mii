@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<files>
+  <file name="MiiverseSymbols-Regular.eot" source="original">
+    <mtime>1742409280</mtime>
+    <size>13626</size>
+    <md5>83892111871fa89e5a94ce9e16257e2c</md5>
+    <crc32>c6d8c5b4</crc32>
+    <sha1>abbe0baa592d061c0d9d39d78d4372bdf1fe95dc</sha1>
+    <format>Unknown</format>
+    <viruscheck>1742409642</viruscheck>
+  </file>
+  <file name="MiiverseSymbols-Regular.ttf" source="original">
+    <mtime>1742409209</mtime>
+    <size>13332</size>
+    <md5>5bc35e8920a8724dc9f8c095ea1f7054</md5>
+    <crc32>717f0f5c</crc32>
+    <sha1>48a3ba382e37a339ba90fcffbb040d5f03e392e5</sha1>
+    <format>TrueType Font</format>
+    <viruscheck>1742409642</viruscheck>
+  </file>
+  <file name="MiiverseSymbols-Regular.woff" source="original">
+    <mtime>1742409276</mtime>
+    <size>11472</size>
+    <md5>464c528631687de7c812c0550222afe9</md5>
+    <crc32>76a382ba</crc32>
+    <sha1>7db7fe42242f48e756771074ba50f5a4e81e3529</sha1>
+    <format>Web Open Font Format</format>
+    <viruscheck>1742409642</viruscheck>
+  </file>
+  <file name="miiverse-symbols-regular_archive.torrent" source="metadata">
+    <btih>49fcd33a7bc33644b10dc29b19c21638cb8e0913</btih>
+    <mtime>1742409643</mtime>
+    <size>2129</size>
+    <md5>d9260092d36746eff25c33c45fb17061</md5>
+    <crc32>8529eaec</crc32>
+    <sha1>cc98ec28db0dfb6f5e4ad32d0edd1457c5cc6bbb</sha1>
+    <format>Archive BitTorrent</format>
+  </file>
+  <file name="miiverse-symbols-regular_files.xml" source="original">
+    <format>Metadata</format>
+    <md5>b3e23f6ee6eca27be318d41c186814d5</md5>
+    <summation>md5</summation>
+  </file>
+  <file name="miiverse-symbols-regular_meta.sqlite" source="original">
+    <mtime>1742409286</mtime>
+    <size>28672</size>
+    <md5>d02ca24ad1e4b52d57df93d7bc3df2c1</md5>
+    <crc32>0f6fcc71</crc32>
+    <sha1>fb1f0e0f6198aa7b1d862ed1285a237dc9959617</sha1>
+    <format>Metadata</format>
+  </file>
+  <file name="miiverse-symbols-regular_meta.xml" source="original">
+    <mtime>1742409642</mtime>
+    <size>875</size>
+    <md5>b1e1afa8b620e358b7b30529d403ec3c</md5>
+    <crc32>3693cb16</crc32>
+    <sha1>b525442ae836aea9b69c92f4bdf4bfe45d511762</sha1>
+    <format>Metadata</format>
+  </file>
+</files>

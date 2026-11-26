@@ -1,0 +1,20 @@
+@font-face {
+    font-family: "MiiverseSymbols";
+    src: url("/Makiiverse/main/font/MiiverseSymbols-Regular.woff") format("woff"),
+         url("/Makiiverse/main/font/MiiverseSymbols-Regular.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
+
+.miiverse-icons {
+    font-family: "MiiverseSymbols";
+}
+
+
+.miiverse-icons {
+    font-family: "MiiverseSymbols";
+}
+
+.miiverse-icon {
+    font-family: "MiiverseSymbols";
+}
